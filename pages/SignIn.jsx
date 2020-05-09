@@ -2,6 +2,9 @@ import React from 'react';
 import Layout from '../components/layout/Layout';
 
 const SignIn = () => {
+
+    document.body.classList.add('bg-dark');
+
     return ( 
         <>
         <Layout>
@@ -46,6 +49,11 @@ const SignIn = () => {
                         </div>
                     </div>
                 </div>
+                <style jsx>{`
+                    body { 
+                        background-color:red;
+                    }
+                    `}</style>
             </div>
         </Layout>
         </>

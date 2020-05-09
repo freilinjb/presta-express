@@ -4,12 +4,28 @@ import Navegacion from './Navegacion';
 import BreadCrumbs from './BreadCrumbs';
 import Footer from './Footer';
 import Header from './Header';
-import cssCDN from './cssCDN';
-import jsCDN from './jsCDN'; 
 
 const Layout = (props) => {
     const usuario  = false;
 
+    function Componente(props) {
+        return (
+            <>
+                <Navegacion/>
+                <div id="right-panel" className="right-panel">
+                    <Header/>
+                            
+                    <BreadCrumbs/>                
+                    <div className="content">
+                        <div className="animated fadeIn">
+                            {props.children}
+                        </div>
+                    </div>
+                <Footer/>    
+            </div>
+        </>
+        );
+      }
     return ( 
         <>
             <Head>
@@ -45,7 +61,7 @@ const Layout = (props) => {
                                     {props.children}
                                 </div>
                             </div>
-                            {usuario ? <Footer/> : null}
+                            {/* {usuario ? <Footer/> : null} */}
                             
                         </div>
                 {/* <!-- Scripts --> */}
