@@ -12,10 +12,10 @@ const SignIn = () => {
                     <div className="card-body">
                         <form>
                             <div className="form-group">
-                                <input className="form-control form-control-lg" id="username" type="text" placeholder="Username" autocomplete="off"/>
+                                <input className="form-control form-control-lg" id="username" type="text" placeholder="Username" autoComplete="off"/>
                             </div>
                             <div className="form-group">
-                                <input className="form-control form-control-lg" id="password" type="password" placeholder="Password"/>
+                                <input className="form-control form-control-lg" id="password" type="password" placeholder="Password" autoComplete="current-password"/>
                             </div>
                             <div className="form-group">
                                 <label className="custom-control custom-checkbox">
@@ -34,9 +34,18 @@ const SignIn = () => {
                     </div>
                 </div>
                 <style jsx>{`
-                html,
-                body {
-                    height: 100%;}
+                    html,
+                    body {
+                        height: 100%;}
+                    
+                    body {
+                        display: -ms-flexbox;
+                        display: flex;
+                        -ms-flex-align: center;
+                        align-items: center;
+                        padding-top: 40px;
+                        padding-bottom: 40px;
+                    }
                 `}</style>
             </div>
         </Layout>
