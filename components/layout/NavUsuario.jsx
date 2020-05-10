@@ -34,15 +34,13 @@ const NavUsuario = () => {
           aria-labelledby="navbarDropdownMenuLink2"
         >
           <div className="nav-user-info">
-            <h5 className="mb-0 text-white nav-user-name">John Abraham</h5>
-            <span className="status"></span>
-            <span className="ml-2">Available</span>
+            <h5 className="mb-0 text-white nav-user-name">{usuario.displayName}</h5>
           </div>
           <a className="dropdown-item" href="#!">
-            <i className="fas fa-user mr-2"></i>Account
+            <i className="fas fa-user mr-2"></i>Cuenta
           </a>
           <a className="dropdown-item" href="#!">
-            <i className="fas fa-cog mr-2"></i>Setting
+            <i className="fas fa-cog mr-2"></i>Configuracion
           </a>
           <a className="dropdown-item" href="#!">
             <span className="fas fa-power-off mr-2" onClick={() => cerrarSession()}></span>Cerrar Sesion

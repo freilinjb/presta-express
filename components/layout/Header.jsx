@@ -28,9 +28,16 @@ const Header = (props) => {
                         {usuario ? 
                         (
                             <>
-                                <div id="custom-search" className="top-search-bar form-inline">
-                                    <input className="form-control" type="text" placeholder="Buscar..."/>
-                                    <button className="btn btn-outline-primary" type="submit">Buscar</button>
+                                <div className="form-inline">
+                                {/* <!-- Another variation with a button --> */}
+                                <div className="input-group">
+                                    <input type="text" className="form-control" placeholder="Buscar..."/>
+                                    <div className="input-group-append">
+                                    <button className="btn btn-primary" type="button">
+                                        <i className="fa fa-search"></i>
+                                    </button>
+                                    </div>
+                                </div>
                                 </div>
 
                                 <NavUsuario/>
