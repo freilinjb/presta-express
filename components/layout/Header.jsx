@@ -24,8 +24,8 @@ const Header = (props) => {
                         {/* CONECCION */}
                         <form className="form-inline my-2 my-lg-0 p-3">
                             {/* <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/> */}
-                            <Link href="SignIn"><a className="btn btn-outline-primary m-2 my-sm-0" href="#!">Iniciar Sesion</a></Link>
-                            <Link href="SignUp"><a className="btn btn-outline-secondary m-2 my-sm-0" href="#!">Registrarse</a></Link>
+                            <Link href="/SignIn"><a className="btn btn-outline-primary m-2 my-sm-0" href="#!">Iniciar Sesion</a></Link>
+                            <Link href="/SignUp"><a className="btn btn-outline-secondary m-2 my-sm-0" href="#!">Registrarse</a></Link>
                         </form>
                     </ul>
                 </div>

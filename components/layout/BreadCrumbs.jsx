@@ -1,6 +1,10 @@
 import React from 'react';
 
-const BreadCrumbs = () => {
+const BreadCrumbs = (props) => {
+    // let direccion = {
+    //     link: [],
+    //     mensaje: ['DA']
+    // }
     return ( 
         <>
             <div className="breadcrumbs">
@@ -9,7 +13,7 @@ const BreadCrumbs = () => {
                         <div className="col-sm-4">
                             <div className="page-header float-left">
                                 <div className="page-title">
-                                    <h1>Dashboard</h1>
+                                    <h1>props.titulo</h1>
                                 </div>
                             </div>
                         </div>

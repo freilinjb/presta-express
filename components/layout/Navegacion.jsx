@@ -19,11 +19,11 @@ const Navegacion = () => {
                             </li>
                             <li className="nav-item ">
                                 <a className="nav-link active" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i className="fa fa-fw fa-user-circle"></i>Dashboard <span className="badge badge-success">6</span></a>
-                                <div id="submenu-1" className="collapse submenu" style="">
+                                <div id="submenu-1" className="collapse submenu" >
                                     <ul className="nav flex-column">
                                         <li className="nav-item">
                                             <a className="nav-link" href="index.html" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-2" aria-controls="submenu-1-2">E-Commerce</a>
-                                            <div id="submenu-1-2" className="collapse submenu" style="">
+                                            <div id="submenu-1-2" className="collapse submenu" >
                                                 <ul className="nav flex-column">
                                                     <li className="nav-item">
                                                         <a className="nav-link" href="../index.html">E Commerce Dashboard</a>
@@ -48,7 +48,7 @@ const Navegacion = () => {
                                         </li>
                                         <li className="nav-item">
                                             <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-1" aria-controls="submenu-1-1">Infulencer</a>
-                                            <div id="submenu-1-1" className="collapse submenu" style="">
+                                            <div id="submenu-1-1" className="collapse submenu" >
                                                 <ul className="nav flex-column">
                                                     <li className="nav-item">
                                                         <a className="nav-link" href="../dashboard-influencer.html">Influencer</a>
@@ -67,7 +67,7 @@ const Navegacion = () => {
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i className="fa fa-fw fa-rocket"></i>UI Elements</a>
-                                <div id="submenu-2" className="collapse submenu" style="">
+                                <div id="submenu-2" className="collapse submenu" >
                                     <ul className="nav flex-column">
                                         <li className="nav-item">
                                             <a className="nav-link" href="cards.html">Cards <span className="badge badge-secondary">New</span></a>
@@ -95,7 +95,7 @@ const Navegacion = () => {
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i className="fas fa-fw fa-chart-pie"></i>Chart</a>
-                                <div id="submenu-3" className="collapse submenu" style="">
+                                <div id="submenu-3" className="collapse submenu" >
                                     <ul className="nav flex-column">
                                         <li className="nav-item">
                                             <a className="nav-link" href="chart-c3.html">C3 Charts</a>
@@ -120,7 +120,7 @@ const Navegacion = () => {
                             </li>
                             <li className="nav-item ">
                                 <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i className="fab fa-fw fa-wpforms"></i>Forms</a>
-                                <div id="submenu-4" className="collapse submenu" style="">
+                                <div id="submenu-4" className="collapse submenu" >
                                     <ul className="nav flex-column">
                                         <li className="nav-item">
                                             <a className="nav-link" href="form-elements.html">Form Elements</a>
@@ -136,7 +136,7 @@ const Navegacion = () => {
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i className="fas fa-fw fa-table"></i>Tables</a>
-                                <div id="submenu-5" className="collapse submenu" style="">
+                                <div id="submenu-5" className="collapse submenu" >
                                     <ul className="nav flex-column">
                                         <li className="nav-item">
                                             <a className="nav-link" href="general-table.html">General Tables</a>
@@ -152,7 +152,7 @@ const Navegacion = () => {
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i className="fas fa-fw fa-file"></i>Pages</a>
-                                <div id="submenu-6" className="collapse submenu" style="">
+                                <div id="submenu-6" className="collapse submenu" >
                                     <ul className="nav flex-column">
                                         <li className="nav-item">
                                             <a className="nav-link" href="invoice.html">Invoice</a>
@@ -204,7 +204,7 @@ const Navegacion = () => {
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-7" aria-controls="submenu-7"><i className="fas fa-fw fa-inbox"></i>Apps <span className="badge badge-secondary">New</span></a>
-                                <div id="submenu-7" className="collapse submenu" style="">
+                                <div id="submenu-7" className="collapse submenu" >
                                     <ul className="nav flex-column">
                                         <li className="nav-item">
                                             <a className="nav-link" href="inbox.html">Inbox</a>
@@ -223,7 +223,7 @@ const Navegacion = () => {
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-8" aria-controls="submenu-8"><i className="fas fa-fw fa-columns"></i>Icons</a>
-                                <div id="submenu-8" className="collapse submenu" style="">
+                                <div id="submenu-8" className="collapse submenu" >
                                     <ul className="nav flex-column">
                                         <li className="nav-item">
                                             <a className="nav-link" href="icon-fontawesome.html">FontAwesome Icons</a>
@@ -248,7 +248,7 @@ const Navegacion = () => {
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-9" aria-controls="submenu-9"><i className="fas fa-fw fa-map-marker-alt"></i>Maps</a>
-                                <div id="submenu-9" className="collapse submenu" style="">
+                                <div id="submenu-9" className="collapse submenu" >
                                     <ul className="nav flex-column">
                                         <li className="nav-item">
                                             <a className="nav-link" href="map-google.html">Google Maps</a>
@@ -261,14 +261,14 @@ const Navegacion = () => {
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-10" aria-controls="submenu-10"><i className="fas fa-f fa-folder"></i>Menu Level</a>
-                                <div id="submenu-10" className="collapse submenu" style="">
+                                <div id="submenu-10" className="collapse submenu" >
                                     <ul className="nav flex-column">
                                         <li className="nav-item">
                                             <a className="nav-link" href="#!">Level 1</a>
                                         </li>
                                         <li className="nav-item">
                                             <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-11" aria-controls="submenu-11">Level 2</a>
-                                            <div id="submenu-11" className="collapse submenu" style="">
+                                            <div id="submenu-11" className="collapse submenu" >
                                                 <ul className="nav flex-column">
                                                     <li className="nav-item">
                                                         <a className="nav-link" href="#!">Level 1</a>

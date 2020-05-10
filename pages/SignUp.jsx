@@ -1,35 +1,47 @@
 import React,{useState} from 'react';
+import Router from 'next/router';
 import Layout from '../components/layout/Layout';
 
+import firebase from '../firebase';
+
+//Validadiones
+import useValidacion from '../hooks/useValidacion';
+import validarCrearCuenta from '../validacion/validarCrearCuenta';
+
+
 const SignUp = () => {
-    const [nuevoUsuario, setNuevoUsuario] = useState({
+    const [errorMensaje, setError] = useState('');
+
+    const STATE_INICIAL = {
         nombre: '',
         email: '',
-        password: '',
-        confirmar: ''
-    });
-
-    const {nombre, email, password, confirmar} = nuevoUsuario;
-
-    const handleChange=e=> {
-        setNuevoUsuario({
-            [e.target.name] : e.target.value
-        });
+        password: ''
     }
-    const hanbleSubmit =e=> {
-        e.preventDefault();
 
-        //Validar
+    const {valores,errores,handleSubmit,handleChange, handleBlur} = useValidacion(STATE_INICIAL, validarCrearCuenta, crearCuenta);
 
-        //Pasar al action
-    }
+    const {nombre, email, password, confirmar} = valores;
+
+    async function crearCuenta() {
+        try {
+             await firebase.registrar(nombre, email, password);
+             Router.push('/');
+        } catch (error) {
+            console.log('Hubo un error al crear el usuario',error.message);
+            setError(error.message);
+        }
+ 
+        console.log(errorMensaje);
+        
+     }
+
     return ( 
         <>
         {/* <!-- SingUp page  --> */}
         {/* <!-- ============================================================== --> */}
         <Layout>
             <form className="splash-container mt-5"
-                onSubmit={hanbleSubmit}
+                onSubmit={handleSubmit}
             >
                 <div className="card">
                     <div className="card-header">
@@ -48,6 +60,9 @@ const SignUp = () => {
                                 onChange={handleChange}
                                 />
                         </div>
+
+                        {errores.nombre && <p>{errores.nombre}</p>}
+
                         <div className="form-group">
                             <input 
                                 className="form-control form-control-lg" 
@@ -60,6 +75,7 @@ const SignUp = () => {
                                 onChange={handleChange}
                                 />
                         </div>
+                        
                         <div className="form-group">
                             <input 
                                 className="form-control form-control-lg" 
@@ -102,7 +118,7 @@ const SignUp = () => {
                         </div>
                     </div>
                     <div className="card-footer bg-white">
-                        <p>¿Ya eres miembro? <a href="#" className="text-secondary">Entre aquí.</a></p>
+                        <p>¿Ya eres miembro? <a href="#!" className="text-secondary">Entre aquí.</a></p>
                     </div>
                     <style jsx>{`
                         html,

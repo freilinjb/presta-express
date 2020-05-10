@@ -1,9 +1,14 @@
 import React from 'react';
 import Head from 'next/head';
 import Header from './Header';
-
+import Navegacion from './Navegacion';
 
 const Layout = (props) => {
+    function Componente(props) {
+        return (
+          props.children
+        );
+      }
     return ( 
         <>
                 <Head>
@@ -19,10 +24,31 @@ const Layout = (props) => {
                     
                 </Head>
                 <body>
-                    <Header/>
+                    
                     <div className="dashboard-main-wrapper">
+                        <Header/>
+
+                        
                         <main>
-                            {props.children}
+
+                        {props.navegacion ? (
+                            <>
+                            <Navegacion/>
+                            
+                            <div className="dashboard-wrapper">
+                                <div className="container-fluid dashboard-content">
+                                    {props.children}
+                                </div>
+                            </div>
+                            </>
+                        ) : 
+                        
+                        (
+                            <Componente>{props.children}</Componente>
+                        )}
+                            
+                            
+
                         </main>
                     </div>
                         {/* <!-- Optional JavaScript --> */}
