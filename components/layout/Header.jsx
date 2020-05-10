@@ -1,8 +1,13 @@
-import React from 'react';
-import Navegacion from './Navegacion';
+import React,{useContext} from 'react';
 import Link from 'next/link';
+import Navegacion from './Navegacion';
+import { FirebaseContext } from '../../firebase';
+
 
 const Header = (props) => {
+
+    const { usuario, firebase } = useContext(FirebaseContext);
+
     return ( 
         <>
             <div className="dashboard-header">
@@ -14,19 +19,31 @@ const Header = (props) => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto navbar-right-top">
                         <li className="nav-item">
-                            {/* <div id="custom-search" className="top-search-bar form-inline">
-                                <input className="form-control" type="text" placeholder="Search.."/>
-                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                            </div> */}
+                            
 
                         </li>
                         {/* NOTIFICACION */}
                         {/* CONECCION */}
-                        <form className="form-inline my-2 my-lg-0 p-3">
-                            {/* <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/> */}
-                            <Link href="/SignIn"><a className="btn btn-outline-primary m-2 my-sm-0" href="#!">Iniciar Sesion</a></Link>
-                            <Link href="/SignUp"><a className="btn btn-outline-secondary m-2 my-sm-0" href="#!">Registrarse</a></Link>
-                        </form>
+                        {usuario ? 
+                        (
+                            <>
+                                <div id="custom-search" className="top-search-bar form-inline">
+                                    <input className="form-control" type="text" placeholder="Search.."/>
+                                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                </div>
+                            </>
+                        ) 
+                        :
+                        (
+                            <>
+                                <form className="form-inline my-2 my-lg-0 p-3">
+                                    {/* <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/> */}
+                                    <Link href="/SignIn"><a className="btn btn-outline-primary m-2 my-sm-0" href="#!">Iniciar Sesion</a></Link>
+                                    <Link href="/SignUp"><a className="btn btn-outline-secondary m-2 my-sm-0" href="#!">Registrarse</a></Link>
+                                </form>
+                            </>
+                        )}
+                        
                     </ul>
                 </div>
             </nav>
