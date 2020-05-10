@@ -14,28 +14,53 @@ class Firebase {
         this.auth = app.auth();
         this.db = app.firestore();
         this.storage = app.storage();
-
+        this.cargando = false;
     }
 
     async registrar(nombre, email, password) {
-        const nuevoUsuario = await this.auth.createUserWithEmailAndPassword(email,password);
-        
-        // Para actualizar el nombre del usuario creado
-        return await nuevoUsuario.user.updateProfile({
-            displayName: nombre
-        });
-        console.log(nuevoUsuario);
+        this.cargando = true;        
+        try {
+            
+            const nuevoUsuario = await this.auth.createUserWithEmailAndPassword(email,password);
+            
+            this.cargando = false;
+            // Para actualizar el nombre del usuario creado
+            return await nuevoUsuario.user.updateProfile({
+                displayName: nombre
+            });
+
+            console.log(nuevoUsuario);
+        } catch (error) {
+            console.log(error);
+            this.cargando = false;
+        }
         
     }
 
     //todo Iniciar sesion del usuario
     async login(email, password) {
-        return this.auth.signInWithEmailAndPassword(email, password);
+        this.cargando = true;
+        
+        try {
+            return this.auth.signInWithEmailAndPassword(email, password);
+            
+        } catch (error) {
+            console.log(error);
+        }
+        this.cargando = false;
     }
 
     //todo Cierra la sesion del usuario
     async cerrarSesion() {
-        await this.auth.signOut();
+        try {
+            
+            this.cargando = false;
+            await this.auth.signOut();
+
+        } catch (error) {
+            console.log(error);
+            this.cargando = false;
+        }
     }
 }
 

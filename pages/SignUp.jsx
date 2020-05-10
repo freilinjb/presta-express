@@ -32,9 +32,9 @@ const SignUp = () => {
         }
  
         console.log(errorMensaje);
-        
      }
-
+    console.log('cargando: ',firebase.cargando);
+    
     return ( 
         <>
         {/* <!-- SingUp page  --> */}
@@ -89,18 +89,35 @@ const SignUp = () => {
                         </div>
                         <div className="form-group">
                             <input 
-                                type="text"
+                                type="password"
                                 className="form-control form-control-lg" 
                                 placeholder="Confirmar contrasena"
                                 autoComplete="off"
-                                id="nombre"
+                                id="confirmar"
                                 name="confirmar"
                                 value={confirmar}
                                 onChange={handleChange}
                                 />
                         </div>
                         <div className="form-group pt-2">
-                            <button className="btn btn-block btn-primary" type="submit">Registrar Mi Cuenta</button>
+                            <button 
+                                className="btn btn-block btn-primary" 
+                                disabled={firebase.cargando}
+                                type="submit">
+                                    {firebase.cargando ? 
+                                    (<>
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            Cargando...
+                                    </>
+                                    )
+                                    :
+                                    (
+                                        <>
+                                        Registrar Mi Cuenta
+                                        </>
+                                    )
+                                    }
+                                </button>
                         </div>
                         <div className="form-group">
                             <label className="custom-control custom-checkbox">

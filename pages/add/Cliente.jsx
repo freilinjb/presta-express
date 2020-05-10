@@ -6,7 +6,8 @@ import Navegacion from '../../components/layout/Navegacion';
 const Cliente = () => {
     return ( 
 
-        <Layout navegacion="true">
+        <Layout>
+            <Navegacion>
             <div classNameName="row">
             {/* <!-- ============================================================== --> */}
             {/* <!-- validation form --> */}
@@ -90,7 +91,8 @@ const Cliente = () => {
             {/* <!-- ============================================================== --> */}
             {/* <!-- end validation form --> */}
             {/* <!-- ============================================================== --> */}
-    </div>    
+    </div> 
+    </Navegacion>   
     </Layout>
      );
 }

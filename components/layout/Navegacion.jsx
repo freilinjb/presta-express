@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Navegacion = () => {
+const Navegacion = (props) => {
     return ( 
         <>
                     {/* <!-- left sidebar --> */}
@@ -292,6 +292,63 @@ const Navegacion = () => {
         </div>
         {/* <!-- ============================================================== --> */}
         {/* <!-- end left sidebar --> */}
+        {/* <!-- wrapper  --> */}
+        {/* <!-- ============================================================== --> */}
+        <div className="dashboard-wrapper">
+            <div className="container-fluid dashboard-content">
+                {/* <!-- ============================================================== --> */}
+                {/* <!-- pageheader --> */}
+                {/* <!-- ============================================================== --> */}
+                <div className="row">
+                    <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div className="page-header">
+                            <h2 className="pageheader-title">Blank Pageheader </h2>
+                            <p className="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
+                            <div className="page-breadcrumb">
+                                <nav aria-label="breadcrumb">
+                                    <ol className="breadcrumb">
+                                        <li className="breadcrumb-item"><a href="#" className="breadcrumb-link">Dashboard</a></li>
+                                        <li className="breadcrumb-item"><a href="#" className="breadcrumb-link">Pages</a></li>
+                                        <li className="breadcrumb-item active" aria-current="page">Blank Pageheader</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* <!-- ============================================================== --> */}
+                {/* <!-- end pageheader --> */}
+                {/* <!-- ============================================================== --> */}
+                {/* <div className="row"> */}
+                    {/* <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"> */}
+                        {/* <h3 className="text-center">Content goes here!</h3> */}
+                    {/* </div> */}
+                {/* </div> */}
+                {props.children}
+            </div>
+            {/* <!-- ============================================================== --> */}
+            {/* <!-- footer --> */}
+            {/* <!-- ============================================================== --> */}
+            <div className="footer">
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
+                        </div>
+                        <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div className="text-md-right footer-links d-none d-sm-block">
+                                <a href="javascript: void(0);">About</a>
+                                <a href="javascript: void(0);">Support</a>
+                                <a href="javascript: void(0);">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* <!-- ============================================================== --> */}
+            {/* <!-- end footer --> */}
+            {/* <!-- ============================================================== --> */}
+        </div>
         </>
      );
 }

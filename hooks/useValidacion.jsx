@@ -22,7 +22,7 @@ const Validacion = (stateInicial,validar,fn) => {
         setValores({
             ...valores,
             [e.target.name] : e.target.value
-        });
+        });        
     }
 
     //Funcion que se ejecuta cuando el usuario hace submit
@@ -31,6 +31,8 @@ const Validacion = (stateInicial,validar,fn) => {
         const erroresValidacion = validar(valores);
         setErrores(erroresValidacion);
         setSubmitForm(true);
+        console.log('enviando...');
+        
     }
 
     //cuando se realiza unel evento de blur
