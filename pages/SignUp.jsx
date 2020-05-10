@@ -61,7 +61,7 @@ const SignUp = () => {
                                 />
                         </div>
 
-                        {errores.nombre && <p>{errores.nombre}</p>}
+                        {errores.nombre && <p className="alert alert-danger">{errores.nombre}</p>}
 
                         <div className="form-group">
                             <input 

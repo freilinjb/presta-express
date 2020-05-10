@@ -9,8 +9,8 @@ export default function validarCrearCliente(valores) {
 
     if(!valores.apellido) {
         errores.apellido = "El Apellido es Obligatorio";
-    } else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(valores.email)){
-        errores.email = "Email no valido"
+    } else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(valores.correo) && valores.correo.trim() == ''){
+        errores.correo = "Email no valido"
     }
 
     //validar el password
