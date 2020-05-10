@@ -21,7 +21,7 @@ const Layout = (props) => {
                 </Head>
                 <body>
                     <Header/>
-                    <div class="dashboard-main-wrapper">
+                    <div className="dashboard-main-wrapper">
                         <main>
                             {props.children}
                         </main>
