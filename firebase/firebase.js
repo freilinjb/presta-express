@@ -23,7 +23,7 @@ class Firebase {
             
             const nuevoUsuario = await this.auth.createUserWithEmailAndPassword(email,password);
             
-            this.cargando = false;
+            this.cargando = true;
             // Para actualizar el nombre del usuario creado
             return await nuevoUsuario.user.updateProfile({
                 displayName: nombre
@@ -32,6 +32,8 @@ class Firebase {
             console.log(nuevoUsuario);
         } catch (error) {
             console.log(error);
+        }
+        finally {
             this.cargando = false;
         }
         
@@ -47,18 +49,22 @@ class Firebase {
         } catch (error) {
             console.log(error);
         }
-        this.cargando = false;
+        finally {
+            this.cargando = false;
+        }
     }
 
     //todo Cierra la sesion del usuario
     async cerrarSesion() {
         try {
             
-            this.cargando = false;
+            this.cargando = true;
             await this.auth.signOut();
 
         } catch (error) {
             console.log(error);
+        }
+        finally {
             this.cargando = false;
         }
     }
