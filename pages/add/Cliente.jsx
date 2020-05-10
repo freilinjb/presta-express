@@ -14,26 +14,26 @@ const Cliente = () => {
             {/* <!-- ============================================================== --> */}
             <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div className="card">
-                    <h5 className="card-header">Bootstrap Validation Form</h5>
+                    <h5 className="card-header">Registro de Cliente</h5>
                     <div className="card-body">
                         <form className="needs-validation" novalidate>
-                            <div className="row">
-                                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
-                                    <label for="validationCustom01">First name</label>
+                            <div className="row justify-content-center">
+                                <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <label htmlFor="validationCustom01">Nombre</label>
                                     <input type="text" className="form-control" id="validationCustom01" placeholder="First name" value="Mark" required/>
                                     <div className="valid-feedback">
                                         Looks good!
                                     </div>
                                 </div>
-                                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
-                                    <label for="validationCustom02">Last name</label>
+                                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    <label htmlFor="validationCustom02">Apellido</label>
                                     <input type="text" className="form-control" id="validationCustom02" placeholder="Last name" value="Otto" required/>
                                     <div className="valid-feedback">
                                         Looks good!
                                     </div>
                                 </div>
                                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
-                                    <label for="validationCustomUsername">Username</label>
+                                    <label htmlFor="validationCustomUsername">Correo electronico</label>
                                     <div className="input-group">
                                         <div className="input-group-prepend">
                                             <span className="input-group-text" id="inputGroupPrepend">@</span>
@@ -44,24 +44,32 @@ const Cliente = () => {
                                         </div>
                                     </div>
                                 </div>
+                                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                                    <label htmlFor="telefono">Telefono</label>
+                                    <input type="text" className="form-control" id="telefono" name="telefono" placeholder="Ejemplo (849)-888-9999" required/>
+                                    <div className="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
                             </div>
                             <div className="form-row">
                                 <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
-                                    <label for="validationCustom03">City</label>
-                                    <input type="text" className="form-control" id="validationCustom03" placeholder="City" required/>
-                                    <div className="invalid-feedback">
-                                        Please provide a valid city.
+                                    <div className="form-group">
+                                    <label htmlFor="sector">Sector</label>
+                                      <select className="form-control" name="sector" id="sector">
+                                        <option>--Seleccione el sector</option>
+                                      </select>
                                     </div>
                                 </div>
                                 <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
-                                    <label for="validationCustom04">State</label>
+                                    <label htmlFor="validationCustom04">State</label>
                                     <input type="text" className="form-control" id="validationCustom04" placeholder="State" required/>
                                     <div className="invalid-feedback">
                                         Please provide a valid state.
                                     </div>
                                 </div>
                                 <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
-                                    <label for="validationCustom05">Zip</label>
+                                    <label htmlFor="validationCustom05">Zip</label>
                                     <input type="text" className="form-control" id="validationCustom05" placeholder="Zip" required/>
                                     <div className="invalid-feedback">
                                         Please provide a valid zip.
@@ -71,7 +79,7 @@ const Cliente = () => {
                                     <div className="form-group">
                                         <div className="form-check">
                                             <input className="form-check-input" type="checkbox" value="" id="invalidCheck" required/>
-                                            <label className="form-check-label" for="invalidCheck">
+                                            <label className="form-check-label" htmlFor="invalidCheck">
                                                 Agree to terms and conditions
                                             </label>
                                             <div className="invalid-feedback">

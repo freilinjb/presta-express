@@ -2,6 +2,7 @@ import React,{useContext} from 'react';
 import Link from 'next/link';
 import Navegacion from './Navegacion';
 import { FirebaseContext } from '../../firebase';
+import NavUsuario from './NavUsuario';
 
 
 const Header = (props) => {
@@ -28,9 +29,11 @@ const Header = (props) => {
                         (
                             <>
                                 <div id="custom-search" className="top-search-bar form-inline">
-                                    <input className="form-control" type="text" placeholder="Search.."/>
-                                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                    <input className="form-control" type="text" placeholder="Buscar..."/>
+                                    <button className="btn btn-outline-primary" type="submit">Buscar</button>
                                 </div>
+
+                                <NavUsuario/>
                             </>
                         ) 
                         :

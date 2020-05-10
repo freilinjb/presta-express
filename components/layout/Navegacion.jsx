@@ -1,4 +1,6 @@
 import React from 'react';
+import Footer from './Footer';
+import Link from 'next/link';
 
 const Navegacion = (props) => {
     return ( 
@@ -66,29 +68,23 @@ const Navegacion = (props) => {
                                 </div>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i className="fa fa-fw fa-rocket"></i>UI Elements</a>
+                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i className="fas fa-fw fa-inbox"></i>Registro</a>
                                 <div id="submenu-2" className="collapse submenu" >
                                     <ul className="nav flex-column">
                                         <li className="nav-item">
-                                            <a className="nav-link" href="cards.html">Cards <span className="badge badge-secondary">New</span></a>
+                                            <Link href="add/Cliente"><a className="nav-link">Cliente <span className="badge badge-secondary">New</span></a></Link>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="general.html">General</a>
+                                            <a className="nav-link" href="general.html">Sector</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="carousel.html">Carousel</a>
+                                            <a className="nav-link" href="carousel.html">Cobrador</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="listgroup.html">List Group</a>
+                                            <a className="nav-link" href="listgroup.html">Capital</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="typography.html">Typography</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="accordions.html">Accordions</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="tabs.html">Tabs</a>
+                                            <a className="nav-link" href="typography.html">Gastos</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -325,26 +321,12 @@ const Navegacion = (props) => {
                     {/* </div> */}
                 {/* </div> */}
                 {props.children}
+                <Footer/>
+
             </div>
             {/* <!-- ============================================================== --> */}
             {/* <!-- footer --> */}
             {/* <!-- ============================================================== --> */}
-            <div className="footer">
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                            Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
-                        </div>
-                        <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                            <div className="text-md-right footer-links d-none d-sm-block">
-                                <a href="#!">About</a>
-                                <a href="#!">Support</a>
-                                <a href="#!">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             {/* <!-- ============================================================== --> */}
             {/* <!-- end footer --> */}
             {/* <!-- ============================================================== --> */}

@@ -1,6 +1,17 @@
-import React from "react";
+import React,{useContext} from "react";
+import Router from 'next/router';
+import { FirebaseContext } from '../../firebase';
+
 
 const NavUsuario = () => {
+
+  const { usuario, firebase } = useContext(FirebaseContext);
+
+  const cerrarSession =()=> {
+    firebase.cerrarSesion();
+    Router.push('/SignIn');
+  } 
+
   return (
     <>
       <li className="nav-item dropdown nav-user">
@@ -34,7 +45,7 @@ const NavUsuario = () => {
             <i className="fas fa-cog mr-2"></i>Setting
           </a>
           <a className="dropdown-item" href="#!">
-            <i class="fas fa-power-off mr-2"></i>Logout
+            <span className="fas fa-power-off mr-2" onClick={() => cerrarSession()}></span>Cerrar Sesion
           </a>
         </div>
       </li>
