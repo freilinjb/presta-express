@@ -1,13 +1,36 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Layout from '../components/layout/Layout';
 
 const SignUp = () => {
+    const [nuevoUsuario, setNuevoUsuario] = useState({
+        nombre: '',
+        email: '',
+        password: '',
+        confirmar: ''
+    });
+
+    const {nombre, email, password, confirmar} = nuevoUsuario;
+
+    const handleChange=e=> {
+        setNuevoUsuario({
+            [e.target.name] : e.target.value
+        });
+    }
+    const hanbleSubmit =e=> {
+        e.preventDefault();
+
+        //Validar
+
+        //Pasar al action
+    }
     return ( 
         <>
         {/* <!-- SingUp page  --> */}
         {/* <!-- ============================================================== --> */}
         <Layout>
-            <form className="splash-container mt-5">
+            <form className="splash-container mt-5"
+                onSubmit={hanbleSubmit}
+            >
                 <div className="card">
                     <div className="card-header">
                         <h3 className="mb-1">Formulario de Registro</h3>
@@ -15,16 +38,51 @@ const SignUp = () => {
                     </div>
                     <div className="card-body">
                         <div className="form-group">
-                            <input className="form-control form-control-lg" type="text" name="nick" required="" placeholder="Username" autoComplete="off"/>
+                            <input 
+                                className="form-control form-control-lg" 
+                                type="text" name="nick"
+                                required="" 
+                                placeholder="Ingrese su nombre" autoComplete="off"
+                                name="nombre"
+                                value={nombre}
+                                onChange={handleChange}
+                                />
                         </div>
                         <div className="form-group">
-                            <input className="form-control form-control-lg" type="email" name="email" required="" placeholder="E-mail" autoComplete="off"/>
+                            <input 
+                                className="form-control form-control-lg" 
+                                type="email" 
+                                required="" 
+                                placeholder="E-mail" 
+                                autoComplete="off"
+                                name="email"
+                                value={email}
+                                onChange={handleChange}
+                                />
                         </div>
                         <div className="form-group">
-                            <input className="form-control form-control-lg" id="pass1" type="password" required="" placeholder="Password"/>
+                            <input 
+                                className="form-control form-control-lg" 
+                                id="password" 
+                                type="password" 
+                                required="" 
+                                placeholder="Ingrerse su contrasena"
+                                autoComplete="on"
+                                name="password"
+                                value={password}
+                                onChange={handleChange}
+                                />
                         </div>
                         <div className="form-group">
-                            <input className="form-control form-control-lg" required="" placeholder="Confirm"/>
+                            <input 
+                                className="form-control form-control-lg" 
+                                required="" 
+                                placeholder="Confirmar contrasena"
+                                autoComplete="off"
+                                name="confirmar"
+                                value={confirmar}
+                                onChange={handleChange}
+                            />
                         </div>
                         <div className="form-group pt-2">
                             <button className="btn btn-block btn-primary" type="submit">Registrar Mi Cuenta</button>
