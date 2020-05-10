@@ -4,112 +4,116 @@ import Navegacion from './Navegacion';
 const Header = (props) => {
     return ( 
         <>
-            {/* <!-- Header--> */}
-            <header id="header" className="header">
-                <div className="top-left">
-                    <div className="navbar-header">
-                        <a className="navbar-brand" href="./"><img src="images/logo.png" alt="Logo"/></a>
-                        <a className="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"/></a>
-                        <a id="menuToggle" className="menutoggle"><i className="fa fa-bars"></i></a>
-                    </div>
-                </div>
-                <div className="top-right">
-                    <div className="header-menu">
-                        <div className="header-left">
-                            <button className="search-trigger"><i className="fa fa-search"></i></button>
-                            <div className="form-inline">
-                                <form className="search-form">
-                                    <input className="form-control mr-sm-2" type="text" placeholder="Buscar..." aria-label="Search"/>
-                                    <button className="search-close" type="submit"><i className="fa fa-close"></i></button>
-                                </form>
+            <div className="dashboard-header">
+            <nav className="navbar navbar-expand-lg bg-white fixed-top">
+                <a className="navbar-brand" href="../index.html">Concept</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav ml-auto navbar-right-top">
+                        <li className="nav-item">
+                            <div id="custom-search" className="top-search-bar">
+                                <input className="form-control" type="text" placeholder="Search.."/>
                             </div>
-
-                            <div className="dropdown for-notification">
-                                <button className="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i className="fa fa-bell"></i>
-                                    <span className="count bg-danger">3</span>
-                                </button>
-                                <div className="dropdown-menu" aria-labelledby="notification">
-                                    <p className="red">You have 3 Notification</p>
-                                    <a className="dropdown-item media" href="#">
-                                        <i className="fa fa-check"></i>
-                                        <p>Server #1 overloaded.</p>
-                                    </a>
-                                    <a className="dropdown-item media" href="#">
-                                        <i className="fa fa-info"></i>
-                                        <p>Server #2 overloaded.</p>
-                                    </a>
-                                    <a className="dropdown-item media" href="#">
-                                        <i className="fa fa-warning"></i>
-                                        <p>Server #3 overloaded.</p>
-                                    </a>
+                        </li>
+                        <li className="nav-item dropdown notification">
+                            <a className="nav-link nav-icons" href="#!" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fas fa-fw fa-bell"></i> <span className="indicator"></span></a>
+                            <ul className="dropdown-menu dropdown-menu-right notification-dropdown">
+                                <li>
+                                    <div className="notification-title"> Notification</div>
+                                    <div className="notification-list">
+                                        <div className="list-group">
+                                            <a href="#!" className="list-group-item list-group-item-action active">
+                                                <div className="notification-info">
+                                                    <div className="notification-list-user-img"><img src="../assets/images/avatar-2.jpg" alt="" className="user-avatar-md rounded-circle"/></div>
+                                                    <div className="notification-list-user-block"><span className="notification-list-user-name">Jeremy Rakestraw</span>accepted your invitation to join the team.
+                                                        <div className="notification-date">2 min ago</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="#!" className="list-group-item list-group-item-action">
+                                                <div className="notification-info">
+                                                    <div className="notification-list-user-img"><img src="../assets/images/avatar-3.jpg" alt="" className="user-avatar-md rounded-circle"/></div>
+                                                    <div className="notification-list-user-block"><span className="notification-list-user-name">
+                                                                John Abraham</span>is now following you
+                                                        <div className="notification-date">2 days ago</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="#!" className="list-group-item list-group-item-action">
+                                                <div className="notification-info">
+                                                    <div className="notification-list-user-img"><img src="../assets/images/avatar-4.jpg" alt="" className="user-avatar-md rounded-circle"/></div>
+                                                    <div className="notification-list-user-block"><span className="notification-list-user-name">Monaan Pechi</span> is watching your main repository
+                                                        <div className="notification-date">2 min ago</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="#!" className="list-group-item list-group-item-action">
+                                                <div className="notification-info">
+                                                    <div className="notification-list-user-img"><img src="../assets/images/avatar-5.jpg" alt="" className="user-avatar-md rounded-circle"/></div>
+                                                    <div className="notification-list-user-block"><span className="notification-list-user-name">Jessica Caruso</span>accepted your invitation to join the team.
+                                                        <div className="notification-date">2 min ago</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div className="list-footer"> <a href="#!">View all notifications</a></div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li className="nav-item dropdown connection">
+                            <a className="nav-link" href="#!" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i className="fas fa-fw fa-th"></i> </a>
+                            <ul className="dropdown-menu dropdown-menu-right connection-dropdown">
+                                <li className="connection-list">
+                                    <div className="row">
+                                        <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#!" className="connection-item"><img src="../assets/images/github.png" alt="" /> <span>Github</span></a>
+                                        </div>
+                                        <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#!" className="connection-item"><img src="../assets/images/dribbble.png" alt="" /> <span>Dribbble</span></a>
+                                        </div>
+                                        <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#!" className="connection-item"><img src="../assets/images/dropbox.png" alt="" /> <span>Dropbox</span></a>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#!" className="connection-item"><img src="../assets/images/bitbucket.png" alt=""/> <span>Bitbucket</span></a>
+                                        </div>
+                                        <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#!" className="connection-item"><img src="../assets/images/mail_chimp.png" alt="" /><span>Mail chimp</span></a>
+                                        </div>
+                                        <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#!" className="connection-item"><img src="../assets/images/slack.png" alt="" /> <span>Slack</span></a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div className="conntection-footer"><a href="#!">More</a></div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li className="nav-item dropdown nav-user">
+                            <a className="nav-link nav-user-img" href="#!" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar-1.jpg" alt="" className="user-avatar-md rounded-circle"/></a>
+                            <div className="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+                                <div className="nav-user-info">
+                                    <h5 className="mb-0 text-white nav-user-name">
+                                        John Abraham</h5>
+                                    <span className="status"></span><span className="ml-2">Available</span>
                                 </div>
+                                <a className="dropdown-item" href="#!"><i className="fas fa-user mr-2"></i>Account</a>
+                                <a className="dropdown-item" href="#!"><i className="fas fa-cog mr-2"></i>Setting</a>
+                                <a className="dropdown-item" href="#!"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
-
-                            <div className="dropdown for-message">
-                                <button className="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i className="fa fa-envelope"></i>
-                                    <span className="count bg-primary">4</span>
-                                </button>
-                                <div className="dropdown-menu" aria-labelledby="message">
-                                    <p className="red">You have 4 Mails</p>
-                                    <a className="dropdown-item media" href="#">
-                                        <span className="photo media-left"><img alt="avatar" src="images/avatar/1.jpg"/></span>
-                                        <div className="message media-body">
-                                            <span className="name float-left">Jonathan Smith</span>
-                                            <span className="time float-right">Just now</span>
-                                            <p>Hello, this is an example msg</p>
-                                        </div>
-                                    </a>
-                                    <a className="dropdown-item media" href="#">
-                                        <span className="photo media-left"><img alt="avatar" src="images/avatar/2.jpg"/></span>
-                                        <div className="message media-body">
-                                            <span className="name float-left">Jack Sanders</span>
-                                            <span className="time float-right">5 minutes ago</span>
-                                            <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                        </div>
-                                    </a>
-                                    <a className="dropdown-item media" href="#">
-                                        <span className="photo media-left"><img alt="avatar" src="images/avatar/3.jpg"/></span>
-                                        <div className="message media-body">
-                                            <span className="name float-left">Cheryl Wheeler</span>
-                                            <span className="time float-right">10 minutes ago</span>
-                                            <p>Hello, this is an example msg</p>
-                                        </div>
-                                    </a>
-                                    <a className="dropdown-item media" href="#">
-                                        <span className="photo media-left"><img alt="avatar" src="images/avatar/4.jpg"/></span>
-                                        <div className="message media-body">
-                                            <span className="name float-left">Rachel Santos</span>
-                                            <span className="time float-right">15 minutes ago</span>
-                                            <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="user-area dropdown float-right">
-                            <a href="#" className="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img className="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar"/>
-                            </a>
-
-                            <div className="user-menu dropdown-menu">
-                                <a className="nav-link" href="#"><i className="fa fa-user"></i>My Profile</a>
-
-                                <a className="nav-link" href="#"><i className="fa fa-bell-o"></i>Notifications <span className="count">13</span></a>
-
-                                <a className="nav-link" href="#"><i className="fa fa-cog"></i>Settings</a>
-
-                                <a className="nav-link" href="#"><i className="fa fa-power-off"></i>Logout</a>
-                            </div>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
-            </header>
-            {/* <!-- /header --> */}
-            {/* <!-- Header-->*/}
-            {props.children}
+            </nav>
+        </div>
         </>
      );
 }
