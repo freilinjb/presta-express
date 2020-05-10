@@ -50,10 +50,10 @@ const SignUp = () => {
                     </div>
                     <div className="card-body">
                         <div className="form-group">
+                            <label htmlFor="nombre">Nombre</label>
                             <input 
                                 className="form-control form-control-lg" 
                                 type="text" name="nick"
-                                required="" 
                                 placeholder="Ingrese su nombre" autoComplete="off"
                                 name="nombre"
                                 value={nombre}
@@ -67,7 +67,6 @@ const SignUp = () => {
                             <input 
                                 className="form-control form-control-lg" 
                                 type="email" 
-                                required="" 
                                 placeholder="E-mail" 
                                 autoComplete="off"
                                 name="email"
@@ -81,7 +80,6 @@ const SignUp = () => {
                                 className="form-control form-control-lg" 
                                 id="password" 
                                 type="password" 
-                                required="" 
                                 placeholder="Ingrerse su contrasena"
                                 autoComplete="on"
                                 name="password"
@@ -91,14 +89,15 @@ const SignUp = () => {
                         </div>
                         <div className="form-group">
                             <input 
+                                type="text"
                                 className="form-control form-control-lg" 
-                                required="" 
                                 placeholder="Confirmar contrasena"
                                 autoComplete="off"
+                                id="nombre"
                                 name="confirmar"
                                 value={confirmar}
                                 onChange={handleChange}
-                            />
+                                />
                         </div>
                         <div className="form-group pt-2">
                             <button className="btn btn-block btn-primary" type="submit">Registrar Mi Cuenta</button>
