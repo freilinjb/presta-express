@@ -1,8 +1,9 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect, useContext} from 'react';
 import Layout from '../components/layout/Layout';
 import Router from 'next/router';
 
 import firebase from '../firebase';
+import { FirebaseContext } from '../firebase';
 
 //Validaciones
 import useValidacion from '../hooks/useValidacion';
@@ -15,7 +16,20 @@ const STATE_INICIAL = {
     password: ''
 }
 
+
 const SignIn = () => {
+
+    const { usuario } = useContext(FirebaseContext);
+
+    useEffect(() => {
+        if (usuario !== null) {
+            console.log('esta loqueado');
+            return Router.push("/");
+            firebase.cargando = false;
+        }
+    },[]);
+
+
 
     const [error, setError] = useState('');
     

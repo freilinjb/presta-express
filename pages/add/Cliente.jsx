@@ -60,7 +60,7 @@ const Cliente = () => {
             //Si el usuario no esta autenticado llevat al login
             if (!usuario) {
                 console.log('no esta loqueado');
-                return router.push("/login");
+                return router.push("/SignIn");
                 firebase.cargando = false;
             }
 
