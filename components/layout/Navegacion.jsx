@@ -1,6 +1,7 @@
 import React from 'react';
 import Footer from './Footer';
 import Link from 'next/link';
+import BreadCrumbs from './BreadCrumbs';
 
 const Navegacion = (props) => {
     return ( 
@@ -68,17 +69,17 @@ const Navegacion = (props) => {
                                 </div>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i className="fas fa-fw fa-inbox"></i>Registro</a>
+                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i className="fas fa-fw fa-inbox"></i>Cliente</a>
                                 <div id="submenu-2" className="collapse submenu" >
                                     <ul className="nav flex-column">
                                         <li className="nav-item">
-                                            <Link href="add/Cliente"><a className="nav-link">Cliente <span className="badge badge-secondary">New</span></a></Link>
+                                            <Link href="add/Cliente"><a className="nav-link">Registrar Clientes<span className="badge badge-secondary">New</span></a></Link>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="general.html">Sector</a>
+                                            <a className="nav-link" href="general.html">Perfiles de Clientes</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="carousel.html">Cobrador</a>
+                                            <a className="nav-link" href="carousel.html">Listar de Clientes</a>
                                         </li>
                                         <li className="nav-item">
                                             <a className="nav-link" href="listgroup.html">Capital</a>
@@ -295,23 +296,7 @@ const Navegacion = (props) => {
                 {/* <!-- ============================================================== --> */}
                 {/* <!-- pageheader --> */}
                 {/* <!-- ============================================================== --> */}
-                <div className="row">
-                    <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div className="page-header">
-                            <h2 className="pageheader-title">Blank Pageheader </h2>
-                            <p className="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
-                            <div className="page-breadcrumb">
-                                <nav aria-label="breadcrumb">
-                                    <ol className="breadcrumb">
-                                        <li className="breadcrumb-item"><a href="#" className="breadcrumb-link">Dashboard</a></li>
-                                        <li className="breadcrumb-item"><a href="#" className="breadcrumb-link">Pages</a></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Blank Pageheader</li>
-                                    </ol>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <BreadCrumbs/>
                 {/* <!-- ============================================================== --> */}
                 {/* <!-- end pageheader --> */}
                 {/* <!-- ============================================================== --> */}

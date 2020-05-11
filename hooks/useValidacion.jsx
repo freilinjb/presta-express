@@ -15,9 +15,10 @@ const Validacion = (stateInicial,validar,fn) => {
 
                 fn();
             }
+            
             setSubmitForm(false);//Cambia el valor para que no se siga ejecutando
         }
-
+        
         
     },[errores]);
  

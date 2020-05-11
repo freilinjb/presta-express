@@ -7,26 +7,18 @@ const BreadCrumbs = (props) => {
     // }
     return ( 
         <>
-            <div className="breadcrumbs">
-                <div className="breadcrumbs-inner">
-                    <div className="row m-0">
-                        <div className="col-sm-4">
-                            <div className="page-header float-left">
-                                <div className="page-title">
-                                    <h1>props.titulo</h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-sm-8">
-                            <div className="page-header float-right">
-                                <div className="page-title">
-                                    <ol className="breadcrumb text-right">
-                                        <li><a href="#">Dashboard</a></li>
-                                        <li><a href="#">UI Elements</a></li>
-                                        <li className="active">Alerts</li>
-                                    </ol>
-                                </div>
-                            </div>
+            <div className="row">
+                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div className="page-header">
+                        <h2 className="pageheader-title">Blank Pageheader </h2>
+                        <div className="page-breadcrumb">
+                            <nav aria-label="breadcrumb">
+                                <ol className="breadcrumb">
+                                    <li className="breadcrumb-item"><a href="#" className="breadcrumb-link">Dashboabfdffgdfgrd</a></li>
+                                    <li className="breadcrumb-item"><a href="#" className="breadcrumb-link">Pages</a></li>
+                                    <li className="breadcrumb-item active" aria-current="page">Blank Pageheader</li>
+                                </ol>
+                            </nav>
                         </div>
                     </div>
                 </div>
