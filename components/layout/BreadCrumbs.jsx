@@ -10,7 +10,7 @@ const BreadCrumbs = (props) => {
             <div className="row">
                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div className="page-header">
-                        <h2 className="pageheader-title">Blank Pageheader </h2>
+                        <h2 className="pageheader-title">{props.titulo}</h2>
                         <div className="page-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol className="breadcrumb">
