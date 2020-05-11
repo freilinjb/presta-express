@@ -11,8 +11,7 @@ import { FirebaseContext } from '../../firebase';
 import useValidacion from '../../hooks/useValidacion';
 import validarCrearCliente from '../../validacion/validarCrearCliente';
 //Copia todo del crear-cuenta
-
-//Modelo
+import useSector from '../../hooks/useSector';
 
 
 const STATE_INICIAL = {
@@ -30,6 +29,10 @@ const STATE_INICIAL = {
 }
 
 const Cliente = () => {
+
+    const {sectores} = useSector("creado");
+
+
       //state de las imagenes
     const [nombreimagen, guardarNombre] = useState("");
     const [subiendo, guardarSubiendo] = useState(false);
@@ -54,6 +57,8 @@ const Cliente = () => {
     
       //Context con las operaciones crud de firebase
       const { usuario, firebase } = useContext(FirebaseContext);
+      console.log(usuario);
+      
     
       async function crearCliente() {
         //Inicia la carga
@@ -236,7 +241,10 @@ const Cliente = () => {
                                 <div className="col-md-6 col-sm-12 mb-3">
                                 <label htmlFor="sector">Sector</label>
                                     <select className="form-control" name="sector" id="sector" value={sector} onChange={handleChange}>
-                                        <option selected value="la herradura">La Herradura</option>
+                                        <option value="" selected disabled>--Seleccione--</option>
+                                        {sectores.map(str=> (
+                                            <option value={str.id} key={str.id} >{str.nombre}</option>
+                                        ))}
                                         <option value="penco">Penco</option>
                                     </select>
                                 

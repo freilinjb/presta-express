@@ -1,18 +1,60 @@
-import React from "react";
+import React,{useState,useContext, useEffect} from "react";
 import Layout from "../components/layout/Layout";
 import Navegacion from "../components/layout/Navegacion";
 import InputModal from '../components/ui/InputModal';
 import Sector from '../components/ui/Sector';
-
+import {FirebaseContext} from '../firebase'; 
 import useSector from '../hooks/useSector';
 
 
 const Sectores = () => {
 
-    const {sectores} = useSector("creado");
-    console.log(sectores);
+    // const {sectores} = useSector("creado");
+
     
-  return (
+
+
+  const [sectores, setSectores ] = useState([]);
+  const {firebase, usuario} = useContext(FirebaseContext);
+
+    // const usuario = useAutenticacion();
+
+    if(usuario) {
+      const { uid } = usuario;
+      const obtenerSectores =() => {  
+        firebase.db.collection("Sectores").where("creador.id","==",uid).orderBy("creado", 'desc').onSnapshot(manejarSnapshot);//Ordena por creado
+      }
+      obtenerSectores();
+    }
+  
+    // useEffect(() => {
+    //   //Esta funcion te da acceso a todos los datos
+    //   //y snapshot realiza operaciones con ellos
+    //   // console.log(usuario);
+    //   if(usuario){
+    //     console.log(usuario);
+        
+       
+    //   }
+    // },[usuario]);
+    
+    //se ejecuta cuando el componente esta listo
+    function manejarSnapshot(snapshot) {
+      const sectores = snapshot.docs.map(doc => {
+        //Extrae todo el registro completo
+        return {
+          id: doc.id,
+          ...doc.data()
+        }
+      });
+   
+      //resultado de la consulta
+      setSectores(sectores);
+    }
+
+    // const {nombre, descripcion, id } = sector;
+
+    return (
     <>
       <Layout>
       <Navegacion>

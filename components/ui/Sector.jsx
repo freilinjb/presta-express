@@ -5,6 +5,7 @@ const Sector = ({sector}) => {
 
   const {nombre, descripcion, id } = sector;
 
+
   return (
     <>
       <li className="list-group-item align-items-center drag-handle border fade-up-right">
