@@ -2,8 +2,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import Link from 'next/link';
 import Layout from "../components/layout/Layout";
-import Navegacion from "../components/layout/Navegacion";
 import { FirebaseContext } from "../firebase";
+import Navegacion from "../components/layout/Navegacion";
+import ClienteMiniaturaDetalle from '../components/ui/ClienteMiniaturaDetalle';
 
 const Clientes = () => {
   // const {sectores} = useSector("creado");
@@ -11,40 +12,40 @@ const Clientes = () => {
   const [clientes, setClientes] = useState([]);
   const { firebase, usuario } = useContext(FirebaseContext);
 
+
+
   // const usuario = useAutenticacion();
 
   useEffect(() => {
-    //Esta funcion te da acceso a todos los datos
-    //y snapshot realiza operaciones con ellos
-    // console.log(usuario);
-    if (usuario) {
-      const { uid } = usuario;
-      const obtenerSectores = () => {
-        firebase.db
-          .collection("Clientes")
-          .where("creador.id", "==", uid)
-          .orderBy("creado", "desc")
-          .onSnapshot(manejarSnapshot); //Ordena por creado
-      }
-
-      obtenerSectores();
-
-      function manejarSnapshot(snapshot) {
-        const clientes = snapshot.docs.map(doc => {
-          //Extrae todo el registro completo
-          return {
-            id: doc.id,
-            ...doc.data()
-          };
-        });
-
-        //resultado de la consulta
-        setClientes(clientes);
-      }
-      console.log(clientes);
+    if(usuario) {
+        const { uid } = usuario;
+        //Esta funcion te da acceso a todos los datos
+        //y snapshot realiza operaciones con ellos
+        const obtenerClientes =() => {
+          firebase.db.collection("Clientes").where("creador.id","==",uid).orderBy("creado", 'desc').onSnapshot(manejarSnapshot);//Ordena por creado
+        }
+        obtenerClientes();
+        console.log(clientes);
+        
     }
-  }, [usuario]);
-
+     
+  },[]);
+  //se ejecuta cuando el componente esta listo
+  function manejarSnapshot(snapshot) {
+    const clientes = snapshot.docs.map(doc => {
+      //Extrae todo el registro completo
+      return {
+        id: doc.id,
+        ...doc.data()
+      }
+    });
+ 
+    //resultado de la consulta
+    setClientes(clientes);    
+  }
+  
+  console.log(clientes);
+  
   //se ejecuta cuando el componente esta listo
 
   return (
@@ -72,6 +73,13 @@ const Clientes = () => {
                             </form>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-6 col-lg-3 col-xl-3 col-sm-12">
+                    {clientes.map(cliente=>(
+                        <ClienteMiniaturaDetalle key={cliente.id} cliente={cliente}/>
+                    ))}
                 </div>
             </div>
       </Navegacion>

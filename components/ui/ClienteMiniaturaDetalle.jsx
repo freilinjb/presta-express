@@ -5,11 +5,11 @@ import { es } from 'date-fns/locale';
 
 const ClienteMiniaturaDetalle = ({cliente}) => {
 
-    const {nombre, apellido, img, creado, sector} = cliente;
+    const {nombre, apellido, correo, telefono, creado} = cliente;
     return ( 
         <>
         <div className="chat-module-body">
-            <div className="media chat-item">
+            <div className="media chat-item border">
                 {cliente.img ? 
                 (
                     <img alt="William" src={cliente.img} className="rounded-circle user-avatar-lg"/>
@@ -22,12 +22,14 @@ const ClienteMiniaturaDetalle = ({cliente}) => {
                 <div className="media-body">
                     <div className="chat-item-title">
                         <Link href="/editar/CLiente">
-                            <a className="chat-item-author">William</a>
+                            <a className="chat-item-author"><strong>{nombre + ' ' + apellido}</strong></a>
                         </Link>
                         <span>{formatDistanceToNow(new Date(creado), {locale: es})}</span>
                     </div>
                     <div className="chat-item-body">
-                        <p>Hey guys, Phasellus imperdiet arcu venenatis, malesuada nulla a, porta sem. Curabitur nec massa ultrices, consequat erat sit amet, luctus justo. Brand Concept &amp; Design!</p>
+                        
+                        <p><strong>Telefono: </strong><a href={`tel:+${telefono}`}>{telefono}</a></p>
+                        <p><strong>Correo: </strong><a href={correo}>{correo}</a></p>
                     </div>
                 </div>
             </div>

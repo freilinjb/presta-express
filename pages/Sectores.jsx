@@ -46,7 +46,7 @@ const Sectores = () => {
       //resultado de la consulta
       setSectores(sectores);
     }
-
+    
     // const {nombre, descripcion, id } = sector;
 
     return (
