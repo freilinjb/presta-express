@@ -148,7 +148,7 @@ const Cliente = () => {
             {/* <!-- ============================================================== --> */}
             <div className="col-xl-8 col-lg-10 col-md-12 col-sm-12">
                 <div className="card">
-                    <h5 className="card-header">Registro de Cliente</h5>
+                    <h5 className="card-header">Registro de Cliente <span className="fas fa-user-plus"></span></h5>
                     <div className="card-body">
                         <form 
                             className="needs-validation" 

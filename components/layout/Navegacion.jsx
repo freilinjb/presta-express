@@ -54,32 +54,26 @@ const Navegacion = (props) => {
                             <li className="nav-item">
                                 
                                     <div className="nav-link">
-                                        <i className="fas fa-fw fa-inbox"></i>
+                                        <i className="fas fa-user"></i>
                                         Clientes
                                     </div>
                             </li>
                             </Link>
                             <li className="nav-item">
-                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i className="fas fa-fw fa-chart-pie"></i>Chart</a>
+                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i className="far fa-money-bill-alt"></i>Prestamos</a>
                                 <div id="submenu-3" className="collapse submenu" >
                                     <ul className="nav flex-column">
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="chart-c3.html">C3 Charts</a>
+                                    <li className="nav-item">
+                                            <Link href="/Sectores"><a className="nav-link">Cobrar</a></Link>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="chart-chartist.html">Chartist Charts</a>
+                                            <Link href="/Sectores"><a className="nav-link">Realizar</a></Link>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="chart-charts.html">Chart</a>
+                                            <Link href="/Sectores"><a className="nav-link">Solicitud</a></Link>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="chart-morris.html">Morris</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="chart-sparkline.html">Sparkline</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="chart-gauge.html">Guage</a>
+                                            <Link href="/Sectores"><a className="nav-link">Sector</a></Link>
                                         </li>
                                     </ul>
                                 </div>
