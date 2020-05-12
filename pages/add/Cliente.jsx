@@ -86,6 +86,7 @@ const Cliente = () => {
                 direccion,
                 observacion,
                 creado: Date.now(),
+                estado:'',
                 creador: {
                     id: usuario.uid,
                     nombre: usuario.displayName

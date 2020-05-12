@@ -9,17 +9,24 @@ import Spinner from '../components/ui/Spinner';
 const Clientes = () => {
   // const {sectores} = useSector("creado");
   const [cargando, setCargando] = useState(false);
-  
+  const [busqueda, setBusqueda] = useState('');
+
   const [clientes, setClientes] = useState([]);
   const { firebase, usuario } = useContext(FirebaseContext);
+
+  const handleChange =e=> {
+    setBusqueda(e.target.value);
+    // console.log(busqueda);
+  }
 
 
 
   // const usuario = useAutenticacion();
 
   useEffect(() => {
-    if(usuario) {
+    if(usuario && busqueda.trim() === '') {
         const { uid } = usuario;
+        
         //Esta funcion te da acceso a todos los datos
         //y snapshot realiza operaciones con ellos
         try {
@@ -29,7 +36,6 @@ const Clientes = () => {
             firebase.db.collection("Clientes").where("creador.id","==",uid).orderBy("creado", 'desc').onSnapshot(manejarSnapshot);//Ordena por creado
           }
           obtenerClientes();
-          console.log(clientes);
         } catch (error) {
           console.log(error);
         }
@@ -37,7 +43,7 @@ const Clientes = () => {
           setCargando(false);
         }
     }
-  },[]);
+  },[clientes, busqueda]);
   //se ejecuta cuando el componente esta listo
   function manejarSnapshot(snapshot) {
     const clientes = snapshot.docs.map(doc => {
@@ -49,46 +55,73 @@ const Clientes = () => {
     });
  
     //resultado de la consulta
-    setClientes(clientes);    
+    setClientes(clientes);   
+    // console.log(clientes);
+     
   }
   
-  console.log(clientes);
+  // console.log(clientes);
   
-  const Componente = (cargando) ? <Spinner/> : (<div className="col-md-6 col-lg-3 col-xl-3 col-sm-12">
+  const Componente = (cargando) ? <Spinner/> : (<div className="">
                                                   {clientes.map(cliente=>(
                                                        <ClienteMiniaturaDetalle key={cliente.id} cliente={cliente}/>
                                                   ))}</div>)
+    const hanbleBuscar =e=> {
+        e.preventDefault();
 
+        if(busqueda.trim()) {
+          setBusqueda(busqueda.toLowerCase().trim());
+
+          const filtro = clientes.filter(cliente => {
+              return(
+                (cliente.nombre.toLowerCase() + ' '+cliente.apellido.toLowerCase()).includes(busqueda) || cliente.cedula.toLowerCase().includes(busqueda)
+              )
+          });
+          
+          //filtro itera en cada uno de ellos, combierte el nombrer en minusculas 
+          //y luego si lo encuentra lo agrega a filter
+          console.log(filtro,' BUSQUEDA: ', busqueda);
+          setClientes(filtro);
+          console.log(clientes);
+           
+        }   
+    }
   return (
     <Layout>
       <Navegacion titulo={"Lista de Clientes"}>
       
-            <div className="row">
+            <div className="row justify-content-center">
                 <Link href="/add/Cliente">            
-                    <a className="btn btn-primary shadow float-right col-md-auto offset-md-10">Registrar un sector</a>
+                    <a className="btn btn-primary shadow float-right col-md-auto offset-md-7">Registrar un sector</a>
                 </Link>
-                <div className="col-xl-11 col-lg-11 col-md-12 col-sm-12 col-11 mt-2">
+                <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-11 mt-2">
                     
                     <div className="card">
                         <div className="card-body">
-                            <form>
-                            <input
-                                className="form-control form-control-lg"
-                                type="search"
-                                placeholder="Buscar..."
-                                aria-label="Buscar..."
-                            />
-                            <button className="btn btn-primary search-btn" type="submit">
-                                Buscar
-                            </button>
+                            <form
+                              onSubmit={hanbleBuscar}
+                            >
+                              <input
+                                  className="form-control form-control-lg"
+                                  type="search"
+                                  placeholder="Buscar..."
+                                  aria-label="Buscar..."
+                                  name="busqueda"
+                                  value={busqueda}
+                                  onChange={handleChange}
+                              />
+                              <button className="btn btn-primary search-btn" type="submit">
+                                  Buscar
+                              </button>
                             </form>
                         </div>
                     </div>
+                    <div className="">
+                  { Componente } 
+                </div>
                 </div>
             </div>
-            <div className="row">
-            { Componente } 
-            </div>
+            
       </Navegacion>
     </Layout>
   );
