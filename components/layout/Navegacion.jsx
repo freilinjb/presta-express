@@ -24,25 +24,7 @@ const Navegacion = (props) => {
                                 <a className="nav-link active" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i className="fa fa-fw fa-user-circle"></i>Dashboard <span className="badge badge-success">6</span></a>
                                 <div id="submenu-1" className="collapse submenu" >
                                     <ul className="nav flex-column">
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="index.html" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-2" aria-controls="submenu-1-2">E-Commerce</a>
-                                            <div id="submenu-1-2" className="collapse submenu" >
-                                                <ul className="nav flex-column">
-                                                    <li className="nav-item">
-                                                        <a className="nav-link" href="../index.html">E Commerce Dashboard</a>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <a className="nav-link" href="../ecommerce-product.html">Product List</a>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <a className="nav-link" href="../ecommerce-product-single.html">Product Single</a>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <a className="nav-link" href="../ecommerce-product-checkout.html">Product Checkout</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
+                                       
                                         <li className="nav-item">
                                             <a className="nav-link" href="../dashboard-finance.html">Finance</a>
                                         </li>
@@ -68,28 +50,15 @@ const Navegacion = (props) => {
                                     </ul>
                                 </div>
                             </li>
+                            <Link href="/Clientes"> 
                             <li className="nav-item">
-                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i className="fas fa-fw fa-inbox"></i>Cliente</a>
-                                <div id="submenu-2" className="collapse submenu" >
-                                    <ul className="nav flex-column">
-                                        <li className="nav-item">
-                                            <Link href="add/Cliente"><a className="nav-link">Registrar Clientes<span className="badge badge-secondary">New</span></a></Link>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="general.html">Perfiles de Clientes</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="carousel.html">Listar de Clientes</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="listgroup.html">Capital</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="typography.html">Gastos</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                
+                                    <div className="nav-link">
+                                        <i className="fas fa-fw fa-inbox"></i>
+                                        Clientes
+                                    </div>
                             </li>
+                            </Link>
                             <li className="nav-item">
                                 <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i className="fas fa-fw fa-chart-pie"></i>Chart</a>
                                 <div id="submenu-3" className="collapse submenu" >
