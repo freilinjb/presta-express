@@ -5,10 +5,11 @@ import Layout from "../components/layout/Layout";
 import { FirebaseContext } from "../firebase";
 import Navegacion from "../components/layout/Navegacion";
 import ClienteMiniaturaDetalle from '../components/ui/ClienteMiniaturaDetalle';
-
+import Spinner from '../components/ui/Spinner';
 const Clientes = () => {
   // const {sectores} = useSector("creado");
-
+  const [cargando, setCargando] = useState(false);
+  
   const [clientes, setClientes] = useState([]);
   const { firebase, usuario } = useContext(FirebaseContext);
 
@@ -21,14 +22,21 @@ const Clientes = () => {
         const { uid } = usuario;
         //Esta funcion te da acceso a todos los datos
         //y snapshot realiza operaciones con ellos
-        const obtenerClientes =() => {
-          firebase.db.collection("Clientes").where("creador.id","==",uid).orderBy("creado", 'desc').onSnapshot(manejarSnapshot);//Ordena por creado
+        try {
+          setCargando(true);
+
+          const obtenerClientes =() => {
+            firebase.db.collection("Clientes").where("creador.id","==",uid).orderBy("creado", 'desc').onSnapshot(manejarSnapshot);//Ordena por creado
+          }
+          obtenerClientes();
+          console.log(clientes);
+        } catch (error) {
+          console.log(error);
         }
-        obtenerClientes();
-        console.log(clientes);
-        
+        finally {
+          setCargando(false);
+        }
     }
-     
   },[]);
   //se ejecuta cuando el componente esta listo
   function manejarSnapshot(snapshot) {
@@ -46,7 +54,10 @@ const Clientes = () => {
   
   console.log(clientes);
   
-  //se ejecuta cuando el componente esta listo
+  const Componente = (cargando) ? <Spinner/> : (<div className="col-md-6 col-lg-3 col-xl-3 col-sm-12">
+                                                  {clientes.map(cliente=>(
+                                                       <ClienteMiniaturaDetalle key={cliente.id} cliente={cliente}/>
+                                                  ))}</div>)
 
   return (
     <Layout>
@@ -76,11 +87,7 @@ const Clientes = () => {
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-6 col-lg-3 col-xl-3 col-sm-12">
-                    {clientes.map(cliente=>(
-                        <ClienteMiniaturaDetalle key={cliente.id} cliente={cliente}/>
-                    ))}
-                </div>
+            { Componente } 
             </div>
       </Navegacion>
     </Layout>
