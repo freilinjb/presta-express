@@ -57,7 +57,7 @@ const Cliente = () => {
     
       //Context con las operaciones crud de firebase
       const { usuario, firebase } = useContext(FirebaseContext);
-      console.log(usuario);
+    //   console.log(usuario);
       
     
       async function crearCliente() {
@@ -97,7 +97,7 @@ const Cliente = () => {
 
             firebase.db.collection("Clientes").add(cliente);
             console.log(cliente);
-            console.log(usuario);
+            // console.log(usuario);
         } catch (error) {
             console.log(error);
         } finally {

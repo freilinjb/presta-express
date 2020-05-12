@@ -4,15 +4,10 @@ import Navegacion from "../components/layout/Navegacion";
 import InputModal from '../components/ui/InputModal';
 import Sector from '../components/ui/Sector';
 import {FirebaseContext} from '../firebase'; 
-import useSector from '../hooks/useSector';
-
 
 const Sectores = () => {
 
-    // const {sectores} = useSector("creado");
-
-    
-
+  // const {sectores} = useSector("creado");
 
   const [sectores, setSectores ] = useState([]);
   const {firebase, usuario} = useContext(FirebaseContext);
@@ -59,7 +54,7 @@ const Sectores = () => {
       <Layout>
       <Navegacion>
         <div className="dashboard-short-list">
-            <button type="button" className="btn btn-primary"  data-toggle="modal" data-target="#Modal">Registrar un sector</button>
+            <button type="button" className="btn btn-primary float-right shadow"  data-toggle="modal" data-target="#Modal">Registrar un sector</button>
             <InputModal/>
             
 
