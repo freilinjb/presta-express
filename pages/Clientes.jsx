@@ -90,11 +90,10 @@ const Clientes = () => {
         e.preventDefault();
 
         if(busqueda.trim()) {
-          setBusqueda(busqueda.toLowerCase().trim());
-
+          const buscar = busqueda.toLowerCase().trim()
           const filtro = clientes.filter(cliente => {
               return(
-                (cliente.nombre.toLowerCase() + ' '+cliente.apellido.toLowerCase()).includes(busqueda) || cliente.cedula.toLowerCase().includes(busqueda)
+                (cliente.nombre.toLowerCase() + ' '+cliente.apellido.toLowerCase()).includes(buscar) || cliente.cedula.toLowerCase().includes(buscar)
               )
           });
           
@@ -103,7 +102,6 @@ const Clientes = () => {
           // console.log(filtro,' BUSQUEDA: ', busqueda);
           setClientes(filtro);
           // console.log(clientes);
-           
         }   
     }
   return (

@@ -37,7 +37,6 @@ const Validacion = (stateInicial,validar,fn) => {
         const erroresValidacion = validar(valores);
         setErrores(erroresValidacion);
         setSubmitForm(true);
-        console.log('enviando...');
     }
 
     //cuando se realiza unel evento de blur

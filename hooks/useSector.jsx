@@ -13,8 +13,8 @@ const useSector = orden => {
     useEffect(() => {
       //Esta funcion te da acceso a todos los datos
       //y snapshot realiza operaciones con ellos
-      console.log(usuario);
-      console.log('usuario');
+      // console.log(usuario);
+      // console.log('usuario');
       
       if(usuario) {
         const { uid } = usuario;

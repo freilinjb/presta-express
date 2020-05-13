@@ -9,10 +9,13 @@ const useProductos = orden => {
     useEffect(() => {
       //Esta funcion te da acceso a todos los datos
       //y snapshot realiza operaciones con ellos
-      const obtenerClientes =() => {
-        firebase.db.collection("Clientes").orderBy(orden, 'desc').onSnapshot(manejarSnapshot);//Ordena por creado
+      if(usuario) {
+        const { uid } = usuario;
+        const obtenerClientes = () => {  
+          firebase.db.collection("Clientes").where("creador.id","==",uid).orderBy(orden, 'desc').onSnapshot(manejarSnapshot);//Ordena por creado
+        }
+        obtenerClientes();
       }
-      obtenerClientes();
     },[]);
     //se ejecuta cuando el componente esta listo
     function manejarSnapshot(snapshot) {
