@@ -45,7 +45,7 @@ const usePrestamo = orden => {
     }
 
     //Periodo de pago
-    const periodoPago = {
+    const periodo = {
       DIARIO: "diario",
       SEMANAL: "semanal",
       QUINCENAL: "quincenal",
@@ -59,7 +59,7 @@ const usePrestamo = orden => {
 
     return {
         prestamos,
-        periodoPago
+        periodo
     }
 }
 

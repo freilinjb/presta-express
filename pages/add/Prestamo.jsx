@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Layout from '../../components/layout/Layout';
 import Navegacion from '../../components/layout/Navegacion';
 import useCliente from '../../hooks/useCliente';
-import useCliente from '../../hooks/useCliente';
+import useCalculadora from '../../hooks/useCalculadora';
 import { FirebaseContext } from "../../firebase";
 
 //Validaciones
@@ -12,7 +12,13 @@ import validarIniciarPrestamo from '../../validacion/validarIniciarPrestamo';
 const Prestamo = () => {
     const { usuario, firebase } = useContext(FirebaseContext);
     const {clientes} = useCliente("creado");
-    const {clientes} = useCliente("creado");
+    const {periodo} = useCalculadora();
+
+    
+
+    for (const prop in periodo) {
+        return periodo[prop];
+      }
 
     const STATE_INICIAL = {
         idCliente:'',
@@ -53,6 +59,7 @@ const Prestamo = () => {
             tasaInteres:'',
             periodoPagos:'',
             cargosPorMora:'',
+            detallesCuotas:[],
             creado: Date.now(),
             cliente:{
                 id:'',
@@ -63,7 +70,15 @@ const Prestamo = () => {
             nombre: usuario.displayName,
             }
         };
-}
+        console.log();
+        
+        //Insertar en la BD
+        // firebase.db.collection("Prestamos").add(prestamo);
+
+        //Despues de registrar un Producto redireccionar al
+        //Inicio
+        return router.push("/");
+    }
     return ( 
         <>
         <Layout>
@@ -77,7 +92,10 @@ const Prestamo = () => {
                                             <h5 className="card-header">Registro de Prestamo <span className="fas fa-donate"></span></h5>
                                         </div>
                                         <div className="card-body">
-                                            <form className="needs-validation" noValidate="">
+                                            <form 
+                                                className="needs-validation" 
+                                                noValidate=""
+                                                onSubmit={crearPrestamo}>
                                                 <div className="row">
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
@@ -112,7 +130,9 @@ const Prestamo = () => {
                                                         <div className="form-group">
                                                             <label htmlFor="tipoTasa">Tipo de Tasa</label>
                                                             <select className="form-control" name="tipoTasa" id="tipoTasa" value={tipoTasa} onChange={handleChange}>
-                                                                <option selected value="">Seleccione un cliente</option>
+                                                                <option selected value="">--Seleccione--</option>
+                                                                <option selected value="mensual">Mensual</option>
+                                                                <option selected value="anual">Anual</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -126,7 +146,16 @@ const Prestamo = () => {
                                                         <div className="form-group">
                                                             <label htmlFor="periodoPagos">Periodo de Pagos</label>
                                                             <select className="form-control" name="periodoPagos" id="periodoPagos" value={periodoPagos} onChange={handleChange}>
-                                                                <option selected value="">Seleccione</option>
+                                                                <option value="">--Seleccione--</option>
+                                                                <option value="diario">Diario</option>
+                                                                <option value="semanal">Semanal</option>
+                                                                <option value="quincenal">Quincenal</option>
+                                                                <option value="mensual">Mensual</option>
+                                                                <option value="bimestral">Bimestral</option>
+                                                                <option value="trimestral">Trimestral</option>
+                                                                <option value="cuatrimestral">Cuatrimestral</option>
+                                                                <option value="semestral">Semestral</option>
+                                                                <option value="anual">Anual</option>
                                                             </select>
                                                         </div>
                                                     </div>
