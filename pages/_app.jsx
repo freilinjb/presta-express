@@ -23,9 +23,6 @@ const MyApp = (props) => {
         >
             <NextNprogress
                     color="#000"
-                    startPosition="10"
-                    stopDelayMs="200"
-                    height="3"
             />
             <Component {...pageProps}/>
         </FirebaseContext.Provider>

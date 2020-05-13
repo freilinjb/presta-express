@@ -1,16 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../../components/layout/Layout';
 import Navegacion from '../../components/layout/Navegacion';
+import useCliente from '../../hooks/useCliente';
+
 
 const Prestamo = () => {
-    const {prestamo,setPrestamo} = useState({
+    // const {firebase} = useContext(FirebaseContext);
+    const {clientes} = useCliente("creado");
+
+    useEffect(() => {
+        console.log(clientes);
+        console.log('listo');
         
-    });
+    },[]);
+    
+    console.log('listo');
+
+
+    // const {prestamo,setPrestamo} = useState({
+
+    // });
     return ( 
         <>
         <Layout>
             <Navegacion titulo={"Registro"}>
-                    <div classNameName="row">
+                    <div className="row">
                         <div className="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div className="row justify-content-center">
                                 <div className="col-md-12 col-lg-12 col-xl-8 col-sm-12">
@@ -57,7 +71,7 @@ const Prestamo = () => {
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 mb-3">
-                                                        <div class="form-group">
+                                                        <div className="form-group">
                                                             <label htmlFor="cuotas">Cantidad de Cuotas</label>
                                                             <input type="number" className="form-control" id="cuotas" value="" required=""/>
                                                         </div>
