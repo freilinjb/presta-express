@@ -1,4 +1,6 @@
 import App,{useState, useEffect} from 'next/app';
+import Router from 'next/router';
+import NextNprogress from 'nextjs-progressbar';
 import firebase, { FirebaseContext} from '../firebase'
 import useAutenticacion from '../hooks/useAutenticacion';
 
@@ -19,6 +21,12 @@ const MyApp = (props) => {
                 usuario
             }}
         >
+            <NextNprogress
+                    color="#000"
+                    startPosition="10"
+                    stopDelayMs="200"
+                    height="3"
+            />
             <Component {...pageProps}/>
         </FirebaseContext.Provider>
     )
