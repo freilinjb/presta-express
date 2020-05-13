@@ -112,7 +112,7 @@ const Clientes = () => {
                 <Link href="/add/Cliente">            
                     <a className="btn btn-primary shadow float-right col-md-auto offset-md-7">Registrar un Cliente</a>
                 </Link>
-                <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-11 mt-2">
+                <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 mt-2">
                     
                     <div className="card">
                         <div className="card-body">

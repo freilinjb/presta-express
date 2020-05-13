@@ -41,9 +41,9 @@ class Firebase {
 
     //todo Iniciar sesion del usuario
     async login(email, password) {
-        this.cargando = true;
         
         try {
+            this.cargando = true;
             return this.auth.signInWithEmailAndPassword(email, password);
             
         } catch (error) {

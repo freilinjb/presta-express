@@ -1,25 +1,69 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Layout from '../../components/layout/Layout';
 import Navegacion from '../../components/layout/Navegacion';
 import useCliente from '../../hooks/useCliente';
+import useCliente from '../../hooks/useCliente';
+import { FirebaseContext } from "../../firebase";
 
+//Validaciones
+import useValidacion from '../../hooks/useValidacion';
+import validarIniciarPrestamo from '../../validacion/validarIniciarPrestamo';
 
 const Prestamo = () => {
-    // const {firebase} = useContext(FirebaseContext);
+    const { usuario, firebase } = useContext(FirebaseContext);
+    const {clientes} = useCliente("creado");
     const {clientes} = useCliente("creado");
 
-    useEffect(() => {
-        console.log(clientes);
-        console.log('listo');
-        
-    },[]);
+    const STATE_INICIAL = {
+        idCliente:'',
+        nombrerCliente:'',
+        entrega:'',
+        monto:'',
+        cuotas:'',
+        tipoTasa:'',
+        periodoPagos:'',
+        cargosPorMora:'on',
+    }
     
-    console.log('listo');
+    const {
+        valores,
+        errores,
+        handleSubmit,
+        handleChange,
+    } = useValidacion(STATE_INICIAL, validarIniciarPrestamo, crearPrestamo);
 
+    const {idCliente, entrega, monto, cuotas, tipoTasa, tasaInteres, periodoPagos, cargosPorMora} = valores;
 
-    // const {prestamo,setPrestamo} = useState({
-
-    // });
+    // useEffect(() => {
+    //     console.log(clientes);
+        
+    // },[clientes]);
+    
+    //Crear el objeto de nuevo prestamo
+    async function crearPrestamo() {
+        const prestamo = {
+            cliente: {
+                id:'',
+                nombre:''
+            },
+            entrega:'',
+            monto:'',
+            cuotas:'',
+            tipoTasa:'',
+            tasaInteres:'',
+            periodoPagos:'',
+            cargosPorMora:'',
+            creado: Date.now(),
+            cliente:{
+                id:'',
+                nombre:''
+            },
+            creador: {
+            id: usuario.uid,
+            nombre: usuario.displayName,
+            }
+        };
+}
     return ( 
         <>
         <Layout>
@@ -37,15 +81,17 @@ const Prestamo = () => {
                                                 <div className="row">
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
-                                                          <label htmlFor="">Cliente</label>
-                                                          <select className="form-control" name="cliente" id="cliente">
-                                                            <option selected value="">Seleccione un cliente</option>
+                                                          <label htmlFor="idCliente">Cliente</label>
+                                                          <select className="form-control" name="cliente" id="idCliente" value={idCliente} onChange={handleChange}>
+                                                            <option selected disabled value="">Seleccione un cliente</option>
+                                                            {clientes.map(cliente=> (<option key={cliente.id} value={cliente.id} >{cliente.nombre + ' ' + cliente.apellido}</option>))}
+                                                            {!clientes && (<p>No tiene clientes registrados</p>)}
                                                           </select>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 mb-3">
-                                                        <label htmlFor="fechaentrega">Fecha de Entrega</label>
-                                                        <input type="date" className="form-control" id="fechaentrega" value="" required=""/>
+                                                        <label htmlFor="entrega">Fecha de Entrega</label>
+                                                        <input type="date" className="form-control" id="entrega" name="entrega" value={entrega} onChange={handleChange} required=""/>
                                                         <div className="invalid-feedback">
                                                             Fecha de Entrega
                                                         </div>
@@ -53,45 +99,41 @@ const Prestamo = () => {
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
                                                             <label htmlFor="monto">Monto</label>
-                                                            <input type="number" className="form-control" id="monto" value="" required=""/>
+                                                            <input type="number" className="form-control" id="monto" name="monto" value={monto} onChange={handleChange} required=""/>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
                                                             <label htmlFor="cuotas">Cantidad de Cuotas</label>
-                                                            <input type="number" className="form-control" id="cuotas" value="" required=""/>
+                                                            <input type="number" className="form-control" id="cuotas" name="cuotas" value={cuotas} onChange={handleChange} required=""/>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
-                                                            <label htmlFor="tipotasa">Tipo de Tasa</label>
-                                                            <select className="form-control" name="tipotasa" id="tipotasa">
+                                                            <label htmlFor="tipoTasa">Tipo de Tasa</label>
+                                                            <select className="form-control" name="tipoTasa" id="tipoTasa" value={tipoTasa} onChange={handleChange}>
                                                                 <option selected value="">Seleccione un cliente</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
-                                                            <label htmlFor="cuotas">Cantidad de Cuotas</label>
-                                                            <input type="number" className="form-control" id="cuotas" value="" required=""/>
+                                                            <label htmlFor="tasaInteres">Tasa de Interes</label>
+                                                            <input type="number" className="form-control" id="tasaInteres" name="tasaInteres" value={tasaInteres} onChange={handleChange} required=""/>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
-                                                            <label htmlFor="periodopago">Periodo de Pagos</label>
-                                                            <select className="form-control" name="periodopago" id="periodopago">
+                                                            <label htmlFor="periodoPagos">Periodo de Pagos</label>
+                                                            <select className="form-control" name="periodoPagos" id="periodoPagos" value={periodoPagos} onChange={handleChange}>
                                                                 <option selected value="">Seleccione</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <div className="custom-control custom-checkbox">
-                                                            <input type="checkbox" className="custom-control-input" id="same-address"/>
-                                                            <label className="custom-control-label" htmlFor="same-address">Incuir gastos de operacion</label>
-                                                        </div>
-                                                        <div className="custom-control custom-checkbox">
-                                                            <input type="checkbox" className="custom-control-input" id="save-info"/>
-                                                            <label className="custom-control-label" htmlFor="save-info">Interes generados por mora</label>
+                                                            <input type="checkbox" className="custom-control-input" id="cargosPorMora" name="cargosPorMora" value="off" checked={cargosPorMora === 'on'} defaultChecked={false} onChange={handleChange}/>
+                                                            <label className="custom-control-label" htmlFor="cargosPorMora">Incluir interes generados por mora</label>
                                                         </div>
                                                     </div>
                                                 </div>

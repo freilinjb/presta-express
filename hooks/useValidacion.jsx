@@ -27,7 +27,8 @@ const Validacion = (stateInicial,validar,fn) => {
         setValores({
             ...valores,
             [e.target.name] : e.target.value
-        });                
+        });
+        console.log(valores);
     }
 
     //Funcion que se ejecuta cuando el usuario hace submit
