@@ -4,12 +4,12 @@ import {NextScript, Main } from 'next/document';
 const HeadDataTable = () => {
     return ( 
         <Head>
-            <link href="/static/assets/vendor/fonts/circular-std/style.css" rel="stylesheet"></link>
+            {/* <link href="/static/assets/vendor/fonts/circular-std/style.css" rel="stylesheet"></link>
             <link rel="stylesheet" href="/static/assets/vendor/fonts/fontawesome/css/fontawesome-all.css"/>
             <link rel="stylesheet" type="text/css" href="/static/assets/vendor/datatables/css/dataTables.bootstrap4.css"/>
             <link rel="stylesheet" type="text/css" href="/static/assets/vendor/datatables/css/buttons.bootstrap4.css"/>
             <link rel="stylesheet" type="text/css" href="/static/assets/vendor/datatables/css/select.bootstrap4.css"/>
-            <link rel="stylesheet" type="text/css" href="/static/assets/vendor/datatables/css/fixedHeader.bootstrap4.css"></link>
+            <link rel="stylesheet" type="text/css" href="/static/assets/vendor/datatables/css/fixedHeader.bootstrap4.css"></link> */}
             <Main>
                 <NextScript/>
                 

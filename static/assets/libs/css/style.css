@@ -457,7 +457,7 @@ address {}
     display: flex;
     -ms-flex-align: center;
     align-items: center;
-    padding: 10px;
+    padding: 8px;
     margin-bottom: 0;
     font-size: 14px;
     font-weight: 400;
@@ -6972,7 +6972,9 @@ Media Query
 }
 
 
-
+.input-group-prepend {
+    heigth: 35px;    
+}
 
 /* Custom, iPhone Retina */
 @media only screen and (max-width:320px) {}

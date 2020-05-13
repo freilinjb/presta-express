@@ -62,10 +62,30 @@ const Clientes = () => {
   
   // console.log(clientes);
   
-  const Componente = (cargando) ? <Spinner/> : (<div className="">
-                                                  {clientes.map(cliente=>(
-                                                       <ClienteMiniaturaDetalle key={cliente.id} cliente={cliente}/>
-                                                  ))}</div>)
+  const Componente = (cargando) ? <Spinner/> : 
+  
+    (<div className="col-lg-12">
+      <div className="section-block">
+          <h3 className="section-title">Lista de Clientes</h3>
+      </div>
+      <div className="card">
+	            <div className="campaign-table table-responsive">
+	                <table className="table">
+                  <thead>
+	                        <tr className="border-0">
+	                            <th className="border-0">Foto</th>
+	                            <th className="border-0">Nombre</th>
+	                            <th className="border-0">Telefono</th>
+	                            <th className="border-0">Correo</th>
+	                            <th className="border-0">Accion</th>
+	                        </tr>
+	                    </thead>
+      {clientes.map(cliente=>(
+           <ClienteMiniaturaDetalle key={cliente.id} cliente={cliente}/>
+      ))}</table>
+      </div>
+  </div></div>)
+
     const hanbleBuscar =e=> {
         e.preventDefault();
 
@@ -80,9 +100,9 @@ const Clientes = () => {
           
           //filtro itera en cada uno de ellos, combierte el nombrer en minusculas 
           //y luego si lo encuentra lo agrega a filter
-          console.log(filtro,' BUSQUEDA: ', busqueda);
+          // console.log(filtro,' BUSQUEDA: ', busqueda);
           setClientes(filtro);
-          console.log(clientes);
+          // console.log(clientes);
            
         }   
     }
@@ -120,6 +140,10 @@ const Clientes = () => {
                   { Componente } 
                 </div>
                 </div>
+                {/* <!-- morris-chart js --> */}
+	                    <script src="/static/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
+	                    <script src="/static/assets/vendor/charts/morris-bundle/morris.js"></script>
+	                    <script src="/static/assets/vendor/charts/morris-bundle/morrisjs.html"></script>
             </div>
             
       </Navegacion>

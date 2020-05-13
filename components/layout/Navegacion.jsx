@@ -64,13 +64,13 @@ const Navegacion = (props) => {
                                 <div id="submenu-3" className="collapse submenu" >
                                     <ul className="nav flex-column">
                                     <li className="nav-item">
-                                            <Link href="/Sectores"><a className="nav-link">Cobrar</a></Link>
+                                            <Link href="/Prestamo"><a className="nav-link">Cobrar</a></Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link href="/Sectores"><a className="nav-link">Realizar</a></Link>
+                                            <Link href="add/Prestamo"><a className="nav-link">Realizar</a></Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link href="/Sectores"><a className="nav-link">Solicitud</a></Link>
+                                            <Link href="add/Prestamo"><a className="nav-link">Solicitud</a></Link>
                                         </li>
                                         <li className="nav-item">
                                             <Link href="/Sectores"><a className="nav-link">Sector</a></Link>
