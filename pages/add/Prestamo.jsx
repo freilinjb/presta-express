@@ -6,7 +6,7 @@ const Prestamo = () => {
     return ( 
         <>
         <Layout>
-            <Navegacion>
+            <Navegacion titulo={"Registro"}>
                     <div classNameName="row">
                         <div className="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div className="row justify-content-center">

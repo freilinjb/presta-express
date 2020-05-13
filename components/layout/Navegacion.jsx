@@ -11,7 +11,7 @@ const Navegacion = (props) => {
       <div className="nav-left-sidebar sidebar-dark">
             <div className="menu-list">
                 <nav className="navbar navbar-expand-lg navbar-light">
-                    <a className="d-xl-none d-lg-none" href="#!">Dashboard</a>
+                    <a className="d-xl-none d-lg-none">Dashboard</a>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -111,77 +111,6 @@ const Navegacion = (props) => {
                                 Features
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i className="fas fa-fw fa-file"></i>Pages</a>
-                                <div id="submenu-6" className="collapse submenu" >
-                                    <ul className="nav flex-column">
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="invoice.html">Invoice</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="blank-page.html">Blank Page</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="blank-page-header.html">Blank Page Header</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="login.html">Login</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="404-page.html">404 page</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="sign-up.html">Sign up Page</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="forgot-password.html">Forgot Password</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="pricing.html">Pricing Tables</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="timeline.html">Timeline</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="calendar.html">Calendar</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="sortable-nestable-lists.html">Sortable/Nestable List</a>
-                                        </li>
-                                       <li className="nav-item">
-                                            <a className="nav-link" href="widgets.html">Widgets</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="media-object.html">Media Objects</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="cropper-image.html">Cropper</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="color-picker.html">Color Picker</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-7" aria-controls="submenu-7"><i className="fas fa-fw fa-inbox"></i>Apps <span className="badge badge-secondary">New</span></a>
-                                <div id="submenu-7" className="collapse submenu" >
-                                    <ul className="nav flex-column">
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="inbox.html">Inbox</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="email-details.html">Email Detail</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="email-compose.html">Email Compose</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="message-chat.html">Message Chat</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li className="nav-item">
                                 <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-8" aria-controls="submenu-8"><i className="fas fa-fw fa-columns"></i>Icons</a>
                                 <div id="submenu-8" className="collapse submenu" >
                                     <ul className="nav flex-column">
@@ -202,45 +131,6 @@ const Navegacion = (props) => {
                                         </li>
                                         <li className="nav-item">
                                             <a className="nav-link" href="icon-weather.html">Weather Icon</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-9" aria-controls="submenu-9"><i className="fas fa-fw fa-map-marker-alt"></i>Maps</a>
-                                <div id="submenu-9" className="collapse submenu" >
-                                    <ul className="nav flex-column">
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="map-google.html">Google Maps</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="map-vector.html">Vector Maps</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-10" aria-controls="submenu-10"><i className="fas fa-f fa-folder"></i>Menu Level</a>
-                                <div id="submenu-10" className="collapse submenu" >
-                                    <ul className="nav flex-column">
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="#!">Level 1</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-11" aria-controls="submenu-11">Level 2</a>
-                                            <div id="submenu-11" className="collapse submenu" >
-                                                <ul className="nav flex-column">
-                                                    <li className="nav-item">
-                                                        <a className="nav-link" href="#!">Level 1</a>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <a className="nav-link" href="#!">Level 2</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="#!">Level 3</a>
                                         </li>
                                     </ul>
                                 </div>

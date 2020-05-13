@@ -52,7 +52,7 @@ const Sectores = () => {
     return (
     <>
       <Layout>
-      <Navegacion>
+      <Navegacion titulo={"Registro de Sectores"}>
         <div className="dashboard-short-list">
             <button type="button" className="btn btn-primary float-right shadow"  data-toggle="modal" data-target="#Modal">Registrar un sector</button>
             <InputModal/>

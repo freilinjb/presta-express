@@ -29,15 +29,18 @@ const ClienteMiniaturaDetalle = ({cliente}) => {
                                     <p><a href={`mailto:${correo}`}>{correo}</a></p>
                                 </td>
 								<td>
-								<td><p data-placement="top" data-toggle="tooltip" title="Edit"><button className="btn btn-primary btn-xs"><span className="far fa-edit"></span></button></p></td>
-    							<td><p data-placement="top" data-toggle="tooltip" title="Delete"><button className="btn btn-danger btn-xs"><span className="fas fa-trash-alt"></span></button></p></td>
+									<div className="acciones form-inline">
+									<button className="btn btn-primary btn-xs m-2"><span className="far fa-edit"></span></button>
+    								<button className="btn btn-danger btn-xs"><span className="fas fa-trash-alt"></span></button>
+									</div>
 								</td>
 	                        </tr>
 	                    </tbody>
 						<style jsx>{`
 							img {
 								width:60px;
-								heigth:60px;
+								height:60px;
+								border-radius: 50%;
 							}
 						`}</style>
 	                

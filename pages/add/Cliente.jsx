@@ -141,7 +141,7 @@ const Cliente = () => {
 
     return ( 
         <Layout>
-            <Navegacion>
+            <Navegacion titulo={"Registro"}>
             <div className="row justify-content-center">
             {/* <!-- ============================================================== --> */}
             {/* <!-- validation form --> */}
@@ -242,7 +242,7 @@ const Cliente = () => {
                                 <div className="col-md-6 col-sm-12 mb-3">
                                 <label htmlFor="sector">Sector</label>
                                     <select className="form-control" name="sector" id="sector" value={sector} onChange={handleChange}>
-                                        <option value="" selected disabled>--Seleccione--</option>
+                                        <option value="" selected value="">--Seleccione--</option>
                                         {sectores.map(str=> (
                                             <option value={str.id} key={str.id} >{str.nombre}</option>
                                         ))}

@@ -1,25 +1,29 @@
 import React,{useState,useEffect,useContext} from 'react';
 import {FirebaseContext} from '../firebase'; 
-// import useAutenticacion from './useAutenticacion';
+import useAutenticacion from './useAutenticacion';
 
 const useSector = orden => {
 
     const [sectores, setSectores ] = useState([]);
     const {firebase} = useContext(FirebaseContext);
 
-    // const usuario = useAutenticacion();
+    const usuario = useAutenticacion();
 
   
     useEffect(() => {
       //Esta funcion te da acceso a todos los datos
       //y snapshot realiza operaciones con ellos
-      // console.log(usuario);
+      console.log(usuario);
+      console.log('usuario');
       
-      const obtenerSectores =() => {  
-        firebase.db.collection("Sectores").orderBy(orden, 'desc').onSnapshot(manejarSnapshot);//Ordena por creado
+      if(usuario) {
+        const { uid } = usuario;
+        const obtenerSectores = () => {  
+          firebase.db.collection("Sectores").where("creador.id","==",uid).orderBy(orden, 'desc').onSnapshot(manejarSnapshot);//Ordena por creado
+        }
+        obtenerSectores();
       }
-      obtenerSectores();
-    },[]);
+    },[usuario]);
     //se ejecuta cuando el componente esta listo
     function manejarSnapshot(snapshot) {
       const sectores = snapshot.docs.map(doc => {

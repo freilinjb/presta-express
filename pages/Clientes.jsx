@@ -112,7 +112,7 @@ const Clientes = () => {
       
             <div className="row justify-content-center">
                 <Link href="/add/Cliente">            
-                    <a className="btn btn-primary shadow float-right col-md-auto offset-md-7">Registrar un sector</a>
+                    <a className="btn btn-primary shadow float-right col-md-auto offset-md-7">Registrar un Cliente</a>
                 </Link>
                 <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-11 mt-2">
                     
