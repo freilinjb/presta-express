@@ -6,6 +6,37 @@
       listo: false
     };
 
+  function formatearFecha(fecha, formato = 'dmy') {
+     //Formatear la fecha
+     let dd = fecha.getDate();
+
+     let mm = fecha.getMonth()+1; 
+     const yyyy = fecha.getFullYear();
+     if(dd<10) 
+     {
+         dd=`0${dd}`;
+     } 
+ 
+     if(mm<10) 
+     {
+         mm=`0${mm}`;
+     } 
+     if(formato === 'dmy') {
+       fecha = `${dd}-${mm}-${yyyy}`;
+     } else if (formato === 'ymd'){
+       fecha = `${yyyy}/${mm}/${dd}`;
+     } else if(formato === 'mdy') {
+       fecha = `${mm}-${dd}-${yyyy}`;
+     }
+     // fecha = `${mm}-${dd}-${yyyy}`;
+     // console.log(fecha);
+     // fecha = `${mm}/${dd}/${yyyy}`;
+     // console.log(fecha);
+     fecha = `${dd}-${mm}-${yyyy}`;
+ 
+     return fecha;
+  }
+
   function setFecha(dia, periodo) {
     var fecha = new Date();
 
@@ -46,29 +77,11 @@
     //Calcular cuando es domingo
     if(fecha.getDay() == 0) {
       fecha.setDate(fecha.getDay()+1);
-      console.log(`es domingo: ${fecha}`);
       
     }
 
     //Formatear la fecha
-    let dd = fecha.getDate();
-
-    let mm = fecha.getMonth()+1; 
-    const yyyy = fecha.getFullYear();
-    if(dd<10) 
-    {
-        dd=`0${dd}`;
-    } 
-
-    if(mm<10) 
-    {
-        mm=`0${mm}`;
-    } 
-    // fecha = `${mm}-${dd}-${yyyy}`;
-    // console.log(fecha);
-    // fecha = `${mm}/${dd}/${yyyy}`;
-    // console.log(fecha);
-    fecha = `${dd}-${mm}-${yyyy}`;
+    fecha = formatearFecha(fecha);
 
     return fecha;
   }
@@ -318,7 +331,8 @@
   return{
     calcular,
     detalleCuotas,
-    setMoneda
+    setMoneda,
+    formatearFecha
   }
 
 };

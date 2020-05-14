@@ -35,7 +35,7 @@ const Amortizacion = ({tablaAmortizada}) => {
                     <td>{cuota.fecha}</td> 
                 </tr>)))}
                 <tr>
-                  <td colspan="8">
+                  <td colSpan="8">
                     <a href="#!" className="btn btn-outline-light float-right">
                       Imprimir
                     </a>

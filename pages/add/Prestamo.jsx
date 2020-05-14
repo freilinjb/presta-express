@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
+import Router from 'next/router';
 import Layout from '../../components/layout/Layout';
 import Navegacion from '../../components/layout/Navegacion';
 import useCliente from '../../hooks/useCliente';
 import useCalculadora from '../../hooks/useCalculadora';
 import { FirebaseContext } from "../../firebase";
+import { useAlert } from 'react-alert';
 
 //Componentes
 import Amortizacion from '../../components/ui/Amortizacion';
@@ -13,26 +15,27 @@ import useValidacion from '../../hooks/useValidacion';
 import validarIniciarPrestamo from '../../validacion/validarIniciarPrestamo';
 
 const Prestamo = () => {
+    //Muestra alerta
+    const alert = useAlert();
+
     const { usuario, firebase } = useContext(FirebaseContext);
-    const { calcular } = useCalculadora();
+    const { calcular, formatearFecha } = useCalculadora();
     const {clientes} = useCliente("creado");
     const [calculado, setCalculado] = useState(false);
     const [tablaAmortizada, setTablaAmortizada] = useState([]);
+    let fecha = new Date();
+    fecha = formatearFecha(fecha);
 
-    useEffect(() => {
-        
-        
-    },[]);
 
     const STATE_INICIAL = {
-        idCliente:'',
-        nombrerCliente:'',
-        entrega:'',
+        idcliente:'',
+        entrega: fecha,
         monto:'',
         cuotas:'',
         tipoTasa:'',
         periodoPagos:'',
         cargosPorMora:'on',
+        observacion:''
     }
     
     const {
@@ -42,7 +45,9 @@ const Prestamo = () => {
         handleChange,
     } = useValidacion(STATE_INICIAL, validarIniciarPrestamo, crearPrestamo);
 
-    const {idCliente, entrega, monto, cuotas, tipoTasa, tasaInteres, periodoPagos, cargosPorMora} = valores;
+    console.log(errores);
+
+    const {idcliente, entrega, monto, cuotas, tipoTasa, tasaInteres, observacion, periodoPagos, cargosPorMora} = valores;
 
     // useEffect(() => {
     //     console.log(clientes);
@@ -60,23 +65,24 @@ const Prestamo = () => {
             periodoPagos,
             cargosPorMora,
             detallesCuotas:tablaAmortizada.cuotas,
+            observacion,
             creado: Date.now(),
             cliente:{
-                id:idCliente,
-                nombre:''
+                id:idcliente,
             },
             creador: {
             id: usuario.uid,
             nombre: usuario.displayName,
             }
         };
+        console.log(prestamo);
         
         //Insertar en la BD
         firebase.db.collection("Prestamos").add(prestamo);
 
         //Despues de registrar un Producto redireccionar al
         //Inicio
-        return router.push("/");
+        return Router.push("/");
     }
 
     const hancleClick = () => {
@@ -88,6 +94,7 @@ const Prestamo = () => {
         }
         
     }
+
     return ( 
         <>
         <Layout>
@@ -109,8 +116,8 @@ const Prestamo = () => {
                                                 <div className="row">
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
-                                                          <label htmlFor="idCliente">Cliente</label>
-                                                          <select className="form-control select2" name="idcliente" id="idCliente" value={idCliente} onChange={handleChange} required>
+                                                          <label htmlFor="idcliente">Cliente</label>
+                                                          <select className="form-control" name="idcliente" id="idcliente" value={idcliente} onChange={handleChange} required>
                                                             <option selected disabled value="">Seleccione un cliente</option>
                                                             {clientes.map(cliente=> (<option key={cliente.id} value={cliente.id} >{cliente.nombre + ' ' + cliente.apellido}</option>))}
                                                             {!clientes && (<p>No tiene clientes registrados</p>)}
@@ -120,7 +127,7 @@ const Prestamo = () => {
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <label htmlFor="entrega">Fecha de Entrega</label>
-                                                        <input type="date" className="form-control" id="entrega" name="entrega" value={entrega} onChange={handleChange} required/>
+                                                        <input type="date" className="form-control" min={fecha} id="entrega" name="entrega" value={entrega} onChange={handleChange} required/>
                                                         <div className="invalid-feedback">
                                                             Fecha de Entrega
                                                         </div>
@@ -184,10 +191,30 @@ const Prestamo = () => {
                                                             <label className="custom-control-label" htmlFor="cargosPorMora">Incluir interes generados por mora</label>
                                                         </div>
                                                     </div>
+                                                    <div className="col-md-12 mb-3">
+                                                          <textarea className="form-control" name="observacion" id="observacion" value={observacion} onChange={handleChange} placeholder="Observaciones a tomar en cuanta" autoComplete="off" rows="2"></textarea>
+                                                    </div>
                                                 </div>
                                                 <div className="row">
                                                     <div className="col-6">
-                                                        <button type="submit" className="btn btn-primary btn-lg btn-block">Guardar</button>
+                                                    <button 
+                                                        className="btn btn-primary btn-lg btn-block" 
+                                                        disabled={firebase.cargando}
+                                                        type="submit">
+                                                            {firebase.cargando ? 
+                                                            (<>
+                                                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                                    Enviando datos
+                                                            </>
+                                                            )
+                                                            :
+                                                            (
+                                                                <>
+                                                                    Guardar
+                                                                </>
+                                                            )
+                                                            }
+                                                        </button>
 
                                                     </div>
                                                     <div className="col-6">
