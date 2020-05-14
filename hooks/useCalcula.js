@@ -12,13 +12,6 @@ let detalleCuota = {
 
 let columna = [];
 
-let prestamo ={
-  numero: [],
-  interes:[],
-  valorCuota:[],
-  saldoCapital:[]
-}
-
 function setFecha(dia, periodo) {
   var fecha = new Date();
 
@@ -118,13 +111,13 @@ function getAmortizacion(monto, tasa, cuotas, periodo, tasa_tipo) {
     interes = interes.toFixed(2);
     abono_al_capital = abono_al_capital.toFixed(2);
     saldo_al_capital = saldo_al_capital.toFixed(2);
-
     item = [
       numero,
       interes,
       abono_al_capital,
       valor_de_cuota,
       saldo_al_capital,
+      setFecha(i, periodo)
     ];
     items.push(item);
   }
@@ -189,23 +182,13 @@ function calcular(monto, cuotas, tasa, periodo, tasa_tipo) {
       }
       // detalleCuota.cuota = document.createElement("cuota");
       detalleCuota.textCell = value;
-      detalleCuota.cuota.push(detalleCuota.textCell);
-      columna.push(detalleCuota.textCell);
+      // columna.push(detalleCuota.textCell);
       detalleCuota.tr.push(detalleCuota.cuota);
 
     }
-    console.log(setFecha(i, periodo));
-    detalleCuota.cuota.push(setFecha(i, periodo));
-    console.log('cada vez');
-    prestamo.numero.push(i);
-    detalleCuota.dato.push({numero: i, interes: columna[0], abonoCapital: columna[1],valorCuota:  columna[2],saldoCapital: columna[3], fecha: setFecha(i, periodo)});
-    prestamo.interes.push(columna[1]);
-    prestamo.valorCuota.push(columna[2]);
-    prestamo.saldoCapital.push(columna[3]);
-    columna = [];
-    // detalleCuota.dato.push(detalleCuota.tr);
+    // detalleCuota.dato.push({numero: i, interes: columna[0], abonoCapital: columna[1],valorCuota:  columna[2],saldoCapital: columna[3],saldoCapital: columna[4], fecha: setFecha(i, periodo),valorCuota: items});
   }
-  // detalleCuota.div1 = document.getElementById("div-valor-cuota");
+  columna.push(items);
 
   valor = setMoneda(items[0][3]);
   detalleCuota.div1 = valor;
@@ -292,17 +275,14 @@ function calcular(monto, cuotas, tasa, periodo, tasa_tipo) {
 console.log("calcular");
 
 calcular(3000, 10, 6, "quincenal", "mensual");
-// console.log(detalleCuota.dato);
-detalleCuota.dato.map(d => {
-  console.log(d);
-});
+console.log(columna);
 
-detalleCuota.cuota.map(d=>{
-  console.log('cambio');
-  
-  console.log(d);
-  
-})
+
+// // console.log(detalleCuota.cuota);
+// detalleCuota.dato.map((d,i) => {
+//   console.log(d);
+// });
+
 // console.log(detalleCuota.div1);
 // console.log(detalleCuota.div2);
 // console.log(detalleCuota.textCell);
