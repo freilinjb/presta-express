@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Layout from '../../components/layout/Layout';
 import Navegacion from '../../components/layout/Navegacion';
 import useCliente from '../../hooks/useCliente';
-import useCalculadora from '../../hooks/useCalcula';
+import useCalculadora from '../../hooks/useCalculadora';
 import { FirebaseContext } from "../../firebase";
 
 //Validaciones
@@ -12,13 +12,23 @@ import validarIniciarPrestamo from '../../validacion/validarIniciarPrestamo';
 const Prestamo = () => {
     const { usuario, firebase } = useContext(FirebaseContext);
     const {clientes} = useCliente("creado");
-    const {periodo} = useCalculadora();
+    const {calcular, columna, datos} = useCalculadora();
 
-    
+    useEffect(() => {
+        calcular(3000, 10, 6, "diario", "mensual");
 
-    for (const prop in periodo) {
-        return periodo[prop];
-      }
+        // columna.map(p=> {
+        //     p.map(m=>{
+        //         console.log(m);
+        //     });
+        // })
+        console.log(datos);
+        
+    },[]);
+
+    // for (const prop in periodo) {
+    //     return periodo[prop];
+    //   }
 
     const STATE_INICIAL = {
         idCliente:'',
