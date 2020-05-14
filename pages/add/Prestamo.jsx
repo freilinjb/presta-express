@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Layout from '../../components/layout/Layout';
 import Navegacion from '../../components/layout/Navegacion';
 import useCliente from '../../hooks/useCliente';
-import useCalculadora from '../../hooks/useCalculadora';
+import useCalculadora from '../../hooks/useCalcula';
 import { FirebaseContext } from "../../firebase";
 
 //Validaciones
