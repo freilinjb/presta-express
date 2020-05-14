@@ -1,5 +1,11 @@
   const useCalculadora =() => {
-
+    let detalleCuota = {
+      cuotaFija: "",
+      dato: [],
+      msg: "",
+    };
+    let columna = [];
+    
   function setFecha(dia, periodo) {
     var fecha = new Date();
 
@@ -131,6 +137,8 @@
         saldo_al_capital,
         setFecha(i, periodo),
       ];
+      detalleCuota.dato.push({cuota: numero, interes: interes, abonoCapital: abono_al_capital,valorCuota:  valor_de_cuota,saldoCapital: saldo_al_capital, fecha: setFecha(i, periodo)});
+
       items.push(item);
     }
     return items;
@@ -156,13 +164,6 @@
   }
 
   function calcular(monto, cuotas, tasa, periodo, tasa_tipo) {
-
-    let detalleCuota = {
-      cuotaFija: "",
-      dato: [],
-      msg: "",
-    };
-    let columna = [];
 
     const cuotafija = getValorDeCuotaFija(monto, tasa, cuotas, periodo, tasa_tipo);
     if (!monto) {
@@ -203,7 +204,7 @@
         columna.push(value);
       }
       
-      detalleCuota.dato.push({cuota: i, interes: cuotafija, abonoCapital: columna[1],valorCuota:  columna[2],saldoCapital: columna[3],saldoCapital: columna[4], fecha: setFecha(i, periodo)});
+      // detalleCuota.dato.push({cuota: i, interes: cuotafija, abonoCapital: columna[1],valorCuota:  columna[2],saldoCapital: columna[3],saldoCapital: columna[4], fecha: setFecha(i, periodo)});
     }
     // columna.push(items);
     columna = [];
@@ -288,13 +289,13 @@
 
   // console.log("calcular");
 
-  // calcular(3000, 10, 6, "diario", "mensual");
+  calcular(3000, 10, 6, "diario", "mensual");
   // console.log(detalleCuota.dato);
 
   return{
     // columna,
-    calcular
-    // detalleCuota
+    calcular,
+    detalleCuota
   }
 
 };

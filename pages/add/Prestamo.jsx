@@ -12,7 +12,7 @@ import validarIniciarPrestamo from '../../validacion/validarIniciarPrestamo';
 const Prestamo = () => {
     const { usuario, firebase } = useContext(FirebaseContext);
     const {clientes} = useCliente("creado");
-    const {calcular, columna, detalleCuota} = useCalculadora();
+    const {calcular, detalleCuota} = useCalculadora();
 
     let resultado = [];
 
@@ -24,9 +24,9 @@ const Prestamo = () => {
         //         console.log(m);
         //     });
         // })
-        resultado = calcular(3000, 10, 6, "diario", "mensual");
+        calcular(3000, 10, 6, "diario", "mensual");
         // detalleCuota = [];
-        console.log(resultado);
+        console.log(detalleCuota);
         
         
     },[]);
@@ -98,10 +98,10 @@ const Prestamo = () => {
         <>
         <Layout>
             <Navegacion titulo={"Registro"}>
-                    <div className="row">
-                        <div className="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div className="row justify-content-center">
+                        <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div className="row justify-content-center">
-                                <div className="col-md-12 col-lg-12 col-xl-8 col-sm-12">
+                                <div className="col-md-12 col-lg-12 col-xl-6 col-sm-12">
                                     <div className="card">
                                         <div className="card-header">
                                             <h5 className="card-header">Registro de Prestamo <span className="fas fa-donate"></span></h5>
@@ -186,55 +186,61 @@ const Prestamo = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-md-12 mb-4 col-lg-4 col-xl-4">
-                                    <div className="card">
-                                        <div className="card-header">
-                                            <h4 className="d-flex justify-content-between align-items-center mb-0">
-                                                        <span className="text-muted">Tabla amortizada</span>
-                                          <span className="badge badge-secondary badge-pill">num cuotas</span>
-                                                 </h4>
-                                        </div>
-                                        <div className="card-body">
-                                            <ul className="list-group mb-3">
-                                                <li className="list-group-item d-flex justify-content-between">
-                                                    <div>
-                                                        <h6 className="my-0">Product name</h6>
-                                                        <small className="text-muted">Brief description</small>
-                                                    </div>
-                                                    <span className="text-muted">$12</span>
-                                                </li>
-                                                <li className="list-group-item d-flex justify-content-between">
-                                                    <div>
-                                                        <h6 className="my-0">Second product</h6>
-                                                        <small className="text-muted">Brief description</small>
-                                                    </div>
-                                                    <span className="text-muted">$8</span>
-                                                </li>
-                                                <li className="list-group-item d-flex justify-content-between">
-                                                    <div>
-                                                        <h6 className="my-0">Third item</h6>
-                                                        <small className="text-muted">Brief description</small>
-                                                    </div>
-                                                    <span className="text-muted">$5</span>
-                                                </li>
-                                                <li className="list-group-item d-flex justify-content-between bg-light">
-                                                    <div className="text-success">
-                                                        <h6 className="my-0">Promo code</h6>
-                                                        <small>EXAMPLECODE</small>
-                                                    </div>
-                                                    <span className="text-success">-$5</span>
-                                                </li>
-                                                <li className="list-group-item d-flex justify-content-between">
-                                                    <span>Total (USD)</span>
-                                                    <strong>$20</strong>
-                                                </li>
-                                            </ul>
-                                                <button type="submit" className="btn btn-secondary">Imprimir</button>
-                                        </div>
-                                    </div>
+                                <div className="col-md-12 mb-6 col-lg-6 col-xl-6">
+                        <div className="card">
+                            <h5 className="card-header">Top Selling Products</h5>
+                            <div className="card-body p-0">
+                                <div className="table-responsive">
+                                    <table className="table">
+                                        <thead className="bg-light">
+                                            <tr className="border-0">
+                                                <th className="border-0">#</th>
+                                                <th className="border-0">Interés</th>
+                                                <th className="border-0">Abono al capital</th>
+                                                <th className="border-0">Valor de la cuota	</th>
+                                                <th className="border-0">Saldo al capital</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Product #1 </td>
+                                                <td>id000001 </td>
+                                                <td>20</td>
+                                                <td>$80.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Product #2 </td>
+                                                <td>id000002 </td>
+                                                <td>12</td>
+                                                <td>$180.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Product #3 </td>
+                                                <td>id000003 </td>
+                                                <td>23</td>
+                                                <td>$820.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>Product #4 </td>
+                                                <td>id000004 </td>
+                                                <td>34</td>
+                                                <td>$340.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="8"><a href="#" className="btn btn-outline-light float-right">View Details</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                                </div>
+                            </div>
                     </div>
                </Navegacion>
         </Layout>
