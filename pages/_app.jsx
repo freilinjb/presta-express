@@ -12,7 +12,8 @@ const MyApp = (props) => {
     
     const options = {
         timeout: 5000,
-        position: positions.BOTTOM_CENTER
+        position: positions.BOTTOM_RIGHT,
+        
       };
     
     //Component: es el componente actual

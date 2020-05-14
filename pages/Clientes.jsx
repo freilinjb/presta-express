@@ -138,10 +138,6 @@ const Clientes = () => {
                   { Componente } 
                 </div>
                 </div>
-                {/* <!-- morris-chart js --> */}
-	                    <script src="/static/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-	                    <script src="/static/assets/vendor/charts/morris-bundle/morris.js"></script>
-	                    <script src="/static/assets/vendor/charts/morris-bundle/morrisjs.html"></script>
             </div>
             
       </Navegacion>
