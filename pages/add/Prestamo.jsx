@@ -25,7 +25,7 @@ const Prestamo = () => {
         nombrerCliente:'',
         entrega:'',
         monto:'',
-        cuotas:'',
+        cuotas:'', 
         tipoTasa:'',
         periodoPagos:'',
         cargosPorMora:'on',

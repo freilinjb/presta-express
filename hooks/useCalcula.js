@@ -1,6 +1,7 @@
 // import React, { useState } from "react";
-let tbody = {
-  td: [],
+
+let detalleCuota = {
+  cuota: [],
   textCell: "",
   div1: "",
   tr: [],
@@ -168,8 +169,8 @@ function calcular(monto, cuotas, tasa, periodo, tasa_tipo) {
   // var select_tasa_tipo = document.getElementById("select_tasa_tipo");
   // tasa_tipo = select_tasa_tipo.options[select_tasa_tipo.selectedIndex].value;
   var items = getAmortizacion(monto, tasa, cuotas, periodo, tasa_tipo);
-  // var tbody = document.getElementById("tbody_1");
-  // tbody.innerHTML = "";
+  // var detalleCuota = document.getElementById("detalleCuota_1");
+  // detalleCuota.innerHTML = "";
 
   if (parseInt(cuotas) > 3000) {
     alert(
@@ -186,29 +187,31 @@ function calcular(monto, cuotas, tasa, periodo, tasa_tipo) {
       if (e > 0) {
         value = setMoneda(value);
       }
-      // tbody.td = document.createElement("td");
-      tbody.textCell = value;
-      tbody.td.push(tbody.textCell);
-      columna.push(tbody.textCell);
-      tbody.tr.push(tbody.td);
+      // detalleCuota.cuota = document.createElement("cuota");
+      detalleCuota.textCell = value;
+      detalleCuota.cuota.push(detalleCuota.textCell);
+      columna.push(detalleCuota.textCell);
+      detalleCuota.tr.push(detalleCuota.cuota);
 
     }
     console.log(setFecha(i, periodo));
-    tbody.td.push(setFecha(i, periodo));
+    detalleCuota.cuota.push(setFecha(i, periodo));
     console.log('cada vez');
     prestamo.numero.push(i);
+    detalleCuota.dato.push({numero: i, interes: columna[0], abonoCapital: columna[1],valorCuota:  columna[2],saldoCapital: columna[3], fecha: setFecha(i, periodo)});
     prestamo.interes.push(columna[1]);
     prestamo.valorCuota.push(columna[2]);
     prestamo.saldoCapital.push(columna[3]);
-    // tbody.dato.push(tbody.tr);
+    columna = [];
+    // detalleCuota.dato.push(detalleCuota.tr);
   }
-  // tbody.div1 = document.getElementById("div-valor-cuota");
+  // detalleCuota.div1 = document.getElementById("div-valor-cuota");
 
   valor = setMoneda(items[0][3]);
-  tbody.div1 = valor;
+  detalleCuota.div1 = valor;
   var msg = "";
   if (periodo == "diario") {
-    tbody.msg =
+    detalleCuota.msg =
       "Usted estará pagando " +
       valor +
       ", todos los dias durante " +
@@ -216,7 +219,7 @@ function calcular(monto, cuotas, tasa, periodo, tasa_tipo) {
       " dias.";
   }
   if (periodo == "semanal") {
-    tbody.msg =
+    detalleCuota.msg =
       "Usted pagará " +
       valor +
       ", semanalmente durante " +
@@ -224,7 +227,7 @@ function calcular(monto, cuotas, tasa, periodo, tasa_tipo) {
       " semanas.";
   }
   if (periodo == "mensual") {
-    tbody.msg =
+    detalleCuota.msg =
       "Usted pagará " +
       valor +
       ", mensualmente durante " +
@@ -232,7 +235,7 @@ function calcular(monto, cuotas, tasa, periodo, tasa_tipo) {
       " meses.";
   }
   if (periodo == "quincenal") {
-    tbody.msg =
+    detalleCuota.msg =
       "Usted pagará " +
       valor +
       ", de manera quincenal por un periodo de " +
@@ -240,7 +243,7 @@ function calcular(monto, cuotas, tasa, periodo, tasa_tipo) {
       " quincenas.";
   }
   if (periodo == "bimestral") {
-    tbody.msg =
+    detalleCuota.msg =
       "Usted pagará " +
       valor +
       ", cada 2 meses durante un periodo de " +
@@ -248,7 +251,7 @@ function calcular(monto, cuotas, tasa, periodo, tasa_tipo) {
       " bimestres.";
   }
   if (periodo == "trimestral") {
-    tbody.msg =
+    detalleCuota.msg =
       "Usted va a pagar " +
       valor +
       ", cada 3 meses durante " +
@@ -256,7 +259,7 @@ function calcular(monto, cuotas, tasa, periodo, tasa_tipo) {
       " trimestres.";
   }
   if (periodo == "cuatrimestral") {
-    tbody.msg =
+    detalleCuota.msg =
       "Usted pagará " +
       valor +
       ", cada cuatrimestre (4 meses) por un periodo de " +
@@ -264,7 +267,7 @@ function calcular(monto, cuotas, tasa, periodo, tasa_tipo) {
       " cuatrimestres.";
   }
   if (periodo == "semestral") {
-    tbody.msg =
+    detalleCuota.msg =
       "Usted pagará " +
       valor +
       ", cada 6 meses durante " +
@@ -272,15 +275,14 @@ function calcular(monto, cuotas, tasa, periodo, tasa_tipo) {
       " semestres";
   }
   if (periodo == "anual") {
-    tbody.msg =
+    detalleCuota.msg =
       "Usted pagará " +
       valor +
       ", anualmente por un periodo de " +
       items.length +
       " años";
   }
-  // var div2 = document.getElementById("div-comentario");
-  tbody.div2 = msg;
+  detalleCuota.div2 = msg;
 }
 
 //   return {
@@ -290,18 +292,28 @@ function calcular(monto, cuotas, tasa, periodo, tasa_tipo) {
 console.log("calcular");
 
 calcular(3000, 10, 6, "quincenal", "mensual");
-console.log(tbody.td);
-console.log(tbody.div1);
-console.log(tbody.div2);
-console.log(tbody.textCell);
-console.log(tbody.msg);
-var fecha = new Date();
+// console.log(detalleCuota.dato);
+detalleCuota.dato.map(d => {
+  console.log(d);
+});
+
+detalleCuota.cuota.map(d=>{
+  console.log('cambio');
+  
+  console.log(d);
+  
+})
+// console.log(detalleCuota.div1);
+// console.log(detalleCuota.div2);
+// console.log(detalleCuota.textCell);
+// console.log(detalleCuota.msg);
+// var fecha = new Date();
 
 
-prestamo[0] = tbody.td[1]; 
-console.log(prestamo);
+// prestamo[0] = detalleCuota.td[1]; 
+// console.log(prestamo);
 
-console.log(fecha.getMonth() + 1);
+// console.log(fecha.getMonth() + 1);
 
 // export default useCalculadora;
 

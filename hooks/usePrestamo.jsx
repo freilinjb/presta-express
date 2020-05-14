@@ -57,6 +57,8 @@ const usePrestamo = orden => {
       ANUAL: "anual"
     }
 
+    
+
     return {
         prestamos,
         periodo
