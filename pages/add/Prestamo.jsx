@@ -12,32 +12,17 @@ import Amortizacion from '../../components/ui/Amortizacion';
 import useValidacion from '../../hooks/useValidacion';
 import validarIniciarPrestamo from '../../validacion/validarIniciarPrestamo';
 
-import Head from 'next/head';
-
 const Prestamo = () => {
     const { usuario, firebase } = useContext(FirebaseContext);
+    const { calcular } = useCalculadora();
     const {clientes} = useCliente("creado");
-    const {calcular, detalleCuotas} = useCalculadora();
     const [calculado, setCalculado] = useState(false);
     const [tablaAmortizada, setTablaAmortizada] = useState([]);
 
-    let resultado = [];
-
     useEffect(() => {
-        // setDetallecuota(calcular(3000, 10, 6, "diario", "mensual"));
-
-        // columna.map(p=> {
-        //     p.map(m=>{
-        //         console.log(m);
-        //     });
-        // })
         
         
     },[]);
-
-    // for (const prop in periodo) {
-    //     return periodo[prop];
-    //   }
 
     const STATE_INICIAL = {
         idCliente:'',
@@ -67,17 +52,17 @@ const Prestamo = () => {
     //Crear el objeto de nuevo prestamo
     async function crearPrestamo() {
         const prestamo = {
-            entrega:'',
-            monto:'',
-            cuotas:'',
-            tipoTasa:'',
-            tasaInteres:'',
-            periodoPagos:'',
-            cargosPorMora:'',
-            detallesCuotas:[],
+            entrega,
+            monto,
+            cuotas,
+            tipoTasa,
+            tasaInteres,
+            periodoPagos,
+            cargosPorMora,
+            detallesCuotas:tablaAmortizada.cuotas,
             creado: Date.now(),
             cliente:{
-                id:'',
+                id:idCliente,
                 nombre:''
             },
             creador: {
@@ -85,10 +70,9 @@ const Prestamo = () => {
             nombre: usuario.displayName,
             }
         };
-        console.log();
         
         //Insertar en la BD
-        // firebase.db.collection("Prestamos").add(prestamo);
+        firebase.db.collection("Prestamos").add(prestamo);
 
         //Despues de registrar un Producto redireccionar al
         //Inicio
@@ -96,7 +80,7 @@ const Prestamo = () => {
     }
 
     const hancleClick = () => {
-        setTablaAmortizada(calcular(3000, 10, 6, "diario", "mensual"));
+        setTablaAmortizada(calcular(monto, cuotas, tasaInteres, periodoPagos, tipoTasa));
         setCalculado(true);
         if(tablaAmortizada.listo){
             // console.log(tablaAmortizada);
@@ -106,11 +90,8 @@ const Prestamo = () => {
     return ( 
         <>
         <Layout>
-            <Head>
-                {/* <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" /> */}
-                {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> */}
-            </Head>
             <Navegacion titulo={"Registro"}>
+
                     <div className="row justify-content-center">
                         <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div className="row justify-content-center">
@@ -122,37 +103,43 @@ const Prestamo = () => {
                                         <div className="card-body">
                                             <form 
                                                 className="needs-validation" 
-                                                noValidate=""
-                                                onSubmit={crearPrestamo}>
+                                                noValidate
+                                                onSubmit={handleSubmit}>
                                                 <div className="row">
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
                                                           <label htmlFor="idCliente">Cliente</label>
-                                                          <select className="form-control" name="idcliente" id="idCliente" value={idCliente} onChange={handleChange}>
+                                                          <select className="form-control select2" name="idcliente" id="idCliente" value={idCliente} onChange={handleChange} required>
                                                             <option selected disabled value="">Seleccione un cliente</option>
                                                             {clientes.map(cliente=> (<option key={cliente.id} value={cliente.id} >{cliente.nombre + ' ' + cliente.apellido}</option>))}
                                                             {!clientes && (<p>No tiene clientes registrados</p>)}
                                                           </select>
+                                                        {errores.idCliente && <p className="alert alert-danger">{errores.idCliente}</p>}
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <label htmlFor="entrega">Fecha de Entrega</label>
-                                                        <input type="date" className="form-control" id="entrega" name="entrega" value={entrega} onChange={handleChange} required=""/>
+                                                        <input type="date" className="form-control" id="entrega" name="entrega" value={entrega} onChange={handleChange} required/>
                                                         <div className="invalid-feedback">
                                                             Fecha de Entrega
                                                         </div>
+                                                        {errores.entrega && <p className="alert alert-danger">{errores.entrega}</p>}
+
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
                                                             <label htmlFor="monto">Monto</label>
-                                                            <input type="number" className="form-control" id="monto" name="monto" value={monto} onChange={handleChange} required=""/>
+                                                            <input type="number" className="form-control" min="100" max="100000000" id="monto" name="monto" value={monto} onChange={handleChange} required=""/>
                                                         </div>
+                                                        {errores.monto && <p className="alert alert-danger">{errores.monto}</p>}
+
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
                                                             <label htmlFor="cuotas">Cantidad de Cuotas</label>
-                                                            <input type="number" className="form-control" id="cuotas" name="cuotas" value={cuotas} onChange={handleChange} required=""/>
+                                                            <input type="number" className="form-control" min="1" max="1000" id="cuotas" name="cuotas" value={cuotas} onChange={handleChange} required=""/>
                                                         </div>
+                                                        {errores.correo && <p className="alert alert-danger">{errores.correo}</p>}
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
@@ -162,12 +149,14 @@ const Prestamo = () => {
                                                                 <option selected value="mensual">Mensual</option>
                                                                 <option selected value="anual">Anual</option>
                                                             </select>
+                                                        {errores.tipoTasa && <p className="alert alert-danger">{errores.tipoTasa}</p>}
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
                                                             <label htmlFor="tasaInteres">Tasa de Interes</label>
-                                                            <input type="number" className="form-control" id="tasaInteres" name="tasaInteres" value={tasaInteres} onChange={handleChange} required=""/>
+                                                            <input type="number" min="0.1" max="50" className="form-control" id="tasaInteres" name="tasaInteres" value={tasaInteres} onChange={handleChange} required=""/>
+                                                        {errores.tasaInteres && <p className="alert alert-danger">{errores.tasaInteres}</p>}
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 mb-3">
@@ -185,6 +174,7 @@ const Prestamo = () => {
                                                                 <option value="semestral">Semestral</option>
                                                                 <option value="anual">Anual</option>
                                                             </select>
+                                                        {errores.periodoPagos && <p className="alert alert-danger">{errores.periodoPagos}</p>}
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 mb-3">
@@ -196,10 +186,11 @@ const Prestamo = () => {
                                                 </div>
                                                 <div className="row">
                                                     <div className="col-6">
-                                                        <button type="button" className="btn btn-primary btn-lg btn-block">Guardar</button>
+                                                        <button type="submit" className="btn btn-primary btn-lg btn-block">Guardar</button>
                                                     </div>
                                                     <div className="col-6">
-                                                        <button type="button" clasclassNames="btn btn-outline-secondary btn-lg btn-block" onClick={hancleClick}>Calcular</button>
+                                                        <button type="button" clasNames="btn btn-outline-secondary btn-lg btn-block" onClick={hancleClick}>Calcular</button>
+                                                        {/* <button type="button" clasclassNames="btn btn-outline-secondary btn-lg btn-block" onClick={hancleClick}>Calcular</button> */}
                                                     </div>
                                                 </div>
                                             </form>
