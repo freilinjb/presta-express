@@ -3,6 +3,7 @@ import {useRouter} from 'next/router';
 import Layout from '../../components/layout/Layout';
 import Navegacion from '../../components/layout/Navegacion';
 import FileUploader from 'react-firebase-file-uploader';
+import {useAlert} from 'react-alert';
 
 
 import { FirebaseContext } from '../../firebase';
@@ -31,7 +32,7 @@ const STATE_INICIAL = {
 const Cliente = () => {
 
     const {sectores} = useSector("creado");
-
+    const alert = useAlert();
 
       //state de las imagenes
     const [nombreimagen, guardarNombre] = useState("");
@@ -97,10 +98,13 @@ const Cliente = () => {
             firebase.cargando = true;
 
             firebase.db.collection("Clientes").add(cliente);
-            console.log(cliente);
+            // console.log(cliente);
+            alert.success('Se ha guardo correctamente');
             // console.log(usuario);
         } catch (error) {
             console.log(error);
+            alert.error('Ha ocurrido un error');
+
         } finally {
             firebase.cargando = false;
         }

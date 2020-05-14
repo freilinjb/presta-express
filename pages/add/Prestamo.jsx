@@ -77,11 +77,16 @@ const Prestamo = () => {
         };
         console.log(prestamo);
         
-        //Insertar en la BD
-        firebase.db.collection("Prestamos").add(prestamo);
-
-        //Despues de registrar un Producto redireccionar al
-        //Inicio
+        try {
+            //Insertar en la BD
+            await firebase.db.collection("Prestamos").add(prestamo);
+            
+            alert.success('Se ha guardo correctamente');
+            
+            //Inicio
+        } catch (error) {
+            
+        }
         return Router.push("/");
     }
 

@@ -6,6 +6,8 @@ import { FirebaseContext } from '../../firebase';
 //Validadiones
 import useValidacion from '../../hooks/useValidacion';
 import validarIniciarSector from '../../validacion/validarIniciarSector';
+import { useAlert } from "react-alert";
+
 
 const InputModal = () => {
 
@@ -13,6 +15,8 @@ const InputModal = () => {
         nombre:'',
         descripcion:''
     }
+
+    const alert  = useAlert();
 
     const [error, setError] = useState("");
 
@@ -60,7 +64,8 @@ const InputModal = () => {
             firebase.cargando = true;
 
             firebase.db.collection("Sectores").add(sector);
-            console.log(sector);
+            alert.success('Ah ocurrido un error');
+
             nombre = '';
             descripcion = '';
 

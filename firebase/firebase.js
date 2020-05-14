@@ -29,9 +29,9 @@ class Firebase {
                 displayName: nombre
             });
 
-            console.log(nuevoUsuario);
         } catch (error) {
             console.log(error);
+
         }
         finally {
             this.cargando = false;
@@ -48,6 +48,7 @@ class Firebase {
             
         } catch (error) {
             console.log(error);
+
         }
         finally {
             this.cargando = false;
@@ -63,6 +64,7 @@ class Firebase {
 
         } catch (error) {
             console.log(error);
+
         }
         finally {
             this.cargando = false;
