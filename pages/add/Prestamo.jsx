@@ -5,14 +5,21 @@ import useCliente from '../../hooks/useCliente';
 import useCalculadora from '../../hooks/useCalculadora';
 import { FirebaseContext } from "../../firebase";
 
+//Componentes
+import Amortizacion from '../../components/ui/Amortizacion';
+
 //Validaciones
 import useValidacion from '../../hooks/useValidacion';
 import validarIniciarPrestamo from '../../validacion/validarIniciarPrestamo';
 
+import Head from 'next/head';
+
 const Prestamo = () => {
     const { usuario, firebase } = useContext(FirebaseContext);
     const {clientes} = useCliente("creado");
-    const {calcular, detalleCuota} = useCalculadora();
+    const {calcular, detalleCuotas} = useCalculadora();
+    const [calculado, setCalculado] = useState(false);
+    const [tablaAmortizada, setTablaAmortizada] = useState([]);
 
     let resultado = [];
 
@@ -24,9 +31,6 @@ const Prestamo = () => {
         //         console.log(m);
         //     });
         // })
-        calcular(3000, 10, 6, "diario", "mensual");
-        // detalleCuota = [];
-        console.log(detalleCuota);
         
         
     },[]);
@@ -63,10 +67,6 @@ const Prestamo = () => {
     //Crear el objeto de nuevo prestamo
     async function crearPrestamo() {
         const prestamo = {
-            cliente: {
-                id:'',
-                nombre:''
-            },
             entrega:'',
             monto:'',
             cuotas:'',
@@ -94,9 +94,22 @@ const Prestamo = () => {
         //Inicio
         return router.push("/");
     }
+
+    const hancleClick = () => {
+        setTablaAmortizada(calcular(3000, 10, 6, "diario", "mensual"));
+        setCalculado(true);
+        if(tablaAmortizada.listo){
+            // console.log(tablaAmortizada);
+        }
+        
+    }
     return ( 
         <>
         <Layout>
+            <Head>
+                {/* <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" /> */}
+                {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> */}
+            </Head>
             <Navegacion titulo={"Registro"}>
                     <div className="row justify-content-center">
                         <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -115,7 +128,7 @@ const Prestamo = () => {
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
                                                           <label htmlFor="idCliente">Cliente</label>
-                                                          <select className="form-control" name="cliente" id="idCliente" value={idCliente} onChange={handleChange}>
+                                                          <select className="form-control" name="idcliente" id="idCliente" value={idCliente} onChange={handleChange}>
                                                             <option selected disabled value="">Seleccione un cliente</option>
                                                             {clientes.map(cliente=> (<option key={cliente.id} value={cliente.id} >{cliente.nombre + ' ' + cliente.apellido}</option>))}
                                                             {!clientes && (<p>No tiene clientes registrados</p>)}
@@ -181,66 +194,23 @@ const Prestamo = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button className="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                                                <div className="row">
+                                                    <div className="col-6">
+                                                        <button type="button" className="btn btn-primary btn-lg btn-block">Guardar</button>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <button type="button" clasclassNames="btn btn-outline-secondary btn-lg btn-block" onClick={hancleClick}>Calcular</button>
+                                                    </div>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col-md-12 mb-6 col-lg-6 col-xl-6">
-                        <div className="card">
-                            <h5 className="card-header">Top Selling Products</h5>
-                            <div className="card-body p-0">
-                                <div className="table-responsive">
-                                    <table className="table">
-                                        <thead className="bg-light">
-                                            <tr className="border-0">
-                                                <th className="border-0">#</th>
-                                                <th className="border-0">Interés</th>
-                                                <th className="border-0">Abono al capital</th>
-                                                <th className="border-0">Valor de la cuota	</th>
-                                                <th className="border-0">Saldo al capital</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Product #1 </td>
-                                                <td>id000001 </td>
-                                                <td>20</td>
-                                                <td>$80.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Product #2 </td>
-                                                <td>id000002 </td>
-                                                <td>12</td>
-                                                <td>$180.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Product #3 </td>
-                                                <td>id000003 </td>
-                                                <td>23</td>
-                                                <td>$820.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Product #4 </td>
-                                                <td>id000004 </td>
-                                                <td>34</td>
-                                                <td>$340.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="8"><a href="#" className="btn btn-outline-light float-right">View Details</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    {calculado ? (<Amortizacion tablaAmortizada={tablaAmortizada}/>) : null }
                                 </div>
                             </div>
                         </div>
-                    </div>
-                                </div>
-                            </div>
                     </div>
                </Navegacion>
         </Layout>

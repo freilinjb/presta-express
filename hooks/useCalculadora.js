@@ -1,11 +1,11 @@
   const useCalculadora =() => {
-    let detalleCuota = {
+    let detalleCuotas = {
       cuotaFija: "",
-      dato: [],
+      cuotas: [],
       msg: "",
+      listo: false
     };
-    let columna = [];
-    
+
   function setFecha(dia, periodo) {
     var fecha = new Date();
 
@@ -43,6 +43,32 @@
         fecha.setDate(fecha.getFullYear() + dia);
         break;
     }
+    //Calcular cuando es domingo
+    if(fecha.getDay() == 0) {
+      fecha.setDate(fecha.getDay()+1);
+      console.log(`es domingo: ${fecha}`);
+      
+    }
+
+    //Formatear la fecha
+    let dd = fecha.getDate();
+
+    let mm = fecha.getMonth()+1; 
+    const yyyy = fecha.getFullYear();
+    if(dd<10) 
+    {
+        dd=`0${dd}`;
+    } 
+
+    if(mm<10) 
+    {
+        mm=`0${mm}`;
+    } 
+    // fecha = `${mm}-${dd}-${yyyy}`;
+    // console.log(fecha);
+    // fecha = `${mm}/${dd}/${yyyy}`;
+    // console.log(fecha);
+    fecha = `${dd}-${mm}-${yyyy}`;
 
     return fecha;
   }
@@ -137,7 +163,7 @@
         saldo_al_capital,
         setFecha(i, periodo),
       ];
-      detalleCuota.dato.push({cuota: numero, interes: interes, abonoCapital: abono_al_capital,valorCuota:  valor_de_cuota,saldoCapital: saldo_al_capital, fecha: setFecha(i, periodo)});
+      detalleCuotas.cuotas.push({cuota: numero, interes: interes, abonoCapital: abono_al_capital,valorCuota:  valor_de_cuota,saldoCapital: saldo_al_capital, fecha: setFecha(i, periodo)});
 
       items.push(item);
     }
@@ -201,19 +227,15 @@
           // value = setMoneda(value);
           value = value;
         }
-        columna.push(value);
       }
-      
-      // detalleCuota.dato.push({cuota: i, interes: cuotafija, abonoCapital: columna[1],valorCuota:  columna[2],saldoCapital: columna[3],saldoCapital: columna[4], fecha: setFecha(i, periodo)});
+
     }
-    // columna.push(items);
-    columna = [];
 
     let valor = setMoneda(items[0][3]);
-    detalleCuota.cuotaFija = valor;
+    detalleCuotas.cuotaFija = valor;
     var msg = "";
     if (periodo == "diario") {
-      detalleCuota.msg =
+      detalleCuotas.msg =
         "Usted estará pagando " +
         valor +
         ", todos los dias durante " +
@@ -221,7 +243,7 @@
         " dias.";
     }
     if (periodo == "semanal") {
-      detalleCuota.msg =
+      detalleCuotas.msg =
         "Usted pagará " +
         valor +
         ", semanalmente durante " +
@@ -229,7 +251,7 @@
         " semanas.";
     }
     if (periodo == "mensual") {
-      detalleCuota.msg =
+      detalleCuotas.msg =
         "Usted pagará " +
         valor +
         ", mensualmente durante " +
@@ -237,7 +259,7 @@
         " meses.";
     }
     if (periodo == "quincenal") {
-      detalleCuota.msg =
+      detalleCuotas.msg =
         "Usted pagará " +
         valor +
         ", de manera quincenal por un periodo de " +
@@ -245,7 +267,7 @@
         " quincenas.";
     }
     if (periodo == "bimestral") {
-      detalleCuota.msg =
+      detalleCuotas.msg =
         "Usted pagará " +
         valor +
         ", cada 2 meses durante un periodo de " +
@@ -253,7 +275,7 @@
         " bimestres.";
     }
     if (periodo == "trimestral") {
-      detalleCuota.msg =
+      detalleCuotas.msg =
         "Usted va a pagar " +
         valor +
         ", cada 3 meses durante " +
@@ -261,7 +283,7 @@
         " trimestres.";
     }
     if (periodo == "cuatrimestral") {
-      detalleCuota.msg =
+      detalleCuotas.msg =
         "Usted pagará " +
         valor +
         ", cada cuatrimestre (4 meses) por un periodo de " +
@@ -269,7 +291,7 @@
         " cuatrimestres.";
     }
     if (periodo == "semestral") {
-      detalleCuota.msg =
+      detalleCuotas.msg =
         "Usted pagará " +
         valor +
         ", cada 6 meses durante " +
@@ -277,25 +299,26 @@
         " semestres";
     }
     if (periodo == "anual") {
-      detalleCuota.msg =
+      detalleCuotas.msg =
         "Usted pagará " +
         valor +
         ", anualmente por un periodo de " +
         items.length +
         " años";
     }
-    return detalleCuota;
+    detalleCuotas.listo = true;
+    return detalleCuotas;
   }
 
   // console.log("calcular");
 
-  calcular(3000, 10, 6, "diario", "mensual");
-  // console.log(detalleCuota.dato);
+  // calcular(3000, 10, 6, "diario", "mensual");
+  // console.log(detalleCuotas.cuotas);
 
   return{
-    // columna,
     calcular,
-    detalleCuota
+    detalleCuotas,
+    setMoneda
   }
 
 };

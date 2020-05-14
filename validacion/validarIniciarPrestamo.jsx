@@ -2,17 +2,23 @@ export default function validarIniciarSesion(valores) {
     
     let errores = {};
 
-    if(!valores.email) {
-        errores.email = "El Email es Obligatorio";
-    } else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(valores.email)){
-        errores.email = "Email no valido"
+    if(!valores.entrega) {
+        errores.entrega = "La fecha de entrega es obligatio";
+    } 
+    if(!valores.monto) {
+        errores.monto = "La fecha de entrega es obligatio";
     }
-
-    //validar el password
-    if(!valores.password) {
-         errores.password = "El password es obligatorio";
-    } else if(valores.password.length < 6) {
-        errores.password = "El password debe ser de al menos 6 caracteres";
+    if(!valores.cuotas) {
+        errores.cuotas = "La fecha de entrega es obligatio";
+    }
+    if(!valores.tipoTasa) {
+        errores.tipoTasa = "La fecha de entrega es obligatio";
+    }
+    if(!valores.tasaInteres) {
+        errores.tasaInteres = "La fecha de entrega es obligatio";
+    }
+    if(!valores.periodoPagos) {
+        errores.periodoPagos = "La fecha de entrega es obligatio";
     }
 
     return errores;
