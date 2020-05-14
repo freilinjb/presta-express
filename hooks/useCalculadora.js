@@ -1,17 +1,5 @@
   const useCalculadora =() => {
 
-  let detalleCuota = {
-    cuota: [],
-    textCell: "",
-    div1: "",
-    tr: [],
-    div2: "",
-    dato: [],
-    msg: "",
-  };
-  let prestamo = [];
-  let columna = [];
-
   function setFecha(dia, periodo) {
     var fecha = new Date();
 
@@ -168,6 +156,14 @@
   }
 
   function calcular(monto, cuotas, tasa, periodo, tasa_tipo) {
+
+    let detalleCuota = {
+      cuotaFija: "",
+      dato: [],
+      msg: "",
+    };
+    let columna = [];
+
     const cuotafija = getValorDeCuotaFija(monto, tasa, cuotas, periodo, tasa_tipo);
     if (!monto) {
       alert("Indique el monto");
@@ -185,13 +181,7 @@
       alert("Las cuotas deben ser de 1 en adelante");
       return;
     }
-    // var select_periodo = document.getElementById("select_periodo");
-    // periodo = select_periodo.options[select_periodo.selectedIndex].value;
-    // var select_tasa_tipo = document.getElementById("select_tasa_tipo");
-    // tasa_tipo = select_tasa_tipo.options[select_tasa_tipo.selectedIndex].value;
     var items = getAmortizacion(monto, tasa, cuotas, periodo, tasa_tipo);
-    // var detalleCuota = document.getElementById("detalleCuota_1");
-    // detalleCuota.innerHTML = "";
 
     if (parseInt(cuotas) > 3000) {
       alert(
@@ -204,24 +194,22 @@
     let value;
     for (let i = 0; i < items.length; i++) {
       item = items[i];
-      // tr = document.createElement("tr");
       for (var e = 0; e < item.length; e++) {
         value = item[e];
         if (e > 0) {
-          value = setMoneda(value);
+          // value = setMoneda(value);
+          value = value;
         }
-        // detalleCuota.cuota = document.createElement("cuota");
-        detalleCuota.textCell = value;
-        columna.push(detalleCuota.textCell);
-        // detalleCuota.tr.push(detalleCuota.cuota);
+        columna.push(value);
       }
-      detalleCuota.dato.push({numero: i, interes: cuotafija, abonoCapital: columna[1],valorCuota:  columna[2],saldoCapital: columna[3],saldoCapital: columna[4], fecha: setFecha(i, periodo)});
+      
+      detalleCuota.dato.push({cuota: i, interes: cuotafija, abonoCapital: columna[1],valorCuota:  columna[2],saldoCapital: columna[3],saldoCapital: columna[4], fecha: setFecha(i, periodo)});
     }
     // columna.push(items);
     columna = [];
 
     let valor = setMoneda(items[0][3]);
-    detalleCuota.div1 = valor;
+    detalleCuota.cuotaFija = valor;
     var msg = "";
     if (periodo == "diario") {
       detalleCuota.msg =
@@ -295,18 +283,18 @@
         items.length +
         " años";
     }
-    detalleCuota.div2 = msg;
+    return detalleCuota;
   }
 
-  console.log("calcular");
+  // console.log("calcular");
 
-  calcular(3000, 10, 6, "diario", "mensual");
-  console.log(detalleCuota.dato);
+  // calcular(3000, 10, 6, "diario", "mensual");
+  // console.log(detalleCuota.dato);
 
   return{
-    columna,
-    calcular,
-    detalleCuota
+    // columna,
+    calcular
+    // detalleCuota
   }
 
 };

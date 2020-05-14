@@ -12,17 +12,22 @@ import validarIniciarPrestamo from '../../validacion/validarIniciarPrestamo';
 const Prestamo = () => {
     const { usuario, firebase } = useContext(FirebaseContext);
     const {clientes} = useCliente("creado");
-    const {calcular, columna, datos} = useCalculadora();
+    const {calcular, columna, detalleCuota} = useCalculadora();
+
+    let resultado = [];
 
     useEffect(() => {
-        calcular(3000, 10, 6, "diario", "mensual");
+        // setDetallecuota(calcular(3000, 10, 6, "diario", "mensual"));
 
         // columna.map(p=> {
         //     p.map(m=>{
         //         console.log(m);
         //     });
         // })
-        console.log(datos);
+        resultado = calcular(3000, 10, 6, "diario", "mensual");
+        // detalleCuota = [];
+        console.log(resultado);
+        
         
     },[]);
 
