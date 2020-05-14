@@ -29,7 +29,7 @@ const Prestamo = () => {
         nombrerCliente:'',
         entrega:'',
         monto:'',
-        cuotas:'', 
+        cuotas:'',
         tipoTasa:'',
         periodoPagos:'',
         cargosPorMora:'on',
@@ -80,10 +80,11 @@ const Prestamo = () => {
     }
 
     const hancleClick = () => {
+        // console.log(tablaAmortizada);
         setTablaAmortizada(calcular(monto, cuotas, tasaInteres, periodoPagos, tipoTasa));
         setCalculado(true);
         if(tablaAmortizada.listo){
-            // console.log(tablaAmortizada);
+            
         }
         
     }
@@ -187,9 +188,10 @@ const Prestamo = () => {
                                                 <div className="row">
                                                     <div className="col-6">
                                                         <button type="submit" className="btn btn-primary btn-lg btn-block">Guardar</button>
+
                                                     </div>
                                                     <div className="col-6">
-                                                        <button type="button" clasNames="btn btn-outline-secondary btn-lg btn-block" onClick={hancleClick}>Calcular</button>
+                                                        <button type="button" className="btn btn-outline-secondary btn-lg btn-block" onClick={hancleClick}>Calcular</button>
                                                         {/* <button type="button" clasclassNames="btn btn-outline-secondary btn-lg btn-block" onClick={hancleClick}>Calcular</button> */}
                                                     </div>
                                                 </div>

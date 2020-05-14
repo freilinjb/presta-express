@@ -163,7 +163,7 @@
         saldo_al_capital,
         setFecha(i, periodo),
       ];
-      detalleCuotas.cuotas.push({cuota: numero, interes: interes, abonoCapital: abono_al_capital,valorCuota:  valor_de_cuota,saldoCapital: saldo_al_capital, fecha: setFecha(i, periodo)});
+      detalleCuotas.cuotas.push({cuota: numero, interes: interes, abonoCapital: abono_al_capital,valorCuota:  valor_de_cuota,saldoCapital: saldo_al_capital, fecha: setFecha(i, periodo),estado:'pendiente'});
 
       items.push(item);
     }
