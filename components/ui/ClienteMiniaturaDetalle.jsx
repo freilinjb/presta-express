@@ -104,7 +104,7 @@ const ClienteMiniaturaDetalle = ({ cliente }) => {
           </td>
           <td>
             <div className="btn-group ml-auto">
-              <button className="btn btn-sm btn-outline-light">Editar</button>
+              <Link href="/cliente/[id]" as={`/cliente/${id}`}><a className="btn btn-sm btn-outline-light">Editar</a></Link>
               <button
                 className="btn btn-sm btn-outline-light"
                 onClick={eliminarCliente}

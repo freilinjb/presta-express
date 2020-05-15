@@ -6971,9 +6971,19 @@ Media Query
     padding: 17px 29px;}
 }
 
+.spinner {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    left: 50%;
+    margin-left: -50px;
+    top: 50%;
+    margin-top: -50px;
+}
+
 
 .input-group-prepend {
-    heigth: 35px;    
+    height: 35px;    
 }
 
 /* Custom, iPhone Retina */

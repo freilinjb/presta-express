@@ -3,8 +3,11 @@ import {useRouter} from 'next/router';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { es } from 'date-fns/locale';
 import {FirebaseContext} from '../../firebase';
-import Layout from '../../components/layouts/Layout';
-import Error404 from '../../components/layouts/404';
+import Layout from '../../components/layout/Layout';
+import Error404 from '../../components/layout/Error404';
+import Navegacion from '../../components/layout/Navegacion';
+import Spinner from '../../components/ui/Spinner';
+
 
 
 const Cliente = () => {
@@ -14,7 +17,6 @@ const Cliente = () => {
 
     //Routing para obtener el id actual del producto
     const router = useRouter();
-    const [comentario, setComentario] = useState({});
     const [consultarDB, setConsultarDB] = useState(true);
     // console.log(router);
     const {query: {id} } = router;
@@ -25,17 +27,26 @@ const Cliente = () => {
     useEffect(() => {
         if(id && consultarDB) {
             const obtenerProducto = async () => {
-                //Trae el documento que tenga el id
-                const clienteQuery = await firebase.db.collection('Clientes').doc(id);
-                const cliente = await clienteQuery.get();
-                if(cliente.exists) {
-                    setClientes(clientes.data());
-                    //Es para evitar que se cicle el useEffect y con la condicion principal
-                    //y quitando el producto para evitar posibles errores
-                    setConsultarDB(false);
-                } else {
-                    setError(true);
-                    setConsultarDB(false);
+                try {
+                    firebase.cargando = true;
+
+                    //Trae el documento que tenga el id
+                    const clienteQuery = await firebase.db.collection('Clientes').doc(id);
+                    const cliente = await clienteQuery.get();
+                    if(cliente.exists) {
+                        setCliente(cliente.data());
+                        //Es para evitar que se cicle el useEffect y con la condicion principal
+                        //y quitando el producto para evitar posibles errores
+                        setConsultarDB(false);
+                    } else {
+                        setError(true);
+                        setConsultarDB(false);
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+                finally {
+                    firebase.cargando = false;
                 }
             }
             obtenerProducto();
@@ -43,7 +54,7 @@ const Cliente = () => {
         //Si algo cambia en producto se actualiza: es por haVotado
     },[id]);
 
-    if(Object.keys(cliente).length === 0 && !error) return 'Cargando...';
+    // if(Object.keys(cliente).length === 0 && !error) return <Spinner className='spinner'/>;
 
     const {comentarios, creado, descripcion,empresa, nombre, url, urlImagen, votos, creador, haVotado} = cliente;
 
@@ -70,6 +81,7 @@ const Cliente = () => {
             await firebase.db.collection("productos").doc(id).delete();
             return router.push('/');
 
+
         } catch (error) {
             console.log(error);
         }
@@ -77,115 +89,50 @@ const Cliente = () => {
     
     return ( 
         <Layout>
-            <>
-            {error ? <Error404/> : (
-            <div className="contenedor">
-                <h1
-                    css={css`
-                        text-align: center;
-                        margin-top: 5rem;
-                    `}
-                >{nombre}</h1>
+            {/* {error ? <Error404/> : ( */}
+                <Navegacion>
+                    {firebase.cargando ? <Spinner className='spinner'/> : (
 
-                <ContenedorProducto> 
-                    <div>
-                        <p>Publicado hace: {formatDistanceToNow(new Date(creado), {locale: es})}</p>
-                        <p>Publicado por: {creador.nombre}</p>
-                        
-                        <img src={urlImagen}/>
-
-                        <p>{descripcion}</p>
-
-                        { usuario && (
-                            <>
-                                <h2>Agrega tu comentario</h2>
-                                <form
-                                    onSubmit={agregarComentario}
-                                >
-                                    <Campo>
-                                        <input 
-                                            type="text"
-                                            name="mensaje"
-                                            onChange={comentarioChange}
-                                            />
-                                    </Campo>
-                                    <InputSubmit
-                                        type="Submit"
-                                        value="Agregar Comentario"
-                                    />
-                                </form> 
-                            </>
-                        )}
-
-                        <h2 css={css`
-                            margin: 2rem 0;
-                        `}>Comentarios</h2>
-                        {comentarios.length === 0 ? "Aun no hay comentarios" : (
-                            <ul>
-                                {comentarios.map((comentario,i) => (
-                                <li 
-                                    key={`${comentario.usuarioId}-${i}`}
-                                    css={css`
-                                        border: 1px solid #e1e1e1;
-                                        padding: 2rem;
-                                    `}
-                                > 
-                                    <p>{comentario.mensaje}</p>
-                                    <p> Escrito por:
-                                        <span
-                                            css={css`
-                                            font-weight: bold;
-                                        `}
-                                        >
-                                            {' '}{comentario.usuarioNombre}
-                                        </span>
-                                    </p>
-                                </li>
-                                ))}
-                            </ul>
-
-                        )}
-                    </div>
-
-                    <aside>
-                        <Boton
-                            target="_blak"
-                            bgColor="true"
-                            href={url}
-                        >Visita URL</Boton>
-
-                        <div 
-                            css={css`
-                                margin-top: 5rem;
-                            `}
-                        >
-                            <p css={css`
-                                text-align: center;
-                            `}>{votos} Votos</p>
-
-
-                            {usuario && (
-                                <Boton
-                                    onClick={votarProducto}
-                                >
-                                    Votar
-                                </Boton>
-                            )}
+                    <div className="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-12">
+                    <div className="card">
+                    <div className="card-body">
+                        <div className="user-avatar text-center d-block">
+                            <img src={cliente.urlFoto} alt="User Avatar" className="rounded-circle user-avatar-xxl"/>
                         </div>
-                    </aside>
-                </ContenedorProducto>
+                        <div className="text-center">
+                            <h2 className="font-24 mb-0">{cliente.nombre + ' '+ cliente.apellido}</h2>
+                            {cliente.apodo && (<p>Alias ({cliente.apodo})</p>)}
+                        </div>
+                    </div>
+                    <div className="card-body border-top">
+                        <h3 className="font-16">Informacion del Cliente </h3>
+                        <div className="">
+                            <ul className="list-unstyled mb-0">
+                            <li className="mb-2"><i className="fas fa-fw fa-envelope mr-2"></i>{cliente.correo}</li>
+                            <li className="mb-0"><i className="fas fa-fw fa-phone mr-2"></i>{cliente.telefono}</li>
+                        </ul>
+                        </div>
+                    </div>
+                    <div className="card-body border-top">
+                        <h3 className="font-16">Rating</h3>
+                        <h1 className="mb-0">0</h1>
+                        <div className="rating-star">
+                            <i className="fa fa-fw fa-star"></i>
+                        </div>
+                    </div>
+                    <div className="card-body border-top">
+                        <h3 className="font-16">Observacion</h3>
+                        <div>
+                            <p>{cliente.observacion}</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                    )}
 
-                {puedeBorrar() &&
-                    <Boton
-                        onClick={eliminarProducto}
-                    >Eliminar Producto</Boton>
-                }
-            </div>
-
-            )}
-            </>
+            </Navegacion>
         </Layout>
      );
 }
  
-export default Producto;
+export default Cliente;
