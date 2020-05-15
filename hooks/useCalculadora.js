@@ -6,7 +6,7 @@
       listo: false
     };
 
-  function formatearFecha(fecha, formato = 'dmy') {
+  function formatearFecha(fecha = new Date(), formato = 'dmy') {
      //Formatear la fecha
      let dd = fecha.getDate();
 

@@ -2,23 +2,23 @@ export default function validarIniciarSesion(valores) {
     
     let errores = {};
 
-    if(!valores.entrega) {
-        errores.entrega = "La fecha de entrega es obligatio";
+    if(!(valores.entrega)) {
+        errores.entrega = "Debe espesificar la fecha de entrega";
     } 
     if(!valores.monto) {
-        errores.monto = "La fecha de entrega es obligatio";
+        errores.monto = "El monto es obligatio";
     }
     if(!valores.cuotas) {
-        errores.cuotas = "La fecha de entrega es obligatio";
+        errores.cuotas = "Debe espesificar las cuotas";
     }
     if(!valores.tipoTasa) {
-        errores.tipoTasa = "La fecha de entrega es obligatio";
+        errores.tipoTasa = "Debe espesificar el tipo de tasa";
     }
     if(!valores.tasaInteres) {
-        errores.tasaInteres = "La fecha de entrega es obligatio";
+        errores.tasaInteres = "Debe espesificar la tasa de interes";
     }
     if(!valores.periodoPagos) {
-        errores.periodoPagos = "La fecha de entrega es obligatio";
+        errores.periodoPagos = "Debe seleccionar el periodo de pago";
     }
 
     return errores;

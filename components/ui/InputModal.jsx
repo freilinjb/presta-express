@@ -64,7 +64,7 @@ const InputModal = () => {
             firebase.cargando = true;
 
             firebase.db.collection("Sectores").add(sector);
-            alert.success('Ah ocurrido un error');
+            alert.error('Ah ocurrido un error');
 
             nombre = '';
             descripcion = '';

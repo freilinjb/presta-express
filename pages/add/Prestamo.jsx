@@ -15,6 +15,9 @@ import useValidacion from '../../hooks/useValidacion';
 import validarIniciarPrestamo from '../../validacion/validarIniciarPrestamo';
 
 const Prestamo = () => {
+
+    
+
     //Muestra alerta
     const alert = useAlert();
 
@@ -23,9 +26,10 @@ const Prestamo = () => {
     const {clientes} = useCliente("creado");
     const [calculado, setCalculado] = useState(false);
     const [tablaAmortizada, setTablaAmortizada] = useState([]);
-    let fecha = new Date();
-    fecha = formatearFecha(fecha);
 
+    let fecha = new Date();
+    fecha = formatearFecha(fecha,'ymd');
+    console.log(fecha);
 
     const STATE_INICIAL = {
         idcliente:'',
@@ -48,11 +52,6 @@ const Prestamo = () => {
     console.log(errores);
 
     const {idcliente, entrega, monto, cuotas, tipoTasa, tasaInteres, observacion, periodoPagos, cargosPorMora} = valores;
-
-    // useEffect(() => {
-    //     console.log(clientes);
-        
-    // },[clientes]);
     
     //Crear el objeto de nuevo prestamo
     async function crearPrestamo() {
@@ -91,13 +90,15 @@ const Prestamo = () => {
         return Router.push("/");
     }
 
-    const hancleClick = () => {
-        // console.log(tablaAmortizada);
-        setTablaAmortizada(calcular(monto, cuotas, tasaInteres, periodoPagos, tipoTasa));
-        setCalculado(true);
-        if(tablaAmortizada.listo){
-            
+    const hancleClick =()=> {
+        
+        if(monto.trim() === '' || cuotas.trim() === '' || tasaInteres.trim() === '' ||periodoPagos.trim() === '' || tipoTasa.trim() === '') {
+            alert.error('No puede dejar campos vacios');
+            return
         }
+        setTablaAmortizada(calcular(monto, cuotas, tasaInteres, periodoPagos, tipoTasa));
+
+        setCalculado(true);
         
     }
 
@@ -143,7 +144,7 @@ const Prestamo = () => {
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
                                                             <label htmlFor="monto">Monto</label>
-                                                            <input type="number" className="form-control" min="100" max="100000000" id="monto" name="monto" value={monto} onChange={handleChange} required=""/>
+                                                            <input type="number" className="form-control" min="100" max="100000000" id="monto" name="monto" value={monto} onChange={handleChange} required/>
                                                         </div>
                                                         {errores.monto && <p className="alert alert-danger">{errores.monto}</p>}
 
@@ -151,14 +152,14 @@ const Prestamo = () => {
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
                                                             <label htmlFor="cuotas">Cantidad de Cuotas</label>
-                                                            <input type="number" className="form-control" min="1" max="1000" id="cuotas" name="cuotas" value={cuotas} onChange={handleChange} required=""/>
+                                                            <input type="number" className="form-control" min="1" max="200" id="cuotas" name="cuotas" value={cuotas} onChange={handleChange} required/>
                                                         </div>
                                                         {errores.correo && <p className="alert alert-danger">{errores.correo}</p>}
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
                                                             <label htmlFor="tipoTasa">Tipo de Tasa</label>
-                                                            <select className="form-control" name="tipoTasa" id="tipoTasa" value={tipoTasa} onChange={handleChange}>
+                                                            <select className="form-control" name="tipoTasa" id="tipoTasa" value={tipoTasa} onChange={handleChange} required>
                                                                 <option selected value="">--Seleccione--</option>
                                                                 <option selected value="mensual">Mensual</option>
                                                                 <option selected value="anual">Anual</option>
@@ -169,14 +170,14 @@ const Prestamo = () => {
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
                                                             <label htmlFor="tasaInteres">Tasa de Interes</label>
-                                                            <input type="number" min="0.1" max="50" className="form-control" id="tasaInteres" name="tasaInteres" value={tasaInteres} onChange={handleChange} required=""/>
+                                                            <input type="number" min="0.1" max="50" className="form-control" id="tasaInteres" name="tasaInteres" value={tasaInteres} onChange={handleChange} required/>
                                                         {errores.tasaInteres && <p className="alert alert-danger">{errores.tasaInteres}</p>}
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <div className="form-group">
                                                             <label htmlFor="periodoPagos">Periodo de Pagos</label>
-                                                            <select className="form-control" name="periodoPagos" id="periodoPagos" value={periodoPagos} onChange={handleChange}>
+                                                            <select className="form-control" name="periodoPagos" id="periodoPagos" value={periodoPagos} onChange={handleChange} required>
                                                                 <option value="">--Seleccione--</option>
                                                                 <option value="diario">Diario</option>
                                                                 <option value="semanal">Semanal</option>
@@ -193,7 +194,7 @@ const Prestamo = () => {
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <div className="custom-control custom-checkbox">
-                                                            <input type="checkbox" className="custom-control-input" id="cargosPorMora" name="cargosPorMora" value="off" checked={cargosPorMora === 'on'} defaultChecked={false} onChange={handleChange}/>
+                                                            <input type="checkbox" className="custom-control-input" id="cargosPorMora" name="cargosPorMora" value="off" checked={cargosPorMora === 'on'} defaultChecked={false} onChange={handleChange} required/>
                                                             <label className="custom-control-label" htmlFor="cargosPorMora">Incluir interes generados por mora</label>
                                                         </div>
                                                     </div>
