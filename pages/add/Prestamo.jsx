@@ -66,6 +66,7 @@ const Prestamo = () => {
             cargosPorMora,
             detallesCuotas:tablaAmortizada.cuotas,
             observacion,
+            estado: 'activo',
             creado: Date.now(),
             cliente:{
                 id:idcliente,

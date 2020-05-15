@@ -1,19 +1,24 @@
-import React from "react";
+import React,{useContext} from "react";
 import Link from "next/link";
+import {FirebaseContext} from '../../firebase';
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { es } from "date-fns/locale";
 
 const ClienteMiniaturaDetalle = ({ cliente }) => {
-  const {
+	const {firebase, usuario} = useContext(FirebaseContext);
+
+	const {
+	id,
     nombre,
     apellido,
     correo,
     telefono,
     creado,
     observacion,
-    urlFoto,
+	urlFoto,
+	creador
   } = cliente;
-
+  
   const eliminarCliente = async () => {
 	if(!usuario) {
 		return router.push('/login');
@@ -24,8 +29,32 @@ const ClienteMiniaturaDetalle = ({ cliente }) => {
 	}
 	
 	try {
-		await firebase.db.collection("productos").doc(cliente.id).delete();
-		return router.push('/');
+		console.log('eliminar Cliente');
+		console.log(id);
+		console.log(usuario);
+
+		firebase.db.collection("Prestamos").where("creador.id", "==", usuario.uid).where("estado","==","pendiente")
+		.get()
+		.then(function(querySnapshot) {
+			querySnapshot.forEach(function(doc) {
+				// doc.data() is never undefined for query doc snapshots
+				console.log(doc.id, " => ", doc.data());
+			});
+		})
+		.catch(function(error) {
+			console.log("Error getting documents: ", error);
+		});
+		
+		// const prestamos = await firebase.db.collection("Prestamos").where("creador.id","==",usuario.uid);
+		// if(prestamos.exists) {
+		// 	console.log('existe');
+		// } else  {
+		// 	console.log('no existe');
+		// }
+		// console.log('prestamos');
+		// console.log(prestamos);
+		// await firebase.db.collection("Clientes").where("").doc(cliente.id).delete();
+		// return router.push('/');
 
 	} catch (error) {
 		console.log(error);
