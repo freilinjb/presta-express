@@ -4,8 +4,11 @@ import {FirebaseContext} from '../../firebase';
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { es } from "date-fns/locale";
 
+import {useAlert} from 'react-alert';
+
 const ClienteMiniaturaDetalle = ({ cliente }) => {
 	const {firebase, usuario} = useContext(FirebaseContext);
+	const alert = useAlert();
 
 	const {
 	id,
@@ -31,30 +34,36 @@ const ClienteMiniaturaDetalle = ({ cliente }) => {
 	try {
 		console.log('eliminar Cliente');
 		console.log(id);
-		console.log(usuario);
+		// console.log(usuario);
+		let existe = false;
 
-		firebase.db.collection("Prestamos").where("creador.id", "==", usuario.uid).where("estado","==","pendiente")
+		//Pregunta si el usuario contiene usuario 
+		await firebase.db.collection("Prestamos").where("creador.id", "==", usuario.uid).where("estado","==","activo").where("cliente.id","==",id)
 		.get()
 		.then(function(querySnapshot) {
 			querySnapshot.forEach(function(doc) {
 				// doc.data() is never undefined for query doc snapshots
-				console.log(doc.id, " => ", doc.data());
+				// console.log(doc.id, " => ", doc.data());
+
+				if(doc.exists) {
+					console.log('existe');
+					existe = true;
+				} else {
+					console.log('no existe');
+				}
 			});
+			if(existe){
+				alert.error('El usuario tiene prestamos activo.\nNo puede ser eliminado hasta cultimar los prestamos activos');
+			} 
 		})
 		.catch(function(error) {
 			console.log("Error getting documents: ", error);
 		});
-		
-		// const prestamos = await firebase.db.collection("Prestamos").where("creador.id","==",usuario.uid);
-		// if(prestamos.exists) {
-		// 	console.log('existe');
-		// } else  {
-		// 	console.log('no existe');
-		// }
-		// console.log('prestamos');
-		// console.log(prestamos);
-		// await firebase.db.collection("Clientes").where("").doc(cliente.id).delete();
-		// return router.push('/');
+
+		//Elimina el usuario si no contiene prestamos activos
+		if(!existe) {
+			await firebase.db.collection("Clientes").doc(id).delete();
+		}
 
 	} catch (error) {
 		console.log(error);
