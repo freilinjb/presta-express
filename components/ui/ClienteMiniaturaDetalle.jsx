@@ -1,14 +1,17 @@
-import React,{useContext} from "react";
+import React,{useContext, useState} from "react";
 import Link from "next/link";
 import {FirebaseContext} from '../../firebase';
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { es } from "date-fns/locale";
-
 import {useAlert} from 'react-alert';
+
+import Spinner from '../../components/ui/Spinner';
 
 const ClienteMiniaturaDetalle = ({ cliente }) => {
 	const {firebase, usuario} = useContext(FirebaseContext);
 	const alert = useAlert();
+
+	const [cargando, setCargando] = useState(false);
 
 	const {
 	id,
@@ -32,11 +35,9 @@ const ClienteMiniaturaDetalle = ({ cliente }) => {
 	}
 	
 	try {
-		console.log('eliminar Cliente');
-		console.log(id);
-		// console.log(usuario);
+		setCargando(true);
 		let existe = false;
-
+		firebase.cargando = true;
 		//Pregunta si el usuario contiene usuario 
 		await firebase.db.collection("Prestamos").where("creador.id", "==", usuario.uid).where("estado","==","activo").where("cliente.id","==",id)
 		.get()
@@ -63,18 +64,28 @@ const ClienteMiniaturaDetalle = ({ cliente }) => {
 		//Elimina el usuario si no contiene prestamos activos
 		if(!existe) {
 			await firebase.db.collection("Clientes").doc(id).delete();
+			alert.success('Se ha eliminado correctamente');
 		}
 
 	} catch (error) {
 		console.log(error);
 	}
+
+	finally{
+		setCargando(false);
+		firebase.cargando = false;
+	}
 }
   return (
     <>
+		
+		{cargando && (<div className="spinner"><Spinner/></div>)}
+	
       <tbody>
         <tr>
           <td>
             <div className="m-r-10">
+
               <img src={urlFoto} className="rounded-circle" alt="Foto" />
             </div>
           </td>
@@ -106,9 +117,15 @@ const ClienteMiniaturaDetalle = ({ cliente }) => {
       </tbody>
       <style jsx>{`
         img {
-          width: 60px;
-          height: 60px;
-          border-radius: 50%;
+          	width: 60px;
+          	height: 60px;
+          	border-radius: 50%;
+			  
+        }
+		.spinner {
+			position: absolute;
+  left: 20px;
+  top: 10%;
         }
       `}</style>
     </>
