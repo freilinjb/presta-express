@@ -85,8 +85,13 @@ const ClienteMiniaturaDetalle = ({ cliente }) => {
         <tr>
           <td>
             <div className="m-r-10">
-
-              <img src={urlFoto} className="rounded-circle" alt="Foto" />
+				{urlFoto ? 
+				(
+					<img src={urlFoto} className="rounded-circle" alt="Foto" />
+				):
+				(
+					<img src="/static/assets/images/avatar-1.jpg" className="rounded-circle" alt="Foto" />
+				)}
             </div>
           </td>
           <td>
