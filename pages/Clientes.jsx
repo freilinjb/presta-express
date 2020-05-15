@@ -7,7 +7,8 @@ import Navegacion from "../components/layout/Navegacion";
 import ClienteMiniaturaDetalle from '../components/ui/ClienteMiniaturaDetalle';
 import Spinner from '../components/ui/Spinner';
 const Clientes = () => {
-  // const {sectores} = useSector("creado");
+
+  const [consultarDB, setConsultarDB] = useState(true);
   const [cargando, setCargando] = useState(false);
   const [busqueda, setBusqueda] = useState('');
 
@@ -24,16 +25,17 @@ const Clientes = () => {
   // const usuario = useAutenticacion();
 
   useEffect(() => {
-    if(usuario && busqueda.trim() === '') {
+    if(usuario && busqueda.trim() === '' && firebase.cargando === false) {
         const { uid } = usuario;
+        console.log(' se cumplio');
         
         //Esta funcion te da acceso a todos los datos
         //y snapshot realiza operaciones con ellos
         try {
-          setCargando(true);
 
-          const obtenerClientes =() => {
-            firebase.db.collection("Clientes").where("creador.id","==",uid).orderBy("creado", 'desc').onSnapshot(manejarSnapshot);//Ordena por creado
+          const obtenerClientes =async() => {
+            await firebase.db.collection("Clientes").where("creador.id","==",uid).orderBy("creado", 'desc').onSnapshot(manejarSnapshot);//Ordena por creado
+            
           }
           obtenerClientes();
         } catch (error) {
@@ -43,7 +45,7 @@ const Clientes = () => {
           setCargando(false);
         }
     }
-  },[clientes, busqueda]);
+  },[usuario, busqueda, firebase.cargando]);
   //se ejecuta cuando el componente esta listo
   function manejarSnapshot(snapshot) {
     const clientes = snapshot.docs.map(doc => {
@@ -137,6 +139,7 @@ const Clientes = () => {
                         </div>
                     </div>
                     <div className="">
+                      {cargando && <Spinner className="spinner"/>}
                   { Componente } 
                 </div>
                 </div>

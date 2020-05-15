@@ -94,10 +94,14 @@ const Prestamo = () => {
         
         if(monto.trim() === '' || cuotas.trim() === '' || tasaInteres.trim() === '' ||periodoPagos.trim() === '' || tipoTasa.trim() === '') {
             alert.error('No puede dejar campos vacios');
-            return
+            return;
         }
         setTablaAmortizada(calcular(monto, cuotas, tasaInteres, periodoPagos, tipoTasa));
-
+        console.log(tablaAmortizada);
+        
+        setTimeout(() => {
+            alert.info(tablaAmortizada.msg);
+        },1000);
         setCalculado(true);
         
     }

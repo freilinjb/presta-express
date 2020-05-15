@@ -109,7 +109,7 @@ const Amortizacion = ({ tablaAmortizada }) => {
                   <span class="badge badge-secondary badge-pill">{tablaAmortizada.cuotas[tablaAmortizada.cuotas.length-1].fecha}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <p className="alert alert-warning">{tablaAmortizada.msg}</p>
+                  <p className="alert alert-warling w-100 text-center"><strong>{tablaAmortizada.msg}</strong></p>
                 </li>
               </ul>
           </div>

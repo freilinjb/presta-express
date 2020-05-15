@@ -15,6 +15,7 @@ const MyApp = (props) => {
         transition: 'scale',
         color: 'white',
         position: positions.BOTTOM_CENTER,
+        offset: '30px',
         
       };
     

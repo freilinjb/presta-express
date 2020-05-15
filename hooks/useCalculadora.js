@@ -249,7 +249,7 @@
     var msg = "";
     if (periodo == "diario") {
       detalleCuotas.msg =
-        "Usted estará pagando " +
+        "El cliente estará pagando " +
         valor +
         ", todos los dias durante " +
         items.length +
@@ -257,7 +257,7 @@
     }
     if (periodo == "semanal") {
       detalleCuotas.msg =
-        "Usted pagará " +
+        "El cliente pagará " +
         valor +
         ", semanalmente durante " +
         items.length +
@@ -265,7 +265,7 @@
     }
     if (periodo == "mensual") {
       detalleCuotas.msg =
-        "Usted pagará " +
+        "El cliente pagará " +
         valor +
         ", mensualmente durante " +
         items.length +
@@ -273,7 +273,7 @@
     }
     if (periodo == "quincenal") {
       detalleCuotas.msg =
-        "Usted pagará " +
+        "El cliente pagará " +
         valor +
         ", de manera quincenal por un periodo de " +
         items.length +
@@ -281,7 +281,7 @@
     }
     if (periodo == "bimestral") {
       detalleCuotas.msg =
-        "Usted pagará " +
+        "El cliente pagará " +
         valor +
         ", cada 2 meses durante un periodo de " +
         items.length +
@@ -289,7 +289,7 @@
     }
     if (periodo == "trimestral") {
       detalleCuotas.msg =
-        "Usted va a pagar " +
+        "El cliente va a pagar " +
         valor +
         ", cada 3 meses durante " +
         items.length +
@@ -297,7 +297,7 @@
     }
     if (periodo == "cuatrimestral") {
       detalleCuotas.msg =
-        "Usted pagará " +
+        "El cliente pagará " +
         valor +
         ", cada cuatrimestre (4 meses) por un periodo de " +
         items.length +
@@ -305,7 +305,7 @@
     }
     if (periodo == "semestral") {
       detalleCuotas.msg =
-        "Usted pagará " +
+        "El cliente pagará " +
         valor +
         ", cada 6 meses durante " +
         items.length +
@@ -313,7 +313,7 @@
     }
     if (periodo == "anual") {
       detalleCuotas.msg =
-        "Usted pagará " +
+        "El cliente pagará " +
         valor +
         ", anualmente por un periodo de " +
         items.length +

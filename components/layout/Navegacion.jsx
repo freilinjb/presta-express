@@ -67,10 +67,10 @@ const Navegacion = (props) => {
                                             <Link href="/Prestamo"><a className="nav-link">Cobrar</a></Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link href="add/Prestamo"><a className="nav-link">Realizar</a></Link>
+                                            <Link href="/add/Prestamo"><a className="nav-link">Realizar</a></Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link href="add/Prestamo"><a className="nav-link">Solicitud</a></Link>
+                                            <Link href="/add/Prestamo"><a className="nav-link">Solicitud</a></Link>
                                         </li>
                                         <li className="nav-item">
                                             <Link href="/Sectores"><a className="nav-link">Sector</a></Link>
