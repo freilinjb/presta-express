@@ -5,7 +5,6 @@ import Navegacion from '../../components/layout/Navegacion';
 import FileUploader from 'react-firebase-file-uploader';
 import {useAlert} from 'react-alert';
 
-
 import { FirebaseContext } from '../../firebase';
 
 //Validaciones
@@ -14,10 +13,7 @@ import validarCrearCliente from '../../validacion/validarCrearCliente';
 //Copia todo del crear-cuenta
 import useSector from '../../hooks/useSector';
 
-
-
-
-const EditarCliente = ({cliente}) => {
+const EditarCliente = ({cliente, id}) => {
 
     const STATE_INICIAL = {
         nombre:cliente.nombre,
@@ -27,7 +23,7 @@ const EditarCliente = ({cliente}) => {
         sexo:cliente.sexo,
         cedula:cliente.cedula,
         correo:cliente.correo,
-        telefonos:cliente.telefonos,
+        telefono:cliente.telefono,
         sector:cliente.sector,
         direccion:cliente.direccion,
         observacion:cliente.observacion
@@ -64,57 +60,48 @@ const EditarCliente = ({cliente}) => {
       
     
       async function crearCliente() {
+          console.log('precionado elimina  r', id);
+          alert.info('Ha precionado crear');
+
+          console.log('id');
+          console.log(id);
+        //   return;
+          
         //Inicia la carga
             //Si el usuario no esta autenticado llevat al login
             if (!usuario) {
                 console.log('no esta loqueado');
-                return router.push("/SignIn");
                 firebase.cargando = false;
+
+                return router.push("/SignIn");
             }
 
         try {
-            //Crear el objeto de nuevo producto
-
-            const cliente = {
+        
+            //Insertar en la BD
+            firebase.cargando = true;            
+            firebase.db.collection("Clientes").doc(id).update({
                 nombre,
                 apellido,
                 apodo,
                 sexo,
-                cedula,
                 correo,
                 telefono,
-                calificacion: 0,
                 urlFoto,
+                cedula,
                 sector,
                 direccion,
-                observacion,
-                creado: Date.now(),
-                estado:'',
-                creador: {
-                    id: usuario.uid,
-                    nombre: usuario.displayName
-                }
-            }
-        
-            //Insertar en la BD
-            firebase.cargando = true;
-
-            firebase.db.collection("Clientes").add(cliente);
-            // console.log(cliente);
+                observacion
+            });
             alert.success('Se ha guardo correctamente');
-            // console.log(usuario);
         } catch (error) {
             console.log(error);
             alert.error('Ha ocurrido un error');
 
         } finally {
             firebase.cargando = false;
+            router.push('/Clientes');
         }
-
-        
-    
-        //Despues de registrar un Producto redireccionar al
-        return router.push("/");
       }
     
       const handleUploadStart = () => {
@@ -197,7 +184,7 @@ const EditarCliente = ({cliente}) => {
                                 </div>
                                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
                                 <label htmlFor="cedula">Cedula de Identificaion</label>
-                                <input type="number" className="form-control" id="cedula" name="cedula" value={cedula} onChange={handleChange} placeholder="Identificacion" autoComplete="off"/>
+                                <input type="text" className="form-control" id="cedula" name="cedula" value={cedula} onChange={handleChange} placeholder="Identificacion" autoComplete="off"/>
                                 <div className="valid-feedback">
                                     Looks good!
                                 </div>
@@ -274,7 +261,7 @@ const EditarCliente = ({cliente}) => {
                                         type="submit">
                                         {firebase.cargando ? 
                                         (<>
-                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                                 Cargando...
                                         </>
                                         )

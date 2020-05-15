@@ -28,7 +28,7 @@ const Cliente = () => {
  
     useEffect(() => {
         if(id && consultarDB) {
-            const obtenerProducto = async () => {
+            const obtenerCliente = async () => {
                 try {
                     firebase.cargando = true;
 
@@ -51,7 +51,7 @@ const Cliente = () => {
                     firebase.cargando = false;
                 }
             }
-            obtenerProducto();
+            obtenerCliente();
         }
         //Si algo cambia en producto se actualiza: es por haVotado
     },[id]);
@@ -97,7 +97,7 @@ const Cliente = () => {
                     <>
                         <div className="row justify-content-center">
                             <PerfilCliente cliente={cliente}/>
-                            <EditarCliente cliente={cliente}/>
+                            <EditarCliente cliente={cliente} id={id}/>
                         </div>
                     </>
                     )}
