@@ -123,9 +123,13 @@ const ClienteMiniaturaDetalle = ({ cliente }) => {
 			  
         }
 		.spinner {
+			height: 100px;
+			width: 100px;
 			position: absolute;
-			left: 20px;
-			top: 10%;
+			left: 50%;
+			margin-left: -50px;
+			top: 50%;
+			margin-top: -50px;
         }
       `}</style>
     </>
