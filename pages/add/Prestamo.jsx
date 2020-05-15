@@ -198,7 +198,7 @@ const Prestamo = () => {
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <div className="custom-control custom-checkbox">
-                                                            <input type="checkbox" className="custom-control-input" id="cargosPorMora" name="cargosPorMora" value="off" checked={cargosPorMora === 'on'} defaultChecked={false} onChange={handleChange} required/>
+                                                            <input type="checkbox" className="custom-control-input" id="cargosPorMora" name="cargosPorMora" value={cargosPorMora} defaultChecked={false} onChange={handleChange} required/>
                                                             <label className="custom-control-label" htmlFor="cargosPorMora">Incluir interes generados por mora</label>
                                                         </div>
                                                     </div>
