@@ -2,7 +2,7 @@ import React from "react";
 
 const RerfilCliente = ({cliente}) => {
   return (
-    <div className="col-xl-3 col-lg-3 col-md-5 col-sm-12 col-12">
+    <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
       <div className="card">
         <div className="card-body">
           <div className="user-avatar text-center d-block">
