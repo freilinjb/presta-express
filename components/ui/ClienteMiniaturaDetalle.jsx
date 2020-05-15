@@ -124,8 +124,8 @@ const ClienteMiniaturaDetalle = ({ cliente }) => {
         }
 		.spinner {
 			position: absolute;
-  left: 20px;
-  top: 10%;
+			left: 20px;
+			top: 10%;
         }
       `}</style>
     </>
