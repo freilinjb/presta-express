@@ -22,7 +22,7 @@
          mm=`0${mm}`;
      } 
      if(formato === 'dmy') {
-       fecha = `${dd}-${mm}-${yyyy}`;
+       fecha = `${dd}/${mm}/${yyyy}`;
      } else if (formato === 'ymd'){
        fecha = `${yyyy}/${mm}/${dd}`;
      } else if(formato === 'mdy') {
@@ -80,7 +80,7 @@
     // }
 
     //Formatear la fecha
-    fecha = formatearFecha(fecha);
+    fecha = formatearFecha(fecha,'ymd');
 
     return fecha;
   }

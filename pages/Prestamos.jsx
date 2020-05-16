@@ -61,7 +61,7 @@ const Prestamos = () => {
       };
     });
     setPrestamos(prestamos);
-    // console.log(prestamos);
+    console.log(prestamos);
   }
 
   // console.log(prestamos);
@@ -76,16 +76,24 @@ const Prestamos = () => {
             <h3 className="section-title">Lista de Prestamos</h3>
           </div>
           <div className="col-3">
-          <div className="btn-group ml-auto">
-              <a className="btn btn-sm btn-outline-light">Editar</a>
-              <a className="btn btn-sm btn-outline-light">Editar</a>
-              <a className="btn btn-sm btn-outline-light">Editar</a>
-              <button
-                className="btn btn-sm btn-outline-light"
-                onClick={eliminarCliente}
-              >
-                <i className="far fa-trash-alt"></i>
+            {/* <div
+              className="btn-group btn-group-sm"
+              role="group"
+              aria-label="Basic example"
+            >
+              <button type="button" className="btn btn-success">
+                Activos
               </button>
+              <button type="button" className="btn btn-warning">
+                Atrasados
+              </button>
+              <button type="button" className="btn btn-danger">
+                Cancelados
+              </button>
+              <button type="button" className="btn btn-info">
+                Todos
+              </button>
+            </div> */}
           </div>
         </div>
       </div>
@@ -314,22 +322,18 @@ const Prestamos = () => {
     e.preventDefault();
 
     if (busqueda.trim()) {
-      const buscar = busqueda.toLowerCase().trim();
-      const filtro = prestamos.filter((cliente) => {
-        return (
-          (
-            cliente.nombre.toLowerCase() +
-            " " +
-            cliente.apellido.toLowerCase()
-          ).includes(buscar) || cliente.cedula.toLowerCase().includes(buscar)
-        );
-      });
-
-      //filtro itera en cada uno de ellos, combierte el nombrer en minusculas
-      //y luego si lo encuentra lo agrega a filter
-      // console.log(filtro,' BUSQUEDA: ', busqueda);
-      setPrestamos(filtro);
-      // console.log(prestamos);
+      const buscar = busqueda.toLowerCase().trim()
+          const filtro = prestamos.filter(prestamo => {
+              return(
+                (prestamo.cliente.nombre.toLowerCase() + ' '+prestamo.cliente.apellido.toLowerCase()).includes(buscar)
+              )
+          });
+          
+          //filtro itera en cada uno de ellos, combierte el nombrer en minusculas 
+          //y luego si lo encuentra lo agrega a filter
+          // console.log(filtro,' BUSQUEDA: ', busqueda);
+          setPrestamos(filtro);
+          // console.log(clientes);
     }
   };
   return (

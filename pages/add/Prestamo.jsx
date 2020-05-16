@@ -15,9 +15,6 @@ import useValidacion from '../../hooks/useValidacion';
 import validarIniciarPrestamo from '../../validacion/validarIniciarPrestamo';
 
 const Prestamo = () => {
-
-    
-
     //Muestra alerta
     const alert = useAlert();
 

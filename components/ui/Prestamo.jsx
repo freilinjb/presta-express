@@ -15,7 +15,8 @@ const Prestamo = ({prestamo}) => {
     "Agosto", "Septiembre", "Octubre",
     "Noviembre", "Diciembre"
   ]
-
+    console.log(prestamo);
+    
     const { setMoneda } = useCalculadora();
     const estadoCuotas = {
         pendiente: 0,
@@ -62,7 +63,7 @@ const Prestamo = ({prestamo}) => {
         <>
         {/* <!-- Project--> */}
         <li>
-            <time datetime={fecha.proximoPago}>
+            <time dateTime={fecha.proximoPago}>
               <span className="day">{fecha.mes}</span>
 							<span className="month">{meses[Number(fecha.mes)]}</span>
 							<span className="year">{fecha.anio}</span>
@@ -71,8 +72,13 @@ const Prestamo = ({prestamo}) => {
 						<div className="info">
 							<h2 className="title">{prestamo.cliente.nombre + ' ' + prestamo.cliente.apellido}</h2>
               <p className="desc">Cuotas: {estadoCuotas.pendiente} / {estadoCuotas.pagados}</p>
+              <p className="desc">Desembolsado hace: {formatDistanceToNow(new Date(prestamo.creado),{locale: es,})}</p>
 							<ul className="detalles">
-								<li><a href="#website"><span className="fa fa-globe"></span> Cobrar</a></li>
+								<li>
+                  <Link href="/prestamo/[id]" as={`/prestamo/${prestamo.id}`}>
+                    <a><span className="fa fa-globe"></span> Cobrar</a>
+                    </Link>
+                </li>
 								<li><span className="fa fa-money"></span> {setMoneda(prestamo.monto)}</li>
 							</ul>
 						</div>
