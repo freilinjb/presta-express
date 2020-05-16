@@ -68,7 +68,7 @@ const Prestamo = () => {
             estado: 'activo',
             creado: Date.now(),
             cliente:{
-                id:idcliente,
+                id:idcliente
             },
             creador: {
             id: usuario.uid,

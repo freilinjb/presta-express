@@ -4,7 +4,8 @@ import useAutenticacion from './useAutenticacion';
 
 const usePrestamo = orden => {
 
-    const [prestamos, setPrestamos ] = useState([]);
+    const [ptm, setPrestamos ] = useState([]);
+    const [clt, setClientes ] = useState([]);
     const {firebase} = useContext(FirebaseContext);
 
     const usuario = useAutenticacion();
@@ -19,7 +20,7 @@ const usePrestamo = orden => {
 
           const { uid } = usuario;
           const obtenerPrestamos = () => {  
-          firebase.db.collection("Prestamos").where("creador.id","==",uid).orderBy(orden, 'desc').onSnapshot(manejarSnapshot);//Ordena por creado
+          firebase.db.collection("Prestamos").where("creador.id","==",uid).orderBy(orden, 'desc').onSnapshot(prestamosSnapshot);//Ordena por creado
         }
         obtenerPrestamos();
         } catch (error) {
@@ -29,18 +30,52 @@ const usePrestamo = orden => {
         }
       }
     },[usuario]);
+
+    useEffect(() => {
+
+      try {
+        if(ptm.length>0) {
+          setClientes([]);
+
+          const obtenerClientes = () => {
+            ptm.map(prestamo => {
+              firebase.db.collection("Clientes").where("id","==",prestamo.id).where("creador.id","==",uid).orderBy(orden, 'desc').onSnapshot(ClientesSnapshot);
+            });
+          }
+          obtenerClientes();
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        firebase.cargando = false;
+        console.log(clt);
+        
+      }
+    },[ptm]);
     //se ejecuta cuando el componente esta listo
-    function manejarSnapshot(snapshot) {
-      const prestamos = snapshot.docs.map(doc => {
+    function prestamosSnapshot(snapshot) {
+      const datos = snapshot.docs.map(doc => {
         //Extrae todo el registro completo
         return {
           id: doc.id,
           ...doc.data()
         }
       });
-   
-      //resultado de la consulta
-      setPrestamos(prestamos);
+
+      setPrestamos(datos);
+    }
+
+    function ClientesSnapshot(snapshot) {
+      const datos = snapshot.docs.map(doc => {
+        //Extrae todo el registro completo
+        return {
+          id: doc.id,
+          ...doc.data()
+        }
+      });
+
+      setClientes({...clt,datos});
+      console.log(clt);
       
     }
 
@@ -58,7 +93,8 @@ const usePrestamo = orden => {
     }
 
     return {
-        prestamos,
+        ptm,
+        clt,
         periodo
     }
 }

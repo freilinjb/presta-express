@@ -6,10 +6,19 @@ import { FirebaseContext } from "../firebase";
 import Navegacion from "../components/layout/Navegacion";
 import ClienteMiniaturaDetalle from "../components/ui/ClienteMiniaturaDetalle";
 import Spinner from "../components/ui/Spinner";
-const Clientes = () => {
+
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import { es } from "date-fns/locale";
+
+import usePrestamo from '../hooks/usePrestamo';
+
+const Prestamos = () => {
+    const { ctl, ptm } = usePrestamo();
+
   const [cargando, setCargando] = useState(false);
   const [busqueda, setBusqueda] = useState("");
 
+  const [prestamos, setPrestamos] = useState([]);
   const [clientes, setClientes] = useState([]);
   const { firebase, usuario } = useContext(FirebaseContext);
 
@@ -25,37 +34,39 @@ const Clientes = () => {
       //Esta funcion te da acceso a todos los datos
       //y snapshot realiza operaciones con ellos
       try {
-        const obtenerClientes = async () => {
+        const obtenerPrestamos = async () => {
           await firebase.db
-            .collection("Clientes")
+            .collection("Prestamos")
             .where("creador.id", "==", uid)
             .orderBy("creado", "desc")
-            .onSnapshot(manejarSnapshot); //Ordena por creado
+            .onSnapshot(PrestamosSnapshot); //Ordena por creado
         };
-        obtenerClientes();
+        obtenerPrestamos();
+
       } catch (error) {
         console.log(error);
       } finally {
         setCargando(false);
+        console.log(ptm);
+        console.log(ctl);
+        
       }
     }
-  }, [usuario, busqueda, firebase.cargando]);
+  }, [usuario, busqueda]);
   //se ejecuta cuando el componente esta listo
-  function manejarSnapshot(snapshot) {
-    const clientes = snapshot.docs.map((doc) => {
+  function PrestamosSnapshot(snapshot) {
+    const prestamos = snapshot.docs.map((doc) => {
       //Extrae todo el registro completo
       return {
         id: doc.id,
         ...doc.data(),
       };
     });
-
-    //resultado de la consulta
-    setClientes(clientes);
-    // console.log(clientes);
+    setPrestamos(prestamos);
+    // console.log(prestamos);
   }
 
-  // console.log(clientes);
+  console.log(prestamos);
 
   const Componente = cargando ? (
     <Spinner />
@@ -67,7 +78,11 @@ const Clientes = () => {
             <h3 className="section-title">Lista de Clientes</h3>
           </div>
           <div className="col-3">
-            <div className="btn-group btn-group-sm" role="group" aria-label="Basic example">
+            <div
+              className="btn-group btn-group-sm"
+              role="group"
+              aria-label="Basic example"
+            >
               <button type="button" className="btn btn-success">
                 Activos
               </button>
@@ -75,30 +90,132 @@ const Clientes = () => {
                 Atrasados
               </button>
               <button type="button" className="btn btn-danger">
-                Incobrables
+                Cancelados
+              </button>
+              <button type="button" className="btn btn-info">
+                Todos
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div className="card">
-        <div className="campaign-table table-responsive">
-          <table className="table">
-            <thead>
-              <tr className="border-0">
-                <th className="border-0">Foto</th>
-                <th className="border-0">Nombre</th>
-                <th className="border-0">Telefono</th>
-                <th className="border-0">Correo</th>
-                <th className="border-0">Accion</th>
-              </tr>
-            </thead>
-            {clientes.map((cliente) => (
-              <ClienteMiniaturaDetalle key={cliente.id} cliente={cliente} />
-            ))}
-          </table>
-        </div>
-      </div>
+      {prestamos.map((prestamo) => (
+        <>
+          {/* <!-- Project--> */}
+          <div key={prestamo.id} className="project">
+            <div className="row bg-white has-shadow">
+              <div className="left-col col-lg-6 d-flex align-items-center justify-content-between">
+                <div className="project-title d-flex align-items-center">
+                  <div className="image has-shadow">
+                    <img
+                      src="https://bootdey.com/img/Content/avatar/avatar8.png"
+                      alt="..."
+                      className="img-fluid"
+                    />
+                  </div>
+                  <div className="text">
+                    <h3 className="h4">Project Title</h3>
+                    <small>Lorem Ipsum Dolor</small>
+                  </div>
+                </div>
+                <div className="project-date">
+                  <span className="hidden-sm-down">Today at 4:24 AM</span>
+                </div>
+              </div>
+              <div className="right-col col-lg-6 d-flex align-items-center">
+                <div className="time">
+                  <i className="fa fa-clock-o"></i>
+                  {formatDistanceToNow(new Date(prestamo.creado), {
+                    locale: es,
+                  })}
+                </div>
+                <div className="comments">
+                  <i className="fa fa-comment-o"></i>
+                  {prestamo.cuotas}
+                </div>
+                <div className="project-progress">
+                  <div className="progress">
+                    <div
+                      role="progressbar"
+                      aria-valuenow="25"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                      className="progress-bar float-right"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* <!-- Project--> */}
+          {/* <ClienteMiniaturaDetalle key={cliente.id} cliente={cliente} /> */}
+
+          <style>{`
+        .project .row {
+            margin: 0;
+            padding: 15px 0;
+            margin-bottom: 15px
+        }
+
+        .project div[class*='col-'] {
+            border-right: 1px solid #eee
+        }
+
+        .project .text h3 {
+            margin-bottom: 0;
+            color: #555
+        }
+
+        .project .text small {
+            color: #aaa;
+            font-size: 0.75em
+        }
+
+        .project .project-date span {
+            font-size: 0.9em;
+            color: #999
+        }
+
+        .project .image {
+            max-width: 50px;
+            min-width: 50px;
+            height: 50px;
+            margin-right: 15px
+        }
+
+        .project .time,
+        .project .comments,
+        .project .project-progress {
+            color: #999;
+            font-size: 0.9em;
+            margin-right: 20px
+        }
+
+        .project .time i,
+        .project .comments i,
+        .project .project-progress i {
+            margin-right: 5px
+        }
+
+        .project .project-progress {
+            width: 200px
+        }
+
+        .project .project-progress .progress {
+            height: 4px
+        }
+
+        .project .card {
+            margin-bottom: 0
+        }
+
+        .progress-bar {
+            width: 50%; 
+            height: 6px;
+        }
+     `}</style>
+        </>
+      ))}
     </div>
   );
 
@@ -107,7 +224,7 @@ const Clientes = () => {
 
     if (busqueda.trim()) {
       const buscar = busqueda.toLowerCase().trim();
-      const filtro = clientes.filter((cliente) => {
+      const filtro = prestamos.filter((cliente) => {
         return (
           (
             cliente.nombre.toLowerCase() +
@@ -120,8 +237,8 @@ const Clientes = () => {
       //filtro itera en cada uno de ellos, combierte el nombrer en minusculas
       //y luego si lo encuentra lo agrega a filter
       // console.log(filtro,' BUSQUEDA: ', busqueda);
-      setClientes(filtro);
-      // console.log(clientes);
+      setPrestamos(filtro);
+      // console.log(prestamos);
     }
   };
   return (
@@ -130,9 +247,9 @@ const Clientes = () => {
 
       <Navegacion titulo={"Lista de Clientes"}>
         <div className="row justify-content-center">
-          <Link href="/add/Cliente">
+          <Link href="/add/Prestamo">
             <a className="btn btn-primary shadow float-right col-md-auto offset-md-7">
-              Registrar un Cliente
+              Nuevo Prestamo
             </a>
           </Link>
           <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 mt-2">
@@ -165,4 +282,4 @@ const Clientes = () => {
   );
 };
 
-export default Clientes;
+export default Prestamos;
