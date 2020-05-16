@@ -26,13 +26,13 @@
      } else if (formato === 'ymd'){
        fecha = `${yyyy}/${mm}/${dd}`;
      } else if(formato === 'mdy') {
-       fecha = `${mm}-${dd}-${yyyy}`;
+       fecha = `${mm}/${dd}/${yyyy}`;
      }
      // fecha = `${mm}-${dd}-${yyyy}`;
      // console.log(fecha);
      // fecha = `${mm}/${dd}/${yyyy}`;
      // console.log(fecha);
-     fecha = `${dd}-${mm}-${yyyy}`;
+    //  fecha = `${dd}-${mm}-${yyyy}`;
  
      return fecha;
   }
@@ -75,10 +75,9 @@
         break;
     }
     //Calcular cuando es domingo
-    if(fecha.getDay() == 0) {
-      fecha.setDate(fecha.getDay()+1);
-      
-    }
+    // if(fecha.getDay() == 0) {
+    //   fecha.setDate(fecha.getDay()+1);
+    // }
 
     //Formatear la fecha
     fecha = formatearFecha(fecha);

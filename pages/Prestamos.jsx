@@ -76,24 +76,16 @@ const Prestamos = () => {
             <h3 className="section-title">Lista de Prestamos</h3>
           </div>
           <div className="col-3">
-            <div
-              className="btn-group btn-group-sm"
-              role="group"
-              aria-label="Basic example"
-            >
-              <button type="button" className="btn btn-success">
-                Activos
+          <div className="btn-group ml-auto">
+              <a className="btn btn-sm btn-outline-light">Editar</a>
+              <a className="btn btn-sm btn-outline-light">Editar</a>
+              <a className="btn btn-sm btn-outline-light">Editar</a>
+              <button
+                className="btn btn-sm btn-outline-light"
+                onClick={eliminarCliente}
+              >
+                <i className="far fa-trash-alt"></i>
               </button>
-              <button type="button" className="btn btn-warning">
-                Atrasados
-              </button>
-              <button type="button" className="btn btn-danger">
-                Cancelados
-              </button>
-              <button type="button" className="btn btn-info">
-                Todos
-              </button>
-            </div>
           </div>
         </div>
       </div>

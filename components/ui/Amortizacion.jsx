@@ -71,11 +71,11 @@ const Amortizacion = ({ tablaAmortizada }) => {
             </div>
           </div>
         </div>
-        <div class="card">
-          <div class="card-header" id="headingTwo">
-            <h5 class="mb-0">
+        <div className="card">
+          <div className="card-header" id="headingTwo">
+            <h5 className="mb-0">
               <button
-                class="btn btn-link collapsed"
+                className="btn btn-link collapsed"
                 data-toggle="collapse"
                 data-target="#collapseTwo"
                 aria-expanded="false"
@@ -87,28 +87,28 @@ const Amortizacion = ({ tablaAmortizada }) => {
           </div>
           <div
             id="collapseTwo"
-            class="collapse"
+            className="collapse"
             aria-labelledby="headingTwo"
             data-parent="#accordion"
           >
-              <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+              <ul className="list-group">
+                <li className="list-group-item d-flex justify-content-between align-items-center">
                   <strong>Valor de la cuota</strong>
-                  <span class="badge badge-secondary badge-pill">{tablaAmortizada.cuotaFija}</span>
+                  <span className="badge badge-secondary badge-pill">{tablaAmortizada.cuotaFija}</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li className="list-group-item d-flex justify-content-between align-items-center">
                   <strong>Cuotas</strong>
-                  <span class="badge badge-secondary badge-pill">{tablaAmortizada.cuotas.length}</span>
+                  <span className="badge badge-secondary badge-pill">{tablaAmortizada.cuotas.length}</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li className="list-group-item d-flex justify-content-between align-items-center">
                   <strong>Fecha de inicio</strong>
-                  <span class="badge badge-secondary badge-pill">{tablaAmortizada.cuotas[0].fecha}</span>
+                  <span className="badge badge-secondary badge-pill">{tablaAmortizada.cuotas[0].fecha}</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li className="list-group-item d-flex justify-content-between align-items-center">
                   <strong>Fecha de culminacion</strong>
-                  <span class="badge badge-secondary badge-pill">{tablaAmortizada.cuotas[tablaAmortizada.cuotas.length-1].fecha}</span>
+                  <span className="badge badge-secondary badge-pill">{tablaAmortizada.cuotas[tablaAmortizada.cuotas.length-1].fecha}</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li className="list-group-item d-flex justify-content-between align-items-center">
                   <p className="alert alert-warning w-100 text-center"><strong>{tablaAmortizada.msg}</strong></p>
                 </li>
               </ul>
