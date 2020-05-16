@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { es } from "date-fns/locale";
 
@@ -40,7 +41,7 @@ const Prestamo = ({prestamo}) => {
                     />
                   </div>
                   <div className="text">
-                    <h3 className="h4">{prestamo.cliente.nombre +' '+prestamo.cliente.apellido}</h3>
+                  <Link href="/prestamo/[id]" as={`prestamo/${prestamo.id}`}><a><h3 className="h4">{prestamo.cliente.nombre +' '+prestamo.cliente.apellido}</h3></a></Link>
                     <p>Prestado: {setMoneda(prestamo.monto)}</p>
                     <p>Periodo de pagos: {prestamo.periodoPagos}</p>
                     <p>Tasa de Interes: {prestamo.tasaInteres}%</p>
