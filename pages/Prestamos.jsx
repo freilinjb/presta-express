@@ -100,78 +100,219 @@ const Prestamos = () => {
       {prestamos.map((prestamo) => (
         <>
         
+        <div className="container">
+          <div className="row">
+            <div className="[ col-xs-12 col-sm-12 ]">
+              <ul className="event-list">
+                <Prestamo key={prestamo.id} prestamo={prestamo}/>
+              </ul>
+            </div>
+          </div>
+        </div>
           {/* <!-- Project--> */}
-            <Prestamo key={prestamo.id} prestamo={prestamo}/>
-          {/* <!-- Project--> */}
 
-          <style>{`
-        .project .row {
-            margin: 0;
-            padding: 15px 0;
-            margin-bottom: 15px
+        <style>{`
+          @import url("http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,400italic");
+          @import url("//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css");
+          
+          .event-list {
+          list-style: none;
+          font-family: 'Lato', sans-serif;
+          margin: 0px;
+          padding: 0px;
+        }
+        .event-list > li {
+          background-color: rgb(255, 255, 255);
+          box-shadow: 0px 0px 5px rgb(51, 51, 51);
+          box-shadow: 0px 0px 5px rgba(51, 51, 51, 0.7);
+          padding: 0px;
+          margin: 0px 0px 20px;
+        }
+        .event-list > li > time {
+          display: inline-block;
+          width: 100%;
+          color: rgb(255, 255, 255);
+          background-color: rgb(197, 44, 102);
+          padding: 5px;
+          text-align: center;
+          text-transform: uppercase;
+        }
+        .event-list > li:nth-child(even) > time {
+          background-color: rgb(165, 82, 167);
+        }
+        .event-list > li > time > span {
+          display: none;
+        }
+        .event-list > li > time > .day {
+          display: block;
+          font-size: 56pt;
+          font-weight: 100;
+          line-height: 1;
+        }
+        .event-list > li time > .month {
+          display: block;
+          font-size: 24pt;
+          font-weight: 900;
+          line-height: 1;
+        }
+        .event-list > li > img {
+          width: 100%;
+        }
+        .event-list > li > .info {
+          padding-top: 5px;
+          text-align: center;
+        }
+        .event-list > li > .info > .title {
+          font-size: 17pt;
+          font-weight: 700;
+          margin: 0px;
+        }
+        .event-list > li > .info > .desc {
+          font-size: 13pt;
+          font-weight: 300;
+          margin: 0px;
+        }
+        .event-list > li > .info > ul,
+        .event-list > li > .social > ul {
+          display: table;
+          list-style: none;
+          margin: 10px 0px 0px;
+          padding: 0px;
+          width: 100%;
+          text-align: center;
+        }
+        .event-list > li > .social > ul {
+          margin: 0px;
+        }
+        .event-list > li > .info > ul > li,
+        .event-list > li > .social > ul > li {
+          display: table-cell;
+          cursor: pointer;
+          color: rgb(30, 30, 30);
+          font-size: 11pt;
+          font-weight: 300;
+              padding: 3px 0px;
+        }
+          .event-list > li > .info > ul > li > a {
+          display: block;
+          width: 100%;
+          color: rgb(30, 30, 30);
+          text-decoration: none;
+        } 
+          .event-list > li > .social > ul > li {    
+              padding: 0px;
+          }
+          .event-list > li > .social > ul > li > a {
+              padding: 3px 0px;
+        } 
+        .event-list > li > .info > ul > li:hover,
+        .event-list > li > .social > ul > li:hover {
+          color: rgb(30, 30, 30);
+          background-color: rgb(200, 200, 200);
+        }
+        .pagar a,
+        .telefono a,
+        .correo a {
+          display: block;
+          width: 100%;
+          color: rgb(75, 110, 168) !important;
+        }
+        .correo a {
+          color: rgb(79, 213, 248) !important;
+        }
+        .pagar a {
+          color: rgb(221, 75, 57) !important;
+        }
+        .telefono:hover a {
+          color: rgb(255, 255, 255) !important;
+          background-color: rgb(75, 110, 168) !important;
+        }
+        .correo:hover a {
+          color: rgb(255, 255, 255) !important;
+          background-color: rgb(79, 213, 248) !important;
+        }
+        .pagar:hover a {
+          color: rgb(255, 255, 255) !important;
+          background-color: rgb(221, 75, 57) !important;
         }
 
-        .project div[class*='col-'] {
-            border-right: 1px solid #eee
-        }
+        @media (min-width: 768px) {
+          .event-list > li {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 120px;
+            padding: 0px;
+          }
+          .event-list > li > time,
+          .event-list > li > img  {
+            display: inline-block;
+          }
+          .event-list > li > time,
+          .event-list > li > img {
+            width: 150px;
+            float: left;
+          }
+          .event-list > li > .info {
+            background-color: rgb(245, 245, 245);
+            overflow: hidden;
+          }
 
-        .project .text h3 {
-            margin-bottom: 0;
-            color: #555
-        }
-
-        .project .text small {
-            color: #aaa;
-            font-size: 0.75em
-        }
-
-        .project .project-date span {
-            font-size: 0.9em;
-            color: #999
-        }
-
-        .project .image {
-            max-width: 50px;
-            min-width: 50px;
-            height: 50px;
-            margin-right: 15px
-        }
-
-        .project .time,
-        .project .comments,
-        .project .project-progress {
-            color: #999;
-            font-size: 0.9em;
-            margin-right: 20px
-        }
-
-        .project .time i,
-        .project .comments i,
-        .project .project-progress i {
-            margin-right: 5px
-        }
-
-        .project .project-progress {
-            width: 200px
-        }
-
-        .project .project-progress .progress {
-            height: 4px
-        }
-
-        .project .card {
-            margin-bottom: 0
-        }
-
-        .progress-bar {
-            width: 50%; 
-            height: 6px;
-        }
-
-        p {
+          .event-list > li > time,
+          .event-list > li > img {
+            width: 190px;
+            height: 120px;
+            padding: 0px;
             margin: 0px;
+          }
+          .event-list > li > .info {
+            position: relative;
+            height: 120px;
+            text-align: left;
+            padding-right: 40px;
+          }	
+          .event-list > li > .info > .title, 
+          .event-list > li > .info > .desc {
+            padding: 0px 10px;
+          }
+          .event-list > li > .info > ul {
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+          }
+          .event-list > li > .social {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            display: block;
+            width: 40px;
+          }
+              .event-list > li > .social > ul {
+                  border-left: 1px solid rgb(230, 230, 230);
+              }
+          .event-list > li > .social > ul > li {			
+            display: block;
+                  padding: 0px;
+          }
+          .event-list > li > .social > ul > li > a {
+            display: block;
+            width: 40px;
+            padding: 10px 0px 9px;
+          }
+        } 
+        .detalles {
+              width: 50%;
         }
-     `}</style>
+        .telefono {
+          width: 33%;
+        }
+        .correo {
+          width: 34%;
+        }
+        .pagar {
+          width: 33%;
+        }
+       `}</style>
         </>
       ))}
     </div>

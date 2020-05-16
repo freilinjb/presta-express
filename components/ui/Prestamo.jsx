@@ -33,10 +33,10 @@ const Prestamo = ({prestamo}) => {
       if(prestamo.detallesCuotas[i].estado === 'pendiente') {
         fecha.proximoPago = prestamo.detallesCuotas[i].fecha;
 
-        const f = fecha.proximoPago.split('-');
-        fecha.dia = f[0];
+        const f = fecha.proximoPago.split('/');
+        fecha.anio = f[0];
         fecha.mes = f[1];
-        fecha.anio = f[2];
+        fecha.dia = f[2];
 
         console.log(fecha);
         
@@ -63,16 +63,16 @@ const Prestamo = ({prestamo}) => {
         {/* <!-- Project--> */}
         <li>
             <time datetime={fecha.proximoPago}>
-              <span className="day">{fecha.dia}</span>
+              <span className="day">{fecha.mes}</span>
 							<span className="month">{meses[Number(fecha.mes)]}</span>
 							<span className="year">{fecha.anio}</span>
 						</time>
-            <img alt="My 24th Birthday!" src="https://farm5.staticflickr.com/4150/5045502202_1d867c8a41_q.jpg" />
+            {/* <img alt="My 24th Birthday!" src="https://farm5.staticflickr.com/4150/5045502202_1d867c8a41_q.jpg" /> */}
 						<div className="info">
 							<h2 className="title">{prestamo.cliente.nombre + ' ' + prestamo.cliente.apellido}</h2>
               <p className="desc">Cuotas: {estadoCuotas.pendiente} / {estadoCuotas.pagados}</p>
 							<ul className="detalles">
-								<li><a href="#website"><span className="fa fa-globe"></span> Pagar</a></li>
+								<li><a href="#website"><span className="fa fa-globe"></span> Cobrar</a></li>
 								<li><span className="fa fa-money"></span> {setMoneda(prestamo.monto)}</li>
 							</ul>
 						</div>
@@ -84,23 +84,6 @@ const Prestamo = ({prestamo}) => {
                 </ul>
 						</div>
 					</li>
-          <style>{`
-              .detalles {
-                width: 50%;
-              }
-
-              .telefono {
-                width: 33%;
-              }
-
-              .correo {
-                width: 34%;
-              }
-
-              .pagar {
-                width: 33%;
-              }
-            `}</style>
         </>
      );
 }
