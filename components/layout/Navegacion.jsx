@@ -49,7 +49,15 @@ const Navegacion = (props) => {
                                     </div>
                             </li>
                             </Link>
-                            
+                            <Link href="/Pagos">
+                            <li className="nav-item">
+                                
+                                    <div className={`nav-link ${router.pathname == '/Pagos' ? 'active' : ''}`}>
+                                        <i className="far fa-money-bill-alt"></i>
+                                        Pagos
+                                    </div>
+                            </li>
+                            </Link>
                             <li className="nav-item ">
                                 <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i className="fab fa-fw fa-wpforms"></i>Forms</a>
                                 <div id="submenu-4" className="collapse submenu" >
