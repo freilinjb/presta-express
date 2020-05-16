@@ -11,9 +11,10 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { es } from "date-fns/locale";
 
 import usePrestamos from '../hooks/usePrestamo';
+import useCalculadora from '../hooks/useCalculadora';
 
 const Prestamos = () => {
-    const { joinsCollectionsHandler } = usePrestamos();
+    const { setMoneda } = useCalculadora();
   const [cargando, setCargando] = useState(false);
   const [busqueda, setBusqueda] = useState("");
 
@@ -46,7 +47,6 @@ const Prestamos = () => {
         console.log(error);
       } finally {
         setCargando(false); 
-        joinsCollectionsHandler();       
       }
     }
   }, [usuario, busqueda]);
@@ -72,7 +72,7 @@ const Prestamos = () => {
       <div className="section-block">
         <div className="row justify-content-between">
           <div className="col-4">
-            <h3 className="section-title">Lista de Clientes</h3>
+            <h3 className="section-title">Lista de Prestamos</h3>
           </div>
           <div className="col-3">
             <div
@@ -112,11 +112,13 @@ const Prestamos = () => {
                   </div>
                   <div className="text">
                     <h3 className="h4">{prestamo.cliente.nombre +' '+prestamo.cliente.apellido}</h3>
-                    <small>Lorem Ipsum Dolor</small>
+                    <p>Prestado: {setMoneda(prestamo.monto)}</p>
+                    <p>Periodo de pagos: {prestamo.periodoPagos}</p>
+                    <p>Tasa de Interes: {prestamo.tasaInteres}%</p>
                   </div>
                 </div>
                 <div className="project-date">
-                  <span className="hidden-sm-down">Today at 4:24 AM</span>
+      <span className="hidden-sm-down">Proximo pago: {prestamo.detallesCuotas[0].fecha}</span>
                 </div>
               </div>
               <div className="right-col col-lg-6 d-flex align-items-center">
@@ -139,6 +141,7 @@ const Prestamos = () => {
                       aria-valuemax="100"
                       className="progress-bar float-right"
                     ></div>
+                    <div className="">{prestamo.estado}</div>
                   </div>
                 </div>
               </div>
@@ -209,6 +212,10 @@ const Prestamos = () => {
         .progress-bar {
             width: 50%; 
             height: 6px;
+        }
+
+        p {
+            margin: 0px;
         }
      `}</style>
         </>
