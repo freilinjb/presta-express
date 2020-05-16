@@ -87,6 +87,7 @@ const Prestamo = () => {
             
             //Inicio
         } catch (error) {
+            console.log(error);
             
         }
         return Router.push("/");

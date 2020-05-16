@@ -6,6 +6,7 @@ import { FirebaseContext } from "../firebase";
 import Navegacion from "../components/layout/Navegacion";
 import ClienteMiniaturaDetalle from "../components/ui/ClienteMiniaturaDetalle";
 import Spinner from "../components/ui/Spinner";
+import Prestamo from '../components/ui/Prestamo';
 
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { es } from "date-fns/locale";
@@ -63,7 +64,7 @@ const Prestamos = () => {
     // console.log(prestamos);
   }
 
-  console.log(prestamos);
+  // console.log(prestamos);
 
   const Componente = cargando ? (
     <Spinner />
@@ -98,57 +99,10 @@ const Prestamos = () => {
       </div>
       {prestamos.map((prestamo) => (
         <>
+        
           {/* <!-- Project--> */}
-          <div key={prestamo.id} className="project">
-            <div className="row bg-white has-shadow">
-              <div className="left-col col-lg-6 d-flex align-items-center justify-content-between">
-                <div className="project-title d-flex align-items-center">
-                  <div className="image has-shadow">
-                    <img
-                      src="https://bootdey.com/img/Content/avatar/avatar8.png"
-                      alt="..."
-                      className="img-fluid"
-                    />
-                  </div>
-                  <div className="text">
-                    <h3 className="h4">{prestamo.cliente.nombre +' '+prestamo.cliente.apellido}</h3>
-                    <p>Prestado: {setMoneda(prestamo.monto)}</p>
-                    <p>Periodo de pagos: {prestamo.periodoPagos}</p>
-                    <p>Tasa de Interes: {prestamo.tasaInteres}%</p>
-                  </div>
-                </div>
-                <div className="project-date">
-      <span className="hidden-sm-down">Proximo pago: {prestamo.detallesCuotas[0].fecha}</span>
-                </div>
-              </div>
-              <div className="right-col col-lg-6 d-flex align-items-center">
-                <div className="time">
-                  <i className="fa fa-clock-o"></i>
-                  {formatDistanceToNow(new Date(prestamo.creado), {
-                    locale: es,
-                  })}
-                </div>
-                <div className="comments">
-                  <i className="fa fa-comment-o"></i>
-                  {prestamo.cuotas}
-                </div>
-                <div className="project-progress">
-                  <div className="progress">
-                    <div
-                      role="progressbar"
-                      aria-valuenow="25"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                      className="progress-bar float-right"
-                    ></div>
-                    <div className="">{prestamo.estado}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            <Prestamo key={prestamo.id} prestamo={prestamo}/>
           {/* <!-- Project--> */}
-          {/* <ClienteMiniaturaDetalle key={cliente.id} cliente={cliente} /> */}
 
           <style>{`
         .project .row {
