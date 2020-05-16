@@ -1,9 +1,11 @@
 import React from 'react';
 import Footer from './Footer';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 import BreadCrumbs from './BreadCrumbs';
 
 const Navegacion = (props) => {
+    const router = useRouter();
     return ( 
         <>
                     {/* <!-- left sidebar --> */}
@@ -20,64 +22,34 @@ const Navegacion = (props) => {
                             <li className="nav-divider">
                                 Menu
                             </li>
+                            <Link href="/"> 
                             <li className="nav-item ">
-                                <a className="nav-link active" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i className="fa fa-fw fa-user-circle"></i>Dashboard <span className="badge badge-success">6</span></a>
-                                <div id="submenu-1" className="collapse submenu" >
-                                    <ul className="nav flex-column">
-                                       
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="../dashboard-finance.html">Finance</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="../dashboard-sales.html">Sales</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-1" aria-controls="submenu-1-1">Infulencer</a>
-                                            <div id="submenu-1-1" className="collapse submenu" >
-                                                <ul className="nav flex-column">
-                                                    <li className="nav-item">
-                                                        <a className="nav-link" href="../dashboard-influencer.html">Influencer</a>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <a className="nav-link" href="../influencer-finder.html">Influencer Finder</a>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <a className="nav-link" href="../influencer-profile.html">Influencer Profile</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <a className={`nav-link ${router.pathname == '/' ? 'active' : ''}`}>
+                                    <i className="fa fa-fw fa-user-circle"></i>
+                                    Dashboard 
+                                </a>
                             </li>
+                            </Link>
                             <Link href="/Clientes"> 
                             <li className="nav-item">
                                 
-                                    <div className="nav-link">
+                                    <div className={`nav-link ${router.pathname == '/Clientes' ? 'active' : ''}`}>
                                         <i className="fas fa-user"></i>
                                         Clientes
                                     </div>
                             </li>
                             </Link>
+
+                            <Link href="/Prestamos"> 
                             <li className="nav-item">
-                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i className="far fa-money-bill-alt"></i>Prestamos</a>
-                                <div id="submenu-3" className="collapse submenu" >
-                                    <ul className="nav flex-column">
-                                    <li className="nav-item">
-                                            <Link href="/Prestamo"><a className="nav-link">Cobrar</a></Link>
-                                        </li>
-                                        <li className="nav-item">
-                                            <Link href="/add/Prestamo"><a className="nav-link">Realizar</a></Link>
-                                        </li>
-                                        <li className="nav-item">
-                                            <Link href="/add/Prestamo"><a className="nav-link">Solicitud</a></Link>
-                                        </li>
-                                        <li className="nav-item">
-                                            <Link href="/Sectores"><a className="nav-link">Sector</a></Link>
-                                        </li>
-                                    </ul>
-                                </div>
+                                
+                                    <div className={`nav-link ${router.pathname == '/Prestamos' ? 'active' : ''}`}>
+                                        <i className="far fa-money-bill-alt"></i>
+                                        Prestamos
+                                    </div>
                             </li>
+                            </Link>
+                            
                             <li className="nav-item ">
                                 <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i className="fab fa-fw fa-wpforms"></i>Forms</a>
                                 <div id="submenu-4" className="collapse submenu" >
