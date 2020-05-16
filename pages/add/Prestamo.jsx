@@ -68,7 +68,9 @@ const Prestamo = () => {
             estado: 'activo',
             creado: Date.now(),
             cliente:{
-                id:idcliente
+                id:idcliente,
+                nombre:(clientes.filter(doc => doc.id === idcliente))[0].nombre,
+                apellido: (clientes.filter(doc => doc.id === idcliente))[0].apellido
             },
             creador: {
             id: usuario.uid,

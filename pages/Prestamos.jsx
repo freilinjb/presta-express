@@ -10,11 +10,10 @@ import Spinner from "../components/ui/Spinner";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { es } from "date-fns/locale";
 
-import usePrestamo from '../hooks/usePrestamo';
+import usePrestamos from '../hooks/usePrestamo';
 
 const Prestamos = () => {
-    const { ctl, ptm } = usePrestamo();
-
+    const { joinsCollectionsHandler } = usePrestamos();
   const [cargando, setCargando] = useState(false);
   const [busqueda, setBusqueda] = useState("");
 
@@ -46,10 +45,8 @@ const Prestamos = () => {
       } catch (error) {
         console.log(error);
       } finally {
-        setCargando(false);
-        console.log(ptm);
-        console.log(ctl);
-        
+        setCargando(false); 
+        joinsCollectionsHandler();       
       }
     }
   }, [usuario, busqueda]);
@@ -114,7 +111,7 @@ const Prestamos = () => {
                     />
                   </div>
                   <div className="text">
-                    <h3 className="h4">Project Title</h3>
+                    <h3 className="h4">{prestamo.cliente.nombre +' '+prestamo.cliente.apellido}</h3>
                     <small>Lorem Ipsum Dolor</small>
                   </div>
                 </div>

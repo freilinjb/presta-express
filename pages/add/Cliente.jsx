@@ -23,7 +23,7 @@ const STATE_INICIAL = {
     sexo:'',
     cedula:'',
     correo:'',
-    telefonos:'',
+    telefono:'',
     sector:'',
     direccion:'',
     observacion:''
