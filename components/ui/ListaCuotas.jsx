@@ -1,6 +1,7 @@
 import React from "react";
 import useCalculadora from "../../hooks/useCalculadora";
 import swal from 'sweetalert';
+import Checkbox from '../../components/ui/Checkbox';
 
 const ListaCuotas = ({ prestamo }) => {
   const { setMoneda } = useCalculadora();
@@ -25,6 +26,11 @@ const ListaCuotas = ({ prestamo }) => {
     });
   };
 
+  const onCheckboxClicked=(idx, isChecked)=>{
+    console.log(`I'm checkbox number ${idx} and i'm checked? --> ${isChecked}`);
+    //Aquí puedes guardar estados si es necesario
+  }
+
   return (
     <>
       <div className="card">
@@ -47,7 +53,9 @@ const ListaCuotas = ({ prestamo }) => {
               <tbody>
                 {prestamo.detallesCuotas.map((cuotas) => (
                   <tr>
-                    <td>{cuotas.cuota}</td>
+                    {/* <td>{cuotas.cuota}</td> */}
+                    {/* <td> <div className="center"><input type="checkbox"  name="pago" id={cuotas.cuota}/></div> </td> */}
+                    <td> <div className="center"><Checkbox initialState={false} id={cuotas.cuota} onChange={onCheckboxClicked}/></div> </td>
                     <td>{setMoneda(cuotas.interes)}</td>
                     <td>{setMoneda(cuotas.abonoCapital)}</td>
                     <td>{setMoneda(cuotas.valorCuota)}</td>
@@ -71,6 +79,13 @@ const ListaCuotas = ({ prestamo }) => {
           </div>
         </div>
       </div>
+      <style>{`
+      .center {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        `}</style>
     </>
   );
 };
