@@ -35,6 +35,7 @@ const Prestamos = () => {
       //Esta funcion te da acceso a todos los datos
       //y snapshot realiza operaciones con ellos
       try {
+        setCargando(true);
         const obtenerPrestamos = async () => {
           await firebase.db
             .collection("Prestamos")

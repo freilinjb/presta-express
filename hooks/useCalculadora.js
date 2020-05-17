@@ -38,11 +38,11 @@
   }
 
   function setFecha(dia, periodo) {
-    var fecha = new Date();
+    let fecha = new Date();
 
     switch (periodo) {
       case "diario":
-        fecha.setDate(fecha.getDay() + dia);
+        fecha.setDate((fecha.getDay() + dia));
         break;
 
       case "semanal":
@@ -80,7 +80,7 @@
     // }
 
     //Formatear la fecha
-    fecha = formatearFecha(fecha,'ymd');
+    fecha = formatearFecha(fecha,'dmy');
 
     return fecha;
   }

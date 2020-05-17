@@ -8,7 +8,7 @@ import Error404 from '../../components/layout/Error404';
 import Navegacion from '../../components/layout/Navegacion';
 import Spinner from '../../components/ui/Spinner';
 import PerfilCliente from '../../components/ui/PerfilCliente';
-import EditarCliente from '../../components/ui/EditarCliente';
+import ListaPrestamos from '../../components/ui/ListaPrestamos';
 
 
 
@@ -111,13 +111,16 @@ const Prestamo = () => {
                 <Navegacion>
                     {Object.keys(cliente).length === 0 && !error ? <Spinner className='spinner'/> : (
                     <>
-                        <div className="row justify-content-center">
-                            <PerfilCliente cliente={cliente}/>
-                            <EditarCliente cliente={cliente} id={id}/>
-                        </div>
+                            
+                            <div className="row justify-content-center">
+                                <PerfilCliente cliente={cliente}/>
+                                <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+                                    <ListaPrestamos key={id}/>
+                                </div>
+                            </div>
+
                     </>
                     )}
-
             </Navegacion>
         </Layout>
      );

@@ -22,10 +22,11 @@ const Prestamo = () => {
     const { calcular, formatearFecha } = useCalculadora();
     const {clientes} = useCliente("creado");
     const [calculado, setCalculado] = useState(false);
+    const [cargando, setCargando] = useState(false);
     const [tablaAmortizada, setTablaAmortizada] = useState([]);
 
     let fecha = new Date();
-    fecha = formatearFecha(fecha,'ymd');
+    fecha = formatearFecha(fecha,'dmy');
     console.log(fecha);
 
     const STATE_INICIAL = {
@@ -78,9 +79,12 @@ const Prestamo = () => {
         
         try {
             //Insertar en la BD
+
+            setCargando(true);
             await firebase.db.collection("Prestamos").add(prestamo);
             
             alert.success('Se ha guardo correctamente');
+            setCargando(false);
             
             //Inicio
         } catch (error) {
@@ -212,7 +216,7 @@ const Prestamo = () => {
                                                         className="btn btn-primary btn-lg btn-block" 
                                                         disabled={firebase.cargando}
                                                         type="submit">
-                                                            {firebase.cargando ? 
+                                                            {cargando ? 
                                                             (<>
                                                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                                                     Enviando datos
