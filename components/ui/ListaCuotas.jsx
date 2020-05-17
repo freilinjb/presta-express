@@ -1,9 +1,30 @@
 import React from "react";
-import useCalculadora from '../../hooks/useCalculadora';
+import useCalculadora from "../../hooks/useCalculadora";
+import swal from 'sweetalert';
 
-const ListaCuotas = ({prestamo}) => {
+const ListaCuotas = ({ prestamo }) => {
   const { setMoneda } = useCalculadora();
   
+  const onClicConfirmar = () => {
+
+    swal({
+      title: "Cobro de Cuota!!",
+      text: "El monto a cobrar es ",
+      icon: "info",
+      buttons: true,
+      dangerMode: false,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("Datos guardado con exito!!", {
+          icon: "success",
+        });
+      } else {
+        // swal("Your imaginary file is safe!");
+      }
+    });
+  };
+
   return (
     <>
       <div className="card">
@@ -24,22 +45,27 @@ const ListaCuotas = ({prestamo}) => {
                 </tr>
               </thead>
               <tbody>
-                  {prestamo.detallesCuotas.map(cuotas=> (
-                    <tr>
-                      <td>{cuotas.cuota}</td>
-                      <td>{setMoneda(cuotas.interes)}</td>
-                      <td>{setMoneda(cuotas.abonoCapital)}</td>
-                      <td>{setMoneda(cuotas.valorCuota)}</td>
-                      <td>{setMoneda(cuotas.saldoCapital)}</td>
-                      <td>{cuotas.fecha}</td>
-                      <td>{cuotas.estado}</td>
-                      <td>
-                        <div className="btn-group ml-auto">
-                          <button className="btn btn-sm btn-outline-light">Cobrar</button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
+                {prestamo.detallesCuotas.map((cuotas) => (
+                  <tr>
+                    <td>{cuotas.cuota}</td>
+                    <td>{setMoneda(cuotas.interes)}</td>
+                    <td>{setMoneda(cuotas.abonoCapital)}</td>
+                    <td>{setMoneda(cuotas.valorCuota)}</td>
+                    <td>{setMoneda(cuotas.saldoCapital)}</td>
+                    <td>{cuotas.fecha}</td>
+                    <td>{cuotas.estado}</td>
+                    <td>
+                      <div className="btn-group ml-auto">
+                        <button
+                          className="btn btn-sm btn-outline-light"
+                          onClick={onClicConfirmar}
+                        >
+                          Cobrar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

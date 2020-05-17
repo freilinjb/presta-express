@@ -9,6 +9,7 @@ import Navegacion from '../../components/layout/Navegacion';
 import Spinner from '../../components/ui/Spinner';
 import PerfilCliente from '../../components/ui/PerfilCliente';
 import ListaCuotas from '../../components/ui/ListaCuotas';
+import ModalCobro from '../../components/ui/ModalCobro';
 
 
 
@@ -84,6 +85,7 @@ const Prestamo = () => {
                                 <PerfilCliente cliente={cliente}/>
                                 <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
                                     <ListaCuotas key={id} prestamo={prestamo}/>
+                                    <ModalCobro/>
                                 </div>
                             </div>
                     </>
