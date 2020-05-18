@@ -1,16 +1,28 @@
-import React from 'react';
+import React from "react";
 
-const ResemenPrestamoPerfil = ({detalles}) => {
-    console.log('desdes perfil usuaril','=>', detalles);
-    console.log(detalles);
-    
-    return (
-        <>
-        {detalles && (<h1>{detalles.pendiente} / {detalles.pagados}</h1>)}
-        
-        {/* <h3>Fecha de Culminacion: {prestamo.detallesCuotas[prestamo.detallesCuotas.length-1].fecha}</h3> */}
-        </>
-     );
-}
+const ResemenPrestamoPerfil = ({ detallesCuotas }) => {
+  console.log("desdes perfil usuaril", "=>", detalles);
+  console.log(detalles);
+
+  return (
+    <>
+      <div className="row">
+        <div className="col-4">
+          <h4> Valor de la cuota: $2,800.30</h4>
+          <p>Suspendisse potenti. Done csit amet rutrum.</p>
+        </div>
+
+        <div className="col-4">
+          <h4> Today's Earning: $2,800.30</h4>
+          <p>Suspendisse potenti. Done csit amet rutrum.</p>
+        </div>
+        <div className="col-4">
+          <h4> Today's Earning: $2,800.30</h4>
+          <p>Suspendisse potenti. Done csit amet rutrum.</p>
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default ResemenPrestamoPerfil;
