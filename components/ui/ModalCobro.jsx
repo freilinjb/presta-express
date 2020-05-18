@@ -225,7 +225,7 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
                 <button type="submit" className="btn btn-primary">
                 {firebase.cargando ? 
                   (<>
-                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                           Cargando...
                   </>
                   )

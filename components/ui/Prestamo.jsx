@@ -73,7 +73,7 @@ const Prestamo = ({prestamo}) => {
 							<h2 className="title">{prestamo.cliente.nombre + ' ' + prestamo.cliente.apellido}</h2>
               <p className="desc">Cuotas: {estadoCuotas.pendiente} / {estadoCuotas.pagados}</p>
               <p className="desc">Desembolsado hace: {formatDistanceToNow(new Date(prestamo.creado),{locale: es,})}</p>
-							<ul className="detalles">
+							<ul className="detalles btn btn-sm btn-outline-light">
 								<li>
                   <Link href="/prestamo/[id]" as={`/prestamo/${prestamo.id}`}>
                     <a><span className="fas fa-hand-holding-usd"></span> Cobrar</a>
