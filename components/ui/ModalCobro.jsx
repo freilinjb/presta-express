@@ -16,7 +16,7 @@ const ModalCobro = () => {
       <div
         className="modal fade"
         id="exampleModal"
-        tabindex="-1"
+        tabIndex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -53,7 +53,7 @@ const ModalCobro = () => {
                 <div className="form-group">
                   <label htmlFor="formaDePago">Forma de pago</label>
                   <select
-                    class="form-control"
+                    className="form-control"
                     name="formaDePago"
                     id="formaDePago"
                   >

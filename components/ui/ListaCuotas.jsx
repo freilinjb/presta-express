@@ -1,13 +1,21 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import useCalculadora from "../../hooks/useCalculadora";
 import swal from 'sweetalert';
 import Checkbox from '../../components/ui/Checkbox';
+import useCuotas from '../../hooks/useCuotas';
 
 const ListaCuotas = ({ prestamo }) => {
   const { setMoneda } = useCalculadora();
+  const {setCultasSeleccionadas, setValorCuotas } = useCuotas();
   const [cuotasSeleccionadas, setCuotasSeleccionadas] = useState([]);
+  const seleccion = [{
+    cuota:0,
+    estado: false
+  }];
 
-  
+  // useEffect(() => {
+  //   setValorCuotas(prestamo.detallesCuotas[0].valorCuota);
+  // });  
   const onClicConfirmar = () => {
 
     swal({
@@ -29,13 +37,29 @@ const ListaCuotas = ({ prestamo }) => {
   };
 
   const onCheckboxClicked=(idx, isChecked)=>{
-      setCuotasSeleccionadas([
-        ...cuotasSeleccionadas,{
-          cuota: idx,
-          check: isChecked
-        }
-      ]);
-      console.log(cuotasSeleccionadas);
+    let existe = false;
+    for(const i in seleccion) {
+      if(seleccion[i].cuota === idx) {
+        existe = true;
+        seleccion[i].estado = isChecked;
+      }
+    }
+
+    if(!existe) {
+      seleccion.push({cuota: idx, estado: isChecked});
+    }
+
+    console.log(seleccion);
+    
+    
+
+    // setCuotasSeleccionadas([
+    //     ...cuotasSeleccionadas,{
+    //       cuota: idx,
+    //       check: isChecked
+    //     }
+    //   ]);
+      // console.log(cuotasSeleccionadas);
       
     console.log(`I'm checkbox number ${idx} and i'm checked? --> ${isChecked}`);
     //Aquí puedes guardar estados si es necesario
