@@ -6,8 +6,7 @@ import useCuotas from '../../hooks/useCuotas';
 
 const ListaCuotas = ({ prestamo }) => {
   const { setMoneda } = useCalculadora();
-  const {setCultasSeleccionadas, setValorCuotas } = useCuotas();
-  const [cuotasSeleccionadas, setCuotasSeleccionadas] = useState([]);
+  
   const seleccion = [{
     cuota:0,
     estado: false
@@ -50,16 +49,6 @@ const ListaCuotas = ({ prestamo }) => {
     }
 
     console.log(seleccion);
-    
-    
-
-    // setCuotasSeleccionadas([
-    //     ...cuotasSeleccionadas,{
-    //       cuota: idx,
-    //       check: isChecked
-    //     }
-    //   ]);
-      // console.log(cuotasSeleccionadas);
       
     console.log(`I'm checkbox number ${idx} and i'm checked? --> ${isChecked}`);
     //Aquí puedes guardar estados si es necesario

@@ -8,7 +8,7 @@ const Checkbox = ({initialState,id,onChange}) => {
         onChange(id, checked);
     }
 
-    return ( <input type="checkbox" onClick={e => onClick(e.target.checked)} id={id} checked={checked}/> );
+    return ( <input type="checkbox" onClick={e => onClick(e.target.checked)} id={id} defaultChecked={initialState} checked={checked}/> );
 }
  
 export default Checkbox;
