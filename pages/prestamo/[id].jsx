@@ -121,7 +121,7 @@ const Prestamo = () => {
           }
         }
         setCuotas(cuotasPagar);
-        
+
   }
 
   return (
@@ -197,7 +197,7 @@ const Prestamo = () => {
                     `}</style>
               </div>
             </div>
-            <ModalCobro cuotas={cuotas} prestamo={prestamo}/>
+            <ModalCobro cuotas={cuotas} prestamo={prestamo} id={id}/>
           </>
         )}
       </Navegacion>

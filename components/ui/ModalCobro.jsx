@@ -1,18 +1,21 @@
-import React from "react";
+import React,{useContext} from "react";
+import {useAlert} from 'react-alert';
 
 //Validaciones
 import useValidacion from '../../hooks/useValidacion';
 import validarCrearCliente from '../../validacion/validarCrearPagoCuota';
 
 import useCalculadora from '../../hooks/useCalculadora';
-
+import { FirebaseContext } from '../../firebase';
 const STATE_INICIAL = {
   formaPago:'',
   observacion:''
 }
 
-const ModalCobro = ({ cuotas, prestamo }) => {
+const ModalCobro = ({ cuotas, prestamo, id }) => {
+  const alert = useAlert();
   const {setMoneda} = useCalculadora();
+  const { firebase, usuario } = useContext(FirebaseContext);
 
     //FUNCIONES PARA EL REGISTRO DEL PAGO
     const {
@@ -39,11 +42,12 @@ const ModalCobro = ({ cuotas, prestamo }) => {
     try {
         //Crear el objeto de nuevo producto
 
-        const pago = {
+        const pagos = {
             tipo:'completa',
             formaPago,
             observacion,
-            cuotas:cuotasPagar,
+            monto: (cuotas.length * prestamo.detallesCuotas[prestamo.detallesCuotas.length - 1].valorCuota),
+            cuotas,
             creado: Date.now(),
             pertenece:{
                 cliente:{
@@ -60,6 +64,21 @@ const ModalCobro = ({ cuotas, prestamo }) => {
                 nombre: usuario.displayName
             }
         }
+        firebase.db.collection("Cobros").add(pagos);
+
+        for(const i in prestamo.detallesCuotas) {
+          for(const j in cuotas) {
+            if(prestamo.detallesCuotas[i].cuota == cuotas[j]){
+              prestamo.detallesCuotas[i].estado  = 'pago'
+              console.log('encontrado');
+              
+            }
+          }
+        }
+
+        firebase.db.collection("Prestamos").doc(id).set(prestamo).then(function() {
+          console.log('Acualizado correctamente');
+        });
 
       //   firebase.db.collection("Prestamos").doc(id).update({
       //     detallesCuotas: {estado: "pago"}
@@ -68,9 +87,9 @@ const ModalCobro = ({ cuotas, prestamo }) => {
 
         //Insertar en la BD
         firebase.cargando = true;
-        console.log(pago);
+        console.log(prestamo);
 
-        firebase.db.collection("Cuotas").add(cliente);
+        // firebase.db.collection("Cuotas").add(cliente);
 
         alert.success('Se ha guardo correctamente');
         
