@@ -1,4 +1,5 @@
-import React,{useContext} from "react";
+import React,{useContext, useState} from "react";
+import Router from 'next/router';
 import {useAlert} from 'react-alert';
 
 //Validaciones
@@ -17,6 +18,8 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
   const {setMoneda} = useCalculadora();
   const { firebase, usuario } = useContext(FirebaseContext);
 
+  const [enviando, setEnviando] = useState(false);
+
     //FUNCIONES PARA EL REGISTRO DEL PAGO
     const {
       valores,
@@ -32,7 +35,7 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
 
 
   async function registrarPago() {
-
+        setEnviando(true);
         if (!usuario) {
             console.log('no esta loqueado');
             firebase.cargando = false;
@@ -102,7 +105,8 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
         firebase.cargando = false;
         document.getElementById("cerrar").click();
         console.log('cuotas: ','=>',cuotas);
-
+        Router.push('/Prestamos');
+        setEnviando(false);
     }
     //Despues de registrar un Producto redireccionar al
     // return router.push("/");
@@ -219,7 +223,19 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
                   Cancelar
                 </button>
                 <button type="submit" className="btn btn-primary">
-                  Cobrar
+                {firebase.cargando ? 
+                  (<>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                          Cargando...
+                  </>
+                  )
+                  :
+                  (
+                      <>
+                      Registrar Mi Cuenta
+                      </>
+                  )
+                }
                 </button>
               </form>
             </div>

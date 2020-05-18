@@ -76,7 +76,7 @@ const Prestamo = ({prestamo}) => {
 							<ul className="detalles">
 								<li>
                   <Link href="/prestamo/[id]" as={`/prestamo/${prestamo.id}`}>
-                    <a><span className="fa fa-globe"></span> Cobrar</a>
+                    <a><span className="fas fa-hand-holding-usd"></span> Cobrar</a>
                     </Link>
                 </li>
 								<li><span className="fa fa-money"></span> {setMoneda(prestamo.monto)}</li>
