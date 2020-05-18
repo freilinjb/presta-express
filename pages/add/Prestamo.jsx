@@ -4,6 +4,7 @@ import Layout from '../../components/layout/Layout';
 import Navegacion from '../../components/layout/Navegacion';
 import useCliente from '../../hooks/useCliente';
 import useCalculadora from '../../hooks/useCalculadora';
+import useMensajesAlertas from '../../hooks/useMensajesAlertas';
 import { FirebaseContext } from "../../firebase";
 import { useAlert } from 'react-alert';
 
@@ -13,11 +14,12 @@ import Amortizacion from '../../components/ui/Amortizacion';
 //Validaciones
 import useValidacion from '../../hooks/useValidacion';
 import validarIniciarPrestamo from '../../validacion/validarIniciarPrestamo';
+import useMensajesAlertas from '../../hooks/useMensajesAlertas';
 
 const Prestamo = () => {
     //Muestra alerta
     const alert = useAlert();
-
+    const { Toast } = useMensajesAlertas();
     const { usuario, firebase } = useContext(FirebaseContext);
     const { calcular, formatearFecha } = useCalculadora();
     const {clientes} = useCliente("creado");
@@ -82,13 +84,20 @@ const Prestamo = () => {
 
             setCargando(true);
             await firebase.db.collection("Prestamos").add(prestamo);
-            
-            alert.success('Se ha guardo correctamente');
+            Toast.fire({
+                icon: 'success',
+                title: 'Se ha guardado correctamente!!'
+              });
+            // alert.success('Se ha guardo correctamente');
             setCargando(false);
             
             //Inicio
         } catch (error) {
             console.log(error);
+            Toast.fire({
+                icon: 'error',
+                title: 'Ha ocurrido un error!!'
+              });
             
         }
         return Router.push("/");

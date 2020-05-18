@@ -7,10 +7,11 @@ import { FirebaseContext } from '../../firebase';
 import useValidacion from '../../hooks/useValidacion';
 import validarIniciarSector from '../../validacion/validarIniciarSector';
 import { useAlert } from "react-alert";
+import useMensajesAlertas from '../../hooks/useMensajesAlertas';
 
 
 const InputModal = () => {
-
+    const { Toast } = useMensajesAlertas();
     const STATE_INICIAL = {
         nombre:'',
         descripcion:''
@@ -64,7 +65,10 @@ const InputModal = () => {
             firebase.cargando = true;
 
             firebase.db.collection("Sectores").add(sector);
-            alert.error('Ah ocurrido un error');
+            Toast.fire({
+                icon: 'success',
+                title: 'Se ha guardado correctamente!!'
+              });
 
             nombre = '';
             descripcion = '';
@@ -74,6 +78,10 @@ const InputModal = () => {
 
         } catch (error) {
             console.log(error);
+            Toast.fire({
+                icon: 'error',
+                title: 'Ha ocurrido un error!!'
+              });
         } finally {
             firebase.cargando = false;
         }
