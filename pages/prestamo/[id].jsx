@@ -16,12 +16,15 @@ const Prestamo = () => {
   const [cliente, setCliente] = useState({});
   const [error, setError] = useState(false);
   const [cargando, setCargando] = useState(false);
-  const [prueba, setPrueba] = useState([{
-      cuota: 0,
-      estado: false
-  }]);
+  const [cuentaSeleccionada, setCuentaSeleccionada] = useState(0);
 
-  const resumen = {};
+  const { setMoneda } = useCalculadora();
+
+  const seleccion = [{
+    cuota:0,
+    estado: false
+  }];
+
   //Routing para obtener el id actual del producto
   const router = useRouter();
   const [consultarDB, setConsultarDB] = useState(true);
@@ -46,6 +49,8 @@ const Prestamo = () => {
           const prestamo = await prestamoQuery.get();
           if (prestamo.exists) {
             setPrestamo(prestamo.data());
+            console.log(prestamo.data());
+            
 
             //Es para evitar que se cicle el useEffect y con la condicion principal
             //y quitando el producto para evitar posibles errores
@@ -79,11 +84,6 @@ const Prestamo = () => {
     //Si algo cambia en producto se actualiza: es por haVotado
   }, [id]);
 
-  const { setMoneda } = useCalculadora();
-  const seleccion = [{
-    cuota:0,
-    estado: false
-  }];
 
   const onClicConfirmar = () => {
 
@@ -120,6 +120,16 @@ const Prestamo = () => {
     console.log(seleccion);
   }
 
+  const calcular=()=> {
+    let c = 0;
+    for(const i in seleccion) {
+        if(seleccion[i].cuota > 0 && seleccion[i].estado) {
+            c++;
+        }
+    }
+    setCuentaSeleccionada(c);
+  }
+
   return (
     <Layout>
       {/* {error ? <Error404/> : ( */}
@@ -132,7 +142,7 @@ const Prestamo = () => {
               <PerfilCliente cliente={cliente} />
               <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
                 <div className="card">
-                  <h5 className="card-header">Top Selling Products</h5>
+                  <h5 className="card-header">Lista de Cuotas</h5>
                   <div className="card-body p-0">
                     <div className="table-responsive">
                       <table className="table table-hover">
@@ -193,7 +203,96 @@ const Prestamo = () => {
                     align-items: center;
                     }
                     `}</style>
-                <ModalCobro seleccion={seleccion}/>
+                    <button
+                    type="button"
+                    className="btn btn-primary"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                    data-whatever="@mdo"
+                    onClick={calcular}
+                >
+                    Open modal for @mdo
+                </button>
+
+                <div
+                    className="modal fade"
+                    id="exampleModal"
+                    tabIndex="-1"
+                    role="dialog"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                >
+                    <div className="card">
+                    <div className="card-body">
+                        <div className="d-inline-block">
+                <h5 className="text-muted">Cuota: ${prestamo.detallesCuotas[prestamo.detallesCuotas.length-1].valorCuota}</h5>
+                        <p className="text-muted">Cantidad de Cuotas seleccionadas: {cuentaSeleccionada}</p>
+                        <h2 className="mb-0">Monto a recibir:  {setMoneda(cuentaSeleccionada * prestamo.detallesCuotas[prestamo.detallesCuotas.length-1].valorCuota)}</h2>
+                        </div>
+                        <div className="float-right icon-circle-medium  icon-box-lg  bg-brand-light mt-1">
+                        <i className="fa fa-money-bill-alt fa-fw fa-sm text-brand"></i>
+                        </div>
+                    </div>
+                    </div>
+                    <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">
+                            Forma de pago
+                        </h5>
+                        <button
+                            type="button"
+                            className="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div className="modal-body">
+                        <form
+                        >
+                            <div className="form-group">
+                            <label htmlFor="formaDePago">Forma de pago</label>
+                            <select
+                                className="form-control"
+                                name="formaDePago"
+                                id="formaDePago"
+                            >
+                                <option>Efectivo</option>
+                                <option>Efectivo</option>
+                                <option>Transferencia Electronica</option>
+                                <option>Tarjeta de servicio</option>
+                                <option>Compensación</option>
+                                <option></option>
+                            </select>
+                            </div>
+                            <div className="form-group">
+                            <label htmlFor="descripcion" className="col-form-label">
+                                Observacion
+                            </label>
+                            <textarea
+                                className="form-control"
+                                id="descripcion"
+                            ></textarea>
+                            </div>
+                        </form>
+                        </div>
+                        <div className="modal-footer">
+                        <button
+                            type="button"
+                            className="btn btn-secondary"
+                            data-dismiss="modal"
+                        >
+                            Cancelar
+                        </button>
+                        <button type="submit" className="btn btn-primary">
+                            Cobrar
+                        </button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
               </div>
             </div>
           </>
