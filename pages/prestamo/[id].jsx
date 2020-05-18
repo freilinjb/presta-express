@@ -134,7 +134,7 @@ const Prestamo = () => {
           <>
             <ModalCobro cuotas={cuotas} prestamo={prestamo} id={id}/>
             <div className="row justify-content-center">
-              <PerfilCliente cliente={cliente} />
+              <PerfilCliente cliente={cliente} detallesCuotas={prestamo.detallesCuotas}/>
               <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
                 <div className="card">
                   <h5 className="card-header">Lista de Cuotas</h5>
