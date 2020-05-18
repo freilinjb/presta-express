@@ -52,7 +52,7 @@ const Prestamo = ({prestamo}) => {
             estadoCuotas.pendiente++;
         } else if(prestamo.detallesCuotas[i].estado === 'atrasados') {
             estadoCuotas.atrasados++;
-        } else  if(prestamo.detallesCuotas[i].estado === 'pagados') {
+        } else  if(prestamo.detallesCuotas[i].estado === 'pago') {
             estadoCuotas.pagados++;
         }
         // console.log(prestamo.detallesCuotas[i]);
