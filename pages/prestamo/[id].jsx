@@ -11,7 +11,17 @@ import ModalCobro from "../../components/ui/ModalCobro";
 import useCalculadora from "../../hooks/useCalculadora";
 import Checkbox from '../../components/ui/Checkbox';
 
+//Validaciones
+import useValidacion from '../../hooks/useValidacion';
+import validarCrearCliente from '../../validacion/validarCrearCliente';
+
+const STATE_INICIAL = {
+    formaPago:'',
+    observacion:''
+}
+
 const Prestamo = () => {
+    
   const [prestamo, setPrestamo] = useState({});
   const [cliente, setCliente] = useState({});
   const [error, setError] = useState(false);
@@ -24,6 +34,8 @@ const Prestamo = () => {
     cuota:0,
     estado: false
   }];
+  
+  const cuotasPagar = [];
 
   //Routing para obtener el id actual del producto
   const router = useRouter();
@@ -125,9 +137,75 @@ const Prestamo = () => {
     for(const i in seleccion) {
         if(seleccion[i].cuota > 0 && seleccion[i].estado) {
             c++;
+            cuotasPagar.push(seleccion[i].cuota);
         }
     }
     setCuentaSeleccionada(c);
+  }
+
+  //FUNCIONES PARA EL REGISTRO DEL PAGO 
+  const {
+    valores,
+    errores,
+    handleSubmit,
+    handleChange,
+    handleBlur,
+  } = useValidacion(STATE_INICIAL, validarCrearCliente, registrarPago);
+
+  const { formaPago, observacion } = valores;
+
+  async function registrarPago() {
+    //Inicia la carga
+        //Si el usuario no esta autenticado llevat al login
+        if (!usuario) {
+            console.log('no esta loqueado');
+            return router.push("/SignIn");
+            firebase.cargando = false;
+        }
+
+    try {
+        //Crear el objeto de nuevo producto
+
+        const pago = {
+            tipo:'completa',
+            formaPago,
+            observacion,
+            cuotas:cuotasPagar,
+            creado: Date.now(),
+            pertenece:{
+                cliente:{
+                    id: prestamo.cliente.id,
+                    nombre: prestamo.cliente.nombre,
+                    apellido: prestamo.cliente.apellido
+                },
+                prestamo: {
+                    id: prestamo.id
+                }
+            },
+            creador: {
+                id: usuario.uid,
+                nombre: usuario.displayName
+            }
+        }
+    
+        //Insertar en la BD
+        firebase.cargando = true;
+
+        firebase.db.collection("Cuotas").add(cliente);
+        // console.log(cliente);
+        alert.success('Se ha guardo correctamente');
+        // console.log(usuario);
+    } catch (error) {
+        console.log(error);
+        alert.error('Ha ocurrido un error');
+
+    } finally {
+        firebase.cargando = false;
+        document.getElementById("cerrar").click();
+
+    }
+    //Despues de registrar un Producto redireccionar al
+    return router.push("/");
   }
 
   return (
@@ -253,27 +331,32 @@ const Prestamo = () => {
                         <form
                         >
                             <div className="form-group">
-                            <label htmlFor="formaDePago">Forma de pago</label>
+                            <label htmlFor="formaPago">Forma de pago</label>
                             <select
                                 className="form-control"
-                                name="formaDePago"
-                                id="formaDePago"
+                                name="formaPago"
+                                id="formaPago"
+                                value={formaPago}
+                                onChange={handleChange}
                             >
-                                <option>Efectivo</option>
-                                <option>Efectivo</option>
-                                <option>Transferencia Electronica</option>
-                                <option>Tarjeta de servicio</option>
-                                <option>Compensación</option>
-                                <option></option>
+                                <option value="">--Seleccione una opcion--</option>
+                                <option value="efectivo">Efectivo</option>
+                                <option value="transferencia electronica">Transferencia Electronica</option>
+                                <option value="tarjeta de servicio">Tarjeta de servicio</option>
+                                <option value="compensación">Compensación</option>
+                                <option value=""></option>
                             </select>
                             </div>
                             <div className="form-group">
-                            <label htmlFor="descripcion" className="col-form-label">
+                            <label htmlFor="observacion" className="col-form-label">
                                 Observacion
                             </label>
                             <textarea
                                 className="form-control"
-                                id="descripcion"
+                                id="observacion"
+                                name="observacion" 
+                                value={observacion} 
+                                onchange={handleChange}
                             ></textarea>
                             </div>
                         </form>
@@ -283,6 +366,7 @@ const Prestamo = () => {
                             type="button"
                             className="btn btn-secondary"
                             data-dismiss="modal"
+                            id="cerrar"
                         >
                             Cancelar
                         </button>
