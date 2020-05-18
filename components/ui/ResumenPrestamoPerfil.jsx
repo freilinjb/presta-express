@@ -1,16 +1,15 @@
 import React,{useState} from "react";
 import useCalculadora from "../../hooks/useCalculadora";
 
-const ResemenPrestamoPerfil = ({ detallesCuotas, monto }) => {
+const ResemenPrestamoPerfil = ({ prestamo, monto }) => {
     const { setMoneda } = useCalculadora();
     const [togalPagado, setTotalPagado] = useState(0);    
     const [capitalPagado,setCapitalPagado] = useState(0);    
     const [capitalPendiente, setCapitalPendiente] = useState(0);    
     const [interes, setInteres] = useState(0);    
 
-    console.log("desdes perfil usuaril", "=>", detallesCuotas);
+    console.log("desdes perfil usuaril", "=>", prestamo);
 
-    for(const i )
   return (
     <>
       <div className="row">

@@ -1,7 +1,16 @@
-import React from "react";
-import ResemenPrestamoPerfil from '../../components/ui/ResumenPrestamoPerfil';
+import React,{useState} from "react";
+import ResemenPrestamoPerfil from './ResumenPrestamoPerfil';
+import useCalculadora from '../../hooks/useCalculadora';
 
-const RerfilCliente = ({cliente}) => {
+const PerfilClientePrestamo = ({cliente, prestamo}) => {
+  const { setMoneda } = useCalculadora();
+
+  const [togalPagado, setTotalPagado] = useState(0);    
+  const [capitalPagado,setCapitalPagado] = useState(0);    
+  const [capitalPendiente, setCapitalPendiente] = useState(0);    
+  const [interes, setInteres] = useState(0);    
+
+  console.log("desdes perfil usuaril", "=>", prestamo);
 
   return (
     <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
@@ -45,6 +54,7 @@ const RerfilCliente = ({cliente}) => {
           </div>
         </div>
         <div className="card-body border-top">
+          {prestamo && <ResemenPrestamoPerfil prestamo={prestamo}/>}
           
           <h3 className="font-16">Rating</h3>
           <h1 className="">0</h1>
@@ -66,4 +76,4 @@ const RerfilCliente = ({cliente}) => {
   );
 };
 
-export default RerfilCliente;
+export default PerfilClientePrestamo;

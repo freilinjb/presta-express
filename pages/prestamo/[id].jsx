@@ -7,7 +7,7 @@ import { FirebaseContext } from "../../firebase";
 import Layout from "../../components/layout/Layout";
 import Navegacion from "../../components/layout/Navegacion";
 import Spinner from "../../components/ui/Spinner";
-import PerfilCliente from "../../components/ui/PerfilCliente";
+import PerfilClientePrestamo from "../../components/ui/PerfilClientePrestamo";
 import ModalCobro from "../../components/ui/ModalCobro";
 import useCalculadora from "../../hooks/useCalculadora";
 import Checkbox from '../../components/ui/Checkbox';
@@ -134,7 +134,7 @@ const Prestamo = () => {
           <>
             <ModalCobro cuotas={cuotas} prestamo={prestamo} id={id}/>
             <div className="row justify-content-center">
-              <PerfilCliente cliente={cliente} detallesCuotas={prestamo.detallesCuotas}/>
+              <PerfilClientePrestamo cliente={cliente} prestamo={prestamo}/>
               <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
                 <div className="card">
                   <h5 className="card-header">Lista de Cuotas</h5>
