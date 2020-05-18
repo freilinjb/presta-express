@@ -3,8 +3,7 @@ import {useRouter} from 'next/router';
 import Layout from '../../components/layout/Layout';
 import Navegacion from '../../components/layout/Navegacion';
 import FileUploader from 'react-firebase-file-uploader';
-import {useAlert} from 'react-alert';
-
+import useMensajesAlertas from '../../hooks/useMensajesAlertas';
 
 import { FirebaseContext } from '../../firebase';
 
@@ -29,10 +28,11 @@ const STATE_INICIAL = {
     observacion:''
 }
 
+
 const Cliente = () => {
 
     const {sectores} = useSector("creado");
-    const alert = useAlert();
+    const { Toast } = useMensajesAlertas();
 
       //state de las imagenes
     const [nombreimagen, guardarNombre] = useState("");
@@ -99,11 +99,18 @@ const Cliente = () => {
 
             firebase.db.collection("Clientes").add(cliente);
             // console.log(cliente);
-            alert.success('Se ha guardo correctamente');
+            // alert.success('Se ha guardo correctamente');
+            Toast.fire({
+                icon: 'success',
+                title: 'Se ha guardado correctamente!!'
+              });
             // console.log(usuario);
         } catch (error) {
             console.log(error);
-            alert.error('Ha ocurrido un error');
+            Toast.fire({
+                icon: 'error',
+                title: 'Ha ocurrido un error!!'
+              });
 
         } finally {
             firebase.cargando = false;
