@@ -22,19 +22,16 @@ const Header = (props) => {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
-                    <li className={`nav-item active ${router.pathname == '/' ? 'active' : ''}`}>
+                    <li className={`nav-item ${router.pathname == '/' ? 'active' : ''}`}>
                         <Link href="/">
                             <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
                         </Link>
                     </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Link</a>
-                    </li>
                     <li className={`nav-item dropdown  ${router.pathname == '/add/Prestamo' ? 'active' : ''}`}>
-                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a className="nav-link dropdown-toggle" href="#" id="registrar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Registrar
                         </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div className="dropdown-menu" aria-labelledby="registrar">
                         <Link href="/add/Cliente">
                             <a className={`dropdown-item ${router.pathname == '/add/Cliente' ? 'active' : ''}`}>Cliente</a>
                         </Link>
