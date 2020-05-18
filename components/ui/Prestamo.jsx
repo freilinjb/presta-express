@@ -71,7 +71,7 @@ const Prestamo = ({prestamo}) => {
             {/* <img alt="My 24th Birthday!" src="https://farm5.staticflickr.com/4150/5045502202_1d867c8a41_q.jpg" /> */}
 						<div className="info">
 							<h2 className="title">{prestamo.cliente.nombre + ' ' + prestamo.cliente.apellido}</h2>
-              <p className="desc">Cuotas: {estadoCuotas.pendiente} / {estadoCuotas.pagados}</p>
+              <p className="desc">Cuotas: {prestamo.detallesCuotas.length} / {estadoCuotas.pagados}</p>
               <p className="desc">Desembolsado hace: {formatDistanceToNow(new Date(prestamo.creado),{locale: es,})}</p>
 							<ul className="detalles btn btn-sm btn-outline-light">
 								<li>
