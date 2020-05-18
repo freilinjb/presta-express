@@ -1,20 +1,21 @@
 import React,{useContext, useState} from "react";
 import Router from 'next/router';
-import {useAlert} from 'react-alert';
 
 //Validaciones
 import useValidacion from '../../hooks/useValidacion';
 import validarCrearCliente from '../../validacion/validarCrearPagoCuota';
 
 import useCalculadora from '../../hooks/useCalculadora';
+import useMensajesAlertas from '../../hooks/useMensajesAlertas';
 import { FirebaseContext } from '../../firebase';
+
 const STATE_INICIAL = {
   formaPago:'',
   observacion:''
 }
 
 const ModalCobro = ({ cuotas, prestamo, id }) => {
-  const alert = useAlert();
+  const { Toast } = useMensajesAlertas();
   const {setMoneda} = useCalculadora();
   const { firebase, usuario } = useContext(FirebaseContext);
 
@@ -91,24 +92,22 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
         firebase.db.collection("Prestamos").doc(id).set(prestamo).then(function() {
           console.log('Acualizado correctamente');
         });
-
-      //   firebase.db.collection("Prestamos").doc(id).update({
-      //     detallesCuotas: {estado: "pago"}
-      // }).where("detalles");
-      // alert.success('Se ha guardo correctamente');
-
         //Insertar en la BD
         firebase.cargando = true;
         console.log(prestamo);
 
-        // firebase.db.collection("Cuotas").add(cliente);
-
-        alert.success('Se ha guardo correctamente');
+        Toast.fire({
+          icon: 'success',
+          title: 'Pago realizado correctamente!!'
+        });
         
         // console.log(usuario);
     } catch (error) {
         console.log(error);
-        alert.error('Ha ocurrido un error');
+        Toast.fire({
+          icon: 'error',
+          title: 'Se ha producido un error!!'
+        });
 
     } finally {
         firebase.cargando = false;
@@ -117,9 +116,6 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
         Router.push('/Prestamos');
         setEnviando(false);
     }
-    //Despues de registrar un Producto redireccionar al
-    // return router.push("/");
-
   }
   return (
     <>
