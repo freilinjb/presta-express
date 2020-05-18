@@ -21,6 +21,7 @@ const Prestamo = () => {
   const [error, setError] = useState(false);
   const [cargando, setCargando] = useState(false);
   const [cuotas, setCuotas] = useState([]);
+  const [pago, setPago] = useState(false);
   const { setMoneda } = useCalculadora();
 
   let resultados = [];
@@ -121,7 +122,6 @@ const Prestamo = () => {
           }
         }
         setCuotas(cuotasPagar);
-
   }
 
   return (
@@ -154,15 +154,13 @@ const Prestamo = () => {
                         </thead>
                         <tbody>
                           {prestamo.detallesCuotas.map((cuotas) => (
-                            <tr>
+                            <>
+                            <tr className={cuotas.estado === 'pago' ? "alert alert-success" : null}>
                               <td>
                                 {" "}
                                 <div className="center">
-                                  <Checkbox
-                                    initialState={false}
-                                    id={cuotas.cuota}
-                                    onChange={onCheckboxClicked}
-                                  />
+                                {cuotas.estado === 'pago' ? (null) : (<Checkbox initialState={false} id={cuotas.cuota} onChange={onCheckboxClicked}/>)}
+                                  
                                 </div>{" "}
                               </td>
                               <td>{setMoneda(cuotas.interes)}</td>
@@ -176,12 +174,14 @@ const Prestamo = () => {
                                   <button
                                     className="btn btn-sm btn-outline-light"
                                     onClick={onClicConfirmar}
+                                    disabled={cuotas.estado === 'pago' ? true : false}
                                   >
                                     Cobrar
                                   </button>
                                 </div>
                               </td>
                             </tr>
+                            </>
                           ))}
                         </tbody>
                       </table>

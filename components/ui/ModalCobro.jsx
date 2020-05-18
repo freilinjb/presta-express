@@ -117,7 +117,7 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
         data-target="#modalPago"
         data-whatever="@mdo"
       >
-        Open modal for @mdo
+        Realizar pagos
       </button>
 
       <div
