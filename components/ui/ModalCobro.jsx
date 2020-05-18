@@ -68,17 +68,26 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
             }
         }
         firebase.db.collection("Cobros").add(pagos);
-
+        let cantidadPagadas = 0;
         for(const i in prestamo.detallesCuotas) {
           for(const j in cuotas) {
-            if(prestamo.detallesCuotas[i].cuota == cuotas[j]){
-              prestamo.detallesCuotas[i].estado  = 'pago'
-              console.log('encontrado');
-              
+            if(prestamo.detallesCuotas[i].cuota === cuotas[j]){
+              prestamo.detallesCuotas[i].estado  = 'pago'              
             }
           }
         }
 
+        for(const i in prestamo.detallesCuotas) {
+          if(prestamo.detallesCuotas[i].estado === 'pago')
+            cantidadPagadas++;
+        }
+
+        if(prestamo.detallesCuotas.length === cantidadPagadas) {
+          prestamo.estado = "finalizado";
+        }
+
+        console.log('cantidad pagada: ', cantidadPagadas, ' prestamo: pago:', prestamo.detallesCuotas.length);
+        
         firebase.db.collection("Prestamos").doc(id).set(prestamo).then(function() {
           console.log('Acualizado correctamente');
         });
