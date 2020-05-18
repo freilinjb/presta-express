@@ -1,13 +1,101 @@
 import React from "react";
 
-const ModalCobro = () => {
+//Validaciones
+import useValidacion from '../../hooks/useValidacion';
+import validarCrearCliente from '../../validacion/validarCrearPagoCuota';
+
+import useCalculadora from '../../hooks/useCalculadora';
+
+const STATE_INICIAL = {
+  formaPago:'',
+  observacion:''
+}
+
+const ModalCobro = ({ cuotas, prestamo }) => {
+  const {setMoneda} = useCalculadora();
+
+    //FUNCIONES PARA EL REGISTRO DEL PAGO
+    const {
+      valores,
+      errores,
+      handleSubmit,
+      handleChange,
+      handleBlur,
+    } = useValidacion(STATE_INICIAL, validarCrearCliente, registrarPago);
+  
+    const { formaPago, observacion } = valores;
+
+  console.log("desde el modal:", "=>", cuotas);
+
+
+  async function registrarPago() {
+
+        if (!usuario) {
+            console.log('no esta loqueado');
+            firebase.cargando = false;
+            return router.push("/SignIn");
+        }
+        console.log(prestamo);
+    try {
+        //Crear el objeto de nuevo producto
+
+        const pago = {
+            tipo:'completa',
+            formaPago,
+            observacion,
+            cuotas:cuotasPagar,
+            creado: Date.now(),
+            pertenece:{
+                cliente:{
+                    id: prestamo.cliente.id,
+                    nombre: prestamo.cliente.nombre,
+                    apellido: prestamo.cliente.apellido
+                },
+                prestamo: {
+                    id: id
+                }
+            },
+            creador: {
+                id: usuario.uid,
+                nombre: usuario.displayName
+            }
+        }
+
+      //   firebase.db.collection("Prestamos").doc(id).update({
+      //     detallesCuotas: {estado: "pago"}
+      // }).where("detalles");
+      // alert.success('Se ha guardo correctamente');
+
+        //Insertar en la BD
+        firebase.cargando = true;
+        console.log(pago);
+
+        firebase.db.collection("Cuotas").add(cliente);
+
+        alert.success('Se ha guardo correctamente');
+        
+        // console.log(usuario);
+    } catch (error) {
+        console.log(error);
+        alert.error('Ha ocurrido un error');
+
+    } finally {
+        firebase.cargando = false;
+        document.getElementById("cerrar").click();
+        console.log('cuotas: ','=>',cuotas);
+
+    }
+    //Despues de registrar un Producto redireccionar al
+    // return router.push("/");
+
+  }
   return (
     <>
       <button
-        type="button"
+        type="submit"
         className="btn btn-primary"
         data-toggle="modal"
-        data-target="#exampleModal"
+        data-target="#modalPago"
         data-whatever="@mdo"
       >
         Open modal for @mdo
@@ -15,18 +103,33 @@ const ModalCobro = () => {
 
       <div
         className="modal fade"
-        id="exampleModal"
+        id="modalPago"
         tabIndex="-1"
         role="dialog"
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="formaPago"
         aria-hidden="true"
       >
         <div className="card">
           <div className="card-body">
             <div className="d-inline-block">
-              <h5 className="text-muted">Cuota: $452</h5>
-              <p className="text-muted">Cantidad de Cuotas seleccionadas: 5</p>
-              <h2 className="mb-0"> $65,544.41</h2>
+              <h5 className="text-muted">
+                Cuota: $
+                {
+                  prestamo.detallesCuotas[prestamo.detallesCuotas.length - 1]
+                    .valorCuota
+                }
+              </h5>
+              <p className="text-muted">
+                Cantidad de Cuotas seleccionadas: {cuotas.length}
+              </p>
+              <h2 className="mb-0">
+                Monto a recibir:{" "}
+                {setMoneda(
+                  cuotas.length *
+                    prestamo.detallesCuotas[prestamo.detallesCuotas.length - 1]
+                      .valorCuota
+                )}
+              </h2>
             </div>
             <div className="float-right icon-circle-medium  icon-box-lg  bg-brand-light mt-1">
               <i className="fa fa-money-bill-alt fa-fw fa-sm text-brand"></i>
@@ -36,7 +139,7 @@ const ModalCobro = () => {
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
+              <h5 className="modal-title" id="formaPago">
                 Forma de pago
               </h5>
               <button
@@ -49,45 +152,59 @@ const ModalCobro = () => {
               </button>
             </div>
             <div className="modal-body">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                  <label htmlFor="formaDePago">Forma de pago</label>
+                  <label htmlFor="formaPago">Forma de pago</label>
                   <select
                     className="form-control"
-                    name="formaDePago"
-                    id="formaDePago"
+                    name="formaPago"
+                    id="formaPago"
+                    value={formaPago}
+                    onChange={handleChange}
                   >
-                    <option>Efectivo</option>
-                    <option>Efectivo</option>
-                    <option>Transferencia Electronica</option>
-                    <option>Tarjeta de servicio</option>
-                    <option>Compensación</option>
-                    <option></option>
+                    <option selected value="">
+                      --Seleccione una opcion--
+                    </option>
+                    <option value="efectivo">Efectivo</option>
+                    <option value="transferencia electronica">
+                      Transferencia Electronica
+                    </option>
+                    <option value="tarjeta de servicio">
+                      Tarjeta de servicio
+                    </option>
+                    <option value="compensación">Compensación</option>
                   </select>
+                  {errores.formaPago && (
+                    <p className="alert alert-danger">{errores.formaPago}</p>
+                  )}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="descripcion" className="col-form-label">
+                  <label htmlFor="observacion" className="col-form-label">
                     Observacion
                   </label>
                   <textarea
                     className="form-control"
-                    id="descripcion"
+                    id="observacion"
+                    name="observacion"
+                    value={observacion}
+                    onChange={handleChange}
+                    defaultValue=""
                   ></textarea>
                 </div>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-dismiss="modal"
+                  id="cerrar"
+                >
+                  Cancelar
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Cobrar
+                </button>
               </form>
             </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Cancelar
-              </button>
-              <button type="button" className="btn btn-primary">
-                Cobrar
-              </button>
-            </div>
+            <div className="modal-footer"></div>
           </div>
         </div>
       </div>
