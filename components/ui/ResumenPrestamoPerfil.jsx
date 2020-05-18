@@ -1,8 +1,7 @@
 import React from "react";
 
 const ResemenPrestamoPerfil = ({ detallesCuotas }) => {
-  console.log("desdes perfil usuaril", "=>", detalles);
-  console.log(detalles);
+  console.log("desdes perfil usuaril", "=>", detallesCuotas);
 
   return (
     <>

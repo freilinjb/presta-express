@@ -1,5 +1,6 @@
 import React,{useContext, useState} from "react";
 import Router from 'next/router';
+import Swal from 'sweetalert2';
 
 //Validaciones
 import useValidacion from '../../hooks/useValidacion';
@@ -96,11 +97,35 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
         firebase.cargando = true;
         console.log(prestamo);
 
-        Toast.fire({
+        // Toast.fire({
+        //   icon: 'success',
+        //   title: 'Pago realizado correctamente!!'
+        // });
+        Swal.fire({
+          title: 'Se ha guardado correctamente',
+          text: "Desa imprimir el bolante de pago!",
           icon: 'success',
-          title: 'Pago realizado correctamente!!'
-        });
-        
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Imprimir',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          if (result.value) {
+            Swal.fire(
+              'Deleted!',
+              'Preciono Imprimir.',
+              'success'
+            )
+          } else {
+
+             Swal.fire(
+              'Deleted!',
+              'Preciono cancelar.',
+              'success'
+            )
+          }
+        })
         // console.log(usuario);
     } catch (error) {
         console.log(error);
@@ -113,7 +138,6 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
         firebase.cargando = false;
         document.getElementById("cerrar").click();
         console.log('cuotas: ','=>',cuotas);
-        Router.push('/Prestamos');
         setEnviando(false);
     }
   }

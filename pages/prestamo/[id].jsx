@@ -129,9 +129,10 @@ const Prestamo = () => {
       {/* {error ? <Error404/> : ( */}
       <Navegacion>
         {Object.keys(cliente).length === 0 && !error ? (
-          <Spinner className="spinner" />
+          <Spinner className="spinner"/>
         ) : (
           <>
+            <ModalCobro cuotas={cuotas} prestamo={prestamo} id={id}/>
             <div className="row justify-content-center">
               <PerfilCliente cliente={cliente} />
               <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
@@ -197,7 +198,6 @@ const Prestamo = () => {
                     `}</style>
               </div>
             </div>
-            <ModalCobro cuotas={cuotas} prestamo={prestamo} id={id}/>
           </>
         )}
       </Navegacion>

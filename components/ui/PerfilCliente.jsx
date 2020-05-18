@@ -1,7 +1,7 @@
 import React from "react";
 import ResemenPrestamoPerfil from '../../components/ui/ResumenPrestamoPerfil';
 
-const RerfilCliente = ({cliente, detalles}) => {
+const RerfilCliente = ({cliente, detallesCuotas}) => {
   return (
     <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
       <div className="card">
@@ -44,7 +44,7 @@ const RerfilCliente = ({cliente, detalles}) => {
           </div>
         </div>
         <div className="card-body border-top">
-          {detalles && <ResemenPrestamoPerfil detalles={detalles}/>}
+          {detallesCuotas && <ResemenPrestamoPerfil detallesCuotas={detallesCuotas}/>}
           
           <h3 className="font-16">Rating</h3>
           <h1 className="">0</h1>
