@@ -19,7 +19,7 @@ import Checkbox from '../../components/ui/Checkbox';
 
 const Prestamo = () => {
   const alert = useAlert();
-  const { setCuotaParcial } = usePagoParcial();
+  const { setCuotaParcial, cuotaParcial } = usePagoParcial();
 
   const [prestamo, setPrestamo] = useState({});
   const [cliente, setCliente] = useState({});
@@ -124,7 +124,7 @@ const Prestamo = () => {
         ) : (
           <>
             <ModalCobro cuotas={cuotas} prestamo={prestamo} id={id}/>
-            <ModalCobroParcial cuotas={cuotas} prestamo={prestamo} id={id}/>
+            <ModalCobroParcial prestamo={prestamo} id={id} cuotaParcial={cuotaParcial}/>
             <div className="row justify-content-center">
               <PerfilClientePrestamo cliente={cliente} prestamo={prestamo}/>
               <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
