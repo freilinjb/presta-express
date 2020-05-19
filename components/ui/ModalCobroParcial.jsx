@@ -12,6 +12,7 @@ import { FirebaseContext } from '../../firebase';
 
 const STATE_INICIAL = {
   formaPago:'',
+  pagoParcial:0,
   observacion:''
 }
 
@@ -31,7 +32,7 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
       handleBlur,
     } = useValidacion(STATE_INICIAL, validarCrearCliente, registrarPago);
   
-    const { formaPago, observacion } = valores;
+    const { formaPago, observacion, pagoParcial } = valores;
 
   console.log("desde el modal:", "=>", cuotas);
 
@@ -143,20 +144,9 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
   }
   return (
     <>
-      <button
-        type="submit"
-        className="btn btn-primary"
-        data-toggle="modal"
-        data-target="#modalPago"
-        data-whatever="@mdo"
-        disabled={cuotas == 0}
-      >
-        Realizar pagos
-      </button>
-
       <div
         className="modal fade"
-        id="modalPago"
+        id="modalPagoParcial"
         tabIndex="-1"
         role="dialog"
         aria-labelledby="formaPago"
@@ -193,7 +183,7 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="formaPago">
-                Forma de pago
+                Pago parcial
               </h5>
               <button
                 type="button"
@@ -232,6 +222,12 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
                   )}
                 </div>
                 <div className="form-group">
+                  
+                  <div className="form-group">
+                    <label htmlFor="pagoParcial">Pago parcial</label>
+                    <input type="number" name="pagoParcial" id="pagoParcial" value={pagoParcial} className="form-control" placeholder="Ingrese el monto"/>
+                  </div>
+
                   <label htmlFor="observacion" className="col-form-label">
                     Observacion
                   </label>

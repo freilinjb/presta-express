@@ -1,5 +1,4 @@
 import React from "react";
-import ResemenPrestamoPerfil from '../../components/ui/ResumenPrestamoPerfil';
 
 const RerfilCliente = ({cliente}) => {
 

@@ -9,6 +9,7 @@ import Navegacion from "../../components/layout/Navegacion";
 import Spinner from "../../components/ui/Spinner";
 import PerfilClientePrestamo from "../../components/ui/PerfilClientePrestamo";
 import ModalCobro from "../../components/ui/ModalCobro";
+import ModalCobroParcial from "../../components/ui/ModalCobroParcial";
 import useCalculadora from "../../hooks/useCalculadora";
 import Checkbox from '../../components/ui/Checkbox';
 
@@ -91,24 +92,8 @@ const Prestamo = () => {
     //Si algo cambia en producto se actualiza: es por haVotado
   }, [id]);
 
-  const onClicConfirmar = () => {
-
-    swal({
-      title: "Cobro de Cuota!!",
-      text: "El monto a cobrar es ",
-      icon: "info",
-      buttons: true,
-      dangerMode: false,
-    })
-    .then((willDelete) => {
-      if (willDelete) {
-        swal("Datos guardado con exito!!", {
-          icon: "success",
-        });
-      } else {
-        // swal("Your imaginary file is safe!");
-      }
-    });
+  const onClickConfirmar = () => {
+    // setCuota()
   };
 
   const onCheckboxClicked=(idx, isChecked)=>{
@@ -133,6 +118,7 @@ const Prestamo = () => {
         ) : (
           <>
             <ModalCobro cuotas={cuotas} prestamo={prestamo} id={id}/>
+            <ModalCobroParcial cuotas={cuotas} prestamo={prestamo} id={id}/>
             <div className="row justify-content-center">
               <PerfilClientePrestamo cliente={cliente} prestamo={prestamo}/>
               <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
@@ -174,8 +160,12 @@ const Prestamo = () => {
                                 <div className="btn-group ml-auto">
                                   <button
                                     className="btn btn-sm btn-outline-light"
-                                    onClick={onClicConfirmar}
+                                    onClick={onClickConfirmar}
                                     disabled={cuotas.estado === 'pago' ? true : false}
+                                    data-toggle="modal"
+                                    data-target="#modalPagoParcial"
+                                    data-whatever="@mdo"
+                                    value={cuotas.cuota}
                                   >
                                     Cobrar
                                   </button>
