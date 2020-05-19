@@ -8,17 +8,19 @@ import validarCrearCliente from '../../validacion/validarCrearPagoCuota';
 
 import useCalculadora from '../../hooks/useCalculadora';
 import useMensajesAlertas from '../../hooks/useMensajesAlertas';
+import usePagoParcial from '../../hooks/usePagoParcial';
 import { FirebaseContext } from '../../firebase';
 
 const STATE_INICIAL = {
   formaPago:'',
-  pagoParcial:0,
+  pago:1,
   observacion:''
 }
 
-const ModalCobro = ({ cuotas, prestamo, id }) => {
+const ModalCobro = ({ prestamo, id }) => {
   const { Toast } = useMensajesAlertas();
   const {setMoneda} = useCalculadora();
+  const { cuotaParcial } = usePagoParcial();
   const { firebase, usuario } = useContext(FirebaseContext);
 
   const [enviando, setEnviando] = useState(false);
@@ -32,9 +34,7 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
       handleBlur,
     } = useValidacion(STATE_INICIAL, validarCrearCliente, registrarPago);
   
-    const { formaPago, observacion, pagoParcial } = valores;
-
-  console.log("desde el modal:", "=>", cuotas);
+    const { formaPago, observacion, pago } = valores;
 
 
   async function registrarPago() {
@@ -49,11 +49,11 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
         //Crear el objeto de nuevo producto
 
         const pagos = {
-            tipo:'completa',
+            tipo:'parcial',
             formaPago,
             observacion,
-            monto: (cuotas.length * prestamo.detallesCuotas[prestamo.detallesCuotas.length - 1].valorCuota),
-            cuotas,
+            monto: pago,
+            cuotas: [cuotaParcial],
             creado: Date.now(),
             pertenece:{
                 cliente:{
@@ -71,25 +71,17 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
             }
         }
         firebase.db.collection("Cobros").add(pagos);
-        let cantidadPagadas = 0;
-        for(const i in prestamo.detallesCuotas) {
-          for(const j in cuotas) {
-            if(prestamo.detallesCuotas[i].cuota === cuotas[j]){
-              prestamo.detallesCuotas[i].estado  = 'pago'              
-            }
-          }
-        }
 
-        for(const i in prestamo.detallesCuotas) {
-          if(prestamo.detallesCuotas[i].estado === 'pago')
-            cantidadPagadas++;
-        }
+        if(cuotaParcial === prestamo) {
+          prestamo.detallesCuotas[cuotaParcial-1].estado = 'pago';
 
-        if(prestamo.detallesCuotas.length === cantidadPagadas) {
-          prestamo.estado = "finalizado";
+        } else {
+          prestamo.detallesCuotas[cuotaParcial-1].estado = 'parcial';
         }
+        prestamo.detallesCuotas[cuotaParcial-1].cuotaParcial -= pago;
+        
 
-        console.log('cantidad pagada: ', cantidadPagadas, ' prestamo: pago:', prestamo.detallesCuotas.length);
+        // console.log('cantidad pagada: ', cantidadPagadas, ' prestamo: pago:', prestamo.detallesCuotas.length);
         
         firebase.db.collection("Prestamos").doc(id).set(prestamo).then(function() {
           console.log('Acualizado correctamente');
@@ -138,7 +130,6 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
     } finally {
         firebase.cargando = false;
         document.getElementById("cerrar").click();
-        console.log('cuotas: ','=>',cuotas);
         setEnviando(false);
     }
   }
@@ -162,16 +153,8 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
                     .valorCuota
                 }
               </h5>
-              <p className="text-muted">
-                Cantidad de Cuotas seleccionadas: {cuotas.length}
-              </p>
               <h2 className="mb-0">
-                Monto a recibir:{" "}
-                {setMoneda(
-                  cuotas.length *
-                    prestamo.detallesCuotas[prestamo.detallesCuotas.length - 1]
-                      .valorCuota
-                )}
+                Monto a recibir: {setMoneda(prestamo.detallesCuotas[0].valorCuota)} - {setMoneda(pago)} = <span className="text-warning ">{setMoneda(prestamo.detallesCuotas[0].valorCuota - pago)}</span>}
               </h2>
             </div>
             <div className="float-right icon-circle-medium  icon-box-lg  bg-brand-light mt-1">
@@ -224,8 +207,17 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
                 <div className="form-group">
                   
                   <div className="form-group">
-                    <label htmlFor="pagoParcial">Pago parcial</label>
-                    <input type="number" name="pagoParcial" id="pagoParcial" value={pagoParcial} className="form-control" placeholder="Ingrese el monto"/>
+                    <label htmlFor="pago">Pago parcial</label>
+                    <input 
+                      type="number"
+                      name="pago" 
+                      id="pago" value={pago}
+                      min={1}
+                      max={prestamo.detallesCuotas[0].valorCuota}
+                      onChange={handleChange} 
+                      className="form-control" 
+                      placeholder="Ingrese el monto"/>
+
                   </div>
 
                   <label htmlFor="observacion" className="col-form-label">

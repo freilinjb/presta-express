@@ -1,9 +1,15 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 const usePagoParcial =()=> {
-    const [cuota, setCuota] = useState();
+    const [cuotaParcial, setCuotaParcial] = useState(0);
+
+    useEffect(() => {
+        console.log(cuotaParcial);
+        
+    },[cuotaParcial]);
     return{
-        setCuota
+        setCuotaParcial,
+        cuotaParcial
     }
 }
 

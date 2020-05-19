@@ -10,12 +10,16 @@ import Spinner from "../../components/ui/Spinner";
 import PerfilClientePrestamo from "../../components/ui/PerfilClientePrestamo";
 import ModalCobro from "../../components/ui/ModalCobro";
 import ModalCobroParcial from "../../components/ui/ModalCobroParcial";
+
 import useCalculadora from "../../hooks/useCalculadora";
+import usePagoParcial from "../../hooks/usePagoParcial";
+
 import Checkbox from '../../components/ui/Checkbox';
 
 
 const Prestamo = () => {
   const alert = useAlert();
+  const { setCuotaParcial } = usePagoParcial();
 
   const [prestamo, setPrestamo] = useState({});
   const [cliente, setCliente] = useState({});
@@ -92,8 +96,10 @@ const Prestamo = () => {
     //Si algo cambia en producto se actualiza: es por haVotado
   }, [id]);
 
-  const onClickConfirmar = () => {
+  const onClickConfirmar = (valor) => {
     // setCuota()
+    // console.log(valor);
+    setCuotaParcial(valor);
   };
 
   const onCheckboxClicked=(idx, isChecked)=>{
@@ -140,32 +146,32 @@ const Prestamo = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {prestamo.detallesCuotas.map((cuotas) => (
+                          {prestamo.detallesCuotas.map((ct) => (
                             <>
-                            <tr className={cuotas.estado === 'pago' ? "alert alert-success" : null}>
+                            <tr className={ct.estado === 'pago' ? "alert alert-success" : null}>
                               <td>
                                 {" "}
                                 <div className="center">
-                                {cuotas.estado === 'pago' ? (null) : (<Checkbox initialState={false} id={cuotas.cuota} onChange={onCheckboxClicked}/>)}
+                                {ct.estado === 'pago' ? (null) : (<Checkbox initialState={false} id={ct.cuota} onChange={onCheckboxClicked}/>)}
                                   
                                 </div>{" "}
                               </td>
-                              <td>{setMoneda(cuotas.interes)}</td>
-                              <td>{setMoneda(cuotas.abonoCapital)}</td>
-                              <td>{setMoneda(cuotas.valorCuota)}</td>
-                              <td>{setMoneda(cuotas.saldoCapital)}</td>
-                              <td>{cuotas.fecha}</td>
-                              <td>{cuotas.estado}</td>
+                              <td>{setMoneda(ct.interes)}</td>
+                              <td>{setMoneda(ct.abonoCapital)}</td>
+                              <td>{setMoneda(ct.valorCuota)}</td>
+                              <td>{setMoneda(ct.saldoCapital)}</td>
+                              <td>{ct.fecha}</td>
+                              <td>{ct.estado}</td>
                               <td>
                                 <div className="btn-group ml-auto">
                                   <button
                                     className="btn btn-sm btn-outline-light"
-                                    onClick={onClickConfirmar}
-                                    disabled={cuotas.estado === 'pago' ? true : false}
+                                    onClick={e => onClickConfirmar(ct.cuota)}
+                                    disabled={ct.estado === 'pago' ? true : false}
                                     data-toggle="modal"
                                     data-target="#modalPagoParcial"
                                     data-whatever="@mdo"
-                                    value={cuotas.cuota}
+                                    disabled={cuotas != 0 || ct.estado === 'pago'}
                                   >
                                     Cobrar
                                   </button>
