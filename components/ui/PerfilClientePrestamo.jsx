@@ -1,13 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import useCalculadora from "../../hooks/useCalculadora";
+import {FirebaseContext} from '../../firebase';
 
 const PerfilClientePrestamo = ({ cliente, prestamo }) => {
+  const {firebase, usuario} = useContext(FirebaseContext);
   const { setMoneda } = useCalculadora();
 
+  const [cuotasPagadas, setCuotasPagadas] = useState(0);
+  const [cuotasPendientes, setCuotasPendientes] = useState(0);
+  const [totalPagado, setTotalPendiente] = useState(0);
+  const [pagosAtrasados, setPagosAtrasados] = useState(0);
   const [togalPagado, setTotalPagado] = useState(0);
   const [capitalPagado, setCapitalPagado] = useState(0);
   const [capitalPendiente, setCapitalPendiente] = useState(0);
   const [interes, setInteres] = useState(0);
+  const [cobros, setCobros] = useState(0);
+
+
+  useEffect(() => {
+    const {uid} = usuario;
+    const obtenerCuotasPagadas =()=> {
+      firebase.db.collection("Cobros").where("creador.id","==",uid).orderBy("creado", 'desc').onSnapshot(manejarSnapshot);
+    }
+  },[]);
+
+  function manejarSnapshot(snapshot) {
+    const cobros = snapshot.docs.map(doc => {
+      //Extrae todo el registro completo
+      return {
+        id: doc.id,
+        ...doc.data()
+      }
+    });
+ 
+    //resultado de la consulta
+    setCobros(cobros);
+  }
+  
 
   console.log("desdes perfil usuaril", "=>", prestamo);
 
