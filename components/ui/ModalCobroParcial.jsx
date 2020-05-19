@@ -13,7 +13,7 @@ import { FirebaseContext } from '../../firebase';
 
 const STATE_INICIAL = {
   formaPago:'',
-  pago:1,
+  pago:1.0,
   observacion:''
 }
 
@@ -47,6 +47,16 @@ const ModalCobro = ({ prestamo, id, cuotaParcial }) => {
             return router.push("/SignIn");
         }
         console.log(prestamo);
+
+        if(pago > prestamo.detallesCuotas[cuotaParcial-1].valorCuota) {
+          Swal.fire(
+            'Error!',
+            'El valor a pagar no puede ser mayor a la cuota.',
+            'error'
+          );
+
+          return;
+        }
     try {
         //Crear el objeto de nuevo producto
 
@@ -74,13 +84,16 @@ const ModalCobro = ({ prestamo, id, cuotaParcial }) => {
         }
         // firebase.db.collection("Cobros").add(pagos);
 
-        if(cuotaParcial === prestamo) {
+        prestamo.detallesCuotas[cuotaParcial-1].valorCuota = (Number(prestamo.detallesCuotas[cuotaParcial-1].valorCuota) - Number(pago)).toFixed(2);
+
+        if(pago == prestamo.detallesCuotas[cuotaParcial-1].valorCuota) {
           prestamo.detallesCuotas[cuotaParcial-1].estado = 'pago';
 
+        } else if (prestamo.detallesCuotas[cuotaParcial-1].valorCuota  < 1) {
+          prestamo.detallesCuotas[cuotaParcial-1].estado = 'pago';
         } else {
           prestamo.detallesCuotas[cuotaParcial-1].estado = 'parcial';
         }
-        prestamo.detallesCuotas[cuotaParcial-1].valorCuota = (Number(prestamo.detallesCuotas[cuotaParcial-1].valorCuota) - Number(pago)).toFixed(2);
         
         console.log('pago:','=>',pago);
         console.log('pagos:','=>',pagos);
@@ -222,6 +235,8 @@ const ModalCobro = ({ prestamo, id, cuotaParcial }) => {
                       name="pago" 
                       id="pago" value={pago}
                       min={1}
+                      step="0.01"
+                      max={cuotaParcial && prestamo.detallesCuotas[cuotaParcial-1].valorCuota}                      
                       maxLength={prestamo.detallesCuotas[0].valorCuota}
                       onChange={handleChange} 
                       className="form-control" 
