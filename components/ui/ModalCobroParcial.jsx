@@ -17,13 +17,14 @@ const STATE_INICIAL = {
   observacion:''
 }
 
-const ModalCobro = ({ prestamo, id, cuotaParcial }) => {
+const ModalCobro = ({ prestamo, id, cuotaParcial, setActualizarCuotas }) => {
   const { Toast } = useMensajesAlertas();
   const {setMoneda} = useCalculadora();
   // const { cuotaParcial } = usePagoParcial();
   const { firebase, usuario } = useContext(FirebaseContext);
 
   const [enviando, setEnviando] = useState(false);
+  const [cargando, setCargando] = useState(false);
 
     //FUNCIONES PARA EL REGISTRO DEL PAGO
     const {
@@ -40,6 +41,7 @@ const ModalCobro = ({ prestamo, id, cuotaParcial }) => {
     
 
   async function registrarPago() {
+
         setEnviando(true);
         if (!usuario) {
             console.log('no esta loqueado');
@@ -146,8 +148,10 @@ const ModalCobro = ({ prestamo, id, cuotaParcial }) => {
 
     } finally {
         firebase.cargando = false;
-        document.getElementById("cerrar").click();
+        document.getElementById("cerrar2").click();
+        // Router.push('/Prestamos');
         setEnviando(false);
+        setActualizarCuotas(true);
     }
   }
   return (
@@ -260,12 +264,12 @@ const ModalCobro = ({ prestamo, id, cuotaParcial }) => {
                   type="button"
                   className="btn btn-secondary"
                   data-dismiss="modal"
-                  id="cerrar"
+                  id="cerrar2"
                 >
                   Cancelar
                 </button>
                 <button type="submit" className="btn btn-primary">
-                {firebase.cargando ? 
+                {enviando ? 
                   (<>
                       <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                           Cargando...

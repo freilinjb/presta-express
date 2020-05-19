@@ -253,7 +253,7 @@ const ModalCobro = ({ cuotas, prestamo, id }) => {
                   Cancelar
                 </button>
                 <button type="submit" className="btn btn-primary">
-                {firebase.cargando ? 
+                {enviando ? 
                   (<>
                       <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                           Cargando...

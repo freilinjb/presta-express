@@ -26,6 +26,10 @@ const Prestamo = () => {
   const [error, setError] = useState(false);
   const [cargando, setCargando] = useState(false);
   const [cuotas, setCuotas] = useState([]);
+  
+  //Cuando se realiza una operacion cambia para actualizar las cuotas
+  const [actualizarCuotas, setActualizarCuotas] = useState(false);
+
   const [pago, setPago] = useState(false);
   const { setMoneda } = useCalculadora();
 
@@ -48,7 +52,7 @@ const Prestamo = () => {
   const { firebase, usuario } = useContext(FirebaseContext);
 
   useEffect(() => {
-    if (id && consultarDB) {
+    if (id && consultarDB || setActualizarCuotas) {
       setCargando(true);
       const obtenerDatos = async () => {
         try {
@@ -92,9 +96,10 @@ const Prestamo = () => {
         }
       };
       obtenerDatos();
+      setActualizarCuotas(false);
     }
     //Si algo cambia en producto se actualiza: es por haVotado
-  }, [id]);
+  }, [id, prestamo]);
 
   const onClickConfirmar = (valor) => {
     // setCuota()
@@ -123,8 +128,8 @@ const Prestamo = () => {
           <Spinner className="spinner"/>
         ) : (
           <>
-            <ModalCobro cuotas={cuotas} prestamo={prestamo} id={id}/>
-            <ModalCobroParcial prestamo={prestamo} id={id} cuotaParcial={cuotaParcial}/>
+            <ModalCobro cuotas={cuotas} prestamo={prestamo} id={id} setActualizarCuotas={setActualizarCuotas}/>
+            <ModalCobroParcial prestamo={prestamo} id={id} cuotaParcial={cuotaParcial} setActualizarCuotas={setActualizarCuotas}/>
             <div className="row justify-content-center">
               <PerfilClientePrestamo cliente={cliente} prestamo={prestamo}/>
               <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
