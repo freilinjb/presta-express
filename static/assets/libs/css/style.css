@@ -3967,15 +3967,6 @@ Pills vertical
 2.11  Listgroup
 -------------------------*/
 
-.list-group-item {
-    position: relative;
-    display: block;
-    padding: 16px 20px;
-    margin-bottom: -1px;
-    border: 1px solid #e6e6f2;
-}
-
-
 /* -----------------------
 2.12  Multiselect
 -------------------------*/

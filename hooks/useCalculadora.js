@@ -6,6 +6,8 @@
       listo: false
     };
 
+  
+
   function formatearFecha(fecha = new Date(), formato = 'dmy') {
      //Formatear la fecha
      let dd = fecha.getDate();
@@ -37,26 +39,34 @@
      return fecha;
   }
 
-  function setFecha(dia, periodo) {
-    let fecha = new Date();
+  function addDay(date, days) {
+    const copy = new Date(Number(date));
+    copy.setDate(date.getDate()+ days);
 
+    return;
+  }
+
+  function setFecha(dia, periodo) {
+    let fecha = new Date('2020-01-04');
+    console.log('dia=>',dia,'periodo=>',periodo);
+    
     switch (periodo) {
       case "diario":
-        fecha.setDate((fecha.getDay() + dia));
+        fecha.setDate((fecha.getDate() + dia+2));
         break;
 
       case "semanal":
-        fecha.setDate(fecha.getDay() + dia * 7);
+        fecha.setDate(fecha.getDate() + (dia * 7));
         break;
 
       case "quincenal":
-        fecha.setDate(fecha.getDay() + 15 * dia);
+        fecha.setDate(fecha.getDate() + (15 * dia));
         break;
       case "mensual":
         fecha.setDate(fecha.getMonth() + dia);
         break;
       case "bimestral":
-        fecha.setDate(fecha.getMonth() + dia * 2);
+        fecha.setDate(fecha.getMonth() + (dia * 2));
         break;
 
       case "trimestral":
