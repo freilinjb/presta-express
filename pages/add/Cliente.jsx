@@ -119,7 +119,7 @@ const Cliente = () => {
         
     
         //Despues de registrar un Producto redireccionar al
-        return router.push("/");
+        return router.push("/Clientes");
       }
     
       const handleUploadStart = () => {

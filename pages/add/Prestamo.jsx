@@ -99,7 +99,7 @@ const Prestamo = () => {
               });
             
         }
-        return Router.push("/");
+        return Router.push("/Prestamos");
     }
 
     const hancleClick =()=> {
