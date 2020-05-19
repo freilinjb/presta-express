@@ -115,7 +115,6 @@ const Prestamo = () => {
             alert.info(tablaAmortizada.msg);
         },1000);
         setCalculado(true);
-        
     }
 
     return ( 
@@ -177,8 +176,8 @@ const Prestamo = () => {
                                                             <label htmlFor="tipoTasa">Tipo de Tasa</label>
                                                             <select className="form-control" name="tipoTasa" id="tipoTasa" value={tipoTasa} onChange={handleChange} required>
                                                                 <option selected value="">--Seleccione--</option>
-                                                                <option selected value="mensual">Mensual</option>
-                                                                <option selected value="anual">Anual</option>
+                                                                <option value="mensual">Mensual</option>
+                                                                <option value="anual">Anual</option>
                                                             </select>
                                                         {errores.tipoTasa && <p className="alert alert-danger">{errores.tipoTasa}</p>}
                                                         </div>
@@ -250,7 +249,7 @@ const Prestamo = () => {
                                     </div>
                                 </div>
                                 <div className="col-md-12 mb-6 col-lg-6 col-xl-6">
-                                    {calculado ? (<Amortizacion tablaAmortizada={tablaAmortizada}/>) : null }
+                                    {calculado ? (<Amortizacion tablaAmortizada={tablaAmortizada} />) : null }
                                 </div>
                             </div>
                         </div>

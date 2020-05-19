@@ -1,9 +1,14 @@
-import React from "react";
+import React,{useState} from "react";
 import useCalculadora from "../../hooks/useCalculadora";
 
 const Amortizacion = ({ tablaAmortizada }) => {
   const { setMoneda,formatearFecha } = useCalculadora();
-  
+  const [interes, setInteres] = useState(0);
+  const [cuota, setCuota] = useState(0);
+
+  // setCuota(tablaAmortizada.cuotas[0].cuota);
+  // setInteres((tablaAmortizada.cuotas[0] *  tablaAmortizada.cuotas.length) - monto);
+
   return (
     <>
       <div id="accordion">
@@ -99,6 +104,10 @@ const Amortizacion = ({ tablaAmortizada }) => {
                 <li className="list-group-item d-flex justify-content-between align-items-center">
                   <strong>Cuotas</strong>
                   <span className="badge badge-secondary badge-pill">{tablaAmortizada.cuotas.length}</span>
+                </li>
+                <li className="list-group-item d-flex justify-content-between align-items-center">
+                  <strong>Interes Generado</strong>
+                  <span className="badge badge-secondary badge-pill">{(parseFloat(tablaAmortizada.cuotas[0]) *  Number(tablaAmortizada.cuotas.length)) - parseFloat(tablaAmortizada.monto)}</span>
                 </li>
                 <li className="list-group-item d-flex justify-content-between align-items-center">
                   <strong>Fecha de inicio</strong>

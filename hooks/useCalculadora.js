@@ -1,5 +1,6 @@
   const useCalculadora =() => {
     let detalleCuotas = {
+      monto: 0,
       cuotaFija: "",
       cuotas: [],
       msg: "",
@@ -164,7 +165,7 @@
     var interes;
     var abono_al_capital;
     var numero;
-
+    detalleCuotas.monto = monto;
     for (let i = 0; i < cuotas; i++) {
       interes = saldo_al_capital * getTasa(tasa, tasa_tipo, periodo);
       abono_al_capital = valor_de_cuota - interes;
