@@ -6,23 +6,47 @@ const PerfilClientePrestamo = ({ cliente, prestamo }) => {
   const {firebase, usuario} = useContext(FirebaseContext);
   const { setMoneda } = useCalculadora();
 
+  const [pagosPendientes, setPagosPendientes] = useState(0);
   const [cuotasPagadas, setCuotasPagadas] = useState(0);
   const [cuotasPendientes, setCuotasPendientes] = useState(0);
-  const [totalPagado, setTotalPendiente] = useState(0);
+  const [totalPagado, setTotalPagado] = useState(0);
   const [pagosAtrasados, setPagosAtrasados] = useState(0);
-  const [togalPagado, setTotalPagado] = useState(0);
   const [capitalPagado, setCapitalPagado] = useState(0);
   const [capitalPendiente, setCapitalPendiente] = useState(0);
   const [interes, setInteres] = useState(0);
   const [cobros, setCobros] = useState(0);
 
+  
 
   useEffect(() => {
     const {uid} = usuario;
     const obtenerCuotasPagadas =()=> {
       firebase.db.collection("Cobros").where("creador.id","==",uid).orderBy("creado", 'desc').onSnapshot(manejarSnapshot);
     }
-  },[]);
+    let cuotasP = 0;
+    let pagoP = 0;
+    let interesP = 0;
+    let capitalP = 0;
+
+    let pendientePn = 0;
+    for(const i in prestamo.detallesCuotas) {
+      if(prestamo.detallesCuotas[i].estado === 'pendiente') {
+        cuotasP++;
+        pagoP = parseFloat(prestamo.detallesCuotas[i].valorCuota);
+        interesP = parseFloat(prestamo.detallesCuotas[i].interes);
+        capitalP = parseFloat(prestamo.detallesCuotas[i].saldoCapital);
+        // setCuotasPendientes(cuotasPendientes + prestamo.detallesCuotas[i].estado)
+      } else if(prestamo.detallesCuotas[i].estado === 'pago') {
+        pendientePn++;
+      }
+    }
+    setCuotasPagadas(pendientePn);
+    ///////////////////
+    setCapitalPendiente(capitalP);
+    setPagosPendientes(pendientePn);
+    setCuotasPendientes(cuotasP);
+    
+  },[prestamo]);
 
   function manejarSnapshot(snapshot) {
     const cobros = snapshot.docs.map(doc => {
@@ -86,36 +110,38 @@ const PerfilClientePrestamo = ({ cliente, prestamo }) => {
             <div className="col-12">
               <p></p>
             </div>
-            <div className="col-4">
-              <h4> Cuotas Pagadas: $2,800.30 | </h4>
-              <p>Suspendisse potenti. Done csit amet rutrum.</p>
+            <div className="col-12 text-center">
+                <h1> [ {prestamo.detallesCuotas.length} / {cuotasPagadas} ] </h1>
             </div>
-
-            <div className="col-4">
-              <h4> Today's Earning: $2,800.30</h4>
-              <p>Suspendisse potenti. Done csit amet rutrum.</p>
+            <div className="col-12">
+              <ul className="list-group">
+              <li className="list-group-item d-flex justify-content-between align-items-center">
+                Monto total pendiente:
+                <span className="badge badge-primary badge-pill">14</span>
+              </li>
+              <li className="list-group-item d-flex justify-content-between align-items-center">
+                Pagos realizados:
+                <span className="badge badge-primary badge-pill">2</span>
+              </li>
+              <li className="list-group-item d-flex justify-content-between align-items-center">
+                Capital pagados:
+                <span className="badge badge-primary badge-pill">1</span>
+              </li>
+              <li className="list-group-item d-flex justify-content-between align-items-center">
+                Capital pagados:
+                <span className="badge badge-primary badge-pill">1</span>
+              </li>
+            </ul>
             </div>
-            <div className="col-4">
-              <h4> Today's Earning: $2,800.30</h4>
-              <p>Suspendisse potenti. Done csit amet rutrum.</p>
-            </div>
-          </div>
-
-          <h3 className="font-16">Rating</h3>
-          <h1 className="">0</h1>
-          <div className="rating-star">
-            <i className="fa fa-fw fa-star"></i>
-            <i className="fa fa-fw fa-star"></i>
-            <i className="fa fa-fw fa-star"></i>
-            <i className="fa fa-fw fa-star"></i>
           </div>
         </div>
         <div className="card-body border-top">
           <h3 className="font-16">Observacion</h3>
           <div>
-            <p>{cliente.observacion}</p>
+            <p>{prestamo.observacion}</p>
           </div>
         </div>
+        <h1 className={`alert text-center text-uppercase ${prestamo.estado == 'finalizado' ? 'alert-primary' : 'alert-success'}`}>{prestamo.estado}</h1>
       </div>
     </div>
   );
