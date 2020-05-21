@@ -72,31 +72,14 @@ const Prestamos = () => {
   ) : (
     <div className="col-lg-12">
       <div className="section-block">
-        <div className="row justify-content-between">
-          <div className="col-4">
-            <h3 className="section-title">Lista de Prestamos</h3>
-          </div>
-          <div className="col-3">
-            {/* <div
-              className="btn-group btn-group-sm"
-              role="group"
-              aria-label="Basic example"
-            >
-              <button type="button" className="btn btn-success">
-                Activos
-              </button>
-              <button type="button" className="btn btn-warning">
-                Atrasados
-              </button>
-              <button type="button" className="btn btn-danger">
-                Cancelados
-              </button>
-              <button type="button" className="btn btn-info">
-                Todos
-              </button>
-            </div> */}
-          </div>
-        </div>
+      <div className="section-block row justify-content-between m-0 p-0 mb-2"><h3 class="section-title col-auto p-0">Lista de Prestamos</h3>
+      <div className="btn-group col-auto col-auto p-0" role="group" aria-label="Basic example">
+        <button type="button" className="btn btn-sm btn-outline-light">Activos</button>
+        <button type="button" className="btn btn-sm btn-outline-light">Finalizados</button>
+        <button type="button" className="btn btn-sm btn-outline-light">Incobrabres</button>
+        <button type="button" className="btn btn-sm btn-outline-primary">Todos</button>
+      </div>
+  </div>
       </div>
       {prestamos.map((prestamo) => (
         <>
@@ -348,7 +331,7 @@ const Prestamos = () => {
               Nuevo Prestamo
             </a>
           </Link>
-          <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 mt-2">
+          <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 mt-2">
             <div className="card">
               <div className="card-body">
                 <form onSubmit={hanbleBuscar}>

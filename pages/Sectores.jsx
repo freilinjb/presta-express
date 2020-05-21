@@ -21,17 +21,6 @@ const Sectores = () => {
       }
       obtenerSectores();
     }
-  
-    // useEffect(() => {
-    //   //Esta funcion te da acceso a todos los datos
-    //   //y snapshot realiza operaciones con ellos
-    //   // console.log(usuario);
-    //   if(usuario){
-    //     console.log(usuario);
-        
-       
-    //   }
-    // },[usuario]);
     
     //se ejecuta cuando el componente esta listo
     function manejarSnapshot(snapshot) {
@@ -48,6 +37,18 @@ const Sectores = () => {
     }
     
     // const {nombre, descripcion, id } = sector;
+    const Componente = (cargando) ? <Spinner/> : 
+  
+    (<div className="col-lg-12">
+      <div className="section-block row justify-content-between m-0 p-0 mb-2"><h3 class="section-title col-auto p-0">Lista de Sectores</h3>
+        <div className="btn-group col-auto col-auto p-0" role="group" aria-label="Basic example">
+          <button type="button" className="btn btn-sm btn-outline-light">Activo</button>
+          <button type="button" className="btn btn-sm btn-outline-light">Inactivos</button>
+          <button type="button" className="btn btn-sm btn-outline-primary">Todos</button>
+        </div>
+      </div>
+    </div>)
+
 
     return (
     <>
