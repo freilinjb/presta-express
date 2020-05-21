@@ -53,7 +53,7 @@ const Navegacion = (props) => {
                             <li className="nav-item">
                                 
                                 <div className={`nav-link ${router.pathname == '/Pagos' ? 'active' : ''}`}>
-                                    <i className="far fa-money-bill-alt"></i>
+                                    <i className="fas fa-hand-holding-usd"></i>
                                     Pagos
                                 </div>
                             </li>

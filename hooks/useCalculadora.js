@@ -8,7 +8,7 @@
     };
 
   
-
+  let fechaInicial;
   function formatearFecha(fecha = new Date(), formato = 'dmy') {
      //Formatear la fecha
      let dd = fecha.getDate();
@@ -25,11 +25,11 @@
          mm=`0${mm}`;
      } 
      if(formato === 'dmy') {
-       fecha = `${dd}/${mm}/${yyyy}`;
+       fecha = `${dd}-${mm}-${yyyy}`;
      } else if (formato === 'ymd'){
-       fecha = `${yyyy}/${mm}/${dd}`;
+       fecha = `${yyyy}-${mm}-${dd}`;
      } else if(formato === 'mdy') {
-       fecha = `${mm}/${dd}/${yyyy}`;
+       fecha = `${mm}-${dd}-${yyyy}`;
      }
      // fecha = `${mm}-${dd}-${yyyy}`;
      // console.log(fecha);
@@ -48,7 +48,8 @@
   }
 
   function setFecha(dia, periodo) {
-    let fecha = new Date('2020-01-04');
+    let fecha = new Date(fechaInicial);
+    
     console.log('dia=>',dia,'periodo=>',periodo);
     
     switch (periodo) {
@@ -212,7 +213,8 @@
     return (sign ? "" : "-") + "$" + num + (cents == "00" ? "" : "." + cents);
   }
 
-  function calcular(monto, cuotas, tasa, periodo, tasa_tipo) {
+  function calcular(monto, cuotas, tasa, periodo, tasa_tipo, fechaI) {
+    fechaInicial = fechaI;
 
     const cuotafija = getValorDeCuotaFija(monto, tasa, cuotas, periodo, tasa_tipo);
     if (!monto) {

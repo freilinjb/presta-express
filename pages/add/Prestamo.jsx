@@ -27,7 +27,7 @@ const Prestamo = () => {
     const [tablaAmortizada, setTablaAmortizada] = useState([]);
 
     let fecha = new Date();
-    fecha = formatearFecha(fecha,'dmy');
+    fecha = formatearFecha(fecha,'ymd');
     console.log(fecha);
 
     const STATE_INICIAL = {
@@ -108,7 +108,7 @@ const Prestamo = () => {
             alert.error('No puede dejar campos vacios');
             return;
         }
-        setTablaAmortizada(calcular(monto, cuotas, tasaInteres, periodoPagos, tipoTasa));
+        setTablaAmortizada(calcular(monto, cuotas, tasaInteres, periodoPagos, tipoTasa, entrega));
         console.log(tablaAmortizada);
         
         setTimeout(() => {
