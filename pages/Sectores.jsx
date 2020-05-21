@@ -10,6 +10,7 @@ const Sectores = () => {
   // const {sectores} = useSector("creado");
 
   const [sectores, setSectores ] = useState([]);
+  const [cargando, setCargando ] = useState(false);
   const {firebase, usuario} = useContext(FirebaseContext);
 
     // const usuario = useAutenticacion();

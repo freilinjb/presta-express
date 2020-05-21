@@ -39,9 +39,11 @@ const PerfilClientePrestamo = ({ cliente, prestamo }) => {
         // setCuotasPendientes(cuotasPendientes + prestamo.detallesCuotas[i].estado)
       } else if(prestamo.detallesCuotas[i].estado === 'pago') {
         pendientePn++;
+        pagoR += parseFloat(prestamo.detallesCuotas[i].valorCuota);
       }
     }
     setCuotasPagadas(pendientePn);
+    setTotalPagado(pagoR);
     ///////////////////
     setCapitalPendiente(capitalP);
     setPagosPendientes(pagoP);
@@ -117,12 +119,13 @@ const PerfilClientePrestamo = ({ cliente, prestamo }) => {
             <div className="col-12">
               <ul className="list-group">
               <li className="list-group-item d-flex justify-content-between align-items-center">
-                Monto total pendiente:
-                <span className="badge badge-primary badge-pill">{pagosPendientes.toFixed(2)}</span>
+              Pagos realizados:
+
+              <span className="badge badge-success badge-pill">{setMoneda(totalPagado.toFixed(2))}</span>
               </li>
               <li className="list-group-item d-flex justify-content-between align-items-center">
-                Pagos realizados:
-                <span className="badge badge-primary badge-pill">2</span>
+                Monto total pendiente:
+                <span className="badge badge-secondary badge-pill">{setMoneda(pagosPendientes.toFixed(2))}</span>
               </li>
               <li className="list-group-item d-flex justify-content-between align-items-center">
                 Capital pagados:
