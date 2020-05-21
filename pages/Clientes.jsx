@@ -66,7 +66,7 @@ const Clientes = () => {
   
   const Componente = (cargando) ? <Spinner/> : 
   
-    (<div className="col-lg-12">
+    (<div className="col-lg-12 p-0">
      <div className="section-block row justify-content-between m-0 p-0 mb-2"><h3 class="section-title col-auto p-0">Lista de Clientes</h3>
       <div className="btn-group col-auto col-auto p-0" role="group" aria-label="Basic example">
         <button type="button" className="btn btn-sm btn-outline-light">Activo</button>
@@ -120,7 +120,7 @@ const Clientes = () => {
                 <Link href="/add/Cliente">            
                     <a className="btn btn-primary shadow float-right col-md-auto offset-md-7">Registrar un Cliente</a>
                 </Link>
-                <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 mt-2">
+                <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 mt-2 p-0">
                     
                     <div className="card">
                         <div className="card-body">

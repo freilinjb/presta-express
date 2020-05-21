@@ -3,13 +3,15 @@ import Link from "next/link";
 import {FirebaseContext} from '../../firebase';
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { es } from "date-fns/locale";
-import {useAlert} from 'react-alert';
 
 import Spinner from '../../components/ui/Spinner';
 
+import useMensajesAlertas from '../../hooks/useMensajesAlertas';
+
 const ClienteMiniaturaDetalle = ({ cliente }) => {
+
+    const { Toast } = useMensajesAlertas();
 	const {firebase, usuario} = useContext(FirebaseContext);
-	const alert = useAlert();
 
 	const [cargando, setCargando] = useState(false);
 
@@ -54,7 +56,10 @@ const ClienteMiniaturaDetalle = ({ cliente }) => {
 				}
 			});
 			if(existe){
-				alert.error('El usuario tiene prestamos activo.\nNo puede ser eliminado hasta cultimar los prestamos activos');
+				Toast.fire({
+					icon: 'warning',
+					title: 'El usuario tiene prestamos activo.\nNo puede ser eliminado hasta cultimar los prestamos activos!!'
+				  });
 			} 
 		})
 		.catch(function(error) {
@@ -64,7 +69,10 @@ const ClienteMiniaturaDetalle = ({ cliente }) => {
 		//Elimina el usuario si no contiene prestamos activos
 		if(!existe) {
 			await firebase.db.collection("Clientes").doc(id).delete();
-			alert.success('Se ha eliminado correctamente');
+			Toast.fire({
+				icon: 'success',
+				title: 'Se ha eliminado correctamente!!'
+			  });
 		}
 
 	} catch (error) {

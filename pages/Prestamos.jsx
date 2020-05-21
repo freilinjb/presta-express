@@ -65,7 +65,29 @@ const Prestamos = () => {
     console.log(prestamos);
   }
 
-  // console.log(prestamos);
+  const handleClickActivo=()=> {
+    const filtros = prestamos.filter(prestamo => {
+      return(
+        (prestamo.estado == 'activo')
+      )
+  });
+  }
+
+  const handleClickInactivo=()=> {
+    const filtros = prestamos.filter(prestamo => {
+      return(
+        (prestamo.estado == 'inactivo')
+      )
+    });
+  }
+
+  const handleClickFinalizados=()=> {
+    const filtro = prestamos.filter(prestamo=> {
+      return(
+        (prestamo.estado == 'finalizado')
+      )
+    })
+  }
 
   const Componente = cargando ? (
     <Spinner />
@@ -74,7 +96,7 @@ const Prestamos = () => {
       <div className="section-block">
       <div className="section-block row justify-content-between m-0 p-0 mb-2"><h3 class="section-title col-auto p-0">Lista de Prestamos</h3>
       <div className="btn-group col-auto col-auto p-0" role="group" aria-label="Basic example">
-        <button type="button" className="btn btn-sm btn-outline-light">Activos</button>
+        <button type="button" className="btn btn-sm btn-outline-light" onClick={handleClickActivo}>Activos</button>
         <button type="button" className="btn btn-sm btn-outline-light">Finalizados</button>
         <button type="button" className="btn btn-sm btn-outline-light">Incobrabres</button>
         <button type="button" className="btn btn-sm btn-outline-primary">Todos</button>

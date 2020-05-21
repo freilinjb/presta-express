@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import swal from 'sweetalert';
-import {useAlert} from 'react-alert';
 
 import { FirebaseContext } from "../../firebase";
 import Layout from "../../components/layout/Layout";
@@ -18,7 +17,6 @@ import Checkbox from '../../components/ui/Checkbox';
 
 
 const Prestamo = () => {
-  const alert = useAlert();
   const { setCuotaParcial, cuotaParcial } = usePagoParcial();
 
   const [prestamo, setPrestamo] = useState({});

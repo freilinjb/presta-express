@@ -5,7 +5,6 @@ import Navegacion from '../../components/layout/Navegacion';
 import useCliente from '../../hooks/useCliente';
 import useCalculadora from '../../hooks/useCalculadora';
 import { FirebaseContext } from "../../firebase";
-import { useAlert } from 'react-alert';
 
 //Componentes
 import Amortizacion from '../../components/ui/Amortizacion';
@@ -17,7 +16,6 @@ import useMensajesAlertas from '../../hooks/useMensajesAlertas';
 
 const Prestamo = () => {
     //Muestra alerta
-    const alert = useAlert();
     const { Toast } = useMensajesAlertas();
     const { usuario, firebase } = useContext(FirebaseContext);
     const { calcular, formatearFecha } = useCalculadora();
@@ -105,14 +103,20 @@ const Prestamo = () => {
     const hancleClick =()=> {
         
         if(monto.trim() === '' || cuotas.trim() === '' || tasaInteres.trim() === '' ||periodoPagos.trim() === '' || tipoTasa.trim() === '') {
-            alert.error('No puede dejar campos vacios');
+            Toast.fire({
+                icon: 'error',
+                title: 'Los campos no pueden estar vacios!!'
+              });
             return;
         }
         setTablaAmortizada(calcular(monto, cuotas, tasaInteres, periodoPagos, tipoTasa, entrega));
         console.log(tablaAmortizada);
         
         setTimeout(() => {
-            alert.info(tablaAmortizada.msg);
+            Toast.fire({
+                icon: 'info',
+                title: `${tablaAmortizada.msg}`
+              });
         },1000);
         setCalculado(true);
     }
