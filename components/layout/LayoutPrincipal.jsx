@@ -1,19 +1,16 @@
 //FRONTAL DE CLIENTE
 import React, { useState, useContext, useEffect } from "react";
 import Link from "next/link";
-import Layout from "../components/layout/Layout";
-import Navegacion from "../components/layout/Navegacion";
-import Spinner from "../components/ui/Spinner";
-import ButtonFloat from "../components/ui/ButtonFloat";
-import Busqueda from "../components/ui/Busqueda";
+import Layout from './Layout'
+import Navegacion from "./Navegacion";
+import Spinner from '../../components/ui/Spinner';
+import ButtonFloat from "../../components/ui/ButtonFloat";
+import Busqueda from "../../components/ui/Busqueda";
 
-const Clientes = (props) => {
-  // const [cargando, setCargando] = useState(false);
-  // const [busqueda, setBusqueda] = useState('');
-  // const { firebase, usuario } = useContext(FirebaseContext);
+const LayoutPrincipal = (props) => {
 
-  const { hanbleBuscar, handleChange, busqueda, nombre }
-
+  const { hanbleBuscar, handleChange, busqueda, nombre, cargando } = props;
+  // const cargando = false;
   // const hanbleBuscar=(e)=> {
   //     e.preventDefault();
 
@@ -26,7 +23,7 @@ const Clientes = (props) => {
 
   return (
     <Layout title="Clientes">
-      {/* {firebase.cargando && (<div className="spinner"><Spinner/></div>)} */}
+      {cargando && (<div className="spinner"><Spinner/></div>)}
 
       <Navegacion titulo={"Lista de Clientes"}>
         <div className="row justify-content-center">
@@ -81,4 +78,4 @@ const Clientes = (props) => {
   );
 };
 
-export default Clientes;
+export default LayoutPrincipal;

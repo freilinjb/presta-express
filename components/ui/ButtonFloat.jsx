@@ -5,11 +5,12 @@ const ButtonFloat = () => {
         <>
 
         <div className="cards">
-        </div>
-
+           <div className="floating-button btn-primary" href="#toast" data-toggle="toast" data-toast-posy="top" data-toast-posx="right" data-toast-inner="You have added a new element" data-toast-delay="5" >+</div>
         <a href="#!">
-        <div className="floating-button btn-primary" href="#toast" data-toggle="toast" data-toast-posy="top" data-toast-posx="right" data-toast-inner="You have added a new element" data-toast-delay="5" >+</div>
+        </a>
+        </div>
         <style>{`
+          
         .floating-button {
           position: fixed;
           z-index: 100;
@@ -73,9 +74,7 @@ const ButtonFloat = () => {
     right: 10px;
     top:90vh;
   }
-}
-`}</style>
-        </a>
+}`}</style>
         </>
      );        
 }
