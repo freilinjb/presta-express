@@ -6,6 +6,8 @@ import { FirebaseContext } from "../firebase";
 import Navegacion from "../components/layout/Navegacion";
 import ClienteMiniaturaDetalle from '../components/ui/ClienteMiniaturaDetalle';
 import Spinner from '../components/ui/Spinner';
+import ButtonFloat from "../components/ui/ButtonFloat";
+
 const Clientes = () => {
 
   const [consultarDB, setConsultarDB] = useState(true);
@@ -67,6 +69,7 @@ const Clientes = () => {
   const Componente = (cargando) ? <Spinner/> : 
   
     (<div className="col-lg-12 p-0">
+      <Link href="/add/Cliente"><a><ButtonFloat/></a></Link>
      <div className="section-block row justify-content-between m-0 p-0 mb-2"><h3 class="section-title col-auto p-0">Lista de Clientes</h3>
       <div className="btn-group col-auto col-auto p-0" role="group" aria-label="Basic example">
         <button type="button" className="btn btn-sm btn-outline-light">Activo</button>

@@ -127,14 +127,6 @@ const PerfilClientePrestamo = ({ cliente, prestamo }) => {
                 Monto total pendiente:
                 <span className="badge badge-secondary badge-pill">{setMoneda(pagosPendientes.toFixed(2))}</span>
               </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-                Capital pagados:
-                <span className="badge badge-primary badge-pill">1</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-                Capital pagados:
-                <span className="badge badge-primary badge-pill">1</span>
-              </li>
             </ul>
             </div>
           </div>
