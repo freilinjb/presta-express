@@ -144,7 +144,7 @@ const Clientes = (props) => {
                     </div>
                     <div className="">
                       {cargando && <Spinner className="spinner"/>}
-                  { props.children } 
+                  { Componente } 
                 </div>
                 </div>
             </div>

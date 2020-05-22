@@ -14,6 +14,15 @@ const Clientes = (props) => {
   const [busqueda, setBusqueda] = useState('');
   const { firebase, usuario } = useContext(FirebaseContext);
 
+  const hanbleBuscar=(e)=> {
+      e.preventDefault();
+
+      console.log('preciono submit');
+  }
+
+  const handleChange=(e)=> {
+      setBusqueda(e.target.value);
+  }
 
   return (
     <Layout title="Clientes">

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 const Busqueda = ({hanbleBuscar,handleChange,busqueda}) => {
   return (
@@ -25,4 +26,12 @@ const Busqueda = ({hanbleBuscar,handleChange,busqueda}) => {
   );
 };
 
+Busqueda.propTypes = {
+    hanbleBuscar: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    busqueda: PropTypes.string.isRequired
+}
+
 export default Busqueda;
+
+
