@@ -343,7 +343,7 @@ const Prestamos = () => {
     }
   };
   return (
-    <Layout>
+    <Layout title="Prestamos">
       {/* {firebase.cargando && (<div className="spinner"><Spinner/></div>)} */}
 
       <Navegacion titulo={"Lista de Clientes"}>

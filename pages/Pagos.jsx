@@ -114,7 +114,7 @@ const Clientes = () => {
     <Layout>
 		{/* {firebase.cargando && (<div className="spinner"><Spinner/></div>)} */}
 
-      <Navegacion titulo={"Lista de Clientes"}>
+      <Navegacion titulo="Lista de Clientes">
       
             <div className="row justify-content-center">
                 <Link href="/add/Cliente">            

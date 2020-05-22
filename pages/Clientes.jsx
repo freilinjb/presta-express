@@ -8,7 +8,7 @@ import ClienteMiniaturaDetalle from '../components/ui/ClienteMiniaturaDetalle';
 import Spinner from '../components/ui/Spinner';
 import ButtonFloat from "../components/ui/ButtonFloat";
 
-const Clientes = () => {
+const Clientes = (props) => {
 
   const [consultarDB, setConsultarDB] = useState(true);
   const [cargando, setCargando] = useState(false);
@@ -70,7 +70,7 @@ const Clientes = () => {
   
     (<div className="col-lg-12 p-0">
       <Link href="/add/Cliente"><a><ButtonFloat/></a></Link>
-     <div className="section-block row justify-content-between m-0 p-0 mb-2"><h3 class="section-title col-auto p-0">Lista de Clientes</h3>
+     <div className="section-block row justify-content-between m-0 p-0 mb-2"><h3 className="section-title col-auto p-0">Lista de Clientes</h3>
       <div className="btn-group col-auto col-auto p-0" role="group" aria-label="Basic example">
         <button type="button" className="btn btn-sm btn-outline-light">Activo</button>
         <button type="button" className="btn btn-sm btn-outline-light">Inactivos</button>
@@ -114,7 +114,7 @@ const Clientes = () => {
         }   
     }
   return (
-    <Layout>
+    <Layout title="Clientes">
 		{/* {firebase.cargando && (<div className="spinner"><Spinner/></div>)} */}
 
       <Navegacion titulo={"Lista de Clientes"}>
@@ -144,7 +144,7 @@ const Clientes = () => {
                     </div>
                     <div className="">
                       {cargando && <Spinner className="spinner"/>}
-                  { Componente } 
+                  { props.children } 
                 </div>
                 </div>
             </div>

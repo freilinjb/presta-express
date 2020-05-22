@@ -39,7 +39,7 @@ const SignUp = () => {
         <>
         {/* <!-- SingUp page  --> */}
         {/* <!-- ============================================================== --> */}
-        <Layout>
+        <Layout title={"Registrarse"}>
             <form className="splash-container mt-5"
                 onSubmit={handleSubmit}
             >

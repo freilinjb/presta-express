@@ -119,7 +119,7 @@ const Prestamo = () => {
   }
 
   return (
-    <Layout>
+    <Layout title="Prestmo">
       {/* {error ? <Error404/> : ( */}
       <Navegacion>
         {Object.keys(cliente).length === 0 && !error ? (

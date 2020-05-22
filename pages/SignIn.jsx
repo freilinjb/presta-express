@@ -59,7 +59,7 @@ const SignIn = () => {
         <>
         {/* <!-- login page  --> */}
         {/* <!-- ============================================================== --> */}
-        <Layout>
+        <Layout title={"Registrarse"}>
             <div className="splash-container mt-5">
                 <div className="card ">
                     <div className="card-header text-center">

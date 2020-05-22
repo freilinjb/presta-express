@@ -11,7 +11,7 @@ const Layout = (props) => {
                     {/* <!-- Required meta tags --> */}
                     <meta charSet="utf-8"/>
                     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-                    <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
+                    <title>P-EXPRESS - {props.title}</title>
                     {/* <!-- Bootstrap CSS --> */}
                     {/* <link rel="stylesheet" href="/static/assets/vendor/bootstrap/css/bootstrap.min.css"/> */}
                     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossOrigin="anonymous"/>
