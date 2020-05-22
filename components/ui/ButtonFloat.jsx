@@ -18,7 +18,7 @@ const ButtonFloat = () => {
           color: #FFF;
           font-size: 2em;
           border-radius: 50%;
-          top: 30vh;
+          top: 20vh;
           right: 10%;
           margin-top: -25px;
           display: -webkit-box;

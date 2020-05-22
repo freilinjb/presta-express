@@ -119,10 +119,7 @@ const Clientes = () => {
 
       <Navegacion titulo={"Lista de Clientes"}>
       
-            <div className="row justify-content-center">
-                <Link href="/add/Cliente">            
-                    <a className="btn btn-primary shadow float-right col-md-auto offset-md-7">Registrar un Cliente</a>
-                </Link>
+            <div className="row justify-content-center">  
                 <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 mt-2 p-0">
                     
                     <div className="card">
