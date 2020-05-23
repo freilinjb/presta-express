@@ -1,48 +1,54 @@
-import React,{useState,useEffect,useContext} from 'react';
-import {FirebaseContext} from '../firebase'; 
-import useAutenticacion from './useAutenticacion';
+import React, { useState, useEffect, useContext } from "react";
+import { FirebaseContext } from "../firebase";
+import useAutenticacion from "./useAutenticacion";
 
-const useSector = orden => {
+const useSector = (orden) => {
+  const { firebase } = useContext(FirebaseContext);
 
-    const [sectores, setSectores ] = useState([]);
-    const {firebase} = useContext(FirebaseContext);
+  const usuario = useAutenticacion();
 
-    const usuario = useAutenticacion();
+  const [cargando, setCargando] = useState(false);
+  const [busqueda, setBusqueda] = useState("");
 
-  
-    useEffect(() => {
-      //Esta funcion te da acceso a todos los datos
-      //y snapshot realiza operaciones con ellos
-      // console.log(usuario);
-      // console.log('usuario');
-      
-      if(usuario) {
-        const { uid } = usuario;
-        const obtenerSectores = () => {  
-          firebase.db.collection("Sectores").where("creador.id","==",uid).orderBy(orden, 'desc').onSnapshot(manejarSnapshot);//Ordena por creado
-        }
-        obtenerSectores();
-      }
-    },[usuario]);
-    //se ejecuta cuando el componente esta listo
-    function manejarSnapshot(snapshot) {
-      const sectores = snapshot.docs.map(doc => {
-        //Extrae todo el registro completo
-        return {
-          id: doc.id,
-          ...doc.data()
-        }
-      });
-   
-      //resultado de la consulta
-      setSectores(sectores);
-      
+  const [sectores, setSectores] = useState([]);
+  const { firebase, usuario } = useContext(FirebaseContext);
+
+  useEffect(() => {
+    //Esta funcion te da acceso a todos los datos
+    //y snapshot realiza operaciones con ellos
+    // console.log(usuario);
+    // console.log('usuario');
+
+    if (usuario) {
+      const { uid } = usuario;
+      const obtenerSectores = () => {
+        firebase.db
+          .collection("Sectores")
+          .where("creador.id", "==", uid)
+          .orderBy(orden, "desc")
+          .onSnapshot(manejarSnapshot); //Ordena por creado
+      };
+      obtenerSectores();
     }
+  }, [usuario]);
+  //se ejecuta cuando el componente esta listo
+  function manejarSnapshot(snapshot) {
+    const sectores = snapshot.docs.map((doc) => {
+      //Extrae todo el registro completo
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
 
-    return {
-        sectores
-    }
-}
+    //resultado de la consulta
+    setSectores(sectores);
+  }
+
+  return {
+    sectores,
+  };
+};
 
 export default useSector;
 

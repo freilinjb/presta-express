@@ -1,14 +1,20 @@
 import React from 'react';
+import Link from 'next/link';
 
-const ButtonFloat = () => {
+const ButtonFloat = ({modal, ir}) => {
     return ( 
         <>
 
-        <div className="cards">
-           <div className="floating-button btn-primary" href="#toast" data-toggle="toast" data-toast-posy="top" data-toast-posx="right" data-toast-inner="You have added a new element" data-toast-delay="5" >+</div>
-        <a href="#!">
-        </a>
-        </div>
+           {modal ? 
+           (
+            <button type="button" className="floating-button btn btn-primary"  data-toggle="modal" data-toast-posy="top" data-target="#sectorModal">+</button>
+           )
+          :
+          (
+            <Link href={`${ir}`}>
+              <a className="floating-button btn-primary" data-toast-posy="top" data-toast-posx="right" data-toast-delay="5" >+</a>
+            </Link>
+          )}
         <style>{`
           
         .floating-button {
@@ -42,6 +48,7 @@ const ButtonFloat = () => {
           -ms-transition: all 0.3s linear;
           -kthtml-transition: all 0.3s linear;
           transition: all 0.3s linear;
+          cursor: pointer;
 }
 
 .floating-button:hover {

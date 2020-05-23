@@ -86,7 +86,7 @@ const Clientes = () => {
     <div className="col-lg-12 p-0">
       <div className="card">
         <div className="campaign-table table-responsive">
-          <table className="table">
+          <table className="table table-hover">
             <thead>
               <tr className="border-0">
                 <th className="border-0">Foto</th>
@@ -111,7 +111,9 @@ const Clientes = () => {
         handleChange={handleChange}
         hanbleBuscar={hanbleBuscar}
         busqueda={busqueda}
+        btnIr="/add/Cliente"
       >
+          <ButtonFloat modal={false} ir="/add/Cliente"/>
         {Componente}
       </LayoutPrincipal>
     </>

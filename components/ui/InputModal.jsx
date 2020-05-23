@@ -97,7 +97,7 @@ const InputModal = () => {
     >
         <div
         className="modal fade"
-        id="Modal"
+        id="sectorModal"
         tabIndex="-1"
         role="dialog"
         aria-labelledby="ModalLabel"

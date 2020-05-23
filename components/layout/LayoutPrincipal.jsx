@@ -9,7 +9,7 @@ import Busqueda from "../../components/ui/Busqueda";
 
 const LayoutPrincipal = (props) => {
 
-  const { hanbleBuscar, handleChange, busqueda, nombre, cargando } = props;
+  const { hanbleBuscar, handleChange, busqueda, nombre, cargando, btnIr } = props;
   // const cargando = false;
   // const hanbleBuscar=(e)=> {
   //     e.preventDefault();
@@ -34,11 +34,6 @@ const LayoutPrincipal = (props) => {
               {cargando && <Spinner className="spinner" />}
               {/* {Componente} */}
               <div className="col-lg-12 p-0">
-                <Link href="/add/Cliente">
-                  <a>
-                    <ButtonFloat />
-                  </a>
-                </Link>
                 <div className="section-block row justify-content-between m-0 p-0 mb-2">
                   <h3 className="section-title col-auto p-0">
                     {nombre}
