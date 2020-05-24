@@ -7,51 +7,11 @@ import ClienteMiniaturaDetalle from "../components/ui/ClienteMiniaturaDetalle";
 import Spinner from "../components/ui/Spinner";
 import ButtonFloat from "../components/ui/ButtonFloat";
 import LayoutPrincipal from "../components/layout/LayoutPrincipal";
+import useCliente from '../hooks/useCliente';
 
 const Clientes = () => {
-  const [cargando, setCargando] = useState(false);
-  const [busqueda, setBusqueda] = useState("");
-
-  const [clientes, setClientes] = useState([]);
-  const { firebase, usuario } = useContext(FirebaseContext);
-
-  useEffect(() => {
-    if(usuario && busqueda.trim() === '' && firebase.cargando === false) {
-        const { uid } = usuario;
-        console.log(' se cumplio');
-        
-        //Esta funcion te da acceso a todos los datos
-        //y snapshot realiza operaciones con ellos
-        try {
-
-          const obtenerClientes =async() => {
-            await firebase.db.collection("Clientes").where("creador.id","==",uid).orderBy("creado", 'desc').onSnapshot(manejarSnapshot);//Ordena por creado
-            
-          }
-          obtenerClientes();
-        } catch (error) {
-          console.log(error);
-        }
-        finally {
-          setCargando(false);
-        }
-    }
-  },[usuario, busqueda, firebase.cargando]);
-  //se ejecuta cuando el componente esta listo
-  function manejarSnapshot(snapshot) {
-    const clientes = snapshot.docs.map(doc => {
-      //Extrae todo el registro completo
-      return {
-        id: doc.id,
-        ...doc.data()
-      }
-    });
- 
-    //resultado de la consulta
-    setClientes(clientes);   
-    // console.log(clientes);
-     
-  }
+  //hook cliente
+  const {clientes, setClientes, cargando, busqueda, setBusqueda} =  useCliente();
 
   const handleChange = (e) => {
     setBusqueda(e.target.value);

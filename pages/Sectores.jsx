@@ -15,7 +15,7 @@ import useSector from '../hooks/useSector';
 import SectorEditarModal from '../components/ui/SectorEditarModal';
 
 const Clientes = () => {
-  const {sectores, cargando, busqueda, setBusqueda} =  useSector();
+  const {sectores, setSectores, cargando, busqueda, setBusqueda} =  useSector();
   const { firebase, usuario } = useContext(FirebaseContext);
 
   const handleChange = (e) => {
@@ -30,11 +30,7 @@ const Clientes = () => {
       const buscar = busqueda.toLowerCase().trim();
       const filtro = sectores.filter((sectore) => {
         return (
-          (
-            sectore.nombre.toLowerCase() +
-            " " +
-            sectore.apellido.toLowerCase()
-          ).includes(buscar) || sectore.cedula.toLowerCase().includes(buscar)
+          sectore.nombre.toLowerCase().includes(buscar) || sectore.descripcion.toLowerCase().includes(buscar)
         );
       });
 

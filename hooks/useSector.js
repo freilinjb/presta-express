@@ -124,6 +124,7 @@ const useSector = (orden) => {
 
   return {
     sectores,
+    setSectores,
     cargando,
     busqueda,
     setBusqueda,
