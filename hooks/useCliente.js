@@ -19,7 +19,7 @@ const useCliente = orden => {
         //y snapshot realiza operaciones con ellos
         try {
 
-          const obtenerClientes =async() => {
+          const obtenerClientes = async() => {
             await firebase.db.collection("Clientes").where("creador.id","==",uid).orderBy("creado", `${orden}`).onSnapshot(manejarSnapshot);//Ordena por creado
           }
           obtenerClientes();

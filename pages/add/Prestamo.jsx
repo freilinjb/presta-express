@@ -19,7 +19,7 @@ const Prestamo = () => {
     const { Toast } = useMensajesAlertas();
     const { usuario, firebase } = useContext(FirebaseContext);
     const { calcular, formatearFecha } = useCalculadora();
-    const {clientes} = useCliente("creado");
+    const {clientes} = useCliente("desc");
     const [calculado, setCalculado] = useState(false);
     const [cargando, setCargando] = useState(false);
     const [tablaAmortizada, setTablaAmortizada] = useState([]);
@@ -80,12 +80,24 @@ const Prestamo = () => {
             //Insertar en la BD
 
             setCargando(true);
-            await firebase.db.collection("Prestamos").add(prestamo);
+            const p = await firebase.db.collection("Prestamos").add(prestamo);
             Toast.fire({
                 icon: 'success',
                 title: 'Se ha guardado correctamente!!'
               });
             // alert.success('Se ha guardo correctamente');
+            
+            tablaAmortizada.prestamo = {
+                id: p.id
+            }
+            tableAmortizada.cliente = {
+                id: idcliente,
+                nombre:(clientes.filter(doc => doc.id === idcliente))[0].nombre,
+                apellido: (clientes.filter(doc => doc.id === idcliente))[0].apellido
+            }
+            console.log(tableAmortizada);
+            
+            // await firebase.db.collection("DetallesCuotas").add(tablaAmortizada);
             setCargando(false);
             
             //Inicio
