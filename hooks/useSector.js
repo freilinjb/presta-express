@@ -11,8 +11,16 @@ const useSector = (orden) => {
 
   const [cargando, setCargando] = useState(false);
   const [busqueda, setBusqueda] = useState("");
-
   const [sectores, setSectores] = useState([]);
+  const [editarsector, setEditarSector] = useState(
+    {
+      id:'',
+      sector:{
+        nombre:'',
+        descripcion:''
+      }
+    }
+  );
 
   useEffect(() => {
     if (usuario && busqueda.trim() === "" && firebase.cargando === false) {
@@ -80,12 +88,49 @@ const useSector = (orden) => {
     })
   }
 
+  async function editarSectorFn(sector,id) {
+
+    console.log('id');
+    console.log(id);
+  //   return;
+    
+  //Inicia la carga
+      //Si el usuario no esta autenticado llevat al login
+      if (!usuario) {
+          console.log('no esta loqueado');
+          firebase.cargando = false;
+
+          return router.push("/SignIn");
+      }
+
+  try {
+  
+      //Insertar en la BD
+      firebase.cargando = true;            
+      firebase.db.collection("Sectores").doc(id).update({
+          nombre:sector.nombre,
+          apellido:sector.descripcion
+      });
+      alert.success('Se ha guardo correctamente');
+  } catch (error) {
+      console.log(error);
+      alert.error('Ha ocurrido un error');
+
+  } finally {
+      firebase.cargando = false;
+      // router.push('/Clientes');
+  }
+}
+
   return {
     sectores,
     cargando,
     busqueda,
     setBusqueda,
-    eliminarSector
+    eliminarSector,
+    editarSectorFn,
+    editarsector, 
+    setEditarSector
   };
 };
 

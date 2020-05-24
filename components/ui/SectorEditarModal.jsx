@@ -8,14 +8,24 @@ import useValidacion from '../../hooks/useValidacion';
 import validarIniciarSector from '../../validacion/validarIniciarSector';
 import { useAlert } from "react-alert";
 import useMensajesAlertas from '../../hooks/useMensajesAlertas';
+import useSector from '../../hooks/useSector';
 
 
-const InputModal = () => {
+const SectorEditarModal = () => {
+    const { editarsector, editarSectorFn } = useSector();
     const { Toast } = useMensajesAlertas();
     const STATE_INICIAL = {
         nombre:'',
         descripcion:''
     }
+    console.log(editarsector);
+    
+    useSector(() => {
+       STATE_INICIAL.nombre = editarsector.sector.nombre,
+       STATE_INICIAL.descripcion = editarsector.sector.descripcion
+    console.log(editarsector);
+       
+    },[editarsector]);
 
     const alert  = useAlert();
 
@@ -28,7 +38,7 @@ const InputModal = () => {
         handleSubmit,
         handleChange,
         handleBlur,
-      } = useValidacion(STATE_INICIAL, validarIniciarSector, crearSector);
+      } = useValidacion(STATE_INICIAL, validarIniciarSector, editarSectorFn);
     
       let { nombre, descripcion } = valores;
     
@@ -91,7 +101,7 @@ const InputModal = () => {
     >
         <div
         className="modal fade"
-        id="sectorModal"
+        id="sectorEdicionModal"
         tabIndex="-1"
         role="dialog"
         aria-labelledby="ModalLabel"
@@ -101,7 +111,7 @@ const InputModal = () => {
                 <div className="modal-content">
                 <div className="modal-header">
                     <h5 className="modal-title" id="ModalLabel">
-                        Registro de Sector
+                        MOdificar Sector
                     </h5>
                     <button
                     type="button"
@@ -161,4 +171,4 @@ const InputModal = () => {
   );
 };
 
-export default InputModal;
+export default SectorEditarModal;

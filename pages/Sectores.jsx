@@ -12,6 +12,7 @@ import LayoutPrincipal from "../components/layout/LayoutPrincipal";
 import Sector from "../components/ui/Sector";
 import InputModal from '../components/ui/InputModal';
 import useSector from '../hooks/useSector';
+import SectorEditarModal from '../components/ui/SectorEditarModal';
 
 const Clientes = () => {
   const {sectores, cargando, busqueda, setBusqueda} =  useSector();
@@ -62,6 +63,7 @@ const Clientes = () => {
           {sectores.map((sector,index) => (
               <Sector
               key={sector.id}
+              id={sector.id}
               sector={sector}
               index={index+1}
               />
@@ -82,6 +84,7 @@ const Clientes = () => {
         id="sectorModal"
       >
         <ButtonFloat modal={true}/>
+        <SectorEditarModal/>
         <InputModal/>
         {Componente}
       </LayoutPrincipal>
