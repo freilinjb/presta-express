@@ -34,10 +34,10 @@ const Prestamo = ({prestamo}) => {
       if(prestamo.detallesCuotas[i].estado === 'pendiente') {
         fecha.proximoPago = prestamo.detallesCuotas[i].fecha;
 
-        const f = fecha.proximoPago.split('/');
-        fecha.anio = f[0];
+        const f = fecha.proximoPago.split('-');
+        fecha.anio = f[2];
         fecha.mes = f[1];
-        fecha.dia = f[2];
+        fecha.dia = f[0];
 
         console.log(fecha);
         
@@ -46,6 +46,8 @@ const Prestamo = ({prestamo}) => {
     }
 
     console.log('',meses[Number(fecha.mes)],'mes', fecha.mes);
+    console.log(fecha);
+    
     
     for(const i in prestamo.detallesCuotas) {
         if(prestamo.detallesCuotas[i].estado === 'pendiente') {
@@ -64,8 +66,8 @@ const Prestamo = ({prestamo}) => {
         {/* <!-- Project--> */}
         <li>
             <time dateTime={fecha.proximoPago}>
-              <span className="day">{fecha.mes}</span>
-							<span className="month">{meses[Number(fecha.mes)]}</span>
+              <span className="day">{fecha.dia}</span>
+							<span className="month">{meses[Number(fecha.mes)-1]}</span>
 							<span className="year">{fecha.anio}</span>
 						</time>
             {/* <img alt="My 24th Birthday!" src="https://farm5.staticflickr.com/4150/5045502202_1d867c8a41_q.jpg" /> */}

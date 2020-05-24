@@ -89,7 +89,6 @@ const ClienteMiniaturaDetalle = ({ cliente }) => {
 		
 		{cargando && (<div className="spinner"><Spinner/></div>)}
 	
-      <tbody>
         <tr>
           <td>
             <div className="m-r-10">
@@ -127,7 +126,6 @@ const ClienteMiniaturaDetalle = ({ cliente }) => {
             </div>
           </td>
         </tr>
-      </tbody>
       <style jsx>{`
         img {
           	width: 60px;
