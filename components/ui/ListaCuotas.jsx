@@ -2,7 +2,6 @@ import React,{useState, useEffect} from "react";
 import useCalculadora from "../../hooks/useCalculadora";
 import swal from 'sweetalert';
 import Checkbox from '../../components/ui/Checkbox';
-import useCuotas from '../../hooks/useCuotas';
 
 const ListaCuotas = ({ prestamo }) => {
   const { setMoneda } = useCalculadora();

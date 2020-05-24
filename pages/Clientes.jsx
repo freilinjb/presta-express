@@ -1,8 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import Link from "next/link";
-import Layout from "../components/layout/Layout";
-import { FirebaseContext } from "../firebase";
-import Navegacion from "../components/layout/Navegacion";
 import ClienteMiniaturaDetalle from "../components/ui/ClienteMiniaturaDetalle";
 import Spinner from "../components/ui/Spinner";
 import ButtonFloat from "../components/ui/ButtonFloat";
@@ -11,7 +7,7 @@ import useCliente from '../hooks/useCliente';
 
 const Clientes = () => {
   //hook cliente
-  const {clientes, setClientes, cargando, busqueda, setBusqueda} =  useCliente();
+  const {clientes, setClientes, cargando, busqueda, setBusqueda} =  useCliente("desc");
 
   const handleChange = (e) => {
     setBusqueda(e.target.value);

@@ -6,7 +6,12 @@ import { FirebaseContext } from "../firebase";
 import Navegacion from "../components/layout/Navegacion";
 import ClienteMiniaturaDetalle from "../components/ui/ClienteMiniaturaDetalle";
 import Spinner from "../components/ui/Spinner";
+import useCuotas from '../hooks/useCuotas';
+
 const Pagos = () => {
+  const { prueba } = useCuotas();
+  prueba();
+  
   const [consultarDB, setConsultarDB] = useState(true);
   const [cargando, setCargando] = useState(false);
   const [busqueda, setBusqueda] = useState("");
