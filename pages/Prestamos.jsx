@@ -11,7 +11,7 @@ import Prestamo from '../components/ui/Prestamo';
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { es } from "date-fns/locale";
 
-import usePrestamos from '../hooks/usePrestamo';
+import usePrestamo from '../hooks/usePrestamo';
 import useCalculadora from '../hooks/useCalculadora';
 
 const Prestamos = () => {
@@ -26,44 +26,6 @@ const Prestamos = () => {
   const handleChange = (e) => {
     setBusqueda(e.target.value);
   };
-
-  useEffect(() => {
-    if (usuario && busqueda.trim() === "" && firebase.cargando === false) {
-      const { uid } = usuario;
-      console.log(" se cumplio");
-
-      //Esta funcion te da acceso a todos los datos
-      //y snapshot realiza operaciones con ellos
-      try {
-        setCargando(true);
-        const obtenerPrestamos = async () => {
-          await firebase.db
-            .collection("Prestamos")
-            .where("creador.id", "==", uid)
-            .orderBy("creado", "desc")
-            .onSnapshot(PrestamosSnapshot); //Ordena por creado
-        };
-        obtenerPrestamos();
-
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setCargando(false); 
-      }
-    }
-  }, [usuario, busqueda]);
-  //se ejecuta cuando el componente esta listo
-  function PrestamosSnapshot(snapshot) {
-    const prestamos = snapshot.docs.map((doc) => {
-      //Extrae todo el registro completo
-      return {
-        id: doc.id,
-        ...doc.data(),
-      };
-    });
-    setPrestamos(prestamos);
-    console.log(prestamos);
-  }
 
   const handleClickActivo=()=> {
     const filtros = prestamos.filter(prestamo => {
