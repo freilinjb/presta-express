@@ -126,11 +126,8 @@ const Pagos = () => {
               {/* {clientes.map((cliente) => (
                 <ClienteMiniaturaDetalle key={cliente.id} cliente={cliente} />
               ))} */}
-                  {prestamos.map(prestamo=> (
+                  {cuotasPendientes.map(prestamo=> (
                     <>
-                    {(prestamo.estado === 'activo') && 
-                    (
-                      <>
                         <tr className="group" key={prestamo.creado}>
                           <td colSpan="5">{prestamo.cliente.nombre + ' ' + prestamo.cliente.apellido}</td>
                         </tr>
@@ -158,9 +155,6 @@ const Pagos = () => {
                           </tr>
                         </>
                       ))}
-                      </>
-                    )}
-                    
                     </>
                   ))}
               
@@ -233,10 +227,6 @@ const Pagos = () => {
           ).includes(buscar) || cliente.cedula.toLowerCase().includes(buscar)
         );
       });
-
-      //filtro itera en cada uno de ellos, combierte el nombrer en minusculas
-      //y luego si lo encuentra lo agrega a filter
-      // console.log(filtro,' BUSQUEDA: ', busqueda);
       setClientes(filtro);
       // console.log(clientes);
     }
