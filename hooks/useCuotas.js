@@ -7,8 +7,9 @@ import Prestamo from '../pages/add/Prestamo';
 
 const useCuotas = () => {
     const { prestamos } = usePrestamo();
-    const {clientes} = useCliente("desc");
-
+    // const {clientes} = useCliente("desc");
+    console.log(prestamos);
+    
     const [cargando, setCargando] = useState(false);
     const [busqueda, setBusqueda] = useState('');
 
@@ -16,10 +17,19 @@ const useCuotas = () => {
     const {firebase, usuario} = useContext(FirebaseContext);
 
     const prueba =() => {
-        console.log('prueba de useCuotas');
-        const fecha = new Date();
-        console.log(fecha);
+        // console.log('prueba de useCuotas');
+        const filtroPrestamo = prestamos.filter(prestamo => {
+            return(
+                prestamo.estado === 'activo'
+            )
+        });
+    
+        setCuotasPendientes(filtroPrestamo);
+        console.log(filtroPrestamo);
+        // console.log(fecha);
     }
+
+    // prueba();
 
     // const filtro = clientes.filter(cliente => {
     //     return(
@@ -27,34 +37,19 @@ const useCuotas = () => {
     //     )
     // });
 
-    const filtroPrestamo = prestamos.filter(prestamo => {
-        return(
-            prestamo.estado === 'activo' && prestamo.detallesCuotas === 'pendiente'
-        )
-    })
-
-    // const cuota
-
-    // if(clientes.length > 0) {
-    //     // const filtroCliente = clientes.filter(cliente => {
-    //     //     return(
-    //     //         cliente.id = filtroPrestamo.cliente.id
-    //     //     )
-    //     // });
-    // console.log('filtroCliente','=>',clientes);
-
-    // }
-
-
-    console.log('filtroPrestamo','=>',filtroPrestamo);
-    // console.log('filtroPrestamo','=>',filtroCliente);
-    
-
-
+    // useEffect(() => {
+       
         
+    // },[]);
+
+    
     // },[resultado,valorCuotas]);
     return {
-        prueba
+        prueba,
+        cargando,
+        busqueda,
+        setBusqueda,
+        cuotasPendientes
     }
 }
 

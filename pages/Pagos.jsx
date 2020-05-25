@@ -6,11 +6,27 @@ import { FirebaseContext } from "../firebase";
 import Navegacion from "../components/layout/Navegacion";
 import ClienteMiniaturaDetalle from "../components/ui/ClienteMiniaturaDetalle";
 import Spinner from "../components/ui/Spinner";
-import useCuotas from '../hooks/useCuotas';
+// import useCuotas from '../hooks/useCuotas';
+import usePrestamo from '../hooks/usePrestamo';
+import useCalculadora from '../hooks/useCalculadora';
 
 const Pagos = () => {
-  const { prueba } = useCuotas();
-  prueba();
+  // const { prueba, cuotasPendientes } = useCuotas();
+  const { prestamos } = usePrestamo();
+  const { setMoneda,formatearFecha } = useCalculadora();
+
+  let fecha = new Date();
+  fecha = formatearFecha(fecha,'dmy');
+
+  // console.log('cuotasPendientes','=>',cuotasPendientes);
+  console.log('prestamo','=>',prestamos);
+
+  if(prestamos.length > 0) {
+
+    console.log(fecha);
+    
+    console.log('prestamo','=>',prestamos[0].detallesCuotas[0].fecha,'dmy');
+  }
   
   const [consultarDB, setConsultarDB] = useState(true);
   const [cargando, setCargando] = useState(false);
@@ -48,7 +64,9 @@ const Pagos = () => {
         setCargando(false);
       }
     }
-  }, [usuario, busqueda, firebase.cargando]);
+  // prueba();
+
+  }, [usuario]);
   //se ejecuta cuando el componente esta listo
   function manejarSnapshot(snapshot) {
     const clientes = snapshot.docs.map((doc) => {
@@ -71,7 +89,7 @@ const Pagos = () => {
   ) : (
     <div className="col-lg-12">
       <div className="section-block row justify-content-between m-0 p-0 mb-2">
-        <h3 class="section-title col-auto p-0">Lista de cuotas de hoy</h3>
+        <h3 className="section-title col-auto p-0">Lista de cuotas de hoy</h3>
         <div
           className="btn-group col-auto col-auto p-0"
           role="group"
@@ -104,7 +122,45 @@ const Pagos = () => {
               {/* {clientes.map((cliente) => (
                 <ClienteMiniaturaDetalle key={cliente.id} cliente={cliente} />
               ))} */}
-              <tr class="group">
+                  {prestamos.map(prestamo=> (
+                    <>
+                    {(prestamo.estado === 'activo') && 
+                    (
+                      <>
+                        <tr className="group" key={prestamo.creado}>
+                          <td colSpan="5">{prestamo.cliente.nombre + ' ' + prestamo.cliente.apellido}</td>
+                        </tr>
+                        {prestamo.detallesCuotas.map(ct=> (
+                      <>
+                          <tr role="row" key={ct.cuota + ct.fecha + ct.valorCuota}>
+                            {console.log('formatearFecha',formatearFecha(ct.creado,'dmy'))}
+                            {console.log('fecha',fecha)}
+                          {/* <td>{setMoneda(ct.interes)}</td> */}
+                          <td>{ct.cuota}</td>
+                          <td>{setMoneda(ct.valorCuota)}</td>
+                          <td>{setMoneda(ct.saldoCapital)}</td>
+                          <td>{ct.fecha}</td>
+                          {/* <td>{ct.estado}</td> */}
+                          <td>
+                            <div className="btn-group ml-auto">
+                              <button
+                                className="btn btn-sm btn-outline-light"
+                                // onClick={e => onClickConfirmar(ct.cuota)}
+                              >
+                                Cobrar
+                              </button>
+                            </div>
+                          </td>
+                          </tr>
+                        </>
+                      ))}
+                      </>
+                    )}
+                    
+                    </>
+                  ))}
+              
+              <tr className="group">
                 <td colSpan="5">Freilin Jose Jerez</td>
               </tr>
               <tr role="row">
@@ -128,7 +184,7 @@ const Pagos = () => {
                 <td>sd6f54a</td>
                 <td>sd6f54a</td>
               </tr>
-              <tr class="group">
+              <tr className="group">
                 <td colSpan="5">Freilin Jose Jerez</td>
               </tr>
               <tr role="row">

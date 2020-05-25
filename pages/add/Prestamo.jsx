@@ -96,8 +96,8 @@ const Prestamo = () => {
                 apellido: (clientes.filter(doc => doc.id === idcliente))[0].apellido
             }
             console.log('tabla amortizada','=>',tablaAmortizada);
-            
-            // await firebase.db.collection("DetallesCuotas").add(tablaAmortizada);
+            tablaAmortizada.estado = 'activo';
+            await firebase.db.collection("Cuotas").add(tablaAmortizada);
             setCargando(false);
             
             //Inicio
