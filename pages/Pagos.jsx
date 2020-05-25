@@ -6,26 +6,27 @@ import { FirebaseContext } from "../firebase";
 import Navegacion from "../components/layout/Navegacion";
 import ClienteMiniaturaDetalle from "../components/ui/ClienteMiniaturaDetalle";
 import Spinner from "../components/ui/Spinner";
-// import useCuotas from '../hooks/useCuotas';
+import useCuotas from '../hooks/useCuotas';
 import usePrestamo from '../hooks/usePrestamo';
 import useCalculadora from '../hooks/useCalculadora';
 
 const Pagos = () => {
-  // const { prueba, cuotasPendientes } = useCuotas();
+  const { cuotasPendientes, prueba } = useCuotas();
   const { prestamos } = usePrestamo();
   const { setMoneda,formatearFecha } = useCalculadora();
+  prueba();
 
   let fecha = new Date();
   fecha = formatearFecha(fecha,'dmy');
 
   // console.log('cuotasPendientes','=>',cuotasPendientes);
-  console.log('prestamo','=>',prestamos);
+  // console.log('prestamo','=>',prestamos);
 
   if(prestamos.length > 0) {
 
     console.log(fecha);
     
-    console.log('prestamo','=>',prestamos[0].detallesCuotas[0].fecha,'dmy');
+    // console.log('prestamo','=>',prestamos[0].detallesCuotas[0].fecha,'dmy');
   }
   
   const [consultarDB, setConsultarDB] = useState(true);
@@ -133,8 +134,8 @@ const Pagos = () => {
                         {prestamo.detallesCuotas.map(ct=> (
                       <>
                           <tr role="row" key={ct.cuota + ct.fecha + ct.valorCuota}>
-                            {console.log('formatearFecha',formatearFecha(ct.creado,'dmy'))}
-                            {console.log('fecha',fecha)}
+                            {/* {console.log('formatearFecha',formatearFecha(ct.creado,'dmy'))} */}
+                            {/* {console.log('fecha',fecha)} */}
                           {/* <td>{setMoneda(ct.interes)}</td> */}
                           <td>{ct.cuota}</td>
                           <td>{setMoneda(ct.valorCuota)}</td>

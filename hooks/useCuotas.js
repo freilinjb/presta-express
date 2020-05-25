@@ -8,27 +8,48 @@ import Prestamo from '../pages/add/Prestamo';
 const useCuotas = () => {
     const { prestamos } = usePrestamo();
     // const {clientes} = useCliente("desc");
-    console.log(prestamos);
+    // console.log(prestamos);
     
     const [cargando, setCargando] = useState(false);
     const [busqueda, setBusqueda] = useState('');
 
     const [cuotasPendientes, setCuotasPendientes] = useState([]);
     const {firebase, usuario} = useContext(FirebaseContext);
-
     const prueba =() => {
-        // console.log('prueba de useCuotas');
-        const filtroPrestamo = prestamos.filter(prestamo => {
-            return(
-                prestamo.estado === 'activo'
-            )
-        });
-    
-        setCuotasPendientes(filtroPrestamo);
-        console.log(filtroPrestamo);
-        // console.log(fecha);
-    }
+        let filtro = [];
+        let cuotas = [];
+        for(const i in prestamos) {
+            console.log(prestamos[i]);
+            if(prestamos[i].estado === 'activo') {
+                console.log(prestamos[i]);
+                // filtro.cliente = prestamos[i].cliente;
+                
 
+                for(const j in prestamos[i].detallesCuotas) {
+                    if(prestamos[i].detallesCuotas[j].estado === 'pendiente') {
+                        cuotas.push(prestamos[i].detallesCuotas[j]);
+                    }
+                }
+                filtro.push({
+                    cliente: prestamos[i].cliente, 
+                    id: prestamos[i].id, 
+                    cuotas: prestamos[i].cuotas, 
+                    periodoPagos: prestamos[i].periodoPagos,
+                    detallesCuotas: cuotas
+                });
+                cuotas = [];
+                // filtro.id = prestamos[i].id;
+                // filtro.tipoTasa = prestamos[i].tipoTasa;
+            }
+
+            console.log('filtro','=>',filtro);
+            
+        }
+        // setCuotasPendientes(filtroPrestamo);
+        // console.log(filtroPrestamo);
+        console.log('prestamo','=>',prestamos);
+    }
+    // prueba()
     // prueba();
 
     // const filtro = clientes.filter(cliente => {
