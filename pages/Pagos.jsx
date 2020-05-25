@@ -14,7 +14,6 @@ const Pagos = () => {
   const { cuotasPendientes, prueba } = useCuotas();
   const { prestamos } = usePrestamo();
   const { setMoneda,formatearFecha } = useCalculadora();
-  prueba();
 
   let fecha = new Date();
   fecha = formatearFecha(fecha,'dmy');
@@ -40,7 +39,11 @@ const Pagos = () => {
     setBusqueda(e.target.value);
     // console.log(busqueda);
   };
-
+  
+  useEffect(() => {
+    console.log(cuotasPendientes);
+    
+  },[cuotasPendientes]);
   // const usuario = useAutenticacion();
 
   useEffect(() => {

@@ -16,14 +16,13 @@ const useCuotas = () => {
     const [cuotasPendientes, setCuotasPendientes] = useState([]);
     const {firebase, usuario} = useContext(FirebaseContext);
     const prueba =() => {
+        // setCargando(true);
         let filtro = [];
         let cuotas = [];
         for(const i in prestamos) {
             console.log(prestamos[i]);
             if(prestamos[i].estado === 'activo') {
                 console.log(prestamos[i]);
-                // filtro.cliente = prestamos[i].cliente;
-                
 
                 for(const j in prestamos[i].detallesCuotas) {
                     if(prestamos[i].detallesCuotas[j].estado === 'pendiente') {
@@ -38,33 +37,40 @@ const useCuotas = () => {
                     detallesCuotas: cuotas
                 });
                 cuotas = [];
-                // filtro.id = prestamos[i].id;
-                // filtro.tipoTasa = prestamos[i].tipoTasa;
             }
-
             console.log('filtro','=>',filtro);
-            
+            setCargando(false);   
         }
-        // setCuotasPendientes(filtroPrestamo);
-        // console.log(filtroPrestamo);
-        console.log('prestamo','=>',prestamos);
     }
-    // prueba()
-    // prueba();
-
-    // const filtro = clientes.filter(cliente => {
-    //     return(
-    //       (cliente.nombre.toLowerCase() + ' '+cliente.apellido.toLowerCase()).includes(buscar) || cliente.cedula.toLowerCase().includes(buscar)
-    //     )
-    // });
-
-    // useEffect(() => {
-       
-        
-    // },[]);
-
     
-    // },[resultado,valorCuotas]);
+    useEffect(() => {
+        let filtro = [];
+        let cuotas = [];
+        for(const i in prestamos) {
+            console.log(prestamos[i]);
+            if(prestamos[i].estado === 'activo') {
+                console.log(prestamos[i]);
+
+                for(const j in prestamos[i].detallesCuotas) {
+                    if(prestamos[i].detallesCuotas[j].estado === 'pendiente') {
+                        cuotas.push(prestamos[i].detallesCuotas[j]);
+                    }
+                }
+                filtro.push({
+                    cliente: prestamos[i].cliente, 
+                    id: prestamos[i].id, 
+                    cuotas: prestamos[i].cuotas, 
+                    periodoPagos: prestamos[i].periodoPagos,
+                    detallesCuotas: cuotas
+                });
+                cuotas = [];
+            }
+            console.log('filtro','=>',filtro);
+        }
+        setCuotasPendientes(filtro)
+        setCargando(false);   
+
+    },[prestamos]);
     return {
         prueba,
         cargando,
