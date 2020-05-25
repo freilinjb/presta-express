@@ -5,7 +5,7 @@ const Amortizacion = ({ tablaAmortizada }) => {
   const { setMoneda,formatearFecha } = useCalculadora();
   const [interes, setInteres] = useState(0);
   const [cuota, setCuota] = useState(0);
-  console.log(tablaAmortizada);
+  // console.log(tablaAmortizada);
   
   // setCuota(tablaAmortizada.cuotas[0].cuota);
   // setInteres((tablaAmortizada.cuotas[0] *  tablaAmortizada.cuotas.length) - monto);
@@ -49,7 +49,7 @@ const Amortizacion = ({ tablaAmortizada }) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {tablaAmortizada.listo &&
+                      {tablaAmortizada.cuotas &&
                         tablaAmortizada.cuotas.map((cuota) => (
                           <tr key={cuota.cuota}>
                             <td>{cuota.cuota}</td>

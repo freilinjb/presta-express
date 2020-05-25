@@ -15,7 +15,7 @@ const Prestamo = ({prestamo}) => {
     "Agosto", "Septiembre", "Octubre",
     "Noviembre", "Diciembre"
   ]
-    console.log(prestamo);
+    // console.log(prestamo);
     
     const { setMoneda } = useCalculadora();
     const estadoCuotas = {
@@ -39,14 +39,14 @@ const Prestamo = ({prestamo}) => {
         fecha.mes = f[1];
         fecha.dia = f[0];
 
-        console.log(fecha);
+        // console.log(fecha);
         
         break;
       }
     }
 
-    console.log('',meses[Number(fecha.mes)],'mes', fecha.mes);
-    console.log(fecha);
+    // console.log('',meses[Number(fecha.mes)],'mes', fecha.mes);
+    // console.log(fecha);
     
     
     for(const i in prestamo.detallesCuotas) {

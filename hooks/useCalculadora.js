@@ -3,8 +3,8 @@
       monto: 0,
       cuotaFija: "",
       cuotas: [],
-      msg: "",
-      listo: false
+      msg: ""
+      // listo: false
     };
 
   
@@ -50,7 +50,7 @@
   function setFecha(dia, periodo) {
     let fecha = new Date(fechaInicial);
     
-    console.log('dia=>',dia,'periodo=>',periodo);
+    // console.log('dia=>',dia,'periodo=>',periodo);
     
     switch (periodo) {
       case "diario":
@@ -331,7 +331,7 @@
         items.length +
         " años";
     }
-    detalleCuotas.listo = true;
+    // detalleCuotas.listo = true;
     return detalleCuotas;
   }
 

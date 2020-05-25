@@ -14,7 +14,7 @@ const usePrestamo = (orden) => {
   useEffect(() => {
     if (usuario && busqueda.trim() === "" && firebase.cargando === false) {
       const { uid } = usuario;
-      console.log(" se cumplio");
+      // console.log(" se cumplio");
 
       //Esta funcion te da acceso a todos los datos
       //y snapshot realiza operaciones con ellos
@@ -45,7 +45,7 @@ const usePrestamo = (orden) => {
       };
     });
     setPrestamos(prestamos);
-    console.log(prestamos);
+    // console.log(prestamos);
   }
 
   return {

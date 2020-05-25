@@ -90,12 +90,12 @@ const Prestamo = () => {
             tablaAmortizada.prestamo = {
                 id: p.id
             }
-            tableAmortizada.cliente = {
+            tablaAmortizada.cliente = {
                 id: idcliente,
                 nombre:(clientes.filter(doc => doc.id === idcliente))[0].nombre,
                 apellido: (clientes.filter(doc => doc.id === idcliente))[0].apellido
             }
-            console.log(tableAmortizada);
+            console.log('tabla amortizada','=>',tablaAmortizada);
             
             // await firebase.db.collection("DetallesCuotas").add(tablaAmortizada);
             setCargando(false);
@@ -122,7 +122,7 @@ const Prestamo = () => {
             return;
         }
         setTablaAmortizada(calcular(monto, cuotas, tasaInteres, periodoPagos, tipoTasa, entrega));
-        console.log(tablaAmortizada);
+        // console.log(tablaAmortizada);
         
         setTimeout(() => {
             Toast.fire({
