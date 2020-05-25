@@ -116,9 +116,9 @@ const Pagos = () => {
             <thead>
               <tr className="border-0">
                 <th className="border-0">#</th>
-                <th className="border-0">Cuota</th>
+                <th className="border-0">Valor de la cuota</th>
+                <th className="border-0">Saldo al capital</th>
                 <th className="border-0">Fecha</th>
-                <th className="border-0">Cuota</th>
                 <th className="border-0">Capital</th>
               </tr>
             </thead>
@@ -158,7 +158,7 @@ const Pagos = () => {
                     </>
                   ))}
               
-              <tr className="group">
+              {/* <tr className="group">
                 <td colSpan="5">Freilin Jose Jerez</td>
               </tr>
               <tr role="row">
@@ -205,7 +205,7 @@ const Pagos = () => {
                 <td>sd6f54a</td>
                 <td>sd6f54a</td>
                 <td>sd6f54a</td>
-              </tr>
+              </tr> */}
             </tbody>
           </table>
         </div>

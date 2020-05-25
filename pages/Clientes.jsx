@@ -52,9 +52,11 @@ const Clientes = () => {
                 <th className="border-0">Accion</th>
               </tr>
             </thead>
+            <tbody>
             {clientes.map((cliente) => (
               <ClienteMiniaturaDetalle key={cliente.id} cliente={cliente} />
             ))}
+            </tbody>
           </table>
         </div>
       </div>
