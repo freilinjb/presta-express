@@ -51,7 +51,8 @@ const useCliente = orden => {
       busqueda,
       setBusqueda,
       cargando,
-      clientes
+      clientes,
+      setClientes
     }
 }
 
