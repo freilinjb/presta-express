@@ -26,7 +26,7 @@ const Prestamo = () => {
 
     let fecha = new Date();
     fecha = formatearFecha(fecha,'ymd');
-    console.log(fecha);
+    // console.log(fecha);
 
     const STATE_INICIAL = {
         idcliente:'',
@@ -74,7 +74,7 @@ const Prestamo = () => {
             nombre: usuario.displayName,
             }
         };
-        console.log(prestamo);
+        // console.log(prestamo);
         
         try {
             //Insertar en la BD

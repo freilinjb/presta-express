@@ -15,13 +15,9 @@ import usePrestamo from '../hooks/usePrestamo';
 import useCalculadora from '../hooks/useCalculadora';
 
 const Prestamos = () => {
-    const { setMoneda } = useCalculadora();
-  const [cargando, setCargando] = useState(false);
-  const [busqueda, setBusqueda] = useState("");
-
-  const [prestamos, setPrestamos] = useState([]);
-  const [clientes, setClientes] = useState([]);
-  const { firebase, usuario } = useContext(FirebaseContext);
+  const { cargando,busqueda, setBusqueda, prestamos } = usePrestamo();
+  const { setMoneda } = useCalculadora();
+  // const { firebase, usuario } = useContext(FirebaseContext);
 
   const handleChange = (e) => {
     setBusqueda(e.target.value);

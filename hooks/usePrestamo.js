@@ -7,10 +7,9 @@ const usePrestamo = (orden) => {
   const [busqueda, setBusqueda] = useState("");
 
   const [prestamos, setPrestamos] = useState([]);
-  const [clientes, setClientes] = useState([]);
   const { firebase, usuario } = useContext(FirebaseContext);
 
-  const usuario = useAutenticacion();
+  // const usuario = useAutenticacion();
 
   useEffect(() => {
     if (usuario && busqueda.trim() === "" && firebase.cargando === false) {
@@ -50,7 +49,9 @@ const usePrestamo = (orden) => {
   }
 
   return {
-    joinsCollectionsHandler,
+    cargando,
+    busqueda,
+    prestamos,
   };
 };
 
