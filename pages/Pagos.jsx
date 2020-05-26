@@ -11,22 +11,11 @@ import usePrestamo from '../hooks/usePrestamo';
 import useCalculadora from '../hooks/useCalculadora';
 
 const Pagos = () => {
-  const { cuotasPendientes, prueba } = useCuotas();
+  const { cuotasPendientes, transformarFechaYMD, fechaActual } = useCuotas();
   const { prestamos } = usePrestamo();
   const { setMoneda,formatearFecha } = useCalculadora();
-
-  let fecha = new Date();
-  fecha = formatearFecha(fecha,'dmy');
-
-  // console.log('cuotasPendientes','=>',cuotasPendientes);
-  // console.log('prestamo','=>',prestamos);
-
-  if(prestamos.length > 0) {
-
-    console.log(fecha);
-    
-    // console.log('prestamo','=>',prestamos[0].detallesCuotas[0].fecha,'dmy');
-  }
+  console.log(fechaActual);
+  
   
   const [consultarDB, setConsultarDB] = useState(true);
   const [cargando, setCargando] = useState(false);
@@ -132,8 +121,8 @@ const Pagos = () => {
                           <td colSpan="5">{prestamo.cliente.nombre + ' ' + prestamo.cliente.apellido}</td>
                         </tr>
                         {prestamo.detallesCuotas.map(ct=> (
-                      <>
-                          <tr role="row" key={ct.cuota + ct.fecha + ct.valorCuota}>
+                        <>
+                          <tr role="row" key={ct.cuota + ct.fecha + ct.valorCuota} className={`alert ${fechaActual == transformarFechaYMD(ct.fecha) ? 'alert-warning' : 'alert alert-danger'}`}>
                             {/* {console.log('formatearFecha',formatearFecha(ct.creado,'dmy'))} */}
                             {/* {console.log('fecha',fecha)} */}
                           {/* <td>{setMoneda(ct.interes)}</td> */}
@@ -145,7 +134,7 @@ const Pagos = () => {
                           <td>
                             <div className="btn-group ml-auto">
                               <button
-                                className="btn btn-sm btn-outline-light"
+                                className="btn btn-sm btn-outline-danger"
                                 // onClick={e => onClickConfirmar(ct.cuota)}
                               >
                                 Cobrar
@@ -157,55 +146,6 @@ const Pagos = () => {
                       ))}
                     </>
                   ))}
-              
-              {/* <tr className="group">
-                <td colSpan="5">Freilin Jose Jerez</td>
-              </tr>
-              <tr role="row">
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-              </tr>
-              <tr role="row">
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-              </tr>
-              <tr role="row">
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-              </tr>
-              <tr className="group">
-                <td colSpan="5">Freilin Jose Jerez</td>
-              </tr>
-              <tr role="row">
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-              </tr>
-              <tr role="row">
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-              </tr>
-              <tr role="row">
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-                <td>sd6f54a</td>
-              </tr> */}
             </tbody>
           </table>
         </div>
@@ -237,11 +177,11 @@ const Pagos = () => {
 
       <Navegacion titulo="Lista de Clientes">
         <div className="row justify-content-center">
-          <Link href="/add/Cliente">
+          {/* <Link href="/add/Cliente">
             <a className="btn btn-primary shadow float-right col-md-auto offset-md-7">
               Registrar un Cliente
             </a>
-          </Link>
+          </Link> */}
           <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 mt-2">
             <div className="card">
               <div className="card-body">

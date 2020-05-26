@@ -18,6 +18,7 @@ const useCuotas = () => {
     
     const [cargando, setCargando] = useState(false);
     const [busqueda, setBusqueda] = useState('');
+    const [fechaActual, setFechaActual] = useState('');
 
     const [cuotasPendientes, setCuotasPendientes] = useState([]);
     const {firebase, usuario} = useContext(FirebaseContext);
@@ -36,14 +37,18 @@ const useCuotas = () => {
         return f.anio+'-'+f.mes+'-'+f.dia;
     }
 
-    const compararFechas=(fecha2)=> {
+    const compararFechas=(fecha2,comodin = true)=> {
         let fecha1 = new Date().now;
         fecha1 = transformarFechaYMD(formatearFecha(fecha1));
+        setFechaActual(fecha1);
+
         fecha2 = transformarFechaYMD(fecha2);
-        console.log('fecha1',fecha1, '   fecha2',fecha2);
-        // console.log('fecha2',fecha2);
-        
-        return new Date(fecha2) <= new Date(fecha1);
+
+        if(comodin) {
+            return new Date(fecha2) < new Date(fecha1);
+        } else {
+            return new Date(fecha2) <= new Date(fecha1);
+        }
     }
     
     const prueba =() => {
@@ -89,7 +94,7 @@ const useCuotas = () => {
 
                 for(const j in prestamos[i].detallesCuotas) {
                     if(prestamos[i].detallesCuotas[j].estado === 'pendiente') {
-                        if(compararFechas(prestamos[i].detallesCuotas[j].fecha)) {
+                        if(compararFechas(prestamos[i].detallesCuotas[j].fecha,false)) {
                             cuotas.push(prestamos[i].detallesCuotas[j]);
                         }
                         // cuotas.push(prestamos[i].detallesCuotas[j]);
@@ -106,7 +111,7 @@ const useCuotas = () => {
                 }
                 cuotas = [];
             }
-            console.log('filtro','=>',filtro);
+            // console.log('filtro','=>',filtro);
         }
         setCuotasPendientes(filtro)
         setCargando(false);   
@@ -117,7 +122,9 @@ const useCuotas = () => {
         cargando,
         busqueda,
         setBusqueda,
-        cuotasPendientes
+        cuotasPendientes,
+        fechaActual,
+        transformarFechaYMD
     }
 }
 
