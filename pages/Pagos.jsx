@@ -88,11 +88,11 @@ const Pagos = () => {
           role="group"
           aria-label="Basic example"
         >
-          <button type="button" className="btn btn-sm btn-outline-light">
-            Activo
+          <button type="button" className="btn btn-sm btn-outline-danger">
+            Atradas
           </button>
-          <button type="button" className="btn btn-sm btn-outline-light">
-            Inactivos
+          <button type="button" className="btn btn-sm btn-outline-warning">
+            Al dia
           </button>
           <button type="button" className="btn btn-sm btn-outline-primary">
             Todos
