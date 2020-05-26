@@ -74,7 +74,8 @@ const useCuotas = () => {
                         id: prestamos[i].id, 
                         cuotas: prestamos[i].cuotas, 
                         periodoPagos: prestamos[i].periodoPagos,
-                        detallesCuotas: cuotas
+                        detallesCuotas: cuotas,
+                        monto: prestamos[i].monto
                     });
                 }
                 cuotas = [];

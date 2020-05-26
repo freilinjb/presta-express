@@ -18,6 +18,11 @@ const STATE_INICIAL = {
 }
 
 const ModalCobro = ({ prestamo, id, cuotaParcial, setActualizarCuotas }) => {
+
+  console.log(prestamo);
+  if(Object.entries(prestamo).length === 0) {
+    return;
+  }
   const { Toast } = useMensajesAlertas();
   const {setMoneda} = useCalculadora();
   // const { cuotaParcial } = usePagoParcial();
@@ -231,7 +236,6 @@ const ModalCobro = ({ prestamo, id, cuotaParcial, setActualizarCuotas }) => {
                   )}
                 </div>
                 <div className="form-group">
-                  
                   <div className="form-group">
                     <label htmlFor="pago">Pago parcial</label>
                     <input 
@@ -245,7 +249,6 @@ const ModalCobro = ({ prestamo, id, cuotaParcial, setActualizarCuotas }) => {
                       onChange={handleChange} 
                       className="form-control" 
                       placeholder="Ingrese el monto"/>
-
                   </div>
 
                   <label htmlFor="observacion" className="col-form-label">
@@ -257,7 +260,6 @@ const ModalCobro = ({ prestamo, id, cuotaParcial, setActualizarCuotas }) => {
                     name="observacion"
                     value={observacion}
                     onChange={handleChange}
-                    defaultValue=""
                   ></textarea>
                 </div>
                 <button

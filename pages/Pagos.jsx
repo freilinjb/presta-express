@@ -4,23 +4,29 @@ import Link from "next/link";
 import Layout from "../components/layout/Layout";
 import { FirebaseContext } from "../firebase";
 import Navegacion from "../components/layout/Navegacion";
-import ClienteMiniaturaDetalle from "../components/ui/ClienteMiniaturaDetalle";
 import Spinner from "../components/ui/Spinner";
+import ModalCobroParcial from '../components/ui/ModalCobroParcial';
+
 import useCuotas from '../hooks/useCuotas';
 import usePrestamo from '../hooks/usePrestamo';
 import useCalculadora from '../hooks/useCalculadora';
-
+import usePagoParcial from '../hooks/usePagoParcial';
 const Pagos = () => {
   const { cuotasPendientes, transformarFechaYMD, fechaActual } = useCuotas();
-  const { prestamos } = usePrestamo();
+  // const { prestamos } = usePrestamo();
+  const { cuotaParcial, setCuotaParcial } = usePagoParcial();
   const { setMoneda,formatearFecha } = useCalculadora();
-  console.log(fechaActual);
+  // console.log(fechaActual);
   
   
   const [consultarDB, setConsultarDB] = useState(true);
   const [cargando, setCargando] = useState(false);
   const [busqueda, setBusqueda] = useState("");
+  //Toma el prestamo completo que se preciono Click
+  const [prestamo, setPrestamo] = useState({});
+  const [cuota, setCuota] = useState(0);
 
+  const [actualizarCuotas, setActualizarCuotas] = useState(false);
   const [clientes, setClientes] = useState([]);
   const { firebase, usuario } = useContext(FirebaseContext);
 
@@ -30,10 +36,21 @@ const Pagos = () => {
   };
   
   useEffect(() => {
-    console.log(cuotasPendientes);
+    // console.log(cuotasPendientes);
     
   },[cuotasPendientes]);
-  // const usuario = useAutenticacion();
+  
+  const  handleClick=(valor, cuota)=> {
+    const filtrar = cuotasPendientes.filter(prestamo => {
+      return prestamo.id === valor
+    });
+
+    setPrestamo(filtrar);
+    setCuota(cuota);
+    setCuotaParcial(cuota);
+    console.log(cuota);
+    console.log(filtrar);
+  }
 
   useEffect(() => {
     if (usuario && busqueda.trim() === "" && firebase.cargando === false) {
@@ -55,6 +72,7 @@ const Pagos = () => {
         console.log(error);
       } finally {
         setCargando(false);
+        setActualizarCuotas(false);
       }
     }
   // prueba();
@@ -127,7 +145,7 @@ const Pagos = () => {
                             {/* {console.log('fecha',fecha)} */}
                           {/* <td>{setMoneda(ct.interes)}</td> */}
                           <td>{ct.cuota}</td>
-                          <td>{setMoneda(ct.valorCuota)}</td>
+                          <td> {fechaActual == transformarFechaYMD(ct.fecha) ? setMoneda(ct.valorCuota) : setMoneda(ct.valorCuota) +' + '+ ct.valorCuota*0.05 }</td>
                           <td>{setMoneda(ct.saldoCapital)}</td>
                           <td>{ct.fecha}</td>
                           {/* <td>{ct.estado}</td> */}
@@ -135,7 +153,11 @@ const Pagos = () => {
                             <div className="btn-group ml-auto">
                               <button
                                 className="btn btn-sm btn-outline-danger"
-                                // onClick={e => onClickConfirmar(ct.cuota)}
+                                data-toggle="modal"
+                                data-target="#modalPagoParcial"
+                                data-whatever="@mdo"
+                                value={prestamo.id}
+                                onClick={e=> handleClick(prestamo.id, ct.cuota)}
                               >
                                 Cobrar
                               </button>
@@ -175,9 +197,14 @@ const Pagos = () => {
     <Layout>
       {/* {firebase.cargando && (<div className="spinner"><Spinner/></div>)} */}
 
-      <Navegacion titulo="Lista de Clientes">
+      <Navegacion titulo="Lista de Cuotas pendientes">
+        {Object.entries(prestamo).length && console.log('prestamo','=>',prestamo)}
+        {Object.entries(prestamo).length > 0 && (<ModalCobroParcial prestamo={prestamo[0]} id={prestamo.id} cuotaParcial={cuotaParcial} setActualizarCuotas={setActualizarCuotas}/>)}
         <div className="row justify-content-center">
           {/* <Link href="/add/Cliente">
+
+
+
             <a className="btn btn-primary shadow float-right col-md-auto offset-md-7">
               Registrar un Cliente
             </a>
