@@ -12,14 +12,15 @@ import usePrestamo from '../hooks/usePrestamo';
 import useCalculadora from '../hooks/useCalculadora';
 import usePagoParcial from '../hooks/usePagoParcial';
 const Pagos = () => {
-  const { cuotasPendientes, transformarFechaYMD, fechaActual } = useCuotas();
+  const { cuotasPendientes, transformarFechaYMD, fechaActual, compararFechas } = useCuotas();
   // const { prestamos } = usePrestamo();
   const { cuotaParcial, setCuotaParcial } = usePagoParcial();
   const { setMoneda,formatearFecha } = useCalculadora();
   // console.log(fechaActual);
+  let fechaF = new Date().now;
+  fechaF = formatearFecha(fechaF);
   
-  
-  const [consultarDB, setConsultarDB] = useState(true);
+
   const [cargando, setCargando] = useState(false);
   const [busqueda, setBusqueda] = useState("");
   //Toma el prestamo completo que se preciono Click
@@ -28,17 +29,10 @@ const Pagos = () => {
 
   const [actualizarCuotas, setActualizarCuotas] = useState(false);
   const [clientes, setClientes] = useState([]);
-  const { firebase, usuario } = useContext(FirebaseContext);
 
   const handleChange = (e) => {
     setBusqueda(e.target.value);
-    // console.log(busqueda);
   };
-  
-  useEffect(() => {
-    // console.log(cuotasPendientes);
-    
-  },[cuotasPendientes]);
   
   const  handleClick=(valor, cuota)=> {
     const filtrar = cuotasPendientes.filter(prestamo => {
@@ -51,49 +45,6 @@ const Pagos = () => {
     console.log(cuota);
     console.log(filtrar);
   }
-
-  useEffect(() => {
-    if (usuario && busqueda.trim() === "" && firebase.cargando === false) {
-      const { uid } = usuario;
-      console.log(" se cumplio");
-
-      //Esta funcion te da acceso a todos los datos
-      //y snapshot realiza operaciones con ellos
-      try {
-        const obtenerClientes = async () => {
-          await firebase.db
-            .collection("Clientes")
-            .where("creador.id", "==", uid)
-            .orderBy("creado", "desc")
-            .onSnapshot(manejarSnapshot); //Ordena por creado
-        };
-        obtenerClientes();
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setCargando(false);
-        setActualizarCuotas(false);
-      }
-    }
-  // prueba();
-
-  }, [usuario]);
-  //se ejecuta cuando el componente esta listo
-  function manejarSnapshot(snapshot) {
-    const clientes = snapshot.docs.map((doc) => {
-      //Extrae todo el registro completo
-      return {
-        id: doc.id,
-        ...doc.data(),
-      };
-    });
-
-    //resultado de la consulta
-    setClientes(clientes);
-    // console.log(clientes);
-  }
-
-  // console.log(clientes);
 
   const Componente = cargando ? (
     <Spinner />
@@ -135,12 +86,16 @@ const Pagos = () => {
               ))} */}
                   {cuotasPendientes.map(prestamo=> (
                     <>
-                        <tr className="group" key={prestamo.creado}>
-                          <td colSpan="5">{prestamo.cliente.nombre + ' ' + prestamo.cliente.apellido}</td>
-                        </tr>
+                        {prestamo.estado == 'activo' && (
+                          <tr className="group" key={prestamo.creado}>
+                            <td colSpan="5">{prestamo.cliente.nombre + ' ' + prestamo.cliente.apellido}</td>
+                          </tr>
+                        )}
                         {prestamo.detallesCuotas.map(ct=> (
                         <>
-                          <tr role="row" key={ct.cuota + ct.fecha + ct.valorCuota} className={`alert ${fechaActual == transformarFechaYMD(ct.fecha) ? 'alert-warning' : 'alert alert-danger'}`}>
+                        {(ct.estado == 'pendiente' || ct.estado == 'parcial') &&
+                         (
+                          <tr role="row" key={ct.cuota + ct.fecha + ct.valorCuota} className={`alert ${fechaF == (ct.fecha) ? 'alert-warning' : 'alert alert-danger'}`}>
                             {/* {console.log('formatearFecha',formatearFecha(ct.creado,'dmy'))} */}
                             {/* {console.log('fecha',fecha)} */}
                           {/* <td>{setMoneda(ct.interes)}</td> */}
@@ -164,6 +119,7 @@ const Pagos = () => {
                             </div>
                           </td>
                           </tr>
+                        )}
                         </>
                       ))}
                     </>
@@ -202,9 +158,6 @@ const Pagos = () => {
         {Object.entries(prestamo).length > 0 && (<ModalCobroParcial prestamo={prestamo[0]} id={prestamo.id} cuotaParcial={cuotaParcial} setActualizarCuotas={setActualizarCuotas}/>)}
         <div className="row justify-content-center">
           {/* <Link href="/add/Cliente">
-
-
-
             <a className="btn btn-primary shadow float-right col-md-auto offset-md-7">
               Registrar un Cliente
             </a>

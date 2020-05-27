@@ -19,7 +19,7 @@ const STATE_INICIAL = {
 
 const ModalCobro = ({ prestamo, id, cuotaParcial, setActualizarCuotas }) => {
 
-  console.log(prestamo);
+  // console.log(prestamo);
   if(Object.entries(prestamo).length === 0) {
     return;
   }
@@ -90,7 +90,8 @@ const ModalCobro = ({ prestamo, id, cuotaParcial, setActualizarCuotas }) => {
             }
         }
         // firebase.db.collection("Cobros").add(pagos);
-
+        console.log('modal','=>',pagos);
+        
         prestamo.detallesCuotas[cuotaParcial-1].valorCuota = (Number(prestamo.detallesCuotas[cuotaParcial-1].valorCuota) - Number(pago)).toFixed(2);
 
         if(pago == prestamo.detallesCuotas[cuotaParcial-1].valorCuota) {
@@ -106,6 +107,7 @@ const ModalCobro = ({ prestamo, id, cuotaParcial, setActualizarCuotas }) => {
         console.log('pagos:','=>',pagos);
         console.log('prestamo:','=>',prestamo);
         // console.log('cantidad pagada: ', cantidadPagadas, ' prestamo: pago:', prestamo.detallesCuotas.length);
+        console.log(prestamo);
         
         firebase.db.collection("Prestamos").doc(id).set(prestamo).then(function() {
           console.log('Acualizado correctamente');
@@ -153,6 +155,7 @@ const ModalCobro = ({ prestamo, id, cuotaParcial, setActualizarCuotas }) => {
 
     } finally {
         firebase.cargando = false;
+        setCargando(false);
         document.getElementById("cerrar2").click();
         // Router.push('/Prestamos');
         setEnviando(false);

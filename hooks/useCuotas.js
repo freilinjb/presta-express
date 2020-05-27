@@ -9,19 +9,14 @@ import useCalculadora from './useCalculadora';
 const useCuotas = () => {
     const { formatearFecha } = useCalculadora();
     const { prestamos } = usePrestamo();
-    // let fecha = new Date();
-    // fecha = formatearFecha(fecha,'ymd');
-    // console.log(fecha);
-    
-    // const {clientes} = useCliente("desc");
-    // console.log(prestamos);
-    
+    //Toma el prestamo completo que se preciono Click
+      
     const [cargando, setCargando] = useState(false);
     const [busqueda, setBusqueda] = useState('');
     const [fechaActual, setFechaActual] = useState('');
-
+    
+    
     const [cuotasPendientes, setCuotasPendientes] = useState([]);
-    const {firebase, usuario} = useContext(FirebaseContext);
 
     const transformarFechaYMD=(fecha)=> {
         const ftemp = fecha.split('-');
@@ -50,82 +45,49 @@ const useCuotas = () => {
             return new Date(fecha2) <= new Date(fecha1);
         }
     }
-    
-    const prueba =() => {
-        // setCargando(true);
-        let filtro = [];
-        let cuotas = [];
-        for(const i in prestamos) {
-            console.log(prestamos[i]);
-            if(prestamos[i].estado === 'activo') {
-                console.log(prestamos[i]);
 
-                for(const j in prestamos[i].detallesCuotas) {
-                    if(prestamos[i].detallesCuotas[j].estado === 'pendiente') {
-                        if(compararFechas(prestamos[i].detallesCuotas[j].fecha)) {
-                            cuotas.push(prestamos[i].detallesCuotas[j]);
-                        }
-                    }
-                }
-
-                if(cuotas.length > 0) {
-                    filtro.push({
-                        cliente: prestamos[i].cliente, 
-                        id: prestamos[i].id, 
-                        cuotas: prestamos[i].cuotas, 
-                        periodoPagos: prestamos[i].periodoPagos,
-                        detallesCuotas: cuotas,
-                        monto: prestamos[i].monto
-                    });
-                }
-                cuotas = [];
-            }
-            console.log('filtro','=>',filtro);
-            setCargando(false);   
-        }
-    }
-    
     useEffect(() => {
-        let filtro = [];
-        let cuotas = [];
-        for(const i in prestamos) {
-            console.log(prestamos[i]);
-            if(prestamos[i].estado === 'activo') {
-                console.log(prestamos[i]);
+        // let filtro = [];
+        // let cuotas = [];
+        // for(const i in prestamos) {
+        //     console.log(prestamos[i]);
+        //     if(prestamos[i].estado === 'activo') {
+        //         console.log(prestamos[i]);
 
-                for(const j in prestamos[i].detallesCuotas) {
-                    if(prestamos[i].detallesCuotas[j].estado === 'pendiente') {
-                        if(compararFechas(prestamos[i].detallesCuotas[j].fecha,false)) {
-                            cuotas.push(prestamos[i].detallesCuotas[j]);
-                        }
-                        // cuotas.push(prestamos[i].detallesCuotas[j]);
-                    }
-                }
-                if(cuotas.length > 0) {
-                    filtro.push({
-                        cliente: prestamos[i].cliente, 
-                        id: prestamos[i].id, 
-                        cuotas: prestamos[i].cuotas, 
-                        periodoPagos: prestamos[i].periodoPagos,
-                        detallesCuotas: cuotas
-                    });
-                }
-                cuotas = [];
-            }
-            // console.log('filtro','=>',filtro);
-        }
-        setCuotasPendientes(filtro)
-        setCargando(false);   
+        //         for(const j in prestamos[i].detallesCuotas) {
+        //             if(prestamos[i].detallesCuotas[j].estado === 'pendiente') {
+        //                 if(compararFechas(prestamos[i].detallesCuotas[j].fecha,false)) {
+        //                     cuotas.push(prestamos[i].detallesCuotas[j]);
+        //                 }
+        //                 // cuotas.push(prestamos[i].detallesCuotas[j]);
+        //             }
+        //         }
+        //         if(cuotas.length > 0) {
+        //             filtro.push({
+        //                 cliente: prestamos[i].cliente, 
+        //                 id: prestamos[i].id, 
+        //                 cuotas: prestamos[i].cuotas, 
+        //                 periodoPagos: prestamos[i].periodoPagos,
+        //                 detallesCuotas: cuotas
+        //             });
+        //         }
+        //         cuotas = [];
+        //     }
+        //     // console.log('filtro','=>',filtro);
+        // }
+        setCuotasPendientes(prestamos)
+        setCargando(false);
 
     },[prestamos]);
+
     return {
-        prueba,
         cargando,
         busqueda,
         setBusqueda,
         cuotasPendientes,
         fechaActual,
-        transformarFechaYMD
+        transformarFechaYMD,
+        compararFechas
     }
 }
 
