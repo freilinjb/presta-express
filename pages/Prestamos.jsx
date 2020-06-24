@@ -96,7 +96,6 @@ const Prestamos = () => {
           display: inline-block;
           width: 100%;
           color: rgb(255, 255, 255);
-          background-color: rgb(197, 44, 102);
           padding: 5px;
           text-align: center;
           text-transform: uppercase;

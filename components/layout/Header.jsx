@@ -44,9 +44,6 @@ const Header = (props) => {
                         </Link>
                         </div>
                     </li>
-                    <li className="nav-item">
-                        <a className="nav-link disabled" href="#">Disabled</a>
-                    </li>
                     </ul>
                     {/* NOTIFICACION */}
                     {/* CONECCION */}
