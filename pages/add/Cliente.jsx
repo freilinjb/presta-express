@@ -172,7 +172,7 @@ const Cliente = () => {
                                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
                                 <label htmlFor="nombre">Nombre</label>
                                 <input type="text" 
-                                    className="form-control" 
+                                    className={`form-control ${nombre.length >= 5 ? 'is-valid' : 'is-invalid'}`} 
                                     id="nombre" 
                                     name="nombre" value={nombre} 
                                     placeholder="Ingrese el nombre" 
@@ -184,10 +184,7 @@ const Cliente = () => {
                                 </div>
                                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
                                 <label htmlFor="apellido">Apellido</label>
-                                <input type="text" className="form-control" id="apellido" name="apellido" placeholder="Apellido" value={apellido} onChange={handleChange} autoComplete="off" required/>
-                                <div className="valid-feedback">
-                                    Looks good!
-                                </div>
+                                <input type="text" className={`form-control ${apellido.length >= 3 ? 'is-valid' : 'is-invalid'}`} id="apellido" name="apellido" placeholder="Apellido" value={apellido} onChange={handleChange} autoComplete="off" required/>
                                 {errores.apellido && <p className="alert alert-danger">{errores.apellido}</p>}
 
                                 </div>

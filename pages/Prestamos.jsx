@@ -52,7 +52,7 @@ const Prestamos = () => {
   ) : (
     <div className="col-lg-12">
       <div className="section-block">
-      <div className="section-block row justify-content-between m-0 p-0 mb-2"><h3 class="section-title col-auto p-0">Lista de Prestamos</h3>
+      <div className="section-block row justify-content-between m-0 p-0 mb-2"><h3 className="section-title col-auto p-0">Lista de Prestamos</h3>
       <div className="btn-group col-auto col-auto p-0" role="group" aria-label="Basic example">
         <button type="button" className="btn btn-sm btn-outline-light" onClick={handleClickActivo}>Activos</button>
         <button type="button" className="btn btn-sm btn-outline-light">Finalizados</button>

@@ -40,6 +40,16 @@ const Navegacion = (props) => {
                             </li>
                             </Link>
 
+                            <Link href="/Solicitudes"> 
+                            <li className="nav-item">
+                                
+                                    <div className={`nav-link ${router.pathname == '/Solicitudes' ? 'active' : ''}`}>
+                                        <i className="far fa-money-bill-alt"></i>
+                                        Solicitudes
+                                    </div>
+                            </li>
+                            </Link>
+
                             <Link href="/Prestamos"> 
                             <li className="nav-item">
                                 
