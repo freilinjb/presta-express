@@ -14,6 +14,12 @@ const NavUsuario = () => {
 
   return (
     <>
+    {/* Elimina el icono de la barra de navegacion */}
+    <style jsx>{`
+      li {
+        list-style-type: none;
+      }
+    `}</style>
       <li className="nav-item dropdown nav-user">
         <a
           className="nav-link nav-user-img"
