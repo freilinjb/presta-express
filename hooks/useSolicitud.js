@@ -8,14 +8,14 @@ const useSolicitud = orden => {
     const [busqueda, setBusqueda] = useState("");
 
     const [cliente, setCliente] = useState({});
-    const [consultar,setConsultar] = useState('');
+    const [consultarCliente, setConsultarCliente] = useState('');
     const { firebase, usuario } = useContext(FirebaseContext);
 
     const obtenerCliente = async (identificacion) => {
-        const { uid } = usuario;
-        
+
+        let resultado;
         try {
-            const resultado = await firebase.db.collection("Clientes").where("creador.id", "==", uid).where("cedula", "==", identificacion).onSnapshot(manejarSnapshot);
+            resultado = await firebase.db.collection("Clientes").where("creador.id", "==", usuario.uid).onSnapshot(manejarSnapshot);
             setCliente(resultado);
 
         } catch (error) {
@@ -24,34 +24,45 @@ const useSolicitud = orden => {
         finally {
             setCargando(false);
         }
+
+        return resultado;
     }
 
     useEffect(() => {
 
-    },[consultar]);
+        console.log(obtenerCliente(consultarCliente));
+        
 
-//se ejecuta cuando el componente esta listo
-function manejarSnapshot(snapshot) {
-    const clientes = snapshot.docs.map(doc => {
-        //Extrae todo el registro completo
-        return {
-            id: doc.id,
-            ...doc.data()
-        }
-    });
+        console.log('cliente: ','=>',cliente);
+        console.log('consultarCliente: ','=>',consultarCliente);
+        
+    }, [consultarCliente, usuario, firebase.cargando]);
 
-    //resultado de la consulta
-    setClientes(clientes);
-    // console.log(clientes);
+    //se ejecuta cuando el componente esta listo
+    function manejarSnapshot(snapshot) {
+        const cliente = snapshot.docs.map(doc => {
+            //Extrae todo el registro completo
+            return {
+                id: doc.id,
+                ...doc.data()
+            }
+        });
 
-}
+        //resultado de la consulta
+        setCliente(cliente);
+        console.log(cliente);
 
-return {
-    busqueda,
-    setBusqueda,
-    cargando,
-    clientes,
-    setClientes
+    }
+
+    return {
+        busqueda,
+        setBusqueda,
+        cargando,
+        cliente,
+        setCliente,
+        setConsultarCliente,
+        obtenerCliente
+    }
 }
 
 export default useSolicitud;

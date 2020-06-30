@@ -373,7 +373,7 @@ const Cliente = () => {
                     <div className="col-sm-6">
                         <button
                           type="submit"
-                          class="btn btn-space btn-primary"
+                          className="btn btn-space btn-primary"
                           disabled={firebase.cargando}
                           type="submit"
                         >

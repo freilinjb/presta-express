@@ -14,10 +14,10 @@ const useSector = (orden) => {
   const [sectores, setSectores] = useState([]);
   const [editarsector, setEditarSector] = useState(
     {
-      id:'',
-      sector:{
-        nombre:'',
-        descripcion:''
+      id: '',
+      sector: {
+        nombre: '',
+        descripcion: ''
       }
     }
   );
@@ -60,7 +60,7 @@ const useSector = (orden) => {
     // console.log(sectores);
   }
 
-  const eliminarSector=()=> {
+  const eliminarSector = () => {
     Swal.fire({
       title: 'Eliminar',
       text: "No podra recuperar el registro despues de haberlo eliminado!",
@@ -79,7 +79,7 @@ const useSector = (orden) => {
         )
       } else {
 
-         Swal.fire(
+        Swal.fire(
           'Deleted!',
           'Preciono cancelar.',
           'success'
@@ -88,39 +88,39 @@ const useSector = (orden) => {
     })
   }
 
-  async function editarSectorFn(sector,id) {
+  async function editarSectorFn(sector, id) {
 
     console.log('id');
     console.log(id);
-  //   return;
-    
-  //Inicia la carga
-      //Si el usuario no esta autenticado llevat al login
-      if (!usuario) {
-          console.log('no esta loqueado');
-          firebase.cargando = false;
+    //   return;
 
-          return router.push("/SignIn");
-      }
+    //Inicia la carga
+    //Si el usuario no esta autenticado llevat al login
+    if (!usuario) {
+      console.log('no esta loqueado');
+      firebase.cargando = false;
 
-  try {
-  
+      return router.push("/SignIn");
+    }
+
+    try {
+
       //Insertar en la BD
-      firebase.cargando = true;            
+      firebase.cargando = true;
       firebase.db.collection("Sectores").doc(id).update({
-          nombre:sector.nombre,
-          apellido:sector.descripcion
+        nombre: sector.nombre,
+        apellido: sector.descripcion
       });
       alert.success('Se ha guardo correctamente');
-  } catch (error) {
+    } catch (error) {
       console.log(error);
       alert.error('Ha ocurrido un error');
 
-  } finally {
+    } finally {
       firebase.cargando = false;
       // router.push('/Clientes');
+    }
   }
-}
 
   return {
     sectores,
@@ -130,7 +130,7 @@ const useSector = (orden) => {
     setBusqueda,
     eliminarSector,
     editarSectorFn,
-    editarsector, 
+    editarsector,
     setEditarSector
   };
 };
