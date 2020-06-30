@@ -6,6 +6,8 @@ import useCliente from '../../hooks/useCliente';
 import useCalculadora from '../../hooks/useCalculadora';
 import { FirebaseContext } from "../../firebase";
 
+import Swal from "sweetalert2";
+
 //Componentes
 import Amortizacion from '../../components/ui/Amortizacion';
 
@@ -27,6 +29,44 @@ const Solicitud = () => {
     let fecha = new Date();
     fecha = formatearFecha(fecha,'ymd');
     // console.log(fecha);
+
+    useEffect(() => {
+        Swal.fire({
+            title: 'Ingrese la Cedula o RNC',
+            input: 'text',
+            inputAttributes: {
+              autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText:'Cancelar',
+            showLoaderOnConfirm: true,
+            preConfirm: (login) => {
+
+              return fetch(`//api.github.com/users/${login}`)
+                .then(response => {
+                  if (!response.ok) {
+                    throw new Error(response.statusText)
+                  }
+                  return response.json()
+                })
+                .catch(error => {
+                  Swal.showValidationMessage(
+                    `Request failed: ${error}`
+                  )
+                })
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+          }).then((result) => {
+            if (result.value) {
+              Swal.fire({
+                title: `${result.value.login}'s avatar`,
+                html: '<h1>HOLA MUNDO<h1> <h2>HOLA MUNDO<h2>',
+                imageUrl: result.value.avatar_url
+              })
+            }
+          })
+    },[])
 
     const STATE_INICIAL = {
         idcliente:'',

@@ -1,22 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
-import Link from "next/link";
-
-import { FirebaseContext } from "../firebase";
-
-import Layout from "../components/layout/Layout";
-import Navegacion from "../components/layout/Navegacion";
 import ClienteMiniaturaDetalle from "../components/ui/ClienteMiniaturaDetalle";
 import Spinner from "../components/ui/Spinner";
 import ButtonFloat from "../components/ui/ButtonFloat";
 import LayoutPrincipal from "../components/layout/LayoutPrincipal";
-import Sector from "../components/ui/Sector";
-import InputModal from '../components/ui/InputModal';
-import useSector from '../hooks/useSector';
-import SectorEditarModal from '../components/ui/SectorEditarModal';
+import useCliente from '../hooks/useCliente';
 
 const Clientes = () => {
-  const {sectores, setSectores, cargando, busqueda, setBusqueda} =  useSector();
-  const { firebase, usuario } = useContext(FirebaseContext);
+  //hook cliente
+  const {clientes, setClientes, cargando, busqueda, setBusqueda} =  useCliente("desc");
 
   const handleChange = (e) => {
     setBusqueda(e.target.value);
@@ -28,48 +19,47 @@ const Clientes = () => {
 
     if (busqueda.trim()) {
       const buscar = busqueda.toLowerCase().trim();
-      const filtro = sectores.filter((sectore) => {
+      const filtro = clientes.filter((cliente) => {
         return (
-          sectore.nombre.toLowerCase().includes(buscar) || sectore.descripcion.toLowerCase().includes(buscar)
+          (
+            cliente.nombre.toLowerCase() +
+            " " +
+            cliente.apellido.toLowerCase()
+          ).includes(buscar) || cliente.cedula.toLowerCase().includes(buscar)
         );
       });
 
       //filtro itera en cada uno de ellos, combierte el nombrer en minusculas
       //y luego si lo encuentra lo agrega a filter
       // console.log(filtro,' BUSQUEDA: ', busqueda);
-      setSectores(filtro);
-      // console.log(sectores);
+      setClientes(filtro);
+      // console.log(clientes);
     }
   };
   const Componente = cargando ? (
     <Spinner />
   ) : (
-    <div className="row justify-content-center">
-      <div className="col-lg-8 col-sm-12 p-0">
-    <div className="card">
-      <div className="campaign-table table-responsive">
-        <table className="table table-hover">
-          <thead>
-            <tr className="border-0">
-              <th className="border-0">#</th>
-              <th className="border-0">Nombre</th>
-              <th className="border-0">Nombre</th>
-              <th className="border-0">Nombre</th>
-              <th className="border-0">Descripcion</th>
-            </tr>
-          </thead>
-          {sectores.map((sector,index) => (
-              <Sector
-              key={sector.id}
-              id={sector.id}
-              sector={sector}
-              index={index+1}
-              />
-          ))}
-        </table>
+    <div className="col-lg-12 p-0">
+      <div className="card">
+        <div className="campaign-table table-responsive">
+          <table className="table table-hover">
+            <thead>
+              <tr className="border-0">
+                <th className="border-0">Foto</th>
+                <th className="border-0">Nombre</th>
+                <th className="border-0">Telefono</th>
+                <th className="border-0">Correo</th>
+                <th className="border-0">Accion</th>
+              </tr>
+            </thead>
+            <tbody>
+            {clientes.map((cliente) => (
+              <ClienteMiniaturaDetalle key={cliente.id} cliente={cliente} />
+            ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-  </div>
     </div>
   );
   return (
@@ -79,11 +69,9 @@ const Clientes = () => {
         handleChange={handleChange}
         hanbleBuscar={hanbleBuscar}
         busqueda={busqueda}
-        id="sectorModal"
+        btnIr="/add/Solicitud"
       >
-        <ButtonFloat modal={true}/>
-        <SectorEditarModal/>
-        <InputModal/>
+          <ButtonFloat modal={false} ir="/add/Solicitud"/>
         {Componente}
       </LayoutPrincipal>
     </>

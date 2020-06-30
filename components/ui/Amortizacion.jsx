@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import useCalculadora from "../../hooks/useCalculadora";
 
 const Amortizacion = ({ tablaAmortizada }) => {
@@ -9,6 +9,20 @@ const Amortizacion = ({ tablaAmortizada }) => {
   
   // setCuota(tablaAmortizada.cuotas[0].cuota);
   // setInteres((tablaAmortizada.cuotas[0] *  tablaAmortizada.cuotas.length) - monto);
+
+  useEffect(() => {
+    let sumatoriaInteres = 0;
+    for(const i in tablaAmortizada.cuotas) {
+      sumatoriaInteres += parseFloat(tablaAmortizada.cuotas[i].interes)
+      // setInteres(parseFloat(interes) + parseFloat(tablaAmortizada.cuotas[i].interes));
+    }
+
+    setInteres(sumatoriaInteres.toFixed(2));
+  
+    console.log('Tabla amortizacion','=>',tablaAmortizada);
+
+  }, [tablaAmortizada]);
+  
 
   return (
     <>
@@ -108,7 +122,7 @@ const Amortizacion = ({ tablaAmortizada }) => {
                 </li>
                 <li className="list-group-item d-flex justify-content-between align-items-center">
                   <strong>Interes Generado</strong>
-                  <span className="badge badge-secondary badge-pill">{(parseFloat(tablaAmortizada.cuotas[0]) *  Number(tablaAmortizada.cuotas.length)) - parseFloat(tablaAmortizada.monto)}</span>
+                  <span className="badge badge-secondary badge-pill">{interes}</span>
                 </li>
                 <li className="list-group-item d-flex justify-content-between align-items-center">
                   <strong>Fecha de inicio</strong>
