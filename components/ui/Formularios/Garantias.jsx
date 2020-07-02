@@ -72,9 +72,8 @@ const Garantias = () => {
               Go somewhere
             </a>
           </div>
-          
-          <Vehiculo/>
 
+          <Vehiculo />
 
           <div
             className="tab-pane fade active show"

@@ -4,6 +4,8 @@ import Layout from "../../components/layout/Layout";
 
 import Navegacion from "../../components/layout/Navegacion";
 import Garantias from "../../components/ui/Formularios/Garantias";
+import ListasGarantias from "../../components/ui/Listas/ListasGarantias";
+import ModalGarantias from "../../components/ui/Modal/ModalGarantias";
 
 import useCliente from "../../hooks/useCliente";
 import useSolicitud from "../../hooks/useSolicitud";
@@ -165,7 +167,7 @@ const Solicitud = () => {
           <div className="row justify-content-center">
             <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12">
               <div className="row justify-content-center">
-                <div className="col-md-12 col-lg-12 col-xl-6 col-sm-12">
+                <div className="col-md-12 col-lg-12 col-xl-10 col-sm-12">
                   <div className="card">
                     <h5 className="card-header">
                       Registro de Solicitud de Prestamo{" "}
@@ -384,49 +386,47 @@ const Solicitud = () => {
                             ></textarea>
                           </div>
                         </div>
-                        <div className="row">
-                          <div className="col-6">
-                            <button
-                              className="btn btn-primary btn-lg btn-block"
-                              disabled={firebase.cargando}
-                              type="submit"
-                            >
-                              {cargando ? (
-                                <>
-                                  <span
-                                    class="spinner-border spinner-border-sm"
-                                    role="status"
-                                    aria-hidden="true"
-                                  ></span>
-                                  Enviando datos
-                                </>
-                              ) : (
-                                <>Guardar</>
-                              )}
-                            </button>
-                          </div>
-                          <div className="col-6">
-                            <button
-                              type="button"
-                              className="btn btn-outline-secondary btn-lg btn-block"
-                              onClick={hancleClick}
-                            >
-                              Calcular
-                            </button>
-                            {/* <button type="button" clasclassNames="btn btn-outline-secondary btn-lg btn-block" onClick={hancleClick}>Calcular</button> */}
-                          </div>
-                        </div>
                       </form>
                     </div>
+                    <div className="card-body border-top">
+                      <ListasGarantias />
+                    </div>
+
+                    <div className="row">
+                      <div className="col-sm-6">
+                        <button
+                          className="btn btn-primary btn-space"
+                          disabled={firebase.cargando}
+                          type="submit"
+                        >
+                          {cargando ? (
+                            <>
+                              <span
+                                class="spinner-border spinner-border-sm"
+                                role="status"
+                                aria-hidden="true"
+                              ></span>
+                              Enviando datos
+                            </>
+                          ) : (
+                            <>Guardar</>
+                          )}
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-outline-secondary btn-space"
+                          onClick={hancleClick}
+                        >
+                          Calcular
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="col-md-12 mb-6 col-lg-6 col-xl-6">
-                  {/* {calculado ? (<Amortizacion tablaAmortizada={tablaAmortizada} />) : null } */}
-                  <Garantias/>
                 </div>
               </div>
             </div>
           </div>
+          <ModalGarantias/>
         </Navegacion>
       </Layout>
     </>
