@@ -78,17 +78,17 @@ const Navegacion = (props) => {
                             </li>
                             </Link>
                             <li className="nav-item ">
-                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i className="fab fa-fw fa-wpforms"></i>Forms</a>
+                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i className="fab fa-fw fa-wpforms"></i>Garantias</a>
                                 <div id="submenu-4" className="collapse submenu" >
                                     <ul className="nav flex-column">
                                         <li className="nav-item">
-                                            <a className="nav-link" href="form-elements.html">Form Elements</a>
+                                            <a className="nav-link" href="form-elements.html">Solidarias</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="form-validation.html">Parsely Validations</a>
+                                            <a className="nav-link" href="form-validation.html">Vehiculos</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="multiselect.html">Multiselect</a>
+                                            <a className="nav-link" href="multiselect.html">Hipotecarios</a>
                                         </li>
                                     </ul>
                                 </div>

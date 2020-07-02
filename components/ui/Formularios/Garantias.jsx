@@ -11,49 +11,49 @@ const Garantias = () => {
           <li className="nav-item">
             <a
               className="nav-link"
-              id="home-tab"
+              id="solidaria-tab"
               data-toggle="tab"
-              href="#home"
+              href="#solidaria"
               role="tab"
-              aria-controls="home"
+              aria-controls="solidaria"
               aria-selected="false"
             >
-              Tab Title #1
+              Solidaria
             </a>
           </li>
           <li className="nav-item">
             <a
               className="nav-link"
-              id="profile-tab"
+              id="vehiculo-tab"
               data-toggle="tab"
-              href="#profile"
+              href="#vehiculo"
               role="tab"
-              aria-controls="profile"
+              aria-controls="vehiculo"
               aria-selected="false"
             >
-              Tab Title #2
+              Vehiculo
             </a>
           </li>
           <li className="nav-item">
             <a
               className="nav-link active show"
-              id="contact-tab"
+              id="hipotecaria-tab"
               data-toggle="tab"
-              href="#contact"
+              href="#hipotecaria"
               role="tab"
-              aria-controls="contact"
+              aria-controls="hipotecaria"
               aria-selected="true"
             >
-              Tab Title #3
+              Hipotecaria
             </a>
           </li>
         </ul>
         <div className="tab-content" id="myTabContent">
           <div
             className="tab-pane fade"
-            id="home"
+            id="solidaria"
             role="tabpanel"
-            aria-labelledby="home-tab"
+            aria-labelledby="solidaria-tab"
           >
             <p className="lead">
               {" "}
@@ -72,26 +72,15 @@ const Garantias = () => {
               Go somewhere
             </a>
           </div>
-          <div
-            className="tab-pane fade"
-            id="profile"
-            role="tabpanel"
-            aria-labelledby="profile-tab"
-          >
-            <h3>Tab Content Heading</h3>
-            <p>
-              Nullam et tellus ac ligula condimentum sodales. Aenean tincidunt
-              viverra suscipit. Maecenas id molestie est, a commodo nisi.
-              Quisque fringilla turpis nec elit eleifend vestibulum. Aliquam sed
-              purus in odio ullamcorper congue consectetur in neque. Aenean sem
-              ex, tempor et auctor sed, congue id neque.{" "}
-            </p>
-          </div>
+          
+          <Vehiculo/>
+
+
           <div
             className="tab-pane fade active show"
-            id="contact"
+            id="hipotecaria"
             role="tabpanel"
-            aria-labelledby="contact-tab"
+            aria-labelledby="hipotecaria-tab"
           >
             <h3>Tab Heading Content </h3>
             <p>
