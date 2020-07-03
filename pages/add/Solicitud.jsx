@@ -83,7 +83,7 @@ const Solicitud = () => {
       cargosPorMora,
       detallesCuotas: tablaAmortizada.cuotas,
       observacion,
-      estado: "activo",
+      estado: "En revisión",
       creado: Date.now(),
       cliente: {
         id: idcliente,
@@ -101,7 +101,7 @@ const Solicitud = () => {
       //Insertar en la BD
 
       setCargando(true);
-      const p = await firebase.db.collection("Prestamos").add(prestamo);
+      const p = await firebase.db.collection("Solicitud").add(prestamo);
       Toast.fire({
         icon: "success",
         title: "Se ha guardado correctamente!!",
@@ -386,9 +386,7 @@ const Solicitud = () => {
                             ></textarea>
                           </div>
                         </div>
-                      </form>
-                    </div>
-                    <div className="card-body border-top">
+                        <div className="card-body border-top">
                       <ListasGarantias />
                     </div>
 
@@ -420,6 +418,8 @@ const Solicitud = () => {
                           Calcular
                         </button>
                       </div>
+                    </div>
+                      </form>
                     </div>
                   </div>
                 </div>
