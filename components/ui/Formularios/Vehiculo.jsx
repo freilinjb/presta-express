@@ -1,6 +1,30 @@
 import React from "react";
 
+import useMensajeAlertas from "../../../hooks/useMensajesAlertas";
+
+import { FirebaseConext } from "../../../firebase";
+
+//Validaciones
+import useValidacion from "../../../hooks/useValidacion";
+import validarCrearGarantiaVehiculo from "../../../validacion/validarCrearGarantiaVehiculo";
+
+import useGarantia from "../../../hooks/useGarantia";
+
+const STATE_INICIAL = {
+  chasis: "",
+  placa: "",
+  marca: "",
+  tipoVehiculo: "",
+  modelo: "",
+  numeroPuertas: "",
+  anio: "",
+  color: "",
+  cilindros: "",
+  pasajeros: ""
+};
+
 const Vehiculo = () => {
+
   return (
     <>
       <div
