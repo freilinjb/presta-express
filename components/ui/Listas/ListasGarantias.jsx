@@ -7,7 +7,7 @@ const ListasGarantias = () => {
         <div className="card-header">
           <div className="row justify-content-between">
             <div className="col-4"><p>Listas de Garantias</p></div>
-            <div className="col-auto m-0 p-0"><button className="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalGarantias">Agregar Garantia</button></div>
+            <div className="col-auto m-0 p-0"><button className="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalGarantias" type="button">Agregar Garantia</button></div>
           </div>
         </div>
         <div className="card-body p-0">

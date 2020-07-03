@@ -3,11 +3,16 @@ import React from "react";
 import Hipotecaria from "../../ui/Formularios/Hipotecaria";
 import Vehiculo from "../../ui/Formularios/Vehiculo";
 
+
+const clickVentana=(e) => {
+  console.log('Valores del click','=>',e);
+}
+
 const Garantias = ({solidaria, vehiculo, hipotecaria}) => {
   return (
     <>
       <div className="tab-regular">
-        <ul className="nav nav-tabs " id="myTab" role="tablist">
+        <ul className="nav nav-tabs " id="myTab" role="tablist" onClick={() => clickVentana()}>
           <li className="nav-item">
             <a
               className="nav-link active show"
@@ -47,6 +52,19 @@ const Garantias = ({solidaria, vehiculo, hipotecaria}) => {
               Hipotecaria
             </a>
           </li>
+          <li className="nav-item">
+            <a
+              className="nav-link"
+              id="documentos-tab"
+              data-toggle="tab"
+              href="#documentos"
+              role="tab"
+              aria-controls="documentos"
+              aria-selected="false"
+            >
+              Adjuntar documentos
+            </a>
+          </li>
         </ul>
         <div className="tab-content" id="myTabContent">
           <div
@@ -80,6 +98,22 @@ const Garantias = ({solidaria, vehiculo, hipotecaria}) => {
             id="hipotecaria"
             role="tabpanel"
             aria-labelledby="hipotecaria-tab"
+          >
+            <h3>Tab Heading Content </h3>
+            <p>
+              Vivamus pellentesque vestibulum lectus vitae auctor. Maecenas eu
+              sodales arcu. Fusce lobortis, libero ac cursus feugiat, nibh ex
+              ultricies tortor, id dictum massa nisl ac nisi. Fusce a eros
+              pellentesque, ultricies urna nec, consectetur dolor. Nam dapibus
+              scelerisque risus, a commodo mi tempus eu.
+            </p>
+          </div>
+
+          <div
+            className="tab-pane fade"
+            id="documentos"
+            role="tabpanel"
+            aria-labelledby="documentos-tab"
           >
             <h3>Tab Heading Content </h3>
             <p>

@@ -9,14 +9,6 @@ const Vehiculo = () => {
         role="tabpanel"
         aria-labelledby="vehiculo-tab"
       >
-        {/* <h3>Registro de Hipoteca </h3>
-        <p>
-          Vivamus pellentesque vestibulum lectus vitae auctor. Maecenas eu
-          sodales arcu. Fusce lobortis, libero ac cursus feugiat, nibh ex
-          ultricies tortor, id dictum massa nisl ac nisi. Fusce a eros
-          pellentesque, ultricies urna nec, consectetur dolor. Nam dapibus
-          scelerisque risus, a commodo mi tempus eu.
-        </p> */}
         <div className="">
           <form
             className="needs-validation"
@@ -48,12 +40,12 @@ const Vehiculo = () => {
                     name="placa"
                     // value={cedula}
                     // onChange={handleChange}
-                    placeholder="Ingrese el Numero de Chasis"
+                    placeholder="Ingrese el Numero de Placa"
                     autoComplete="off"
                   />
                 </div>
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                <label htmlFor="sexo">Marca</label>
+                <label htmlFor="marca">Marca</label>
                   <select
                     className="form-control"
                     name="marca"
@@ -68,7 +60,7 @@ const Vehiculo = () => {
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                <label htmlFor="sexo">Tipo de Vehiculo</label>
+                <label htmlFor="tipoVehiculo">Tipo de Vehiculo</label>
                   <select
                     className="form-control"
                     name="tipoVehiculo"
@@ -83,7 +75,7 @@ const Vehiculo = () => {
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="sexo">Modelo</label>
+                  <label htmlFor="modelo">Modelo</label>
                   <input
                     type="text"
                     className="form-control"
@@ -95,7 +87,7 @@ const Vehiculo = () => {
                   />
                 </div>
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="sexo">Numero de puertas</label>
+                  <label htmlFor="puertas">Numero de puertas</label>
                   <input
                     type="number"
                     className="form-control"
@@ -108,12 +100,12 @@ const Vehiculo = () => {
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                <label htmlFor="sexo">Anio</label>
+                <label htmlFor="anio">Anio</label>
                   <select
                     className="form-control"
-                    name="tipoVehiculo"
+                    name="anio"
                     // value={sexo}
-                    id="tipoVehiculo"
+                    id="anio"
                     // onChange={handleChange}
                   >
                     <option selected value="">Seleccione el anio</option>
@@ -124,7 +116,7 @@ const Vehiculo = () => {
 
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                <label htmlFor="sexo">Color</label>
+                <label htmlFor="color">Color</label>
                   <select
                     className="form-control"
                     name="color"
@@ -139,7 +131,7 @@ const Vehiculo = () => {
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="cedula">Cilindros</label>
+                  <label htmlFor="cilindros">Cilindros</label>
                   <input
                     type="number"
                     className="form-control"
@@ -153,7 +145,7 @@ const Vehiculo = () => {
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="cedula">Pasajeros</label>
+                  <label htmlFor="pasajeros">Pasajeros</label>
                   <input
                     type="number"
                     className="form-control"
@@ -167,7 +159,7 @@ const Vehiculo = () => {
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="sexo">Fuerza Motriz</label>
+                  <label htmlFor="fuerzaMotriz">Fuerza Motriz</label>
                   <input
                     type="number"
                     className="form-control"
@@ -180,7 +172,7 @@ const Vehiculo = () => {
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="sexo">Tasación</label>
+                  <label htmlFor="tasacion">Tasación</label>
                   <input
                     type="number"
                     className="form-control"
@@ -241,7 +233,7 @@ const Vehiculo = () => {
 
                 <div className="w-100"></div>
                 <div className="col-md-6 col-sm-12 mb-3">
-                  <label htmlFor="sector">Cedula de identificacion</label>
+                  <label htmlFor="cedula">Cedula de identificacion</label>
                   <input
                     type="text"
                     className="form-control"
@@ -255,13 +247,13 @@ const Vehiculo = () => {
                 </div>
 
                 <div className="col-md-6 col-sm-12 mb-3">
-                  <label htmlFor="sector">Placa anterior</label>
+                  <label htmlFor="placaAnterior">Placa anterior</label>
                   <input
                     type="text"
                     className="form-control"
-                    id="placa"
+                    id="placaAnterior"
                     placeholder="Ingrese el numero de telefono"
-                    name="placa"
+                    name="placaAnterior"
                     // value={correo}
                     // onChange={handleChange}
                     autoComplete="off"
@@ -283,11 +275,11 @@ const Vehiculo = () => {
                 </div>
                 <div className="col-12">
                   <div className="form-group">
-                    <label htmlFor="">Observacion</label>
+                    <label htmlFor="observacionVehiculo">Observacion</label>
                     <textarea
                       className="form-control"
-                      name="observacion"
-                      id="observacion"
+                      name="observacionVehiculo"
+                      id="observacionVehiculo"
                       // value={observacion}
                       // onChange={handleChange}
                       placeholder="Observaciones a tomar en cuanta"
@@ -297,6 +289,18 @@ const Vehiculo = () => {
                   </div>
                 </div>
               </div>
+              <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" className="btn btn-primary">
+                Save changes
+              </button>
+            </div>
             </fieldset>
           </form>
         </div>
