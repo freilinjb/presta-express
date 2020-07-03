@@ -17,7 +17,7 @@ const EditarCliente = ({cliente, id}) => {
 
     const STATE_INICIAL = {
         nombre:cliente.nombre,
-        apellido:cliente.nombre,
+        apellido:cliente.apellido,
         foto:'',
         apodo:cliente.apodo,
         sexo:cliente.sexo,

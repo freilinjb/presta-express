@@ -57,7 +57,7 @@ const Cliente = () => {
     telefono,
     correo,
     sector,
-    direccion,
+    direccion,empresa,telefonoTrabajo, sueldo,direccionLaboral,
     observacion,
   } = valores;
 
@@ -92,6 +92,12 @@ const Cliente = () => {
         urlFoto,
         sector,
         direccion,
+        trabajo: {
+          telefonoTrabajo,
+          empresa,
+          sueldo,
+          direccionLaboral,
+        },
         observacion,
         creado: Date.now(),
         estado: "",
@@ -352,22 +358,88 @@ const Cliente = () => {
                         />
                         <div className="valid-feedback">Looks good!</div>
                       </div>
+                    </div>
+
+
+                    {/* LEYENDA */}
+                    <legend className="border-top mt-2"><strong>Datos Laborales</strong></legend>
+                    <div className="form-row">
+                      <div className="col-md-6 col-sm-12 mb-3">
+                        <label htmlFor="empresa">Empresa</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="empresa"
+                          placeholder="Ingrese el nombre de la Empresa"
+                          name="empresa"
+                          value={empresa}
+                          onChange={handleChange}
+                          autoComplete="off"
+                          required
+                        />
+                      </div>
+                      <div className="col-md-6 col-sm-12 mb-3">
+                        <label htmlFor="correo">Fecha de Ingreso</label>
+                        <input
+                          type="date"
+                          className="form-control"
+                          // value={correo}
+                          onChange={handleChange}
+                          autoComplete="off"
+                          required
+                        />
+                        {errores.correo && (
+                          <p className="alert alert-danger">{errores.correo}</p>
+                        )}
+                      </div>
+
+                      <div className="w-100"></div>
+                      <div className="col-md-6 col-sm-12 mb-3">
+                      <label htmlFor="telefonoTrabajo">Telefono</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="telefonoTrabajo"
+                          placeholder="Ejemplo (809-888-9999)"
+                          name="telefonoTrabajo"
+                          value={telefonoTrabajo}
+                          onChange={handleChange}
+                          autoComplete="off"
+                          required
+                        />
+                      </div>
+                      <div className="col-md-6 col-sm-12 mb-3">
+                        <label htmlFor="sueldo">Sueldo$</label>
+                        <input
+                          type="number"
+                          className="form-control"
+                          id="sueldo"
+                          name="sueldo"
+                          value={sueldo}
+                          onChange={handleChange}
+                          placeholder="Sueldo"
+                        />
+                        <div className="valid-feedback">Looks good!</div>
+                      </div>
+
                       <div className="col-12">
                         <div className="form-group">
-                          <label htmlFor="">Observacion</label>
+                          <label htmlFor="direccionLaboral">Direccion Laboral</label>
                           <textarea
                             className="form-control"
-                            name="observacion"
-                            id="observacion"
-                            value={observacion}
+                            name="direccionLaboral"
+                            id="direccionLaboral"
+                            value={direccionLaboral}
                             onChange={handleChange}
-                            placeholder="Observaciones a tomar en cuanta"
+                            placeholder="Direccion del lugar de trabajo"
                             autoComplete="off"
                             rows="2"
                           ></textarea>
                         </div>
                       </div>
                     </div>
+
+                    {/* LEYANDA */}
 
                     <div className="row">
                     <div className="col-sm-6">

@@ -3,20 +3,20 @@ import React from "react";
 import Hipotecaria from "../../ui/Formularios/Hipotecaria";
 import Vehiculo from "../../ui/Formularios/Vehiculo";
 
-const Garantias = () => {
+const Garantias = ({solidaria, vehiculo, hipotecaria}) => {
   return (
     <>
       <div className="tab-regular">
         <ul className="nav nav-tabs " id="myTab" role="tablist">
           <li className="nav-item">
             <a
-              className="nav-link"
+              className="nav-link active show"
               id="solidaria-tab"
               data-toggle="tab"
               href="#solidaria"
               role="tab"
               aria-controls="solidaria"
-              aria-selected="false"
+              aria-selected="true"
             >
               Solidaria
             </a>
@@ -36,13 +36,13 @@ const Garantias = () => {
           </li>
           <li className="nav-item">
             <a
-              className="nav-link active show"
+              className="nav-link"
               id="hipotecaria-tab"
               data-toggle="tab"
               href="#hipotecaria"
               role="tab"
               aria-controls="hipotecaria"
-              aria-selected="true"
+              aria-selected="false"
             >
               Hipotecaria
             </a>

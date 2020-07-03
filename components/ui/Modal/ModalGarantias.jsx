@@ -7,7 +7,7 @@ const ModalGarantias = () => {
       <div
         className="modal fade"
         id="ModalGarantias"
-        tabindex="-1"
+        tabIndex="-1"
         role="dialog"
         aria-labelledby="ModalGarantiasLabel"
         aria-hidden="true"
@@ -16,7 +16,7 @@ const ModalGarantias = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="ModalGarantiasLabel">
-                Registro de Cliente <span className="fas fa-user-plus"></span>
+                Registro de Garantias <span className="fas fa-user-plus"></span>
               </h5>
 
               <button
