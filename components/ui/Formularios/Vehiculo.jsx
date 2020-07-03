@@ -1,8 +1,8 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import { useRouter } from "next/router";
 import useMensajeAlertas from "../../../hooks/useMensajesAlertas";
 
-import { FirebaseConext } from "../../../firebase";
+import { FirebaseContext } from "../../../firebase";
 
 //Validaciones
 import useValidacion from "../../../hooks/useValidacion";
@@ -20,10 +20,66 @@ const STATE_INICIAL = {
   anio: "",
   color: "",
   cilindros: "",
-  pasajeros: ""
+  pasajeros: "",
 };
 
 const Vehiculo = () => {
+  //hook de routing para redireccionar
+  const router = useRouter();
+
+  //Context con las operaciones crud de firebase
+  const { usuario, firebase } = useContext(FirebaseContext);
+
+  const { valores, errores, handleSubmit, handleChange } = useValidacion(
+    STATE_INICIAL,
+    validarCrearGarantiaVehiculo,
+    crearGarantiaVehiculo
+  );
+
+  async function crearGarantiaVehiculo() {
+    if(!usuario) {
+      return router.push("/SignIn");
+      firebase.cargando = false;
+    }
+
+    const Garantia = {
+      tipoGarantia:'Vehiculo',
+      chasis,
+      placa,
+      marca,
+      tipoVehiculo,
+      modelo,
+      numeroPuertas,
+      anio,
+      color,
+      cilindros,
+      pasajeros,
+      fuerzaMotriz,
+      tasacion,
+    }
+  }
+
+  const {
+    chasis,
+    placa,
+    marca,
+    tipoVehiculo,
+    modelo,
+    numeroPuertas,
+    anio,
+    color,
+    cilindros,
+    pasajeros,
+    fuerzaMotriz,
+    tasacion,
+    nombre,
+    correo,
+    telefono,
+    identificacion,
+    placaAnterior,
+    direccion,
+    observacionVehiculo,
+  } = valores;
 
   return (
     <>
@@ -34,11 +90,7 @@ const Vehiculo = () => {
         aria-labelledby="vehiculo-tab"
       >
         <div className="">
-          <form
-            className="needs-validation"
-            noValidate
-            // onSubmit={handleSubmit}
-          >
+          <form className="needs-validation" noValidate onSubmit={handleSubmit}>
             <fieldset>
               <legend>Datos del Vehiculo</legend>
               <div className="form-row">
@@ -49,8 +101,8 @@ const Vehiculo = () => {
                     className="form-control"
                     id="chasis"
                     name="chasis"
-                    // value={cedula}
-                    // onChange={handleChange}
+                    value={chasis}
+                    onChange={handleChange}
                     placeholder="Ingrese el Numero de Chasis"
                     autoComplete="off"
                   />
@@ -62,37 +114,41 @@ const Vehiculo = () => {
                     className="form-control"
                     id="placa"
                     name="placa"
-                    // value={cedula}
-                    // onChange={handleChange}
+                    value={placa}
+                    onChange={handleChange}
                     placeholder="Ingrese el Numero de Placa"
                     autoComplete="off"
                   />
                 </div>
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                <label htmlFor="marca">Marca</label>
+                  <label htmlFor="marca">Marca</label>
                   <select
                     className="form-control"
                     name="marca"
-                    // value={sexo}
+                    value={marca}
                     id="marca"
-                    // onChange={handleChange}
+                    onChange={handleChange}
                   >
-                    <option selected value="">Seleccione una opción</option>
+                    <option selected value="">
+                      Seleccione una opción
+                    </option>
                     <option value="Hombre">Hombre</option>
                     <option value="mujer">Mujer</option>
                   </select>
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                <label htmlFor="tipoVehiculo">Tipo de Vehiculo</label>
+                  <label htmlFor="tipoVehiculo">Tipo de Vehiculo</label>
                   <select
                     className="form-control"
                     name="tipoVehiculo"
-                    // value={sexo}
+                    value={tipoVehiculo}
                     id="tipoVehiculo"
-                    // onChange={handleChange}
+                    onChange={handleChange}
                   >
-                    <option selected value="">Seleccione el tipo de vehiculo</option>
+                    <option selected value="">
+                      Seleccione el tipo de vehiculo
+                    </option>
                     <option value="Hombre">Hombre</option>
                     <option value="mujer">Mujer</option>
                   </select>
@@ -105,50 +161,53 @@ const Vehiculo = () => {
                     className="form-control"
                     id="modelo"
                     name="modelo"
-                    // value={cedula}
-                    // onChange={handleChange}
+                    value={modelo}
+                    onChange={handleChange}
                     autoComplete="off"
                   />
                 </div>
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="puertas">Numero de puertas</label>
+                  <label htmlFor="numeroPuertas">Numero de puertas</label>
                   <input
                     type="number"
                     className="form-control"
-                    id="puertas"
-                    name="cpuertasedula"
-                    // value={cedula}
-                    // onChange={handleChange}
+                    id="numeroPuertas"
+                    name="numeroPuertas"
+                    value={numeroPuertas}
+                    onChange={handleChange}
                     autoComplete="off"
                   />
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                <label htmlFor="anio">Anio</label>
+                  <label htmlFor="anio">Anio</label>
                   <select
                     className="form-control"
                     name="anio"
-                    // value={sexo}
+                    value={anio}
                     id="anio"
-                    // onChange={handleChange}
+                    onChange={handleChange}
                   >
-                    <option selected value="">Seleccione el anio</option>
+                    <option selected value="">
+                      Seleccione el anio
+                    </option>
                     <option value="Hombre">Hombre</option>
                     <option value="mujer">Mujer</option>
                   </select>
                 </div>
 
-
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                <label htmlFor="color">Color</label>
+                  <label htmlFor="color">Color</label>
                   <select
                     className="form-control"
                     name="color"
-                    // value={sexo}
+                    value={color}
                     id="color"
-                    // onChange={handleChange}
+                    onChange={handleChange}
                   >
-                    <option selected value="">Seleccione el color</option>
+                    <option selected value="">
+                      Seleccione el color
+                    </option>
                     <option value="Hombre">Hombre</option>
                     <option value="mujer">Mujer</option>
                   </select>
@@ -161,8 +220,8 @@ const Vehiculo = () => {
                     className="form-control"
                     id="cilindros"
                     name="cilindros"
-                    // value={cedula}
-                    // onChange={handleChange}
+                    value={cilindros}
+                    onChange={handleChange}
                     autoComplete="off"
                   />
                   <div className="valid-feedback">Looks good!</div>
@@ -175,8 +234,8 @@ const Vehiculo = () => {
                     className="form-control"
                     id="pasajeros"
                     name="pasajeros"
-                    // value={cedula}
-                    // onChange={handleChange}
+                    value={pasajeros}
+                    onChange={handleChange}
                     autoComplete="off"
                   />
                   <div className="valid-feedback">Looks good!</div>
@@ -189,8 +248,8 @@ const Vehiculo = () => {
                     className="form-control"
                     id="fuerzaMotriz"
                     name="fuerzaMotriz"
-                    // value={cedula}
-                    // onChange={handleChange}
+                    value={fuerzaMotriz}
+                    onChange={handleChange}
                     autoComplete="off"
                   />
                 </div>
@@ -202,8 +261,8 @@ const Vehiculo = () => {
                     className="form-control"
                     id="tasacion"
                     name="tasacion"
-                    // value={cedula}
-                    // onChange={handleChange}
+                    value={tasacion}
+                    onChange={handleChange}
                     autoComplete="off"
                   />
                 </div>
@@ -219,8 +278,8 @@ const Vehiculo = () => {
                     id="nombre"
                     placeholder="Ingrese el nombre completo"
                     name="nombre"
-                    // value={telefono}
-                    // onChange={handleChange}
+                    value={nombre}
+                    onChange={handleChange}
                     autoComplete="off"
                     required
                   />
@@ -233,8 +292,8 @@ const Vehiculo = () => {
                     id="correo"
                     placeholder="Ejemplo nombre@gmail.com"
                     name="correo"
-                    // value={correo}
-                    // onChange={handleChange}
+                    value={correo}
+                    onChange={handleChange}
                     autoComplete="off"
                     required
                   />
@@ -248,8 +307,8 @@ const Vehiculo = () => {
                     id="telefono"
                     placeholder="Ingrese el numero de telefono"
                     name="telefono"
-                    // value={correo}
-                    // onChange={handleChange}
+                    value={telefono}
+                    onChange={handleChange}
                     autoComplete="off"
                     required
                   />
@@ -261,11 +320,11 @@ const Vehiculo = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id="cedula"
+                    id="identificacion"
                     placeholder="Ingrese el numero de telefono"
-                    name="cedula"
-                    // value={correo}
-                    // onChange={handleChange}
+                    name="identificacion"
+                    value={identificacion}
+                    onChange={handleChange}
                     autoComplete="off"
                   />
                 </div>
@@ -278,8 +337,8 @@ const Vehiculo = () => {
                     id="placaAnterior"
                     placeholder="Ingrese el numero de telefono"
                     name="placaAnterior"
-                    // value={correo}
-                    // onChange={handleChange}
+                    value={placaAnterior}
+                    onChange={handleChange}
                     autoComplete="off"
                   />
                 </div>
@@ -291,8 +350,8 @@ const Vehiculo = () => {
                     className="form-control"
                     id="direccion"
                     name="direccion"
-                    // value={direccion}
-                    // onChange={handleChange}
+                    value={direccion}
+                    onChange={handleChange}
                     placeholder="Identificacion"
                   />
                   <div className="valid-feedback">Looks good!</div>
@@ -304,8 +363,8 @@ const Vehiculo = () => {
                       className="form-control"
                       name="observacionVehiculo"
                       id="observacionVehiculo"
-                      // value={observacion}
-                      // onChange={handleChange}
+                      value={observacionVehiculo}
+                      onChange={handleChange}
                       placeholder="Observaciones a tomar en cuanta"
                       autoComplete="off"
                       rows="2"
@@ -313,19 +372,19 @@ const Vehiculo = () => {
                   </div>
                 </div>
               </div>
-              <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="submit" className="btn btn-primary">
-                Save changes
-              </button>
-            </div>
             </fieldset>
+            <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Save changes
+                </button>
+              </div>
           </form>
         </div>
       </div>
