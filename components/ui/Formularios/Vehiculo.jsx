@@ -23,14 +23,14 @@ const STATE_INICIAL = {
   pasajeros: "",
 };
 
-const Vehiculo = () => {
+const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
   //hook de routing para redireccionar
   const router = useRouter();
 
   //Context con las operaciones crud de firebase
   const { usuario, firebase } = useContext(FirebaseContext);
 
-  const { garantiasTemporales, setGarantiasTemporales } = useGarantia("desc");
+  // const { garantiasTemporales, setGarantiasTemporales } = useGarantia("desc");
 
   const { valores, errores, handleSubmit, handleChange } = useValidacion(
     STATE_INICIAL,

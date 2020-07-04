@@ -1,7 +1,7 @@
 import React from "react";
 import Garantias from '../../ui/Formularios/Garantias';
 
-const ModalGarantias = () => {
+const ModalGarantias = ({garantiasTemporales,setGarantiasTemporales}) => {
 
 
   return (
@@ -31,7 +31,7 @@ const ModalGarantias = () => {
               </button>
             </div>
             <div className="modal-body mb-0">
-            <Garantias/>
+            <Garantias garantiasTemporales={garantiasTemporales} setGarantiasTemporales={setGarantiasTemporales}/>
             </div>
             {/* <div className="modal-footer">
               <button

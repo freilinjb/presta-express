@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
+import ModalGarantias from "../../ui/Modal/ModalGarantias";
 
 import useGarantia from "../../../hooks/useGarantia";
 
 const ListasGarantias = () => {
-  const { garantiasTemporales } = useGarantia("desc");
-  const [garantia, setGarantia] = useState([]);
+  const { garantiasTemporales, setGarantiasTemporales } = useGarantia("desc");
 
   useEffect(() => {
     console.log("cambio lista garantia");
@@ -41,9 +41,28 @@ const ListasGarantias = () => {
                   <th className="border-0">#</th>
                   <th className="border-0">Tipo de Garantia</th>
                   <th className="border-0">Propietario</th>
+                  <th className="border-0">Tasación</th>
                 </tr>
               </thead>
               <tbody>
+                {garantiasTemporales.map((garantia,index)=> (
+                  <>
+                    <tr>
+                      <td>{index+1}</td>
+                      <td>{garantia.Garantia.tipoGarantia}</td>
+                      <td>{garantia.Garantia.nombre}</td>
+                      <td>{garantia.Garantia.tasacion}</td>
+                      <td>
+                        <div className="btn-group ml-auto">
+                          <button className="btn btn-sm btn-outline-light" data-toggle="modal" data-toast-posy="top" data-target="#sectorEdicionModal">Editar</button>
+                          <button className="btn btn-sm btn-outline-light">
+                            <i className="far fa-trash-alt"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </>
+                ))}
                 <tr>
                   <td>1</td>
                   <td>
@@ -56,6 +75,7 @@ const ListasGarantias = () => {
                       />
                     </div>
                   </td>
+
                   <td>Product #1 </td>
                   <td>id000001 </td>
                   <td>
@@ -75,6 +95,7 @@ const ListasGarantias = () => {
           </div>
         </div>
       </div>
+      <ModalGarantias setGarantiasTemporales={setGarantiasTemporales} garantiasTemporales={garantiasTemporales}/>
     </>
   );
 };

@@ -397,9 +397,6 @@ const Solicitud = () => {
                           </div>
                         </div>
 
-                      <ListasGarantias className="border-top"/>
-                      {garantiasTemporales.map((g)=>(<p>Hola mundo</p>))}
-
                     <div className="row">
                       <div className="col-sm-6">
                         <button
@@ -430,7 +427,8 @@ const Solicitud = () => {
                       </div>
                     </div>
                       </form>
-                    <ModalGarantias/>
+                      <ListasGarantias className="border-top"/>
+                      {/* {garantiasTemporales.map((g)=>(<p>Hola mundo</p>))} */}
                     </div>
                   </div>
                 

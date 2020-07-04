@@ -8,7 +8,7 @@ const clickVentana=(e) => {
   console.log('Valores del click','=>',e);
 }
 
-const Garantias = () => {
+const Garantias = ({garantiasTemporales, setGarantiasTemporales}) => {
   return (
     <>
       <div className="tab-regular">
@@ -91,7 +91,7 @@ const Garantias = () => {
             </a>
           </div>
 
-          <Vehiculo />
+          <Vehiculo setGarantiasTemporales={setGarantiasTemporales} garantiasTemporales={garantiasTemporales}/>
 
           <div
             className="tab-pane fade active show"
