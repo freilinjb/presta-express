@@ -47,6 +47,7 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
 
     const Garantia = {
       tipoGarantia: "Vehiculo",
+      codigo: Math.random().toString(),
       chasis,
       placa,
       marca,

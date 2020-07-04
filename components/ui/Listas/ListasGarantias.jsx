@@ -47,11 +47,11 @@ const ListasGarantias = () => {
               <tbody>
                 {garantiasTemporales.map((garantia,index)=> (
                   <>
-                    <tr>
+                    <tr key={index+garantia.Garantia.tipoGarantia}>
                       <td>{index+1}</td>
                       <td>{garantia.Garantia.tipoGarantia}</td>
                       <td>{garantia.Garantia.nombre}</td>
-                      <td>{garantia.Garantia.tasacion}</td>
+                      <td>{garantia.Garantia}</td>
                       <td>
                         <div className="btn-group ml-auto">
                           <button className="btn btn-sm btn-outline-light" data-toggle="modal" data-toast-posy="top" data-target="#sectorEdicionModal">Editar</button>
