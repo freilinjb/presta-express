@@ -67,7 +67,6 @@ const Vehiculo = () => {
       direccion,
       observacionVehiculo,
     };
-    console.log("todo validado", "=>", Garantia);
     setGarantiasTemporales([...garantiasTemporales, {Garantia}]);
 
     //Cierra el modal

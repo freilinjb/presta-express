@@ -11,6 +11,8 @@ const useGarantia = orden => {
   const [garantiasTemporales, setGarantiasTemporales] = useState([]);
   const { firebase, usuario } = useContext(FirebaseContext);
 
+  const [recargar, setRecargar] = useState(false);
+
   useEffect(() => {
     if(usuario && firebase.cargando === false) {
         const { uid } = usuario;
@@ -44,8 +46,15 @@ const useGarantia = orden => {
  
     //resultado de la consulta
     setGarantias(garantias);   
-     
   }
+
+  useEffect(() => {
+    firebase.cargando = true;
+    console.log('cambio: ',garantiasTemporales);
+    firebase.cargando = false;
+    
+    
+  },[garantiasTemporales]);
 
     return {
       busqueda,

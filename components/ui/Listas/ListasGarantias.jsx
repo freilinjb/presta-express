@@ -1,13 +1,13 @@
-import React,{ useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import useGarantia from "../../../hooks/useGarantia";
 
 const ListasGarantias = () => {
-
   const { garantiasTemporales } = useGarantia("desc");
+  const [garantia, setGarantia] = useState([]);
 
   useEffect(() => {
-    console.log('garantiasTemporales','=>',garantiasTemporales);
+    console.log("cambio lista garantia");
   }, [garantiasTemporales]);
 
   return (
@@ -26,6 +26,9 @@ const ListasGarantias = () => {
                 type="button"
               >
                 Agregar Garantia
+                {garantiasTemporales.map((g) => (
+                  <p>Hola mundo</p>
+                ))}
               </button>
             </div>
           </div>
@@ -41,16 +44,12 @@ const ListasGarantias = () => {
                 </tr>
               </thead>
               <tbody>
-                
                 <tr>
                   <td>1</td>
                   <td>
                     <div className="m-r-10">
-                    {garantiasTemporales.map((garantia) => (
-                  <p>{garantia.nombre}</p>
-                ))}
                       <img
-                        src="assets/images/product-pic.jpg"
+                        src="/static/assets/images/product-pic.jpg"
                         alt="user"
                         className="rounded"
                         width="45"

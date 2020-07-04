@@ -37,7 +37,6 @@ const Solicitud = () => {
   const [calculado, setCalculado] = useState(false);
   const [cargando, setCargando] = useState(false);
   const [tablaAmortizada, setTablaAmortizada] = useState([]);
-  const [garantias, setGarantias] = useState([]);
 
   let fecha = new Date();
   fecha = formatearFecha(fecha, "ymd");
@@ -178,6 +177,7 @@ const Solicitud = () => {
             <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12">
               <div className="row justify-content-center">
                 <div className="col-md-12 col-lg-12 col-xl-10 col-sm-12">
+
                   <div className="card">
                     <h5 className="card-header">
                       Registro de Solicitud de Prestamo{" "}
@@ -396,9 +396,9 @@ const Solicitud = () => {
                             ></textarea>
                           </div>
                         </div>
-                        <div className="card-body border-top">
-                      <ListasGarantias />
-                    </div>
+
+                      <ListasGarantias className="border-top"/>
+                      {garantiasTemporales.map((g)=>(<p>Hola mundo</p>))}
 
                     <div className="row">
                       <div className="col-sm-6">
@@ -430,13 +430,14 @@ const Solicitud = () => {
                       </div>
                     </div>
                       </form>
+                    <ModalGarantias/>
                     </div>
                   </div>
+                
                 </div>
               </div>
             </div>
           </div>
-          <ModalGarantias/>
         </Navegacion>
       </Layout>
     </>
