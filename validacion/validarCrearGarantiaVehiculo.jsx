@@ -32,20 +32,20 @@ export default function validarCrearGarantiaVehiculo(valores) {
     } 
 
     if(!valores.pasajeros) {
-        errores.pasajeros = "El Apellido es Obligatorio";
+        errores.pasajeros = "El numero de pasajeros es Obligatorio";
     } 
 
     if(!valores.numeroPuertas) {
-        errores.numeroPuertas = "El Apellido es Obligatorio";
+        errores.numeroPuertas = "El Numero de puertas es Obligatorio";
     } 
 
     if(!valores.tasacion) {
-        errores.tasacion = "El Apellido es Obligatorio";
+        errores.tasacion = "La tasacion es Obligatorio";
     } 
 
     //TODO Validar los datos del Propietario
     if(!valores.nombre) {
-        errores.nombre = "El Numero de Telefono es Obligatorio";
+        errores.nombre = "El Numero de nombre es Obligatorio";
     } 
 
     if(!valores.telefono) {
@@ -53,11 +53,7 @@ export default function validarCrearGarantiaVehiculo(valores) {
     }     
 
     if(!valores.direccion) {
-        errores.direccion = "El Numero de Telefono es Obligatorio";
-    }
-
-    if(!valores.observacionVehiculo) {
-        errores.observacionVehiculo = "El Numero de Telefono es Obligatorio";
+        errores.direccion = "La direccion es un campo obligatorio";
     }
 
     return errores;

@@ -23,7 +23,7 @@ const STATE_INICIAL = {
   pasajeros: "",
 };
 
-const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
+const Vehiculo = ({ garantiasTemporales, setGarantiasTemporales }) => {
   //hook de routing para redireccionar
   const router = useRouter();
 
@@ -68,7 +68,7 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
       direccion,
       observacionVehiculo,
     };
-    setGarantiasTemporales([...garantiasTemporales, {Garantia}]);
+    setGarantiasTemporales([...garantiasTemporales, { Garantia }]);
 
     //Cierra el modal
     document.getElementById("btnCerrar").click();
@@ -113,7 +113,7 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
                   <label htmlFor="chasis">Chasis</label>
                   <input
                     type="text"
-                    className="form-control"
+                    className={`form-control ${errores.chasis && ("is-invalid")}`}
                     id="chasis"
                     name="chasis"
                     value={chasis}
@@ -121,19 +121,26 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
                     placeholder="Ingrese el Numero de Chasis"
                     autoComplete="off"
                   />
+                  <div className="invalid-feedback">
+                    Debe espesificar el chasis del vehiculo
+                  </div>
                 </div>
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
                   <label htmlFor="chasis">Placa</label>
                   <input
                     type="text"
-                    className="form-control"
+                    className={`form-control ${errores.placa && ("is-invalid")}`}
                     id="placa"
                     name="placa"
                     value={placa}
                     onChange={handleChange}
                     placeholder="Ingrese el Numero de Placa"
                     autoComplete="off"
+                    required
                   />
+                  <div className="invalid-feedback">
+                    Debe espesificar la placa del vehiculo
+                  </div>
                 </div>
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
                   <label htmlFor="marca">Marca</label>
@@ -143,6 +150,7 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
                     value={marca}
                     id="marca"
                     onChange={handleChange}
+                    required
                   >
                     <option selected value="">
                       Seleccione una opción
@@ -160,6 +168,7 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
                     value={tipoVehiculo}
                     id="tipoVehiculo"
                     onChange={handleChange}
+                    required
                   >
                     <option selected value="">
                       Seleccione el tipo de vehiculo
@@ -179,6 +188,7 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
                     value={modelo}
                     onChange={handleChange}
                     autoComplete="off"
+                    required
                   />
                 </div>
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
@@ -191,6 +201,7 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
                     value={numeroPuertas}
                     onChange={handleChange}
                     autoComplete="off"
+                    required
                   />
                 </div>
 
@@ -202,6 +213,7 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
                     value={anio}
                     id="anio"
                     onChange={handleChange}
+                    required
                   >
                     <option selected value="">
                       Seleccione el anio
@@ -219,6 +231,7 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
                     value={color}
                     id="color"
                     onChange={handleChange}
+                    required
                   >
                     <option selected value="">
                       Seleccione el color
@@ -238,6 +251,7 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
                     value={cilindros}
                     onChange={handleChange}
                     autoComplete="off"
+                    required
                   />
                   <div className="valid-feedback">Looks good!</div>
                 </div>
@@ -252,6 +266,7 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
                     value={pasajeros}
                     onChange={handleChange}
                     autoComplete="off"
+                    required
                   />
                   <div className="valid-feedback">Looks good!</div>
                 </div>
@@ -266,6 +281,7 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
                     value={fuerzaMotriz}
                     onChange={handleChange}
                     autoComplete="off"
+                    required
                   />
                 </div>
 
@@ -279,6 +295,7 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
                     value={tasacion}
                     onChange={handleChange}
                     autoComplete="off"
+                    required
                   />
                 </div>
               </div>
@@ -310,7 +327,6 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
                     value={correo}
                     onChange={handleChange}
                     autoComplete="off"
-                    required
                   />
                 </div>
 
@@ -341,6 +357,7 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
                     value={identificacion}
                     onChange={handleChange}
                     autoComplete="off"
+                    required
                   />
                 </div>
 
@@ -355,6 +372,7 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
                     value={placaAnterior}
                     onChange={handleChange}
                     autoComplete="off"
+                    required
                   />
                 </div>
 
@@ -368,6 +386,7 @@ const Vehiculo = ({garantiasTemporales, setGarantiasTemporales}) => {
                     value={direccion}
                     onChange={handleChange}
                     placeholder="Identificacion"
+                    required
                   />
                   <div className="valid-feedback">Looks good!</div>
                 </div>

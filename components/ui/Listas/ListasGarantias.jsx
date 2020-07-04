@@ -26,9 +26,6 @@ const ListasGarantias = () => {
                 type="button"
               >
                 Agregar Garantia
-                {garantiasTemporales.map((g) => (
-                  <p>Hola mundo</p>
-                ))}
               </button>
             </div>
           </div>
@@ -47,11 +44,11 @@ const ListasGarantias = () => {
               <tbody>
                 {garantiasTemporales.map((garantia,index)=> (
                   <>
-                    <tr key={index+garantia.Garantia.tipoGarantia}>
+                    <tr key={garantia.Garantia.key}>
                       <td>{index+1}</td>
                       <td>{garantia.Garantia.tipoGarantia}</td>
                       <td>{garantia.Garantia.nombre}</td>
-                      <td>{garantia.Garantia}</td>
+                      <td>{garantia.Garantia.tasacion}</td>
                       <td>
                         <div className="btn-group ml-auto">
                           <button className="btn btn-sm btn-outline-light" data-toggle="modal" data-toast-posy="top" data-target="#sectorEdicionModal">Editar</button>
@@ -59,11 +56,11 @@ const ListasGarantias = () => {
                             <i className="far fa-trash-alt"></i>
                           </button>
                         </div>
-                      </td>
+                      </td> 
                     </tr>
                   </>
                 ))}
-                <tr>
+                {/* <tr>
                   <td>1</td>
                   <td>
                     <div className="m-r-10">
@@ -82,7 +79,7 @@ const ListasGarantias = () => {
                     <span className="badge-dot badge-brand mr-1"></span>
                     InTransit{" "}
                   </td>
-                </tr>
+                </tr> */}
                 <tr>
                   <td colSpan="9">
                     <a href="#" className="btn btn-outline-light float-right">

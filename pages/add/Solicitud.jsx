@@ -88,6 +88,7 @@ const Solicitud = () => {
       detallesCuotas: tablaAmortizada.cuotas,
       observacion,
       estado: "En revisión",
+      garantias:garantiasTemporales,
       creado: Date.now(),
       cliente: {
         id: idcliente,
@@ -105,6 +106,8 @@ const Solicitud = () => {
       //Insertar en la BD
 
       setCargando(true);
+      console.log('solicitud: ', prestamo);
+      
       const p = await firebase.db.collection("Solicitud").add(prestamo);
       Toast.fire({
         icon: "success",
@@ -407,7 +410,7 @@ const Solicitud = () => {
                           {cargando ? (
                             <>
                               <span
-                                class="spinner-border spinner-border-sm"
+                                className="spinner-border spinner-border-sm"
                                 role="status"
                                 aria-hidden="true"
                               ></span>
@@ -427,13 +430,14 @@ const Solicitud = () => {
                       </div>
                     </div>
                       </form>
-                      <ListasGarantias className="border-top"/>
                       {/* {garantiasTemporales.map((g)=>(<p>Hola mundo</p>))} */}
                     </div>
                   </div>
                 
                 </div>
               </div>
+              <ListasGarantias className="border-top"/>
+
             </div>
           </div>
         </Navegacion>
