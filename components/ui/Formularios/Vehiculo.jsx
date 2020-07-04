@@ -30,6 +30,8 @@ const Vehiculo = () => {
   //Context con las operaciones crud de firebase
   const { usuario, firebase } = useContext(FirebaseContext);
 
+  const { garantiasTemporales, setGarantiasTemporales } = useGarantia("desc");
+
   const { valores, errores, handleSubmit, handleChange } = useValidacion(
     STATE_INICIAL,
     validarCrearGarantiaVehiculo,
@@ -37,13 +39,14 @@ const Vehiculo = () => {
   );
 
   async function crearGarantiaVehiculo() {
-    if(!usuario) {
-      return router.push("/SignIn");
+    if (!usuario) {
       firebase.cargando = false;
+
+      return router.push("/SignIn");
     }
 
     const Garantia = {
-      tipoGarantia:'Vehiculo',
+      tipoGarantia: "Vehiculo",
       chasis,
       placa,
       marca,
@@ -56,7 +59,19 @@ const Vehiculo = () => {
       pasajeros,
       fuerzaMotriz,
       tasacion,
-    }
+      nombre,
+      correo,
+      telefono,
+      identificacion,
+      placaAnterior,
+      direccion,
+      observacionVehiculo,
+    };
+    console.log("todo validado", "=>", Garantia);
+    setGarantiasTemporales([...garantiasTemporales, {Garantia}]);
+
+    //Cierra el modal
+    document.getElementById("btnCerrar").click();
   }
 
   const {
@@ -374,17 +389,18 @@ const Vehiculo = () => {
               </div>
             </fieldset>
             <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="submit" className="btn btn-primary">
-                  Save changes
-                </button>
-              </div>
+              <button
+                type="button"
+                id="btnCerrar"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" className="btn btn-primary">
+                Save changes
+              </button>
+            </div>
           </form>
         </div>
       </div>

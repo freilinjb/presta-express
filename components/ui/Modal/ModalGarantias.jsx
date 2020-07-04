@@ -2,6 +2,8 @@ import React from "react";
 import Garantias from '../../ui/Formularios/Garantias';
 
 const ModalGarantias = () => {
+
+
   return (
     <>
       <div

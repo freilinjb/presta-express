@@ -8,6 +8,7 @@ const useGarantia = orden => {
   const [busqueda, setBusqueda] = useState("");
 
   const [garantias, setGarantias] = useState([]);
+  const [garantiasTemporales, setGarantiasTemporales] = useState([]);
   const { firebase, usuario } = useContext(FirebaseContext);
 
   useEffect(() => {
@@ -48,10 +49,12 @@ const useGarantia = orden => {
 
     return {
       busqueda,
-      setBusqueda,
       cargando,
       garantias,
-      setGarantias
+      garantiasTemporales,
+      setBusqueda,
+      setGarantias,
+      setGarantiasTemporales
     }
 }
 

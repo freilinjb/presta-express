@@ -17,6 +17,9 @@ import Swal from "sweetalert2";
 //Componentes
 import Amortizacion from "../../components/ui/Amortizacion";
 
+import useGarantia from "../../hooks/useGarantia";
+
+
 //Validaciones
 import useValidacion from "../../hooks/useValidacion";
 import validarIniciarPrestamo from "../../validacion/validarIniciarPrestamo";
@@ -25,6 +28,7 @@ import useMensajesAlertas from "../../hooks/useMensajesAlertas";
 const Solicitud = () => {
   //Muestra alerta
   const { Toast } = useMensajesAlertas();
+  const { garantiasTemporales } = useGarantia("desc");
   const { usuario, firebase } = useContext(FirebaseContext);
   const { calcular, formatearFecha } = useCalculadora();
   const { setCliente, setConsultarCliente, obtenerCliente } = useSolicitud();
@@ -33,6 +37,7 @@ const Solicitud = () => {
   const [calculado, setCalculado] = useState(false);
   const [cargando, setCargando] = useState(false);
   const [tablaAmortizada, setTablaAmortizada] = useState([]);
+  const [garantias, setGarantias] = useState([]);
 
   let fecha = new Date();
   fecha = formatearFecha(fecha, "ymd");
@@ -131,6 +136,11 @@ const Solicitud = () => {
     }
     return Router.push("/Prestamos");
   }
+
+  useEffect(() => {
+    console.log(garantiasTemporales);
+    
+  },[garantiasTemporales]);
 
   const hancleClick = () => {
     if (

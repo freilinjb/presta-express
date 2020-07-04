@@ -1,13 +1,33 @@
-import React from "react";
+import React,{ useEffect } from "react";
+
+import useGarantia from "../../../hooks/useGarantia";
 
 const ListasGarantias = () => {
+
+  const { garantiasTemporales } = useGarantia("desc");
+
+  useEffect(() => {
+    console.log('garantiasTemporales','=>',garantiasTemporales);
+  }, [garantiasTemporales]);
+
   return (
     <>
       <div className="card">
         <div className="card-header">
           <div className="row justify-content-between">
-            <div className="col-4"><p>Listas de Garantias</p></div>
-            <div className="col-auto m-0 p-0"><button className="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalGarantias" type="button">Agregar Garantia</button></div>
+            <div className="col-4">
+              <p>Listas de Garantias</p>
+            </div>
+            <div className="col-auto m-0 p-0">
+              <button
+                className="btn btn-primary btn-sm"
+                data-toggle="modal"
+                data-target="#ModalGarantias"
+                type="button"
+              >
+                Agregar Garantia
+              </button>
+            </div>
           </div>
         </div>
         <div className="card-body p-0">
@@ -21,10 +41,14 @@ const ListasGarantias = () => {
                 </tr>
               </thead>
               <tbody>
+                
                 <tr>
                   <td>1</td>
                   <td>
                     <div className="m-r-10">
+                    {garantiasTemporales.map((garantia) => (
+                  <p>{garantia.nombre}</p>
+                ))}
                       <img
                         src="assets/images/product-pic.jpg"
                         alt="user"

@@ -8,11 +8,11 @@ const clickVentana=(e) => {
   console.log('Valores del click','=>',e);
 }
 
-const Garantias = ({solidaria, vehiculo, hipotecaria}) => {
+const Garantias = () => {
   return (
     <>
       <div className="tab-regular">
-        <ul className="nav nav-tabs " id="myTab" role="tablist" onClick={() => clickVentana()}>
+        <ul className="nav nav-tabs " id="myTab" role="tablist" onClick={clickVentana}>
           <li className="nav-item">
             <a
               className="nav-link active show"
