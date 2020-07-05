@@ -28,7 +28,7 @@ import useMensajesAlertas from "../../hooks/useMensajesAlertas";
 const Solicitud = () => {
   //Muestra alerta
   const { Toast } = useMensajesAlertas();
-  const { garantiasTemporales } = useGarantia("desc");
+  const { garantiasTemporales, setGarantiasTemporales } = useGarantia("desc");
   const { usuario, firebase } = useContext(FirebaseContext);
   const { calcular, formatearFecha } = useCalculadora();
   const { setCliente, setConsultarCliente, obtenerCliente } = useSolicitud();
@@ -85,7 +85,7 @@ const Solicitud = () => {
       tasaInteres,
       periodoPagos,
       cargosPorMora,
-      detallesCuotas: tablaAmortizada.cuotas,
+      // detallesCuotas: tablaAmortizada.cuotas,
       observacion,
       estado: "En revisión",
       garantias:garantiasTemporales,
@@ -436,7 +436,7 @@ const Solicitud = () => {
                 
                 </div>
               </div>
-              <ListasGarantias className="border-top"/>
+              <ListasGarantias className="border-top" garantiasTemporales={garantiasTemporales} setGarantiasTemporales={setGarantiasTemporales}/>
 
             </div>
           </div>

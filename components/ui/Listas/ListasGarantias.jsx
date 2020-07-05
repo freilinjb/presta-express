@@ -3,8 +3,8 @@ import ModalGarantias from "../../ui/Modal/ModalGarantias";
 
 import useGarantia from "../../../hooks/useGarantia";
 
-const ListasGarantias = () => {
-  const { garantiasTemporales, setGarantiasTemporales } = useGarantia("desc");
+const ListasGarantias = ({ garantiasTemporales, setGarantiasTemporales }) => {
+  // const { garantiasTemporales, setGarantiasTemporales } = useGarantia("desc");
 
   useEffect(() => {
     console.log("cambio lista garantia");

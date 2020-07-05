@@ -21,6 +21,7 @@ const STATE_INICIAL = {
   color: "",
   cilindros: "",
   pasajeros: "",
+  observacionVehiculo: "",
 };
 
 const Vehiculo = ({ garantiasTemporales, setGarantiasTemporales }) => {
