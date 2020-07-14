@@ -64,7 +64,7 @@ const Prestamos = () => {
       {prestamos.map((prestamo) => (
         <>
         
-        <div className="container">
+        <div className="container" key={prestamo.id}>
           <div className="row">
             <div className="[ col-xs-12 col-sm-12 ]">
               <ul className="event-list">

@@ -2,39 +2,44 @@ import React from "react";
 
 import Hipotecaria from "../../ui/Formularios/Hipotecaria";
 import Vehiculo from "../../ui/Formularios/Vehiculo";
+import Solidario from "./Solidario";
 
+const clickVentana = (e) => {
+  console.log("Valores del click", "=>", e);
+};
 
-const clickVentana=(e) => {
-  console.log('Valores del click','=>',e);
-}
-
-const Garantias = ({garantiasTemporales, setGarantiasTemporales}) => {
+const Garantias = ({ garantiasTemporales, setGarantiasTemporales }) => {
   return (
     <>
       <div className="tab-regular">
-        <ul className="nav nav-tabs " id="myTab" role="tablist" onClick={clickVentana}>
+        <ul
+          className="nav nav-tabs "
+          id="myTab"
+          role="tablist"
+          onClick={clickVentana}
+        >
           <li className="nav-item">
             <a
-              className="nav-link active show"
+              className="nav-link"
               id="solidaria-tab"
               data-toggle="tab"
               href="#solidaria"
               role="tab"
               aria-controls="solidaria"
-              aria-selected="true"
+              aria-selected="false"
             >
               Solidaria
             </a>
           </li>
           <li className="nav-item">
             <a
-              className="nav-link"
+              className="nav-link show active"
               id="vehiculo-tab"
               data-toggle="tab"
               href="#vehiculo"
               role="tab"
               aria-controls="vehiculo"
-              aria-selected="false"
+              aria-selected="true"
             >
               Vehiculo
             </a>
@@ -67,33 +72,19 @@ const Garantias = ({garantiasTemporales, setGarantiasTemporales}) => {
           </li>
         </ul>
         <div className="tab-content" id="myTabContent">
-          <div
-            className="tab-pane fade"
-            id="solidaria"
-            role="tabpanel"
-            aria-labelledby="solidaria-tab"
-          >
-            <p className="lead">
-              {" "}
-              All the Lorem Ipsum generators on the Internet tend to repeat
-              predefined chunks as necessary, making this the first true
-              generator on the Internet.{" "}
-            </p>
-            <p>
-              Phasellus non ante gravida, ultricies neque a, fermentum leo.
-              Etiam ornare enim arcu, at venenatis odio mollis quis. Mauris
-              fermentum elementum ligula in efficitur. Aliquam id congue lorem.
-              Proin consectetur feugiasse platea dictumst. Pellentesque sed
-              justo aliquet, posuere sem nec, elementum ante.
-            </p>
-            <a href="#" className="btn btn-secondary">
-              Go somewhere
-            </a>
-          </div>
-
-          <Vehiculo setGarantiasTemporales={setGarantiasTemporales} garantiasTemporales={garantiasTemporales}/>
-
-          <div
+          <Solidario
+            setGarantiasTemporales={setGarantiasTemporales}
+            garantiasTemporales={garantiasTemporales}
+          />
+          <Vehiculo
+            setGarantiasTemporales={setGarantiasTemporales}
+            garantiasTemporales={garantiasTemporales}
+          />
+          <Hipotecaria
+            setGarantiasTemporales={setGarantiasTemporales}
+            garantiasTemporales={garantiasTemporales}
+          />
+          {/* <div
             className="tab-pane fade active show"
             id="hipotecaria"
             role="tabpanel"
@@ -107,9 +98,9 @@ const Garantias = ({garantiasTemporales, setGarantiasTemporales}) => {
               pellentesque, ultricies urna nec, consectetur dolor. Nam dapibus
               scelerisque risus, a commodo mi tempus eu.
             </p>
-          </div>
+          </div> */}
 
-          <div
+          {/* <div
             className="tab-pane fade"
             id="documentos"
             role="tabpanel"
@@ -123,7 +114,7 @@ const Garantias = ({garantiasTemporales, setGarantiasTemporales}) => {
               pellentesque, ultricies urna nec, consectetur dolor. Nam dapibus
               scelerisque risus, a commodo mi tempus eu.
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

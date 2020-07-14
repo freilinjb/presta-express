@@ -72,7 +72,7 @@ const Vehiculo = ({ garantiasTemporales, setGarantiasTemporales }) => {
     setGarantiasTemporales([...garantiasTemporales, { Garantia }]);
 
     //Cierra el modal
-    document.getElementById("btnCerrar").click();
+    document.getElementById("btnCerrarVehiculo").click();
   }
 
   const {
@@ -156,8 +156,34 @@ const Vehiculo = ({ garantiasTemporales, setGarantiasTemporales }) => {
                     <option selected value="">
                       Seleccione una opción
                     </option>
+
                     <option value="Hombre">Hombre</option>
                     <option value="mujer">Mujer</option>
+                        <option value="Mazda">Mazda</option>
+                        <option value="Nissan">Nissan</option>
+                        <option value="Renault">Renault</option>
+                        <option value="SsangYong">SsangYong</option>
+                        <option value="Toyota">Toyota</option>
+                        <option value="Abarth">Abarth</option>
+                        <option value="BMW">BMW</option>
+                        <option value="Dacia">Dacia</option>
+                        <option value="Infiniti">Infiniti</option>
+                        <option value="Kia">Kia</option>
+                        <option value="Land Rover">Land Rover</option>
+                        <option value="Mercedes-Benz">Mercedes-Benz</option>
+                        <option value="Opel">Opel</option>
+                        <option value="Rolls-Royce">Rolls-Royce</option>
+                        <option value="Subaru">Subaru</option>
+                        <option value="Volkswagen">Volkswagen</option>
+                        <option value="Alfa Romeo">Alfa Romeo</option>
+                        <option value="Cadillac">Cadillac</option>
+                        <option value="Ferrari">Ferrari</option>
+                        <option value="Isuzu">Isuzu</option>
+                        <option value="KTM">KTM</option>
+                        <option value="Lexus">Lexus</option>
+                        <option value="Mini">Mini</option>
+                        <option value="Peugeot">Peugeot</option>
+
                   </select>
                 </div>
 
@@ -303,6 +329,21 @@ const Vehiculo = ({ garantiasTemporales, setGarantiasTemporales }) => {
 
               <legend className="border-top mt-2">Datos del Propietario</legend>
               <div className="form-row">
+              <div className="w-100"></div>
+                <div className="col-md-6 col-sm-12 mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="identificacion"
+                    placeholder="Ingrese el numero de identificion"
+                    name="identificacion"
+                    value={identificacion}
+                    onChange={handleChange}
+                    autoComplete="off"
+                    required
+                  />
+                </div>
+
                 <div className="col-md-12 col-sm-12 mb-3">
                   <label htmlFor="nombre">Nombre completo</label>
                   <input
@@ -340,22 +381,6 @@ const Vehiculo = ({ garantiasTemporales, setGarantiasTemporales }) => {
                     placeholder="Ingrese el numero de telefono"
                     name="telefono"
                     value={telefono}
-                    onChange={handleChange}
-                    autoComplete="off"
-                    required
-                  />
-                </div>
-
-                <div className="w-100"></div>
-                <div className="col-md-6 col-sm-12 mb-3">
-                  <label htmlFor="cedula">Cedula de identificacion</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="identificacion"
-                    placeholder="Ingrese el numero de telefono"
-                    name="identificacion"
-                    value={identificacion}
                     onChange={handleChange}
                     autoComplete="off"
                     required
@@ -411,7 +436,7 @@ const Vehiculo = ({ garantiasTemporales, setGarantiasTemporales }) => {
             <div className="modal-footer">
               <button
                 type="button"
-                id="btnCerrar"
+                id="btnCerrarVehiculo"
                 className="btn btn-secondary"
                 data-dismiss="modal"
               >

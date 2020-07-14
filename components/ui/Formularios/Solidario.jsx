@@ -25,7 +25,7 @@ const STATE_INICIAL = {
   observacionHipoteca: "",
 };
 
-const Hipotecaria = ({ garantiasTemporales, setGarantiasTemporales }) => {
+const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
   //hook de routing para redireccionar
   const router = useRouter();
 
@@ -68,7 +68,7 @@ const Hipotecaria = ({ garantiasTemporales, setGarantiasTemporales }) => {
     setGarantiasTemporales([...garantiasTemporales, { Garantia }]);
 
     //Cierra el modal
-    document.getElementById("btnCerrarHipoteca").click();
+    document.getElementById("btnCerrarSolidario").click();
   }
 
   const {
@@ -92,9 +92,9 @@ const Hipotecaria = ({ garantiasTemporales, setGarantiasTemporales }) => {
     <>
       <div
         className="tab-pane fade"
-        id="hipotecaria"
+        id="solidaria"
         role="tabpanel"
-        aria-labelledby="hipotecaria-tab"
+        aria-labelledby="solidaria-tab"
       >
         <div className="">
           <form className="needs-validation" noValidate onSubmit={handleSubmit}>
@@ -340,7 +340,7 @@ const Hipotecaria = ({ garantiasTemporales, setGarantiasTemporales }) => {
             <div className="modal-footer">
               <button
                 type="button"
-                id="btnCerrarHipoteca"
+                id="btnCerrarSolidario"
                 className="btn btn-secondary"
                 data-dismiss="modal"
               >
@@ -357,4 +357,4 @@ const Hipotecaria = ({ garantiasTemporales, setGarantiasTemporales }) => {
   );
 };
 
-export default Hipotecaria;
+export default Solidario;
