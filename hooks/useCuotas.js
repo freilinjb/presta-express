@@ -14,7 +14,6 @@ const useCuotas = () => {
     const [cargando, setCargando] = useState(false);
     const [busqueda, setBusqueda] = useState('');
     const [fechaActual, setFechaActual] = useState('');
-    
 
     const [cuotasPendientes, setCuotasPendientes] = useState([]);
 
@@ -73,7 +72,6 @@ const useCuotas = () => {
                 }
                 cuotas = [];
             }
-            // console.log('filtro','=>',filtro);
         }
         setCuotasPendientes(prestamos)
         setCargando(false);

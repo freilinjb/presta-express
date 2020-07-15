@@ -8,7 +8,6 @@ import Spinner from "../components/ui/Spinner";
 import ModalCobroParcial from '../components/ui/ModalCobroParcial';
 
 import useCuotas from '../hooks/useCuotas';
-import usePrestamo from '../hooks/usePrestamo';
 import useCalculadora from '../hooks/useCalculadora';
 import usePagoParcial from '../hooks/usePagoParcial';
 const Pagos = () => {
@@ -63,7 +62,9 @@ const Pagos = () => {
           <button type="button" className="btn btn-sm btn-outline-warning">
             Al dia
           </button>
-          <button type="button" className="btn btn-sm btn-outline-primary">
+          <button type="button" className="btn btn-sm btn-outline-primary"
+            
+          >
             Todos
           </button>
         </div>
@@ -93,18 +94,18 @@ const Pagos = () => {
                         )}
                         {prestamo.detallesCuotas.map(ct=> (
                         <>
-                        {(ct.estado == 'pendiente' || ct.estado == 'parcial') &&
+                        {(ct.estado == 'pendiente' || ct.estado == 'parcial' ) &&
                          (
                           <tr role="row" key={ct.cuota + ct.fecha + ct.valorCuota} className={`alert ${fechaF == (ct.fecha) ? 'alert-warning' : 'alert alert-danger'}`}>
                             {/* {console.log('formatearFecha',formatearFecha(ct.creado,'dmy'))} */}
                             {/* {console.log('fecha',fecha)} */}
                           {/* <td>{setMoneda(ct.interes)}</td> */}
                           <td>{ct.cuota}</td>
-                          <td> {fechaActual === transformarFechaYMD(ct.fecha) ? setMoneda(ct.valorCuota) : setMoneda(ct.valorCuota) +' + '+ ct.valorCuota*0.05 }</td>
+                          <td> {fechaActual == transformarFechaYMD(ct.fecha) ? setMoneda(ct.valorCuota) : setMoneda(ct.valorCuota) +' + '+ ct.valorCuota*0.05 }</td>
                           <td>{setMoneda(ct.saldoCapital)}</td>
                           <td>{ct.fecha}</td>
                           {/* <td>{ct.estado}</td> */}
-                          <td>=
+                          <td>
                             <div className="btn-group ml-auto">
                               <button
                                 className="btn btn-sm btn-outline-danger"
