@@ -6,16 +6,16 @@ import { FirebaseContext } from "../../../firebase";
 
 //Validaciones
 import useValidacion from "../../../hooks/useValidacion";
-import validarCrearGarantiaHipoteca from "../../../validacion/validarCrearGarantiaHipoteca";
+import validarCrearGarantiaSolidaria from "../../../validacion/validarCrearGarantiaSolidaria";
 
 import useGarantia from "../../../hooks/useGarantia";
 
 const STATE_INICIAL = {
   tipoIdentificacion: "cedula de identificación",
   identificacion: "",
-  nombre: "",
-  apellido: "",
-  sexo: "",
+  nombreSolidaria: "",
+  apellidoSolidaria: "",
+  sexoSolidaria: "",
 };
 
 const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
@@ -29,7 +29,7 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
 
   const { valores, errores, handleSubmit, handleChange } = useValidacion(
     STATE_INICIAL,
-    validarCrearGarantiaHipoteca,
+    validarCrearGarantiaSolidaria,
     crearGarantiaVehiculo
   );
 
@@ -43,11 +43,11 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
     const Garantia = {
       tipoGarantia: "Solidaria",
       codigo: Math.random().toString(),
-      tipoIdentificacion,
-      identificacion,
-      nombre,
-      apellido,
-      sexo,
+      tipoIdentificacion: tipoIdentificacionSolidaria,
+      identificacion: identificacionSolidaria,
+      nombre: nombreSolidaria,
+      apellido: apellidoSolidaria,
+      sexo: sexoSolidaria,
       fechaNacimiento,
       telefono: telefonoSolidaria,
       correo: correoSolidaria,
@@ -63,11 +63,11 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
   }
 
   const {
-    tipoIdentificacion,
-    identificacion,
-    nombre,
-    apellido,
-    sexo,
+    tipoIdentificacionSolidaria,
+    identificacionSolidaria,
+    nombreSolidaria,
+    apellidoSolidaria,
+    sexoSolidaria,
     fechaNacimiento,
     telefonoSolidaria,
     correoSolidaria,
@@ -92,12 +92,12 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
               <div className="form-row">
 
               <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="tipoIdentificacion">Tipo de Identificacion</label>
+                  <label htmlFor="tipoIdentificacionSolidaria">Tipo de Identificacion</label>
                   <select
                     className="form-control"
-                    name="tipoIdentificacion"
-                    value={tipoIdentificacion}
-                    id="tipoIdentificacion"
+                    name="tipoIdentificacionSolidaria"
+                    value={tipoIdentificacionSolidaria}
+                    id="tipoIdentificacionSolidaria"
                     onChange={handleChange}
                     required
                   >
@@ -111,13 +111,13 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="identificacion">Identificacion</label>
+                  <label htmlFor="identificacionSolidaria">Identificacion</label>
                   <input
                     type="text"
-                    className={`form-control ${errores.identificacion && ("is-invalid")}`}
-                    id="identificacion"
-                    name="identificacion"
-                    value={identificacion}
+                    className={`form-control ${errores.identificacionSolidaria && ("is-invalid")}`}
+                    id="identificacionSolidaria"
+                    name="identificacionSolidaria"
+                    value={identificacionSolidaria}
                     onChange={handleChange}
                     placeholder="Ingrese el numero de identificación"
                     autoComplete="off"
@@ -128,13 +128,13 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
                 </div>
                 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="nombre">Nombre</label>
+                  <label htmlFor="nombreSolidaria">Nombre</label>
                   <input
                     type="text"
-                    className={`form-control ${errores.nombre && ("is-invalid")}`}
-                    id="nombre"
-                    name="nombre"
-                    value={nombre}
+                    className={`form-control ${errores.nombreSolidaria && ("is-invalid")}`}
+                    id="nombreSolidaria"
+                    name="nombreSolidaria"
+                    value={nombreSolidaria}
                     onChange={handleChange}
                     placeholder="Ingrese el nombre del garante"
                     autoComplete="off"
@@ -146,13 +146,13 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="apellido">Apellido</label>
+                  <label htmlFor="apellidoSolidaria">Apellido</label>
                   <input
                     type="text"
-                    className={`form-control ${errores.apellido && ("is-invalid")}`}
-                    id="apellido"
-                    name="apellido"
-                    value={apellido}
+                    className={`form-control ${errores.apellidoSolidaria && ("is-invalid")}`}
+                    id="apellidoSolidaria"
+                    name="apellidoSolidaria"
+                    value={apellidoSolidaria}
                     onChange={handleChange}
                     placeholder="Ingrese el apellido del garante"
                     autoComplete="off"
@@ -164,12 +164,12 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="sexo">Sexo</label>
+                  <label htmlFor="sexoSolidaria">Sexo</label>
                   <select
                     className="form-control"
-                    name="sexo"
-                    value={sexo}
-                    id="sexo"
+                    name="sexoSolidaria"
+                    value={sexoSolidaria}
+                    id="sexoSolidaria"
                     onChange={handleChange}
                     required
                   >
@@ -182,13 +182,13 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="sexo">Fecha de nacimiento</label>
+                  <label htmlFor="fechaNacimiento">Fecha de nacimiento</label>
                   <input
                     type="date"
                     className="form-control"
-                    id="sexo"
-                    name="sexo"
-                    value={sexo}
+                    id="fechaNacimiento"
+                    name="fechaNacimiento"
+                    value={fechaNacimiento}
                     onChange={handleChange}
                     autoComplete="off"
                     required
@@ -215,7 +215,7 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
                   <label htmlFor="correoSolidaria">Correo</label>
                   <input
-                    type="number"
+                    type="email"
                     className="form-control"
                     id="correoSolidaria"
                     name="correoSolidaria"
@@ -269,7 +269,7 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
                   />
                   <div className="valid-feedback">Looks good!</div>
                 </div>
-                
+
                 <div className="col-12">
                   <div className="form-group">
                     <label htmlFor="observacionSolidaria">Observacion</label>

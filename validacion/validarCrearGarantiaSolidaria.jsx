@@ -3,28 +3,24 @@ export default function validarCrearGarantiaSolidaria(valores) {
     let errores = {};
 
     // validar el nombrer de usuario
-    if(!valores.tipoIdentificacion) {
-        errores.tipoIdentificacion = "El Chasis es obligatorio";
+    if(!valores.tipoIdentificacionSolidaria) {
+        errores.tipoIdentificacionSolidaria = "El Chasis es obligatorio";
     }  
 
-    if(!valores.identificacion) {
-        errores.identificacion = "El Nombre es obligatorio";
+    if(!valores.identificacionSolidaria) {
+        errores.identificacionSolidaria = "El Nombre es obligatorio";
     } 
 
-    if(!valores.nombre) {
-        errores.nombre = "El Nombre es obligatorio";
+    if(!valores.nombreSolidaria) {
+        errores.nombreSolidaria = "El Nombre es obligatorio";
     } 
 
-    if(!valores.apellido) {
-        errores.apellido = "El Nombre es obligatorio";
+    if(!valores.apellidoSolidaria) {
+        errores.apellidoSolidaria = "El Nombre es obligatorio";
     } 
     
-    if(!valores.sexo) {
-        errores.sexo = "El Nombre es obligatorio";
-    } 
-
-    if(!valores.telefono) {
-        errores.telefono = "El Apellido es Obligatorio";
+    if(!valores.sexoSolidaria) {
+        errores.sexoSolidaria = "El Nombre es obligatorio";
     } 
 
     if(!valores.fechaNacimiento) {
