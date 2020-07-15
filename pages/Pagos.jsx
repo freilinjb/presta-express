@@ -100,11 +100,11 @@ const Pagos = () => {
                             {/* {console.log('fecha',fecha)} */}
                           {/* <td>{setMoneda(ct.interes)}</td> */}
                           <td>{ct.cuota}</td>
-                          <td> {fechaActual == transformarFechaYMD(ct.fecha) ? setMoneda(ct.valorCuota) : setMoneda(ct.valorCuota) +' + '+ ct.valorCuota*0.05 }</td>
+                          <td> {fechaActual === transformarFechaYMD(ct.fecha) ? setMoneda(ct.valorCuota) : setMoneda(ct.valorCuota) +' + '+ ct.valorCuota*0.05 }</td>
                           <td>{setMoneda(ct.saldoCapital)}</td>
                           <td>{ct.fecha}</td>
                           {/* <td>{ct.estado}</td> */}
-                          <td>
+                          <td>=
                             <div className="btn-group ml-auto">
                               <button
                                 className="btn btn-sm btn-outline-danger"

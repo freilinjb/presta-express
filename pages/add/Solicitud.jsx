@@ -77,7 +77,7 @@ const Solicitud = () => {
 
   //Crear el objeto de nuevo prestamo
   async function crearPrestamo() {
-    const prestamo = {
+    const solicitud = {
       entrega,
       monto,
       cuotas,
@@ -106,26 +106,26 @@ const Solicitud = () => {
       //Insertar en la BD
 
       setCargando(true);
-      console.log('solicitud: ', prestamo);
+      console.log('solicitud: ', solicitud);
       
-      const p = await firebase.db.collection("Solicitud").add(prestamo);
+      const p = await firebase.db.collection("Solicitud").add(solicitud);
       Toast.fire({
         icon: "success",
         title: "Se ha guardado correctamente!!",
       });
       // alert.success('Se ha guardo correctamente');
 
-      tablaAmortizada.prestamo = {
-        id: p.id,
-      };
-      tablaAmortizada.cliente = {
-        id: idcliente,
-        nombre: clientes.filter((doc) => doc.id === idcliente)[0].nombre,
-        apellido: clientes.filter((doc) => doc.id === idcliente)[0].apellido,
-      };
-      console.log("tabla amortizada", "=>", tablaAmortizada);
-      tablaAmortizada.estado = "activo";
-      await firebase.db.collection("Cuotas").add(tablaAmortizada);
+      // tablaAmortizada.prestamo = {
+      //   id: p.id,
+      // };
+      // tablaAmortizada.cliente = {
+      //   id: idcliente,
+      //   nombre: clientes.filter((doc) => doc.id === idcliente)[0].nombre,
+      //   apellido: clientes.filter((doc) => doc.id === idcliente)[0].apellido,
+      // };
+      // console.log("tabla amortizada", "=>", tablaAmortizada);
+      // tablaAmortizada.estado = "activo";
+      // await firebase.db.collection("Cuotas").add(tablaAmortizada);
       setCargando(false);
 
       //Inicio
