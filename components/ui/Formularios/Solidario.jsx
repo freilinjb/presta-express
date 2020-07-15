@@ -11,18 +11,11 @@ import validarCrearGarantiaHipoteca from "../../../validacion/validarCrearGarant
 import useGarantia from "../../../hooks/useGarantia";
 
 const STATE_INICIAL = {
-  tipoPropiedad: "",
-  certificado: "",
-  parcela: "",
-  metraje: "",
-  frenteMts: "",
-  libro: "",
-  folio: "",
-  distritoCatastral: "",
-  fontoMts: "",
-  ciudad: "",
-  tasacionHipoteca: "",
-  observacionHipoteca: "",
+  tipoIdentificacion: "cedula de identificación",
+  identificacion: "",
+  nombre: "",
+  apellido: "",
+  sexo: "",
 };
 
 const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
@@ -48,22 +41,20 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
     }
 
     const Garantia = {
-      tipoGarantia: "Hipotecario",
+      tipoGarantia: "Solidaria",
       codigo: Math.random().toString(),
-      tipoPropiedad,
-      certificado,
-      parcela,
-      metraje,
-      frenteMts,
-      libro,
-      folio,
-      distritoCatastral,
-      fontoMts,
-      fechaTasacion,
-      tasacion: tasacionHipoteca,
-      direccion: direccionHipoteca,
-      ciudad,
-      observacion: observacionHipoteca,
+      tipoIdentificacion,
+      identificacion,
+      nombre,
+      apellido,
+      sexo,
+      fechaNacimiento,
+      telefono: telefonoSolidaria,
+      correo: correoSolidaria,
+      sector: sectorSolidaria,
+      ciudad: ciudadSolidaria,
+      direccion: direccionSolidaria,
+      observacion: observacionSolidaria,
     };
     setGarantiasTemporales([...garantiasTemporales, { Garantia }]);
 
@@ -72,20 +63,18 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
   }
 
   const {
-    tipoPropiedad,
-    certificado,
-    parcela,
-    metraje,
-    frenteMts,
-    libro,
-    folio,
-    distritoCatastral,
-    fontoMts,
-    fechaTasacion,
-    tasacionHipoteca,
-    direccionHipoteca,
-    ciudad,
-    observacionHipoteca,
+    tipoIdentificacion,
+    identificacion,
+    nombre,
+    apellido,
+    sexo,
+    fechaNacimiento,
+    telefonoSolidaria,
+    correoSolidaria,
+    sectorSolidaria,
+    ciudadSolidaria,
+    direccionSolidaria,
+    observacionSolidaria,
   } = valores;
 
   return (
@@ -99,37 +88,38 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
         <div className="">
           <form className="needs-validation" noValidate onSubmit={handleSubmit}>
             <fieldset>
-              <legend>Datos de la Propiedad</legend>
+              <legend>Datos de la personales</legend>
               <div className="form-row">
 
               <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="tipoVehiculo">Tipo de Propiedad</label>
+                  <label htmlFor="tipoIdentificacion">Tipo de Identificacion</label>
                   <select
                     className="form-control"
-                    name="tipoPropiedad"
-                    value={tipoPropiedad}
-                    id="tipoPropiedad"
+                    name="tipoIdentificacion"
+                    value={tipoIdentificacion}
+                    id="tipoIdentificacion"
                     onChange={handleChange}
                     required
                   >
                     <option selected value="">
                       Seleccione el tipo de propiedad
                     </option>
-                    <option value="Hombre">Hombre</option>
-                    <option value="mujer">Mujer</option>
+                    <option value="cedula de identificación">Cedula de Identificacion</option>
+                    <option value="Hombre">RNC</option>
+                    <option value="Hombre">Pasaporte</option>
                   </select>
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="certificado">Certificado</label>
+                  <label htmlFor="identificacion">Identificacion</label>
                   <input
                     type="text"
-                    className={`form-control ${errores.certificado && ("is-invalid")}`}
-                    id="certificado"
-                    name="certificado"
-                    value={certificado}
+                    className={`form-control ${errores.identificacion && ("is-invalid")}`}
+                    id="identificacion"
+                    name="identificacion"
+                    value={identificacion}
                     onChange={handleChange}
-                    placeholder="Ingrese el certificado"
+                    placeholder="Ingrese el numero de identificación"
                     autoComplete="off"
                   />
                   <div className="invalid-feedback">
@@ -138,15 +128,15 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
                 </div>
                 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="chasis">Parcela</label>
+                  <label htmlFor="nombre">Nombre</label>
                   <input
                     type="text"
-                    className={`form-control ${errores.parcela && ("is-invalid")}`}
-                    id="parcela"
-                    name="parcela"
-                    value={parcela}
+                    className={`form-control ${errores.nombre && ("is-invalid")}`}
+                    id="nombre"
+                    name="nombre"
+                    value={nombre}
                     onChange={handleChange}
-                    placeholder="Ingrese la parcela"
+                    placeholder="Ingrese el nombre del garante"
                     autoComplete="off"
                     required
                   />
@@ -156,15 +146,15 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="metraje">Metraje</label>
+                  <label htmlFor="apellido">Apellido</label>
                   <input
                     type="text"
-                    className={`form-control ${errores.metraje && ("is-invalid")}`}
-                    id="metraje"
-                    name="metraje"
-                    value={metraje}
+                    className={`form-control ${errores.apellido && ("is-invalid")}`}
+                    id="apellido"
+                    name="apellido"
+                    value={apellido}
                     onChange={handleChange}
-                    placeholder="Ingrese el Numero de Placa"
+                    placeholder="Ingrese el apellido del garante"
                     autoComplete="off"
                     required
                   />
@@ -172,42 +162,14 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
                     Debe espesificar la metraje
                   </div>
                 </div>
-              
-                <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="libro">Libro</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="libro"
-                    name="libro"
-                    value={libro}
-                    onChange={handleChange}
-                    autoComplete="off"
-                    required
-                  />
-                </div>
-                
-                <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="folio">Folio</label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="folio"
-                    name="folio"
-                    value={folio}
-                    onChange={handleChange}
-                    autoComplete="off"
-                    required
-                  />
-                </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="distritoCatastral">Descripcion castral</label>
+                  <label htmlFor="sexo">Sexo</label>
                   <select
                     className="form-control"
-                    name="distritoCatastral"
-                    value={distritoCatastral}
-                    id="distritoCatastral"
+                    name="sexo"
+                    value={sexo}
+                    id="sexo"
                     onChange={handleChange}
                     required
                   >
@@ -220,71 +182,59 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="color">FontoMts</label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="fontoMts"
-                    name="fontoMts"
-                    value={fontoMts}
-                    onChange={handleChange}
-                    autoComplete="off"
-                    required
-                  />
-                </div>
-
-                <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="frenteMts">FrenteMts</label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="frenteMts"
-                    name="frenteMts"
-                    value={frenteMts}
-                    onChange={handleChange}
-                    autoComplete="off"
-                    required
-                  />
-                </div>
-
-                <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="fechaTasacion">Fecha Tasacion</label>
+                  <label htmlFor="sexo">Fecha de nacimiento</label>
                   <input
                     type="date"
                     className="form-control"
-                    id="fechaTasacion"
-                    name="fechaTasacion"
-                    value={fechaTasacion}
+                    id="sexo"
+                    name="sexo"
+                    value={sexo}
                     onChange={handleChange}
                     autoComplete="off"
                     required
                   />
                   <div className="valid-feedback">Looks good!</div>
                 </div>
-
-                {/* <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="pasajeros">Pasajeros</label>
+                
+                <legend>Datos de contactos</legend>
+                <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <label htmlFor="telefonoSolidaria">Telefono</label>
                   <input
-                    type="number"
+                    type="text"
                     className="form-control"
-                    // id="pasajeros"
-                    // name="pasajeros"
-                    // value={pasajeros}
+                    id="telefonoSolidaria"
+                    name="telefonoSolidaria"
+                    value={telefonoSolidaria}
                     onChange={handleChange}
+                    placeholder="Ingrese su numero de telefono"
                     autoComplete="off"
                     required
                   />
-                  <div className="valid-feedback">Looks good!</div>
-                </div> */}
-
+                </div>
+                
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="tasacionHipoteca">Tasación</label>
+                  <label htmlFor="correoSolidaria">Correo</label>
                   <input
                     type="number"
                     className="form-control"
-                    id="tasacionHipoteca"
-                    name="tasacionHipoteca"
-                    value={tasacionHipoteca}
+                    id="correoSolidaria"
+                    name="correoSolidaria"
+                    value={correoSolidaria}
+                    onChange={handleChange}
+                    placeholder="Ingrese su correo electronico"
+                    autoComplete="off"
+                    required
+                  />
+                </div>
+
+                <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <label htmlFor="sector">Sector</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="sectorSolidariasectorSolidaria"
+                    name="sectorSolidaria"
+                    value={sectorSolidaria}
                     onChange={handleChange}
                     autoComplete="off"
                     required
@@ -292,13 +242,13 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
                 </div>
 
                 <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <label htmlFor="ciudad">Ciudad</label>
+                  <label htmlFor="ciudadSolidaria">Ciudad</label>
                   <input
                     type="number"
                     className="form-control"
-                    id="ciudad"
-                    name="ciudad"
-                    value={ciudad}
+                    id="ciudadSolidaria"
+                    name="ciudadSolidaria"
+                    value={ciudadSolidaria}
                     onChange={handleChange}
                     autoComplete="off"
                     required
@@ -306,27 +256,28 @@ const Solidario = ({ garantiasTemporales, setGarantiasTemporales }) => {
                 </div>
 
                 <div className="col-12">
-                  <label htmlFor="direccionHipoteca">Direccion</label>
+                  <label htmlFor="direccionSolidaria">Direccion</label>
                   <input
                     type="text"
                     className="form-control"
-                    id="direccionHipoteca"
-                    name="direccionHipoteca"
-                    value={direccionHipoteca}
+                    id="direccionSolidaria"
+                    name="direccionSolidaria"
+                    value={direccionSolidaria}
                     onChange={handleChange}
                     placeholder="Ingrese la direccion de la propiedad"
                     required
                   />
                   <div className="valid-feedback">Looks good!</div>
                 </div>
+                
                 <div className="col-12">
                   <div className="form-group">
-                    <label htmlFor="observacionHipoteca">Observacion</label>
+                    <label htmlFor="observacionSolidaria">Observacion</label>
                     <textarea
                       className="form-control"
-                      name="observacionHipoteca"
-                      id="observacionHipoteca"
-                      value={observacionHipoteca}
+                      name="observacionSolidaria"
+                      id="observacionSolidaria"
+                      value={observacionSolidaria}
                       onChange={handleChange}
                       placeholder="Observaciones a tomar en cuanta"
                       autoComplete="off"

@@ -1,0 +1,52 @@
+export default function validarCrearGarantiaSolidaria(valores) {
+    
+    let errores = {};
+
+    // validar el nombrer de usuario
+    if(!valores.tipoIdentificacion) {
+        errores.tipoIdentificacion = "El Chasis es obligatorio";
+    }  
+
+    if(!valores.identificacion) {
+        errores.identificacion = "El Nombre es obligatorio";
+    } 
+
+    if(!valores.nombre) {
+        errores.nombre = "El Nombre es obligatorio";
+    } 
+
+    if(!valores.apellido) {
+        errores.apellido = "El Nombre es obligatorio";
+    } 
+    
+    if(!valores.sexo) {
+        errores.sexo = "El Nombre es obligatorio";
+    } 
+
+    if(!valores.telefono) {
+        errores.telefono = "El Apellido es Obligatorio";
+    } 
+
+    if(!valores.fechaNacimiento) {
+        errores.fechaNacimiento = "El Apellido es Obligatorio";
+    } 
+
+    if(!valores.telefonoSolidaria) {
+        errores.telefonoSolidaria = "El numero de pasajeros es Obligatorio";
+    } 
+
+    if(!valores.sectorSolidaria) {
+        errores.sectorSolidaria = "El Numero de puertas es Obligatorio";
+    } 
+
+    if(!valores.ciudadSolidaria) {
+        errores.ciudadSolidaria = "La tasacion es Obligatorio";
+    } 
+
+    //TODO Validar los datos del Propietario
+    if(!valores.direccionSolidaria) {
+        errores.direccionSolidaria = "El Numero de nombre es Obligatorio";
+    } 
+
+    return errores;
+}

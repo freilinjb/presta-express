@@ -1,4 +1,4 @@
-export default function validarCrearGarantiaVehiculo(valores) {
+export default function validarCrearGarantiaHipoteca(valores) {
     
     let errores = {};
 

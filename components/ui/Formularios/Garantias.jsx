@@ -4,10 +4,6 @@ import Hipotecaria from "../../ui/Formularios/Hipotecaria";
 import Vehiculo from "../../ui/Formularios/Vehiculo";
 import Solidario from "./Solidario";
 
-const clickVentana = (e) => {
-  console.log("Valores del click", "=>", e);
-};
-
 const Garantias = ({ garantiasTemporales, setGarantiasTemporales }) => {
   return (
     <>
@@ -16,8 +12,20 @@ const Garantias = ({ garantiasTemporales, setGarantiasTemporales }) => {
           className="nav nav-tabs "
           id="myTab"
           role="tablist"
-          onClick={clickVentana}
         >
+          <li className="nav-item">
+            <a
+              className="nav-link show active"
+              id="documentos-tab"
+              data-toggle="tab"
+              href="#documentos"
+              role="tab"
+              aria-controls="documentos"
+              aria-selected="true"
+            >
+              Adjuntar documentos
+            </a>
+          </li>
           <li className="nav-item">
             <a
               className="nav-link"
@@ -33,13 +41,13 @@ const Garantias = ({ garantiasTemporales, setGarantiasTemporales }) => {
           </li>
           <li className="nav-item">
             <a
-              className="nav-link show active"
+              className="nav-link"
               id="vehiculo-tab"
               data-toggle="tab"
               href="#vehiculo"
               role="tab"
               aria-controls="vehiculo"
-              aria-selected="true"
+              aria-selected="false"
             >
               Vehiculo
             </a>
@@ -55,19 +63,6 @@ const Garantias = ({ garantiasTemporales, setGarantiasTemporales }) => {
               aria-selected="false"
             >
               Hipotecaria
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className="nav-link"
-              id="documentos-tab"
-              data-toggle="tab"
-              href="#documentos"
-              role="tab"
-              aria-controls="documentos"
-              aria-selected="false"
-            >
-              Adjuntar documentos
             </a>
           </li>
         </ul>
@@ -100,8 +95,8 @@ const Garantias = ({ garantiasTemporales, setGarantiasTemporales }) => {
             </p>
           </div> */}
 
-          {/* <div
-            className="tab-pane fade"
+          <div
+            className="tab-pane fade active show"
             id="documentos"
             role="tabpanel"
             aria-labelledby="documentos-tab"
@@ -114,7 +109,7 @@ const Garantias = ({ garantiasTemporales, setGarantiasTemporales }) => {
               pellentesque, ultricies urna nec, consectetur dolor. Nam dapibus
               scelerisque risus, a commodo mi tempus eu.
             </p>
-          </div> */}
+          </div>
         </div>
       </div>
     </>
