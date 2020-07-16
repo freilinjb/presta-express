@@ -5,20 +5,26 @@ import Layout from "../components/layout/Layout";
 import { FirebaseContext } from "../firebase";
 import Navegacion from "../components/layout/Navegacion";
 import Spinner from "../components/ui/Spinner";
-import ModalCobroParcial from '../components/ui/ModalCobroParcial';
+import ModalCobroParcial from "../components/ui/ModalCobroParcial";
 
-import useCuotas from '../hooks/useCuotas';
-import useCalculadora from '../hooks/useCalculadora';
-import usePagoParcial from '../hooks/usePagoParcial';
+import useCuotas from "../hooks/useCuotas";
+import usePrestamo from "../hooks/usePrestamo";
+import useCalculadora from "../hooks/useCalculadora";
+import usePagoParcial from "../hooks/usePagoParcial";
 const Pagos = () => {
-  const { cuotasPendientes, transformarFechaYMD, fechaActual, compararFechas } = useCuotas();
+  const {
+    cuotasPendientes,
+    transformarFechaYMD,
+    fechaActual,
+    compararFechas,
+    validarPrestamo,
+  } = useCuotas();
   // const { prestamos } = usePrestamo();
   const { cuotaParcial, setCuotaParcial } = usePagoParcial();
-  const { setMoneda,formatearFecha } = useCalculadora();
+  const { setMoneda, formatearFecha } = useCalculadora();
   // console.log(fechaActual);
   let fechaF = new Date().now;
   fechaF = formatearFecha(fechaF);
-  
 
   const [cargando, setCargando] = useState(false);
   const [busqueda, setBusqueda] = useState("");
@@ -32,10 +38,10 @@ const Pagos = () => {
   const handleChange = (e) => {
     setBusqueda(e.target.value);
   };
-  
-  const  handleClick=(valor, cuota)=> {
-    const filtrar = cuotasPendientes.filter(prestamo => {
-      return prestamo.id === valor
+
+  const handleClick = (valor, cuota) => {
+    const filtrar = cuotasPendientes.filter((prestamo) => {
+      return prestamo.id === valor;
     });
 
     setPrestamo(filtrar);
@@ -43,93 +49,156 @@ const Pagos = () => {
     setCuotaParcial(cuota);
     console.log(cuota);
     console.log(filtrar);
-  }
+  };
 
   const Componente = cargando ? (
     <Spinner />
   ) : (
-    <div className="col-lg-12">
-      <div className="section-block row justify-content-between m-0 p-0 mb-2">
-        <h3 className="section-title col-auto p-0">Lista de cuotas de hoy</h3>
-        <div
-          className="btn-group col-auto col-auto p-0"
-          role="group"
-          aria-label="Basic example"
-        >
-          <button type="button" className="btn btn-sm btn-outline-danger">
-            Atradas
-          </button>
-          <button type="button" className="btn btn-sm btn-outline-warning">
-            Al dia
-          </button>
-          <button type="button" className="btn btn-sm btn-outline-primary"
-            
+    <>
+      <div className="col-lg-12">
+        <div className="section-block row justify-content-between m-0 p-0 mb-2">
+          <h3 className="section-title col-auto p-0">Lista de cuotas de hoy</h3>
+          <div
+            className="btn-group col-auto col-auto p-0"
+            role="group"
+            aria-label="Basic example"
           >
-            Todos
-          </button>
+            <button type="button" className="btn btn-sm btn-outline-danger">
+              Atradas
+            </button>
+            <button type="button" className="btn btn-sm btn-outline-warning">
+              Al dia
+            </button>
+            <button type="button" className="btn btn-sm btn-outline-primary">
+              Todos
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="card">
-        <div className="campaign-table table-responsive">
-          <table className="table">
-            <thead>
-              <tr className="border-0">
-                <th className="border-0">#</th>
-                <th className="border-0">Valor de la cuota</th>
-                <th className="border-0">Saldo al capital</th>
-                <th className="border-0">Fecha</th>
-                <th className="border-0">Capital</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* {clientes.map((cliente) => (
-                <ClienteMiniaturaDetalle key={cliente.id} cliente={cliente} />
-              ))} */}
-                  {cuotasPendientes.map(prestamo=> (
-                    <>
-                        {prestamo.estado == 'activo' && (
-                          <tr className="group" key={prestamo.creado}>
-                            <td colSpan="5">{prestamo.cliente.nombre + ' ' + prestamo.cliente.apellido}</td>
-                          </tr>
-                        )}
-                        {prestamo.detallesCuotas.map(ct=> (
-                        <>
-                        {(ct.estado == 'pendiente' || ct.estado == 'parcial' ) &&
-                         (
-                          <tr role="row" key={ct.cuota + ct.fecha + ct.valorCuota} className={`alert ${fechaF == (ct.fecha) ? 'alert-warning' : 'alert alert-danger'}`}>
-                            {/* {console.log('formatearFecha',formatearFecha(ct.creado,'dmy'))} */}
-                            {/* {console.log('fecha',fecha)} */}
-                          {/* <td>{setMoneda(ct.interes)}</td> */}
-                          <td>{ct.cuota}</td>
-                          <td> {fechaActual == transformarFechaYMD(ct.fecha) ? setMoneda(ct.valorCuota) : setMoneda(ct.valorCuota) +' + '+ ct.valorCuota*0.05 }</td>
-                          <td>{setMoneda(ct.saldoCapital)}</td>
-                          <td>{ct.fecha}</td>
-                          {/* <td>{ct.estado}</td> */}
-                          <td>
-                            <div className="btn-group ml-auto">
-                              <button
-                                className="btn btn-sm btn-outline-danger"
-                                data-toggle="modal"
-                                data-target="#modalPagoParcial"
-                                data-whatever="@mdo"
-                                value={prestamo.id}
-                                onClick={e=> handleClick(prestamo.id, ct.cuota)}
-                              >
-                                Cobrar
-                              </button>
+        {cuotasPendientes.map((prestamo, index) => (
+          <>
+            {validarPrestamo(prestamo.detallesCuotas) === true ? (
+              <>
+                <div className="accrodion-regular">
+                  <div id="accordion">
+                    <div className="card">
+                      <div className="card-header" id={`prestamo-${index}`}>
+                        <h5 className="mb-0">
+                          <button
+                            className="btn btn-link collapsed"
+                            data-toggle="collapse"
+                            data-target={`#prestamo-${index}-x`}
+                            aria-expanded="false"
+                            aria-controls={`prestamo-${index}-x`}
+                          >
+                            <span className="fas mr-3 fa-angle-down"></span>
+                            {prestamo.cliente.nombre +
+                              " " +
+                              prestamo.cliente.apellido}
+                          </button>
+                        </h5>
+                      </div>
+                      <div
+                        id={`prestamo-${index}-x`}
+                        className="collapse"
+                        aria-labelledby={`prestamo-${index}`}
+                        data-parent="#accordion"
+                      >
+                        <div className="card-body">
+                          <div className="card">
+                            <div className="campaign-table table-responsive">
+                              <table className="table">
+                                <thead>
+                                  <tr className="border-0">
+                                    <th className="border-0">#</th>
+                                    <th className="border-0">
+                                      Valor de la cuota
+                                    </th>
+                                    <th className="border-0">Mora</th>
+                                    <th className="border-0">
+                                      Saldo al capital
+                                    </th>
+                                    <th className="border-0">Fecha</th>
+                                    <th className="border-0">Capital</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {prestamo.detallesCuotas.map((ct) => (
+                                    <>
+                                      {compararFechas(ct.fecha, false) ? (
+                                        <>
+                                          {(ct.estado == "pendiente" ||
+                                            ct.estado == "parcial") && (
+                                            <tr
+                                              role="row"
+                                              key={
+                                                ct.cuota +
+                                                ct.fecha +
+                                                ct.valorCuota
+                                              }
+                                              className={`alert ${
+                                                fechaF == ct.fecha
+                                                  ? "alert-warning"
+                                                  : "alert alert-danger"
+                                              }`}
+                                            >
+                                              <td>{ct.cuota}</td>
+                                              <td>
+                                                {setMoneda(ct.valorCuota)}
+                                              </td>
+                                              <td>
+                                                {compararFechas(ct.fecha, true)
+                                                  ? setMoneda(
+                                                      (
+                                                        ct.valorCuota * 0.05
+                                                      ).toFixed(2)
+                                                    )
+                                                  : null}
+                                              </td>
+                                              <td>
+                                                {setMoneda(ct.saldoCapital)}
+                                              </td>
+                                              <td>{ct.fecha}</td>
+                                              {/* <td>{ct.estado}</td> */}
+                                              <td>
+                                                <div className="btn-group ml-auto">
+                                                  <button
+                                                    className="btn btn-sm btn-outline-danger"
+                                                    data-toggle="modal"
+                                                    data-target="#modalPagoParcial"
+                                                    data-whatever="@mdo"
+                                                    value={prestamo.id}
+                                                    onClick={(e) =>
+                                                      handleClick(
+                                                        prestamo.id,
+                                                        ct.cuota
+                                                      )
+                                                    }
+                                                  >
+                                                    Cobrar
+                                                  </button>
+                                                </div>
+                                              </td>
+                                            </tr>
+                                          )}
+                                        </>
+                                      ) : null}
+                                    </>
+                                  ))}
+                                </tbody>
+                              </table>
                             </div>
-                          </td>
-                          </tr>
-                        )}
-                        </>
-                      ))}
-                    </>
-                  ))}
-            </tbody>
-          </table>
-        </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : null}
+          </>
+        ))}
       </div>
-    </div>
+    </>
   );
 
   const hanbleBuscar = (e) => {
@@ -155,8 +224,16 @@ const Pagos = () => {
       {/* {firebase.cargando && (<div className="spinner"><Spinner/></div>)} */}
 
       <Navegacion titulo="Lista de Cuotas pendientes">
-        {Object.entries(prestamo).length && console.log('prestamo','=>',prestamo)}
-        {Object.entries(prestamo).length > 0 && (<ModalCobroParcial prestamo={prestamo[0]} id={prestamo.id} cuotaParcial={cuotaParcial} setActualizarCuotas={setActualizarCuotas}/>)}
+        {Object.entries(prestamo).length &&
+          console.log("prestamo", "=>", prestamo)}
+        {Object.entries(prestamo).length > 0 && (
+          <ModalCobroParcial
+            prestamo={prestamo[0]}
+            id={prestamo.id}
+            cuotaParcial={cuotaParcial}
+            setActualizarCuotas={setActualizarCuotas}
+          />
+        )}
         <div className="row justify-content-center">
           {/* <Link href="/add/Cliente">
             <a className="btn btn-primary shadow float-right col-md-auto offset-md-7">

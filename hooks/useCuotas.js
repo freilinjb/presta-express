@@ -17,6 +17,7 @@ const useCuotas = () => {
 
     const [cuotasPendientes, setCuotasPendientes] = useState([]);
 
+    
     const transformarFechaYMD=(fecha)=> {
         const ftemp = fecha.split('-');
         const f = {
@@ -34,20 +35,34 @@ const useCuotas = () => {
     const compararFechas=(fecha2,comodin = true)=> {
         let fecha1 = new Date().now;
         fecha1 = transformarFechaYMD(formatearFecha(fecha1));
-        setFechaActual(fecha1);
 
         fecha2 = transformarFechaYMD(fecha2);
 
-        if(comodin) {
+        if(comodin === true) {
             return new Date(fecha2) < new Date(fecha1);
+        }else if(comodin === 'igual'){
+            return new Date(fecha2) === new Date(fecha1);
         } else {
             return new Date(fecha2) <= new Date(fecha1);
+        } 
+    }
+
+    const validarPrestamo=(detallesCuotas)=> {
+        let bool = false;
+        for(const i in detallesCuotas) {
+            if(compararFechas(detallesCuotas[i].fecha, true)) {
+                bool = true;
+                break;
+            }
         }
+        return bool;
     }
 
     useEffect(() => {
         let filtro = [];
         let cuotas = [];
+        const fecha1 = new Date().now;
+        setFechaActual(fecha1);
         for(const i in prestamos) {
             console.log(prestamos[i]);
             if(prestamos[i].estado === 'activo') {
@@ -55,7 +70,7 @@ const useCuotas = () => {
 
                 for(const j in prestamos[i].detallesCuotas) {
                     if(prestamos[i].detallesCuotas[j].estado === 'pendiente') {
-                        if(compararFechas(prestamos[i].detallesCuotas[j].fecha,false)) {
+                        if(compararFechas(prestamos[i].detallesCuotas[j].fecha,'igual')) {
                             cuotas.push(prestamos[i].detallesCuotas[j]);
                         }
                         // cuotas.push(prestamos[i].detallesCuotas[j]);
@@ -85,7 +100,8 @@ const useCuotas = () => {
         cuotasPendientes,
         fechaActual,
         transformarFechaYMD,
-        compararFechas
+        compararFechas,
+        validarPrestamo
     }
 }
 

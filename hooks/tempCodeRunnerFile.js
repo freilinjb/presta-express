@@ -57,3 +57,12 @@ const transformarFechaYMD=(fecha)=> {
   }
 
   console.log(compararFechas('16-07-2020',false));
+
+  var date1 = '25/02/1985';  /*february 25th*/
+var date2 = '26/02/1985';  /*february 26th*/
+
+if (date.parseDate('dd/mm/yy', date2) > $.datepicker.parseDate('dd/mm/yy', date1)) {
+
+          console.log(date2 + 'is later than ' + date1);
+
+}
