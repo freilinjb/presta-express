@@ -11,13 +11,14 @@ import useMensajesAlertas from '../../hooks/useMensajesAlertas';
 import usePagoParcial from '../../hooks/usePagoParcial';
 import { FirebaseContext } from '../../firebase';
 
-const STATE_INICIAL = {
-  formaPago:'',
-  pago:1.0,
-  observacion:''
-}
 
 const ModalCobro = ({ prestamo, id, cuotaParcial, setActualizarCuotas }) => {
+
+  const STATE_INICIAL = {
+    formaPago:'',
+    pago:prestamo.detallesCuotas[cuotaParcial-1].valorCuota,
+    observacion:''
+  }
 
   console.log('prestamo','=>',prestamo);
   console.log('id','=>',id);

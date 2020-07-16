@@ -16,6 +16,7 @@ const useCuotas = () => {
     const [fechaActual, setFechaActual] = useState('');
 
     const [cuotasPendientes, setCuotasPendientes] = useState([]);
+    const [prestamosActivos, setPrestamosActivos] = useState([]);
 
     
     const transformarFechaYMD=(fecha)=> {
@@ -50,7 +51,7 @@ const useCuotas = () => {
     const validarPrestamo=(detallesCuotas)=> {
         let bool = false;
         for(const i in detallesCuotas) {
-            if(compararFechas(detallesCuotas[i].fecha, true)) {
+            if(compararFechas(detallesCuotas[i].fecha, true) && (detallesCuotas[i].estado === "pendiente" || detallesCuotas[i].estado === "parcial")) {
                 bool = true;
                 break;
             }
@@ -69,7 +70,7 @@ const useCuotas = () => {
                 console.log(prestamos[i]);
 
                 for(const j in prestamos[i].detallesCuotas) {
-                    if(prestamos[i].detallesCuotas[j].estado === 'pendiente') {
+                    if(prestamos[i].detallesCuotas[j].estado === 'pendiente' || prestamos[i].detallesCuotas[j].estado === 'parcial') {
                         if(compararFechas(prestamos[i].detallesCuotas[j].fecha,'igual')) {
                             cuotas.push(prestamos[i].detallesCuotas[j]);
                         }
@@ -96,6 +97,7 @@ const useCuotas = () => {
     return {
         cargando,
         busqueda,
+        prestamos,
         setBusqueda,
         cuotasPendientes,
         fechaActual,
