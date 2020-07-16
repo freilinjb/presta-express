@@ -96,7 +96,6 @@ const Prestamo = () => {
       obtenerDatos();
       setActualizarCuotas(false);
     }
-    //Si algo cambia en producto se actualiza: es por haVotado
   }, [id, prestamo]);
 
   const onClickConfirmar = (valor) => {

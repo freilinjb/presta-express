@@ -19,7 +19,9 @@ const STATE_INICIAL = {
 
 const ModalCobro = ({ prestamo, id, cuotaParcial, setActualizarCuotas }) => {
 
-  // console.log(prestamo);
+  console.log('prestamo','=>',prestamo);
+  console.log('id','=>',id);
+  console.log('cuotaParcial','=>',cuotaParcial);
   if(Object.entries(prestamo).length === 0) {
     return;
   }

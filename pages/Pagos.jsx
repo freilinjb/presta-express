@@ -229,7 +229,7 @@ const Pagos = () => {
         {Object.entries(prestamo).length > 0 && (
           <ModalCobroParcial
             prestamo={prestamo[0]}
-            id={prestamo.id}
+            id={prestamo[0].id}
             cuotaParcial={cuotaParcial}
             setActualizarCuotas={setActualizarCuotas}
           />
