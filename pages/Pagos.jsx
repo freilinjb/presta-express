@@ -8,7 +8,7 @@ import Spinner from "../components/ui/Spinner";
 import ModalCobroParcial from "../components/ui/ModalCobroParcial";
 
 import useCuotas from "../hooks/useCuotas";
-import usePrestamo from "../hooks/usePrestamo";
+import ResumenPrestamos from "../components/ui/witget/ResumenPrestamos";
 import useCalculadora from "../hooks/useCalculadora";
 import usePagoParcial from "../hooks/usePagoParcial";
 const Pagos = () => {
@@ -260,6 +260,8 @@ const Pagos = () => {
               </div>
             </div>
             <div className="">
+                              {/* RESUMEN DE LOS DATOS OBTENIDOS */}
+              <ResumenPrestamos/>
               {cargando && <Spinner className="spinner" />}
               {Componente}
             </div>

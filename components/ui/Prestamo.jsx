@@ -15,7 +15,7 @@ const Prestamo = ({prestamo}) => {
     "Agosto", "Septiembre", "Octubre",
     "Noviembre", "Diciembre"
   ]
-    // console.log(prestamo);
+    // console.log(prestamo);r
     
     const { setMoneda } = useCalculadora();
     const estadoCuotas = {
@@ -96,7 +96,11 @@ const Prestamo = ({prestamo}) => {
 						</div>
 						<div className="social">
 							<ul>
-								<li className="telefono"><a href="#facebook"><span className="fa fa-facebook"></span></a></li>
+								<li className="telefono">
+                  <Link href="/cliente/[id]" as={`/cliente/${prestamo.cliente.id}`}>
+                    <a><span className="fas fa-user-circle"></span></a>
+                    </Link> 
+                  </li>
 								<li className="correo"><a href="#twitter"><span className="fa fa-twitter"></span></a></li>
 								<li className="pagar"><a href="#google-plus"><span className="fa fa-google-plus"></span></a></li>
                 </ul>

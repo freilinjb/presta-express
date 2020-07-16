@@ -16,13 +16,14 @@ const ModalCobro = ({ prestamo, id, cuotaParcial, setActualizarCuotas }) => {
 
   const STATE_INICIAL = {
     formaPago:'',
-    pago:prestamo.detallesCuotas[cuotaParcial-1].valorCuota,
+    pago:(cuotaParcial === 0 ? prestamo.detallesCuotas[cuotaParcial].valorCuota : prestamo.detallesCuotas[cuotaParcial-1].valorCuota),
     observacion:''
   }
 
   console.log('prestamo','=>',prestamo);
   console.log('id','=>',id);
   console.log('cuotaParcial','=>',cuotaParcial);
+  // console.log('pago entrante','=>',prestamo.detallesCuotas[cuotaParcial-1].valorCuota);
   if(Object.entries(prestamo).length === 0) {
     return;
   }
