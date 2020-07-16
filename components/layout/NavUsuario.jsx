@@ -46,18 +46,25 @@ const NavUsuario = () => {
           <a className="dropdown-item" href="#!">
             <i className="fas fa-user mr-2"></i>Cuenta
           </a>
-          <Link href="/usuario/configuracion/[id]" as={`/usuario/configuracion/${usuario.uid}`}>
-            <a className={`dropdown-item ${Router.pathname == `/usuario/configuracion/${usuario.uid}` ? 'active' : ''}`}>
+          <Link
+            href="/usuario/configuracion/[id]"
+            as={`/usuario/configuracion/${usuario.uid}`}
+          >
+            <a
+              className={`dropdown-item ${
+                Router.pathname == `/usuario/configuracion/${usuario.uid}`
+                  ? "active"
+                  : ""
+              }`}
+            >
               <i className="fas fa-cog mr-2"></i>Configuracion
             </a>
           </Link>
-          <a className="dropdown-item" href="#!">
-            <span
-              className="fas fa-power-off mr-2"
-              onClick={() => cerrarSession()}
-            ></span>
-            Cerrar Sesion
-          </a>
+
+            <a className="dropdown-item" onClick={() => cerrarSession()}>
+              <span className="fas fa-power-off mr-2"></span>
+              Cerrar Sesion
+            </a>
         </div>
       </li>
     </>

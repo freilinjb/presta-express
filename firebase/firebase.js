@@ -7,7 +7,7 @@ import firebaseConfig from './config';
 class Firebase {
 
     constructor() {
-        if(!app.apps.length) {
+        if (!app.apps.length) {
             app.initializeApp(firebaseConfig);
         }
         //Metodo de autenticar y crear una cuenta
@@ -18,13 +18,55 @@ class Firebase {
     }
 
     async registrar(nombre, email, password) {
-        this.cargando = true;        
+        this.cargando = true;
         try {
-            
-            const nuevoUsuario = await this.auth.createUserWithEmailAndPassword(email,password);
-            
-            this.cargando = true;
-            // Para actualizar el nombre del usuario creado
+
+            const nuevoUsuario = await this.auth.createUserWithEmailAndPassword(email, password);
+
+            console.log('nuevoUsuario', '=>', nuevoUsuario);
+
+            //Coleccion de configuracion de operaciones de 
+            //negocios y datos de relacionados a los roles
+            const configuracion = {
+
+                nombreEmpresa: '',
+                eslogan: '',
+                urlLogo: '',
+                direccion: {
+                    ciudad: '',
+                    sector: '',
+                    direccion: '',
+                },
+                contacto: {
+                    telefono: '',
+                    celular: '',
+                    correo: '',
+                },
+                prestamo: {
+                    tipoCobro: '',
+                    aplicacionInteres: '',
+                    interesPorDefecto: '',
+                    permitirCambiarInteres: false,
+                    diasIgnorados: [
+
+                    ],
+                    fijarCobro: false,
+                    cobro: {
+                        semanal: '',
+                        quincenal: '',
+                        mensual: '',
+                    },
+                    diasQuincena: 14,
+                    diasMes: 28,
+                    redondeoAutomatico: false,
+                },
+                usuario: {
+                    id: nuevoUsuario.user.uid,
+                },
+            };
+
+            const resultado = await firebase.db.collection("Configuracion").add(configuracion);
+
             return await nuevoUsuario.user.updateProfile({
                 displayName: nombre
             });
@@ -36,16 +78,16 @@ class Firebase {
         finally {
             this.cargando = false;
         }
-        
+
     }
 
     //todo Iniciar sesion del usuario
     async login(email, password) {
-        
+
         try {
             this.cargando = true;
             return this.auth.signInWithEmailAndPassword(email, password);
-            
+
         } catch (error) {
             console.log(error);
 
@@ -58,7 +100,7 @@ class Firebase {
     //todo Cierra la sesion del usuario
     async cerrarSesion() {
         try {
-            
+
             this.cargando = true;
             await this.auth.signOut();
 

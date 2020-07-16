@@ -25,6 +25,7 @@ const SignUp = () => {
     async function crearCuenta() {
         try {
              await firebase.registrar(nombre, email, password);
+
              Router.push('/');
         } catch (error) {
             console.log('Hubo un error al crear el usuario',error.message);
@@ -106,7 +107,7 @@ const SignUp = () => {
                                 type="submit">
                                     {firebase.cargando ? 
                                     (<>
-                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                             Cargando...
                                     </>
                                     )
