@@ -64,7 +64,7 @@ const Navegacion = (props) => {
                                 
                                 <div className={`nav-link ${router.pathname == '/Pagos' ? 'active' : ''}`}>
                                     <i className="fas fa-hand-holding-usd"></i>
-                                    Pagos
+                                    Cuotas por cobrar
                                 </div>
                             </li>
                             </Link>
