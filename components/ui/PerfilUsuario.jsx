@@ -1,15 +1,19 @@
 import React from "react";
 
-const RerfilCliente = ({cliente}) => {
+const RerfilCliente = ({usuario, parametrosNegocios}) => {
 
   return (
+
+    <>
+    {usuario ? (
+      <>
     <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
       <div className="card">
         <div className="card-body">
           <div className="user-avatar text-center d-block">
-            {cliente.urlFoto ? (
+            {parametrosNegocios.urlFoto ? (
               <img
-                src={cliente.urlFoto}
+                src={parametrosNegocios.urlFoto}
                 alt="User Avatar"
                 className="rounded-circle user-avatar-xxl"
               />
@@ -23,9 +27,9 @@ const RerfilCliente = ({cliente}) => {
           </div>
           <div className="text-center">
             <h2 className="font-24 mb-0">
-              {cliente.nombre + " " + cliente.apellido}
+              {usuario.displayName}
             </h2>
-            {cliente.apodo && <p>Alias ({cliente.apodo})</p>}
+            {parametrosNegocios.eslogan && <p>Alias ({parametrosNegocios.eslogan})</p>}
           </div>
         </div>
         <div className="card-body border-top">
@@ -34,11 +38,11 @@ const RerfilCliente = ({cliente}) => {
             <ul className="list-unstyled mb-0">
               <li className="mb-2">
                 <i className="fas fa-fw fa-envelope mr-2"></i>
-                {cliente.correo}
+                {parametrosNegocios.eslogan}
               </li>
               <li className="mb-0">
                 <i className="fas fa-fw fa-phone mr-2"></i>
-                {cliente.telefono}
+                {parametrosNegocios.eslogan}
               </li>
             </ul>
           </div>
@@ -57,11 +61,14 @@ const RerfilCliente = ({cliente}) => {
         <div className="card-body border-top">
           <h3 className="font-16">Observacion</h3>
           <div>
-            <p>{cliente.observacion}</p>
+            <p>{parametrosNegocios.eslogan}</p>
           </div>
         </div>
       </div>
     </div>
+      </>
+    ) : null}
+    </>
   );
 };
 

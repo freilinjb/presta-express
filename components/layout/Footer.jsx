@@ -12,9 +12,9 @@ const Footer = () => {
             </div>
             <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
               <div className="text-md-right footer-links d-none d-sm-block">
-                <a href="javascript: void(0);">About</a>
-                <a href="javascript: void(0);">Support</a>
-                <a href="javascript: void(0);">Contact Us</a>
+                <a href="#">About</a>
+                <a href="#">Support</a>
+                <a href="#">Contact Us</a>
               </div>
             </div>
           </div>

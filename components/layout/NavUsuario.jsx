@@ -47,12 +47,10 @@ const NavUsuario = () => {
             <i className="fas fa-user mr-2"></i>Cuenta
           </a>
           <Link
-            href="/usuario/configuracion/[id]"
-            as={`/usuario/configuracion/${usuario.uid}`}
-          >
+            href="/Configuracion">
             <a
               className={`dropdown-item ${
-                Router.pathname == `/usuario/configuracion/${usuario.uid}`
+                Router.pathname == `/Configuracion`
                   ? "active"
                   : ""
               }`}
