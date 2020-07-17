@@ -256,7 +256,7 @@ const EdicarConfiguracionUsuario = ({ parametrosNegocios }) => {
                 </div>
               </div>
 
-              <legend>Ubicacion</legend>
+              <legend>Contactos</legend>
               <div className="form-row">
                 <div className="col-md-6 col-sm-12 mb-3">
                   <label htmlFor="telefono1">Telefono 1</label>
@@ -315,7 +315,8 @@ const EdicarConfiguracionUsuario = ({ parametrosNegocios }) => {
                     <p className="alert alert-danger">{errores.correo}</p>
                   )} */}
                 </div>
-
+                
+                <legend>Ubicación</legend>
                 <div className="w-100"></div>
                 <div className="col-md-6 col-sm-12 mb-3">
                   <label htmlFor="sector">Sector</label>

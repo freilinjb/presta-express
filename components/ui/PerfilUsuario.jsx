@@ -26,23 +26,53 @@ const RerfilCliente = ({usuario, parametrosNegocios}) => {
             )}
           </div>
           <div className="text-center">
-            <h2 className="font-24 mb-0">
+            <h3 className="font-24 mb-0">
+              <p><strong>Nombre de usuario</strong></p>
               {usuario.displayName}
-            </h2>
-            {parametrosNegocios.eslogan && <p>Alias ({parametrosNegocios.eslogan})</p>}
+            </h3>
+            {parametrosNegocios[0].nombreEmpresa && (<><p className="border-top mt-3"><strong>Nombre comercial</strong></p>  <h1> ({parametrosNegocios[0].nombreEmpresa}) </h1></>)}
+            {parametrosNegocios[0].eslogan && <p><strong>Eslogan</strong><br/> ({parametrosNegocios[0].eslogan})</p>}
           </div>
         </div>
         <div className="card-body border-top">
-          <h3 className="font-16">Informacion del Cliente </h3>
+          <h3 className="font-16">Informacion de contacto </h3>
           <div className="">
             <ul className="list-unstyled mb-0">
               <li className="mb-2">
                 <i className="fas fa-fw fa-envelope mr-2"></i>
-                {parametrosNegocios.eslogan}
+                {parametrosNegocios[0].Contacto.correo}
               </li>
               <li className="mb-0">
                 <i className="fas fa-fw fa-phone mr-2"></i>
-                {parametrosNegocios.eslogan}
+                {parametrosNegocios[0].Contacto.telefono1}
+              </li>
+              <li className="mb-0">
+                <i className="fas fa-fw fa-phone mr-2"></i>
+                {parametrosNegocios[0].Contacto.telefono2}
+              </li>
+              <li className="mb-0">
+                <i className="fas fa-mobile fa-phone mr-2"></i>
+                {parametrosNegocios[0].Contacto.celular}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="card-body border-top">
+          <h3 className="font-16">Informacion de geografica </h3>
+          <div className="">
+            <ul className="list-unstyled mb-0">
+              <li className="mb-2">
+                <i className="fas fa-map-marker fa-envelope mr-2"></i>
+                {parametrosNegocios[0].Direccion.ciudad}
+              </li>
+              <li className="mb-0">
+                <i className=" fas fa-map-signs fa-phone mr-2"></i>
+                {parametrosNegocios[0].Direccion.sector}
+              </li>
+              <li className="mb-0">
+                <i className="fas fa-map fa-phone mr-2"></i>
+                {parametrosNegocios[0].Direccion.direccion}
               </li>
             </ul>
           </div>

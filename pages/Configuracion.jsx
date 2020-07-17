@@ -22,7 +22,6 @@ const Configuracion = () => {
   return (
     <Layout>
       <Navegacion>
-        <h1>Hola mundo</h1>
 
         {firebase.cargando ? (
           <Spinner className="spinner" />
