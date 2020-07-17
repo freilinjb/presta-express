@@ -33,15 +33,15 @@ class Firebase {
                 eslogan: '',
                 urlLogo: '',
                 Direccion:{
-                    direccion,
-                    ciudad,
-                    sector,
+                    direccion:'',
+                    ciudad:'',
+                    sector:'',
                 },
                 Contacto:{
-                    celular,
-                    telefono1,
-                    telefono2,
-                    correo,
+                    celular:'',
+                    telefono1:'',
+                    telefono2:'',
+                    correo:'',
                 },
                 prestamo: {
                     tipoCobro: '',
@@ -67,7 +67,8 @@ class Firebase {
             };
 
             const resultado = await firebase.db.collection("Configuracion").add(configuracion);
-
+            console.log(`resultado: `, resultado);
+            
             return await nuevoUsuario.user.updateProfile({
                 displayName: nombre
             });
