@@ -17,8 +17,8 @@ const Configuracion = () => {
   const { parametrosNegocios } = useParametrosUsuario();
 
   console.log(parametrosNegocios[0]);
-  console.log('usuario:',usuario);
-  
+  console.log("usuario:", usuario);
+
   return (
     <Layout>
       <Navegacion>
@@ -29,8 +29,15 @@ const Configuracion = () => {
         ) : (
           <>
             <div className="row justify-content-center">
-              <PerfilUsuario parametrosNegocios={parametrosNegocios} usuario={usuario} />
-              {usuario && (<EdicarConfiguracionUsuario parametrosNegocios={parametrosNegocios}/>)}
+              {usuario && parametrosNegocios.length > 0 && (
+                <PerfilUsuario parametrosNegocios={parametrosNegocios} usuario={usuario}/>
+              )}
+
+              {usuario && parametrosNegocios.length > 0 && (
+                <EdicarConfiguracionUsuario
+                  parametrosNegocios={parametrosNegocios}
+                />
+              )}
             </div>
           </>
         )}

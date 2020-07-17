@@ -19,7 +19,7 @@ const RerfilCliente = ({usuario, parametrosNegocios}) => {
               />
             ) : (
               <img
-                src="/static/assets/images/avatar-1.jpg"
+                src={`${parametrosNegocios[0].urlLogo ? parametrosNegocios[0].urlLogo : "/static/assets/images/avatar-1.jpg" }`}
                 alt="User Avatar"
                 className="rounded-circle user-avatar-xxl"
               />

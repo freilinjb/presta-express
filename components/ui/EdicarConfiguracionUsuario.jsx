@@ -17,7 +17,15 @@ const EdicarConfiguracionUsuario = ({ parametrosNegocios }) => {
   console.log("parametrosNegocios: ", parametrosNegocios);
 
   const STATE_INICIAL = {
-      
+    nombreEmpresa: parametrosNegocios[0].nombreEmpresa,
+    eslogan: parametrosNegocios[0].eslogan,
+    direccion: parametrosNegocios[0].Direccion.direccion,
+    ciudad: parametrosNegocios[0].Direccion.ciudad,
+    sector: parametrosNegocios[0].Direccion.sector,
+    telefono1: parametrosNegocios[0].Contacto.telefono1,
+    telefono2: parametrosNegocios[0].Contacto.telefono2,
+    celular: parametrosNegocios[0].Contacto.celular,
+    correo: parametrosNegocios[0].Contacto.correo,
   };
 
   const { sectores } = useSector("creado");
@@ -45,7 +53,8 @@ const EdicarConfiguracionUsuario = ({ parametrosNegocios }) => {
     eslogan,
     logo,
     celular,
-    telefono,
+    telefono1,
+    telefono2,
     correo,
     direccion,
     ciudad,
@@ -79,18 +88,45 @@ const EdicarConfiguracionUsuario = ({ parametrosNegocios }) => {
     try {
       //Insertar en la BD
       firebase.cargando = true;
-      firebase.db.collection("Configuracion").doc(parametrosNegocios[0].id).update({
-        nombreEmpresa,
-        eslogan,
-        urlLogo,
-        celular,
-        telefono,
-        correo,
-        telefono,
-        direccion,
-        ciudad,
-        sector,
-      });
+
+      //Si no tiene imagen
+      if(!urlLogo) {
+        firebase.db.collection("Configuracion").doc(parametrosNegocios[0].id).update({
+            nombreEmpresa,
+            eslogan,
+            Contacto:{
+                celular,
+                telefono1,
+                telefono2,
+                correo,
+            },
+            Direccion:{
+                direccion,
+                ciudad,
+                sector,
+            },
+          });
+      }
+      //Si tiene imagen
+      else {
+        firebase.db.collection("Configuracion").doc(parametrosNegocios[0].id).update({
+            nombreEmpresa,
+            eslogan,
+            urlLogo,
+            Contacto:{
+                celular,
+                telefono1,
+                telefono2,
+                correo,
+            },
+            Direccion:{
+                direccion,
+                ciudad,
+                sector,
+            },
+          });
+      }
+
       alert.success("Se ha guardo correctamente");
     } catch (error) {
       console.log(error);
@@ -206,7 +242,7 @@ const EdicarConfiguracionUsuario = ({ parametrosNegocios }) => {
                         name="logo"
                         id="logo"
                         randomizeFilename
-                        storageRef={firebase.storage.ref("Clientes")}
+                        storageRef={firebase.storage.ref("Configuracion")}
                         onUploadStart={handleUploadStart}
                         onUploadError={handleUploadError}
                         onUploadSuccess={handleUploadSuccess}
@@ -223,14 +259,28 @@ const EdicarConfiguracionUsuario = ({ parametrosNegocios }) => {
               <legend>Ubicacion</legend>
               <div className="form-row">
                 <div className="col-md-6 col-sm-12 mb-3">
-                  <label htmlFor="telefono">Telefono</label>
+                  <label htmlFor="telefono1">Telefono 1</label>
                   <input
                     type="text"
                     className="form-control"
-                    id="telefono"
+                    id="telefono1"
                     placeholder="Ingrese el numero telefonico"
-                    name="telefono"
-                    value={telefono}
+                    name="telefono1"
+                    value={telefono1}
+                    onChange={handleChange}
+                    autoComplete="off"
+                  />
+                </div>
+
+                <div className="col-md-6 col-sm-12 mb-3">
+                  <label htmlFor="telefono1">Telefono 2</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="telefono2"
+                    placeholder="Ingrese el numero telefonico"
+                    name="telefono2"
+                    value={telefono2}
                     onChange={handleChange}
                     autoComplete="off"
                   />

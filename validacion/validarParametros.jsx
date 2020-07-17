@@ -6,8 +6,8 @@ export default function validarParametros(valores) {
     errores.nombreEmpresa = "El Nombre es obligatorio";
   }
 
-  if (!valores.telefono) {
-    errores.telefono = "El Apellido es Obligatorio";
+  if (!valores.telefono1) {
+    errores.telefono1 = "El Apellido es Obligatorio";
   }
 //   if (
 //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(valores.correo) &&
