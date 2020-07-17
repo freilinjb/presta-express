@@ -32,15 +32,16 @@ class Firebase {
                 nombreEmpresa: '',
                 eslogan: '',
                 urlLogo: '',
-                direccion: {
-                    ciudad: '',
-                    sector: '',
-                    direccion: '',
+                Direccion:{
+                    direccion,
+                    ciudad,
+                    sector,
                 },
-                contacto: {
-                    telefono: '',
-                    celular: '',
-                    correo: '',
+                Contacto:{
+                    celular,
+                    telefono1,
+                    telefono2,
+                    correo,
                 },
                 prestamo: {
                     tipoCobro: '',
