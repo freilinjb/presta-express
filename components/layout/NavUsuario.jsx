@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import Router from "next/router";
 import { FirebaseContext } from "../../firebase";
+import useParametrosUsuario from "../../hooks/useParametrosUsuario";
 
 const NavUsuario = () => {
   const { usuario, firebase } = useContext(FirebaseContext);
+  const { parametrosNegocios } = useParametrosUsuario();
 
   const cerrarSession = () => {
     firebase.cerrarSesion();
@@ -29,7 +31,7 @@ const NavUsuario = () => {
           aria-expanded="false"
         >
           <img
-            src="/static/assets/images/avatar-1.jpg"
+            src={parametrosNegocios.length > 0 && parametrosNegocios[0].urlLogo ? parametrosNegocios[0].urlLogo : "/static/assets/images/avatar-1.jpg"}
             alt=""
             className="user-avatar-md rounded-circle"
           />
