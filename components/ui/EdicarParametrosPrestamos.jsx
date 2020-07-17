@@ -13,7 +13,7 @@ import validarParametros from "../../validacion/validarParametros";
 //Copia todo del crear-cuenta
 import useSector from "../../hooks/useSector";
 
-const EdicarConfiguracionUsuario = ({ parametrosNegocios }) => {
+const EditarConfiguracionPrestamos = ({ parametrosNegocios }) => {
   console.log("parametrosNegocios: ", parametrosNegocios);
 
   const STATE_INICIAL = {
@@ -173,12 +173,12 @@ const EdicarConfiguracionUsuario = ({ parametrosNegocios }) => {
 
   return (
     <div
-      className="tab-pane fade active show"
+      className="tab-pane fade"
       id="parametrosConfiguracion"
       role="tabpanel"
       aria-labelledby="parametrosConfiguracion-tab"
     >
-      <div className="">
+      <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12">
         <div className="card">
           <h5 className="card-header">
             Modificar Registro <span className="fas fa-user-plus"></span>
@@ -420,4 +420,4 @@ const EdicarConfiguracionUsuario = ({ parametrosNegocios }) => {
   );
 };
 
-export default EdicarConfiguracionUsuario;
+export default EditarConfiguracionPrestamos;
