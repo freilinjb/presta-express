@@ -6,7 +6,7 @@ const RerfilCliente = ({ usuario, parametrosNegocios }) => {
       {usuario ? (
         <>
 
-            <div className="">
+            <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
               <div className="card">
                 <div className="card-body">
                   <div className="user-avatar text-center d-block">
@@ -37,8 +37,8 @@ const RerfilCliente = ({ usuario, parametrosNegocios }) => {
                     </h3>
                     {parametrosNegocios[0].nombreEmpresa && (
                       <>
-                        <p className="border-top mt-3">
-                          <strong>Nombre comercial</strong>
+                        <p className="border-top">
+                          <strong className="mt-5">Nombre comercial</strong>
                         </p>{" "}
                         <h1> ({parametrosNegocios[0].nombreEmpresa}) </h1>
                       </>

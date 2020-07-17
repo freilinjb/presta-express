@@ -46,7 +46,7 @@ const Configuracion = () => {
                       aria-controls="informacionGeneral"
                       aria-selected="true"
                     >
-                      Tab Title #1
+                      Configuracion General
                     </a>
                   </li>
                   <li className="nav-item">
@@ -59,7 +59,7 @@ const Configuracion = () => {
                       aria-controls="profile"
                       aria-selected="false"
                     >
-                      Tab Title #2
+                      Parametros de Configuracion
                     </a>
                   </li>
                 </ul>

@@ -57,6 +57,7 @@ const Cliente = () => {
     telefono,
     correo,
     sector,
+    fechaIngrerso,
     direccion,empresa,telefonoTrabajo, sueldo,direccionLaboral,
     observacion,
   } = valores;
@@ -97,6 +98,7 @@ const Cliente = () => {
           empresa,
           sueldo,
           direccionLaboral,
+          fechaIngrerso,
         },
         observacion,
         creado: Date.now(),
@@ -379,12 +381,15 @@ const Cliente = () => {
                         />
                       </div>
                       <div className="col-md-6 col-sm-12 mb-3">
-                        <label htmlFor="correo">Fecha de Ingreso</label>
+                        <label htmlFor="fechaIngrerso">Fecha de Ingreso</label>
                         <input
                           type="date"
                           className="form-control"
-                          // value={correo}
+                          id="fechaIngrerso"
+                          name="fechaIngrerso"
+                          value={fechaIngrerso}
                           onChange={handleChange}
+                          selected={fechaIngrerso}
                           autoComplete="off"
                           required
                         />
