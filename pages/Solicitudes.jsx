@@ -1,13 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
-import ClienteMiniaturaDetalle from "../components/ui/ClienteMiniaturaDetalle";
+import SolicitudMiniatura from "../components/ui/SolicitudMiniatura";
 import Spinner from "../components/ui/Spinner";
 import ButtonFloat from "../components/ui/ButtonFloat";
 import LayoutPrincipal from "../components/layout/LayoutPrincipal";
-import useCliente from '../hooks/useCliente';
+import useSolicitud from "../hooks/useSolicitud";
 
-const Clientes = () => {
+const Solicitudes = () => {
   //hook cliente
-  const {clientes, setClientes, cargando, busqueda, setBusqueda} =  useCliente("desc");
+  const { solicitudes, setSolicitudes, busqueda, cargando, setBusqueda } = useSolicitud(
+    "desc"
+  );
 
   const handleChange = (e) => {
     setBusqueda(e.target.value);
@@ -19,13 +21,13 @@ const Clientes = () => {
 
     if (busqueda.trim()) {
       const buscar = busqueda.toLowerCase().trim();
-      const filtro = clientes.filter((cliente) => {
+      const filtro = solicitudes.filter((solicitud) => {
         return (
           (
-            cliente.nombre.toLowerCase() +
+            solicitud.cliente.nombre.toLowerCase() +
             " " +
-            cliente.apellido.toLowerCase()
-          ).includes(buscar) || cliente.cedula.toLowerCase().includes(buscar)
+            solicitud.cliente.apellido.toLowerCase()
+          ).includes(buscar)
         );
       });
 
@@ -39,26 +41,11 @@ const Clientes = () => {
   const Componente = cargando ? (
     <Spinner />
   ) : (
-    <div className="col-lg-12 p-0">
-      <div className="card">
-        <div className="campaign-table table-responsive">
-          <table className="table table-hover">
-            <thead>
-              <tr className="border-0">
-                <th className="border-0">Foto</th>
-                <th className="border-0">Nombre</th>
-                <th className="border-0">Telefono</th>
-                <th className="border-0">Correo</th>
-                <th className="border-0">Accion</th>
-              </tr>
-            </thead>
-            <tbody>
-            {clientes.map((cliente) => (
-              <ClienteMiniaturaDetalle key={cliente.id} cliente={cliente} />
-            ))}
-            </tbody>
-          </table>
-        </div>
+    <div className="row justify-content-center">
+      <div className="col-xl-9 col-lg-8 col-md-8 col-sm-12 col-12">
+        {solicitudes.map((solicitud) => (
+          <SolicitudMiniatura key={solicitud.id} solicitud={solicitud} />
+        ))}
       </div>
     </div>
   );
@@ -71,11 +58,11 @@ const Clientes = () => {
         busqueda={busqueda}
         btnIr="/add/Solicitud"
       >
-          <ButtonFloat modal={false} ir="/add/Solicitud"/>
+        <ButtonFloat modal={false} ir="/add/Solicitud" />
         {Componente}
       </LayoutPrincipal>
     </>
   );
 };
 
-export default Clientes;
+export default Solicitudes;

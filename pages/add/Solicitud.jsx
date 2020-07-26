@@ -31,7 +31,7 @@ const Solicitud = () => {
   const { garantiasTemporales, setGarantiasTemporales } = useGarantia("desc");
   const { usuario, firebase } = useContext(FirebaseContext);
   const { calcular, formatearFecha } = useCalculadora();
-  const { setCliente, setConsultarCliente, obtenerCliente } = useSolicitud();
+  // const { setCliente, setConsultarCliente, obtenerCliente } = useSolicitud();
 
   const { clientes } = useCliente("desc");
   const [calculado, setCalculado] = useState(false);

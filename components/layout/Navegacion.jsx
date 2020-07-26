@@ -93,43 +93,119 @@ const Navegacion = (props) => {
                                     </ul>
                                 </div>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i className="fas fa-fw fa-table"></i>Tables</a>
-                                <div id="submenu-5" className="collapse submenu" >
-                                    <ul className="nav flex-column">
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="general-table.html">General Tables</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="data-tables.html">Data Tables</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
+
                             <li className="nav-divider">
                                 Features
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-8" aria-controls="submenu-8"><i className="fas fa-fw fa-columns"></i>Icons</a>
-                                <div id="submenu-8" className="collapse submenu" >
+                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i className=" fas fa-map-signs"></i>Transacción</a>
+                                <div id="submenu-5" className="collapse submenu" >
                                     <ul className="nav flex-column">
                                         <li className="nav-item">
-                                            <a className="nav-link" href="icon-fontawesome.html">FontAwesome Icons</a>
+                                            <a className="nav-link" href="data-tables.html">Adjudicacion de bienes</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="icon-material.html">Material Icons</a>
+                                            <a className="nav-link" href="data-tables.html">Pagos de cuotas</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="icon-simple-lineicon.html">Simpleline Icon</a>
+                                            <a className="nav-link" href="data-tables.html">Procesamiento de solicitud</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="icon-themify.html">Themify Icon</a>
+                                            <a className="nav-link" href="data-tables.html">Desembolso de prestamos</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li className="nav-item">
+                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i className="fab fa-algolia"></i>Controles</a>
+                                <div id="submenu-6" className="collapse submenu" >
+                                    <ul className="nav flex-column">
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="general-table.html">Intereses</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="icon-flag.html">Flag Icons</a>
+                                            <a className="nav-link" href="data-tables.html">Fechas de cobro</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="icon-weather.html">Weather Icon</a>
+                                            <a className="nav-link" href="data-tables.html">Dias Ignorados</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="data-tables.html">Controles de usuarios</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="data-tables.html">Controles generales</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                            <li className="nav-item">
+                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#submenu-10" aria-controls="submenu-10"><i className="fas fa-fw fa-columns"></i>Consultas/Reportes</a>
+                                <div id="submenu-10" className="collapse submenu" >
+                                    <ul className="nav flex-column">
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="icon-fontawesome.html">Clientes</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="icon-material.html">Pagos</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="icon-simple-lineicon.html">Solicitudes</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="icon-themify.html">Garantias</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="icon-flag.html">Bienes</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#entrada-datos" aria-controls="entrada-datos"><i className=" fas fa-parachute-box"></i>Entrada de datos</a>
+                                <div id="entrada-datos" className="collapse submenu" >
+                                    <ul className="nav flex-column">
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="icon-fontawesome.html">Cliente</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="icon-material.html">Solicitud</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="icon-simple-lineicon.html">Prestamos</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="icon-themify.html">Garantias</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="icon-flag.html">Zonas</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="icon-flag.html">Cobrador</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="icon-flag.html">Carteras de clientes</a>
+                                        </li>
+
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="icon-flag.html">Usuarios</a>
+                                        </li>
+
+
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="icon-flag.html">Gastos</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#!" data-toggle="collapse" aria-expanded="false" data-target="#utilidad" aria-controls="utilidad"><i className="fas fa-fw fa-columns"></i>Utilidades</a>
+                                <div id="utilidad" className="collapse submenu" >
+                                    <ul className="nav flex-column">
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="icon-fontawesome.html">Calculadora de prestamos</a>
                                         </li>
                                     </ul>
                                 </div>
