@@ -64,7 +64,7 @@ const SignIn = () => {
                 <div className="card ">
                     <div className="card-header text-center">
                         <a href="../index.html">
-                            <h1 className="text-primary">PRESTA EXPRESS</h1>
+                            <h1 className="text-primaryi">PRESTA EXPRESS</h1>
                             {/* <img className="logo-img" src="/static/assets/images/logo.png" alt="logo"/> */}
                         </a>
                             <span className="splash-description">Por favor ingrese su información de usuario.</span>

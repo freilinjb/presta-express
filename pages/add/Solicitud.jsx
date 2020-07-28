@@ -19,7 +19,6 @@ import Amortizacion from "../../components/ui/Amortizacion";
 
 import useGarantia from "../../hooks/useGarantia";
 
-
 //Validaciones
 import useValidacion from "../../hooks/useValidacion";
 import validarIniciarPrestamo from "../../validacion/validarIniciarPrestamo";
@@ -77,6 +76,8 @@ const Solicitud = () => {
 
   //Crear el objeto de nuevo prestamo
   async function crearPrestamo() {
+    document.getElementById("calcuarPrestamo").click();
+
     const solicitud = {
       entrega,
       monto,
@@ -88,7 +89,7 @@ const Solicitud = () => {
       // detallesCuotas: tablaAmortizada.cuotas,
       observacion,
       estado: "En revisión",
-      garantias:garantiasTemporales,
+      garantias: garantiasTemporales,
       creado: Date.now(),
       cliente: {
         id: idcliente,
@@ -106,8 +107,8 @@ const Solicitud = () => {
       //Insertar en la BD
 
       setCargando(true);
-      console.log('solicitud: ', solicitud);
-      
+      console.log("solicitud: ", solicitud);
+
       const p = await firebase.db.collection("Solicitud").add(solicitud);
       Toast.fire({
         icon: "success",
@@ -141,8 +142,7 @@ const Solicitud = () => {
 
   useEffect(() => {
     console.log(garantiasTemporales);
-    
-  },[garantiasTemporales]);
+  }, [garantiasTemporales]);
 
   const hancleClick = () => {
     if (
@@ -180,7 +180,6 @@ const Solicitud = () => {
             <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12">
               <div className="row justify-content-center">
                 <div className="col-md-12 col-lg-12 col-xl-10 col-sm-12">
-
                   <div className="card">
                     <h5 className="card-header">
                       Registro de Solicitud de Prestamo{" "}
@@ -192,252 +191,387 @@ const Solicitud = () => {
                         noValidate
                         onSubmit={handleSubmit}
                       >
-                        <div className="row">
+                        <fieldset>
+                          <div className="row">
+
                           <div className="col-md-6 mb-3">
-                            <div className="form-group">
-                              <label htmlFor="idcliente">Cliente</label>
-                              <select
+                              <div className="form-group">
+                                <label htmlFor="periodoPagos">
+                                  Gerente
+                                </label>
+                                <input
+                                type="text"
                                 className="form-control"
-                                name="idcliente"
-                                id="idcliente"
-                                value={idcliente}
+                                id="entrega"
+                                name="entrega"
+                                value={entrega}
                                 onChange={handleChange}
-                                required
-                              >
-                                <option selected disabled value="">
-                                  Seleccione un cliente
-                                </option>
-                                {clientes.map((cliente) => (
-                                  <option key={cliente.id} value={cliente.id}>
-                                    {cliente.nombre + " " + cliente.apellido}
+                                disabled
+                              />
+                              <div className="invalid-feedback">
+                                Fecha de Entrega
+                              </div>
+                              {errores.entrega && (
+                                <p className="alert alert-danger">
+                                  {errores.entrega}
+                                </p>
+                              )}
+                              </div>
+                            </div>
+
+                            <div className="col-md-6 mb-3">
+                              <div className="form-group">
+                                <label htmlFor="periodoPagos">
+                                  Cobrador
+                                </label>
+                                <select
+                                  className="form-control"
+                                  name="periodoPagos"
+                                  id="periodoPagos"
+                                  value={periodoPagos}
+                                  onChange={handleChange}
+                                  required
+                                >
+                                  <option value="">
+                                    --Seleccione un tipo de Amortización--
                                   </option>
-                                ))}
-                                {!clientes && (
-                                  <p>No tiene clientes registrados</p>
+                                  <option value="Absoluto">Absoluto</option>
+                                  <option value="Capital Fijo">
+                                    Capital Fijo
+                                  </option>
+                                  <option value="Insoluto">Insoluto</option>
+                                  <option value="Vencimiento">
+                                    Vencimiento
+                                  </option>
+                                </select>
+                                {errores.periodoPagos && (
+                                  <p className="alert alert-danger">
+                                    {errores.periodoPagos}
+                                  </p>
                                 )}
-                              </select>
-                              {errores.idCliente && (
-                                <p className="alert alert-danger">
-                                  {errores.idCliente}
-                                </p>
-                              )}
+                              </div>
                             </div>
-                          </div>
-                          <div className="col-md-6 mb-3">
-                            <label htmlFor="entrega">Fecha de Entrega</label>
-                            <input
-                              type="date"
-                              className="form-control"
-                              min={fecha}
-                              id="entrega"
-                              name="entrega"
-                              value={entrega}
-                              onChange={handleChange}
-                              required
-                            />
-                            <div className="invalid-feedback">
-                              Fecha de Entrega
+
+                            <div className="col-md-6 mb-3">
+                              <div className="form-group">
+                                <label htmlFor="periodoPagos">
+                                  Cartera
+                                </label>
+                                <select
+                                  className="form-control"
+                                  name="periodoPagos"
+                                  id="periodoPagos"
+                                  value={periodoPagos}
+                                  onChange={handleChange}
+                                  required
+                                >
+                                  <option value="">
+                                    --Seleccione un tipo de Amortización--
+                                  </option>
+                                  <option value="Absoluto">Absoluto</option>
+                                  <option value="Capital Fijo">
+                                    Capital Fijo
+                                  </option>
+                                  <option value="Insoluto">Insoluto</option>
+                                  <option value="Vencimiento">
+                                    Vencimiento
+                                  </option>
+                                </select>
+                                {errores.periodoPagos && (
+                                  <p className="alert alert-danger">
+                                    {errores.periodoPagos}
+                                  </p>
+                                )}
+                              </div>
                             </div>
-                            {errores.entrega && (
-                              <p className="alert alert-danger">
-                                {errores.entrega}
-                              </p>
-                            )}
-                          </div>
-                          <div className="col-md-6 mb-3">
-                            <div className="form-group">
-                              <label htmlFor="monto">Monto</label>
+
+                            <div className="col-md-6 mb-3">
+                              <div className="form-group">
+                                <label htmlFor="periodoPagos">
+                                  Amortizacion
+                                </label>
+                                <select
+                                  className="form-control"
+                                  name="periodoPagos"
+                                  id="periodoPagos"
+                                  value={periodoPagos}
+                                  onChange={handleChange}
+                                  required
+                                >
+                                  <option value="">
+                                    --Seleccione un tipo de Amortización--
+                                  </option>
+                                  <option value="Absoluto">Absoluto</option>
+                                  <option value="Capital Fijo">
+                                    Capital Fijo
+                                  </option>
+                                  <option value="Insoluto">Insoluto</option>
+                                  <option value="Vencimiento">
+                                    Vencimiento
+                                  </option>
+                                </select>
+                                {errores.periodoPagos && (
+                                  <p className="alert alert-danger">
+                                    {errores.periodoPagos}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+
+                            <legend className="pl-3  border-top mt-3">Datos y valores de la Solicitud</legend>
+                            
+                            <div className="col-md-6 mb-3">
+                              <div className="form-group">
+                                <label htmlFor="idcliente">Cliente</label>
+                                <select
+                                  className="form-control"
+                                  name="idcliente"
+                                  id="idcliente"
+                                  value={idcliente}
+                                  onChange={handleChange}
+                                  required
+                                >
+                                  <option selected disabled value="">
+                                    Seleccione un cliente
+                                  </option>
+                                  {clientes.map((cliente) => (
+                                    <option key={cliente.id} value={cliente.id}>
+                                      {cliente.nombre + " " + cliente.apellido}
+                                    </option>
+                                  ))}
+                                  {!clientes && (
+                                    <p>No tiene clientes registrados</p>
+                                  )}
+                                </select>
+                                {errores.idCliente && (
+                                  <p className="alert alert-danger">
+                                    {errores.idCliente}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+     
+                            <div className="col-md-6 mb-3">
+                              <label htmlFor="entrega">Fecha de Entrega</label>
                               <input
-                                type="number"
+                                type="date"
                                 className="form-control"
-                                min="100"
-                                max="100000000"
-                                id="monto"
-                                name="monto"
-                                value={monto}
+                                min={fecha}
+                                id="entrega"
+                                name="entrega"
+                                value={entrega}
                                 onChange={handleChange}
                                 required
                               />
-                            </div>
-                            {errores.monto && (
-                              <p className="alert alert-danger">
-                                {errores.monto}
-                              </p>
-                            )}
-                          </div>
-                          <div className="col-md-6 mb-3">
-                            <div className="form-group">
-                              <label htmlFor="cuotas">Cantidad de Cuotas</label>
-                              <input
-                                type="number"
-                                className="form-control"
-                                min="1"
-                                max="200"
-                                id="cuotas"
-                                name="cuotas"
-                                value={cuotas}
-                                onChange={handleChange}
-                                required
-                              />
-                            </div>
-                            {errores.correo && (
-                              <p className="alert alert-danger">
-                                {errores.correo}
-                              </p>
-                            )}
-                          </div>
-                          <div className="col-md-6 mb-3">
-                            <div className="form-group">
-                              <label htmlFor="tipoTasa">Tipo de Tasa</label>
-                              <select
-                                className="form-control"
-                                name="tipoTasa"
-                                id="tipoTasa"
-                                value={tipoTasa}
-                                onChange={handleChange}
-                                required
-                              >
-                                <option selected value="">
-                                  --Seleccione--
-                                </option>
-                                <option value="mensual">Mensual</option>
-                                <option value="anual">Anual</option>
-                              </select>
-                              {errores.tipoTasa && (
+                              <div className="invalid-feedback">
+                                Fecha de Entrega
+                              </div>
+                              {errores.entrega && (
                                 <p className="alert alert-danger">
-                                  {errores.tipoTasa}
+                                  {errores.entrega}
                                 </p>
                               )}
                             </div>
-                          </div>
-                          <div className="col-md-6 mb-3">
-                            <div className="form-group">
-                              <label htmlFor="tasaInteres">
-                                Tasa de Interes
-                              </label>
-                              <input
-                                type="number"
-                                min="0.1"
-                                max="50"
-                                className="form-control"
-                                id="tasaInteres"
-                                name="tasaInteres"
-                                value={tasaInteres}
-                                onChange={handleChange}
-                                required
-                              />
-                              {errores.tasaInteres && (
+                            <div className="col-md-6 mb-3">
+                              <div className="form-group">
+                                <label htmlFor="monto">Monto</label>
+                                <input
+                                  type="number"
+                                  className="form-control"
+                                  min="100"
+                                  max="100000000"
+                                  id="monto"
+                                  name="monto"
+                                  value={monto}
+                                  onChange={handleChange}
+                                  required
+                                />
+                              </div>
+                              {errores.monto && (
                                 <p className="alert alert-danger">
-                                  {errores.tasaInteres}
+                                  {errores.monto}
                                 </p>
                               )}
                             </div>
-                          </div>
-                          <div className="col-md-6 mb-3">
-                            <div className="form-group">
-                              <label htmlFor="periodoPagos">
-                                Periodo de Pagos
-                              </label>
-                              <select
-                                className="form-control"
-                                name="periodoPagos"
-                                id="periodoPagos"
-                                value={periodoPagos}
-                                onChange={handleChange}
-                                required
-                              >
-                                <option value="">--Seleccione--</option>
-                                <option value="diario">Diario</option>
-                                <option value="semanal">Semanal</option>
-                                <option value="quincenal">Quincenal</option>
-                                <option value="mensual">Mensual</option>
-                                <option value="bimestral">Bimestral</option>
-                                <option value="trimestral">Trimestral</option>
-                                <option value="cuatrimestral">
-                                  Cuatrimestral
-                                </option>
-                                <option value="semestral">Semestral</option>
-                                <option value="anual">Anual</option>
-                              </select>
-                              {errores.periodoPagos && (
+                            <div className="col-md-6 mb-3">
+                              <div className="form-group">
+                                <label htmlFor="cuotas">
+                                  Cantidad de Cuotas
+                                </label>
+                                <input
+                                  type="number"
+                                  className="form-control"
+                                  min="1"
+                                  max="200"
+                                  id="cuotas"
+                                  name="cuotas"
+                                  value={cuotas}
+                                  onChange={handleChange}
+                                  required
+                                />
+                              </div>
+                              {errores.correo && (
                                 <p className="alert alert-danger">
-                                  {errores.periodoPagos}
+                                  {errores.correo}
                                 </p>
                               )}
                             </div>
-                          </div>
-                          <div className="col-md-6 mb-3">
-                            <div className="custom-control custom-checkbox">
-                              <input
-                                type="checkbox"
-                                className="custom-control-input"
-                                id="cargosPorMora"
-                                name="cargosPorMora"
-                                value={cargosPorMora}
-                                defaultChecked={false}
+                            <div className="col-md-6 mb-3">
+                              <div className="form-group">
+                                <label htmlFor="tipoTasa">Tipo de Tasa</label>
+                                <select
+                                  className="form-control"
+                                  name="tipoTasa"
+                                  id="tipoTasa"
+                                  value={tipoTasa}
+                                  onChange={handleChange}
+                                  required
+                                >
+                                  <option selected value="">
+                                    --Seleccione--
+                                  </option>
+                                  <option value="mensual">Mensual</option>
+                                  <option value="anual">Anual</option>
+                                </select>
+                                {errores.tipoTasa && (
+                                  <p className="alert alert-danger">
+                                    {errores.tipoTasa}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                            <div className="col-md-6 mb-3">
+                              <div className="form-group">
+                                <label htmlFor="tasaInteres">
+                                  Tasa de Interes
+                                </label>
+                                <input
+                                  type="number"
+                                  min="0.1"
+                                  max="50"
+                                  className="form-control"
+                                  id="tasaInteres"
+                                  name="tasaInteres"
+                                  value={tasaInteres}
+                                  onChange={handleChange}
+                                  required
+                                />
+                                {errores.tasaInteres && (
+                                  <p className="alert alert-danger">
+                                    {errores.tasaInteres}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                            <div className="col-md-6 mb-3">
+                              <div className="form-group">
+                                <label htmlFor="periodoPagos">
+                                  Periodo de Pagos
+                                </label>
+                                <select
+                                  className="form-control"
+                                  name="periodoPagos"
+                                  id="periodoPagos"
+                                  value={periodoPagos}
+                                  onChange={handleChange}
+                                  required
+                                >
+                                  <option value="">--Seleccione--</option>
+                                  <option value="diario">Diario</option>
+                                  <option value="semanal">Semanal</option>
+                                  <option value="quincenal">Quincenal</option>
+                                  <option value="mensual">Mensual</option>
+                                  <option value="bimestral">Bimestral</option>
+                                  <option value="trimestral">Trimestral</option>
+                                  <option value="cuatrimestral">
+                                    Cuatrimestral
+                                  </option>
+                                  <option value="semestral">Semestral</option>
+                                  <option value="anual">Anual</option>
+                                </select>
+                                {errores.periodoPagos && (
+                                  <p className="alert alert-danger">
+                                    {errores.periodoPagos}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                            <div className="col-md-6 mb-3">
+                              <div className="custom-control custom-checkbox">
+                                <input
+                                  type="checkbox"
+                                  className="custom-control-input"
+                                  id="cargosPorMora"
+                                  name="cargosPorMora"
+                                  value={cargosPorMora}
+                                  defaultChecked={false}
+                                  onChange={handleChange}
+                                  required
+                                />
+                                <label
+                                  className="custom-control-label"
+                                  htmlFor="cargosPorMora"
+                                >
+                                  Incluir interes generados por mora
+                                </label>
+                              </div>
+                            </div>
+                            <div className="col-md-12 mb-3">
+                              <textarea
+                                className="form-control"
+                                name="observacion"
+                                id="observacion"
+                                value={observacion}
                                 onChange={handleChange}
-                                required
-                              />
-                              <label
-                                className="custom-control-label"
-                                htmlFor="cargosPorMora"
-                              >
-                                Incluir interes generados por mora
-                              </label>
+                                placeholder="Observaciones a tomar en cuanta"
+                                autoComplete="off"
+                                rows="2"
+                              ></textarea>
                             </div>
                           </div>
-                          <div className="col-md-12 mb-3">
-                            <textarea
-                              className="form-control"
-                              name="observacion"
-                              id="observacion"
-                              value={observacion}
-                              onChange={handleChange}
-                              placeholder="Observaciones a tomar en cuanta"
-                              autoComplete="off"
-                              rows="2"
-                            ></textarea>
+                        </fieldset>
+
+                        <div className="row">
+                          <div className="col-sm-6">
+                            <button
+                              className="btn btn-primary btn-space"
+                              disabled={firebase.cargando}
+                              type="submit"
+                            >
+                              {cargando ? (
+                                <>
+                                  <span
+                                    className="spinner-border spinner-border-sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                  ></span>
+                                  Enviando datos
+                                </>
+                              ) : (
+                                <>Guardar</>
+                              )}
+                            </button>
+                            <button
+                              type="button"
+                              id="calcuarPrestamo"
+                              className="btn btn-outline-secondary btn-space"
+                              onClick={hancleClick}
+                            >
+                              Calcular
+                            </button>
                           </div>
                         </div>
-
-                    <div className="row">
-                      <div className="col-sm-6">
-                        <button
-                          className="btn btn-primary btn-space"
-                          disabled={firebase.cargando}
-                          type="submit"
-                        >
-                          {cargando ? (
-                            <>
-                              <span
-                                className="spinner-border spinner-border-sm"
-                                role="status"
-                                aria-hidden="true"
-                              ></span>
-                              Enviando datos
-                            </>
-                          ) : (
-                            <>Guardar</>
-                          )}
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-outline-secondary btn-space"
-                          onClick={hancleClick}
-                        >
-                          Calcular
-                        </button>
-                      </div>
-                    </div>
                       </form>
                       {/* {garantiasTemporales.map((g)=>(<p>Hola mundo</p>))} */}
                     </div>
                   </div>
-                
                 </div>
               </div>
-              <ListasGarantias className="border-top" garantiasTemporales={garantiasTemporales} setGarantiasTemporales={setGarantiasTemporales}/>
-
+              <ListasGarantias
+                className="border-top"
+                garantiasTemporales={garantiasTemporales}
+                setGarantiasTemporales={setGarantiasTemporales}
+              />
             </div>
           </div>
         </Navegacion>
