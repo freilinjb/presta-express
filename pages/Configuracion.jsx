@@ -39,14 +39,14 @@ const Configuracion = () => {
                   <li className="nav-item">
                     <a
                       className="nav-link active show"
-                      id="informacionGeneral-tab"
+                      id="configuracionUsuario-tab"
                       data-toggle="tab"
-                      href="#informacionGeneral"
+                      href="#configuracionUsuario"
                       role="tab"
-                      aria-controls="informacionGeneral"
+                      aria-controls="configuracionUsuario"
                       aria-selected="true"
                     >
-                      Configuracion General
+                      Configuracion General <span className="fas fa-user-plus"></span>
                     </a>
                   </li>
                   <li className="nav-item">
@@ -59,11 +59,11 @@ const Configuracion = () => {
                       aria-controls="profile"
                       aria-selected="false"
                     >
-                      Parametros de Configuracion
+                      Parametros de Configuracion <span className="fas fa-user-plus"></span>
                     </a>
                   </li>
                 </ul>
-                <div className="tab-content" id="myTabContent ">
+                <div className="tab-content p-0" id="myTabContent ">
 
                   {usuario && parametrosNegocios.length > 0 && (
                     <EdicarConfiguracionUsuario

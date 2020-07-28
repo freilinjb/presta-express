@@ -178,11 +178,8 @@ const EditarConfiguracionPrestamos = ({ parametrosNegocios }) => {
       role="tabpanel"
       aria-labelledby="parametrosConfiguracion-tab"
     >
-      <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12">
-        <div className="card">
-          <h5 className="card-header">
-            Modificar Registro <span className="fas fa-user-plus"></span>
-          </h5>
+      <div className="">
+        <div className="card shadow mb-0">
           <div className="card-body">
             <form
               className="needs-validation"
@@ -190,10 +187,10 @@ const EditarConfiguracionPrestamos = ({ parametrosNegocios }) => {
               onSubmit={handleSubmit}
             >
               <fieldset>
-                <legend>Datos del Negocio</legend>
+                <legend>Datos del Configuración</legend>
                 <div className="form-row">
                   <div className="col-lg-6 col-md-8 col-sm-12 mb-3">
-                    <label htmlFor="nombreEmpresa">Nombre del negocio</label>
+                    <label htmlFor="nombreEmpresa">Operaciones de Negocio</label>
                     <input
                       type="text"
                       className="form-control"

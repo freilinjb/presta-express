@@ -7,7 +7,7 @@ const RerfilCliente = ({ usuario, parametrosNegocios }) => {
         <>
 
             <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-              <div className="card">
+              <div className="card shadow">
                 <div className="card-body">
                   <div className="user-avatar text-center d-block">
                     {parametrosNegocios.urlFoto ? (
@@ -92,22 +92,6 @@ const RerfilCliente = ({ usuario, parametrosNegocios }) => {
                         {parametrosNegocios[0].Direccion.direccion}
                       </li>
                     </ul>
-                  </div>
-                </div>
-                <div className="card-body border-top">
-                  <h3 className="font-16">Rating</h3>
-                  <h1 className="">0</h1>
-                  <div className="rating-star">
-                    <i className="fa fa-fw fa-star"></i>
-                    <i className="fa fa-fw fa-star"></i>
-                    <i className="fa fa-fw fa-star"></i>
-                    <i className="fa fa-fw fa-star"></i>
-                  </div>
-                </div>
-                <div className="card-body border-top">
-                  <h3 className="font-16">Observacion</h3>
-                  <div>
-                    <p>{parametrosNegocios.eslogan}</p>
                   </div>
                 </div>
               </div>

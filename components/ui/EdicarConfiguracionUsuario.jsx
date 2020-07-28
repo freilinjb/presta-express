@@ -69,7 +69,7 @@ const EdicarConfiguracionUsuario = ({ parametrosNegocios }) => {
   //   console.log(usuario);
 
   async function crearCliente() {
-    console.log("precionado elimina  r", parametrosNegocios[0].id);
+    console.log("precionado eliminar", parametrosNegocios[0].id);
     alert.info("Ha precionado crear");
 
     console.log("id");
@@ -174,15 +174,12 @@ const EdicarConfiguracionUsuario = ({ parametrosNegocios }) => {
   return (
     <div
       className="tab-pane fade active show"
-      id="parametrosConfiguracion"
+      id="configuracionUsuario"
       role="tabpanel"
-      aria-labelledby="parametrosConfiguracion-tab"
+      aria-labelledby="configuracionUsuario-tab"
     >
       <div className="">
-        <div className="card">
-          <h5 className="card-header">
-            Modificar Registro <span className="fas fa-user-plus"></span>
-          </h5>
+        <div className="card shadow mb-0">
           <div className="card-body">
             <form
               className="needs-validation"
