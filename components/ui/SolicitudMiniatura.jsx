@@ -96,7 +96,7 @@ const SolicitudMiniatura = ({ solicitud, index }) => {
         <td>
           <div className="m-r-10">
             <img
-              src="static/assets/images/product-pic.jpg"
+              src={solicitud.cliente.urlFoto ? solicitud.cliente.urlFoto : `static/assets/images/product-pic.jpg`}
               alt="user"
               className="rounded"
               width="45"

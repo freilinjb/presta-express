@@ -95,6 +95,7 @@ const Solicitud = () => {
         id: idcliente,
         nombre: clientes.filter((doc) => doc.id === idcliente)[0].nombre,
         apellido: clientes.filter((doc) => doc.id === idcliente)[0].apellido,
+        urlFoto: clientes.filter((doc) => doc.id === idcliente)[0].urlFoto,
       },
       creador: {
         id: usuario.uid,

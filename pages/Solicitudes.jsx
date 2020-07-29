@@ -44,9 +44,9 @@ const Solicitudes = () => {
     <Spinner />
   ) : (
     <div className="row justify-content-center">
-      <div className="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div className="card">
-          <h5 className="card-header">Recent Orders</h5>
+          <h5 className="card-header">Solicitudes</h5>
           <div className="card-body p-0">
             <div className="table-responsive">
               <table className="table">
