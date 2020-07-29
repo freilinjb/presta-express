@@ -92,11 +92,15 @@ const SolicitudMiniatura = ({ solicitud, index }) => {
         </div>
       )}
       <tr>
-        <td>{(index)+1}</td>
+        <td>{index + 1}</td>
         <td>
           <div className="m-r-10">
             <img
-              src={solicitud.cliente.urlFoto ? solicitud.cliente.urlFoto : `static/assets/images/product-pic.jpg`}
+              src={
+                solicitud.cliente.urlFoto
+                  ? solicitud.cliente.urlFoto
+                  : `static/assets/images/product-pic.jpg`
+              }
               alt="user"
               className="rounded"
               width="45"
@@ -108,11 +112,24 @@ const SolicitudMiniatura = ({ solicitud, index }) => {
         <td>{solicitud.tasaInteres}</td>
         <td>{setMoneda(solicitud.monto)}</td>
         <td>{solicitud.entrega}</td>
-      <td>{solicitud.tipoTasa}</td>
-      <td>{solicitud.tasaInteres}%</td>
+        <td>{solicitud.tipoTasa}</td>
+        <td>{solicitud.tasaInteres}%</td>
         <td>
           <span className="badge-dot badge-brand mr-1"></span>
-          InTransit{" "}
+          {solicitud.estado}{" "}
+        </td>
+        <td>
+          <div className="btn-group ml-auto">
+            <a
+              className="btn btn-sm btn-outline-light"
+              // href="/cliente/CS0nmfGKG5p0s1yA6sVr"
+            >
+              Visualizar
+            </a>
+            <button className="jsx-1189774325 btn btn-sm btn-outline-light">
+              <i className="jsx-1189774325 far fa-trash-alt"></i>
+            </button>
+          </div>
         </td>
       </tr>
     </>

@@ -12,7 +12,6 @@ const Sector = ({sector, index, id}) => {
 
   return (
     <>
-      <tbody>
         <tr>
           <td>
             <p>{index}</p>
@@ -35,7 +34,6 @@ const Sector = ({sector, index, id}) => {
             </div>
           </td>
         </tr>
-      </tbody>
     </>
   );
 };

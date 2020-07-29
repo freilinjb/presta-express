@@ -10,12 +10,18 @@ import Spinner from "../components/ui/Spinner";
 import ButtonFloat from "../components/ui/ButtonFloat";
 import LayoutPrincipal from "../components/layout/LayoutPrincipal";
 import Sector from "../components/ui/Sector";
-import InputModal from '../components/ui/InputModal';
-import useSector from '../hooks/useSector';
-import SectorEditarModal from '../components/ui/SectorEditarModal';
+import InputModal from "../components/ui/InputModal";
+import useSector from "../hooks/useSector";
+import SectorEditarModal from "../components/ui/SectorEditarModal";
 
 const Clientes = () => {
-  const {sectores, setSectores, cargando, busqueda, setBusqueda} =  useSector();
+  const {
+    sectores,
+    setSectores,
+    cargando,
+    busqueda,
+    setBusqueda,
+  } = useSector();
   const { firebase, usuario } = useContext(FirebaseContext);
 
   const handleChange = (e) => {
@@ -30,7 +36,8 @@ const Clientes = () => {
       const buscar = busqueda.toLowerCase().trim();
       const filtro = sectores.filter((sectore) => {
         return (
-          sectore.nombre.toLowerCase().includes(buscar) || sectore.descripcion.toLowerCase().includes(buscar)
+          sectore.nombre.toLowerCase().includes(buscar) ||
+          sectore.descripcion.toLowerCase().includes(buscar)
         );
       });
 
@@ -45,29 +52,35 @@ const Clientes = () => {
     <Spinner />
   ) : (
     <div className="row justify-content-center">
-      <div className="col-lg-8 col-sm-12 p-0">
-    <div className="card">
-      <div className="campaign-table table-responsive">
-        <table className="table table-hover">
-          <thead>
-            <tr className="border-0">
-              <th className="border-0">#</th>
-              <th className="border-0">Nombre</th>
-              <th className="border-0">Descripcion</th>
-            </tr>
-          </thead>
-          {sectores.map((sector,index) => (
-              <Sector
-              key={sector.id}
-              id={sector.id}
-              sector={sector}
-              index={index+1}
-              />
-          ))}
-        </table>
+      <div className="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div className="card">
+          <h5 className="card-header">Sectores</h5>
+          <div className="card-body p-0">
+            <div className="table-responsive">
+              <table className="table">
+                <thead className="bg-light">
+                  <tr className="border-0">
+                    <th className="border-0">#</th>
+                    <th className="border-0">Nombre</th>
+                    <th className="border-0">Descripción</th>
+                    <th className="border-0">Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sectores.map((sector, index) => (
+                    <Sector
+                      key={sector.id}
+                      id={sector.id}
+                      sector={sector}
+                      index={index + 1}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
     </div>
   );
   return (
@@ -76,12 +89,13 @@ const Clientes = () => {
         cargando={false}
         handleChange={handleChange}
         hanbleBuscar={hanbleBuscar}
+        titulo="Lista de Sectores"
         busqueda={busqueda}
         id="sectorModal"
       >
-        <ButtonFloat modal={true}/>
-        <SectorEditarModal/>
-        <InputModal/>
+        <ButtonFloat modal={true} />
+        <SectorEditarModal />
+        <InputModal />
         {Componente}
       </LayoutPrincipal>
     </>

@@ -60,7 +60,9 @@ const Solicitudes = () => {
                     <th className="border-0">Fecha de entrega</th>
                     <th className="border-0">Tipo de Tasa</th>
                     <th className="border-0">Periodo</th>
-                    <th className="border-0">Estasa</th>
+                    <th className="border-0">Tasa</th>
+                    <th className="border-0">Estado</th>
+                    <th className="border-0">Acción</th>
                   </tr>
                 </thead>
                 <tbody>
