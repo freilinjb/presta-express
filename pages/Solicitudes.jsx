@@ -7,9 +7,13 @@ import useSolicitud from "../hooks/useSolicitud";
 
 const Solicitudes = () => {
   //hook cliente
-  const { solicitudes, setSolicitudes, busqueda, cargando, setBusqueda } = useSolicitud(
-    "desc"
-  );
+  const {
+    solicitudes,
+    setSolicitudes,
+    busqueda,
+    cargando,
+    setBusqueda,
+  } = useSolicitud("desc");
 
   const handleChange = (e) => {
     setBusqueda(e.target.value);
@@ -23,12 +27,10 @@ const Solicitudes = () => {
       const buscar = busqueda.toLowerCase().trim();
       const filtro = solicitudes.filter((solicitud) => {
         return (
-          (
-            solicitud.cliente.nombre.toLowerCase() +
-            " " +
-            solicitud.cliente.apellido.toLowerCase()
-          ).includes(buscar)
-        );
+          solicitud.cliente.nombre.toLowerCase() +
+          " " +
+          solicitud.cliente.apellido.toLowerCase()
+        ).includes(buscar);
       });
 
       //filtro itera en cada uno de ellos, combierte el nombrer en minusculas
@@ -42,10 +44,38 @@ const Solicitudes = () => {
     <Spinner />
   ) : (
     <div className="row justify-content-center">
-      <div className="col-xl-9 col-lg-8 col-md-8 col-sm-12 col-12">
-        {solicitudes.map((solicitud) => (
-          <SolicitudMiniatura key={solicitud.id} solicitud={solicitud} />
-        ))}
+      <div className="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div className="card">
+          <h5 className="card-header">Recent Orders</h5>
+          <div className="card-body p-0">
+            <div className="table-responsive">
+              <table className="table">
+                <thead className="bg-light">
+                  <tr className="border-0">
+                    <th className="border-0">#</th>
+                    <th className="border-0">Cliente</th>
+                    <th className="border-0">Tipo de Prestamo</th>
+                    <th className="border-0">Interes</th>
+                    <th className="border-0">Cuotas</th>
+                    <th className="border-0">Fecha de entrega</th>
+                    <th className="border-0">Tipo de Tasa</th>
+                    <th className="border-0">Periodo</th>
+                    <th className="border-0">Estasa</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {solicitudes.map((solicitud, index) => (
+                    <SolicitudMiniatura
+                      key={solicitud.id}
+                      solicitud={solicitud}
+                      index={index}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -55,6 +85,7 @@ const Solicitudes = () => {
         cargando={false}
         handleChange={handleChange}
         hanbleBuscar={hanbleBuscar}
+        titulo="Listas de Solicitudes"
         busqueda={busqueda}
         btnIr="/add/Solicitud"
       >

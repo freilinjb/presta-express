@@ -7,9 +7,11 @@ import { es } from "date-fns/locale";
 import Spinner from "./Spinner";
 
 import useMensajesAlertas from "../../hooks/useMensajesAlertas";
+import useCalculadora from "../../hooks/useCalculadora";
 
-const SolicitudMiniatura = ({ solicitud }) => {
+const SolicitudMiniatura = ({ solicitud, index }) => {
   const { Toast } = useMensajesAlertas();
+  const { setMoneda } = useCalculadora();
   const { firebase, usuario } = useContext(FirebaseContext);
 
   const [cargando, setCargando] = useState(false);
@@ -89,69 +91,30 @@ const SolicitudMiniatura = ({ solicitud }) => {
           <Spinner />
         </div>
       )}
-      <div className="card">
-        <div className="card-body">
-          <div className="row align-items-center">
-            <div className="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12">
-              <div className="user-avatar float-xl-left pr-4 float-none">
-                <img
-                  src="static/assets/images/avatar-1.jpg"
-                  alt="User Avatar"
-                  className="rounded-circle user-avatar-xl"
-                />
-              </div>
-              <div className="pl-xl-3">
-                <div className="m-b-0">
-                  <div className="user-avatar-name d-inline-block">
-                    <h2 className="font-24 m-b-10">Henry Barbara</h2>
-                  </div>
-                  <div className="rating-star d-inline-block pl-xl-2 mb-2 mb-xl-0">
-                    <i className="fa fa-fw fa-star"></i>
-                    <i className="fa fa-fw fa-star"></i>
-                    <i className="fa fa-fw fa-star"></i>
-                    <i className="fa fa-fw fa-star"></i>
-                    <i className="fa fa-fw fa-star"></i>
-                    <p className="d-inline-block text-dark">14 Reviews </p>
-                  </div>
-                </div>
-                <div className="user-avatar-address">
-                  <p className="mb-2">
-                    <i className="fa fa-map-marker-alt mr-2  text-primary"></i>
-                    Salt Lake City, UT{" "}
-                    <span className="m-l-10">
-                      Male<span className="m-l-20">29 Year Old</span>
-                    </span>
-                  </p>
-                  <div className="mt-3">
-                    <a href="#" className="mr-1 badge badge-light">
-                      Fitness
-                    </a>
-                    <a href="#" className="mr-1 badge badge-light">
-                      Life Style
-                    </a>
-                    <a href="#" className="mr-1 badge badge-light">
-                      Gym
-                    </a>
-                    <a href="#" className="badge badge-light">
-                      Crossfit
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-12 col-md-12 col-sm-12 col-12">
-              <div className="float-xl-right float-none mt-xl-0 mt-4">
-                <a href="#" className="btn-wishlist m-r-10">
-                  <i className="far fa-star"></i>
-                </a>
-                <a href="#" className="btn btn-secondary">
-                  Send Messages
-                </a>
-              </div>
-            </div>
+      <tr>
+        <td>{(index)+1}</td>
+        <td>
+          <div className="m-r-10">
+            <img
+              src="static/assets/images/product-pic.jpg"
+              alt="user"
+              className="rounded"
+              width="45"
+            />
           </div>
-        </div>
-      </div>
+        </td>
+        <td>{solicitud.cliente.nombre + " " + solicitud.cliente.apellido}</td>
+        <td>{solicitud.periodoPagos}</td>
+        <td>{solicitud.tasaInteres}</td>
+        <td>{setMoneda(solicitud.monto)}</td>
+        <td>{solicitud.entrega}</td>
+      <td>{solicitud.tipoTasa}</td>
+      <td>{solicitud.tasaInteres}%</td>
+        <td>
+          <span className="badge-dot badge-brand mr-1"></span>
+          InTransit{" "}
+        </td>
+      </tr>
     </>
   );
 };

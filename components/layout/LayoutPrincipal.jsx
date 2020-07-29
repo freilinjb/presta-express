@@ -9,7 +9,7 @@ import Busqueda from "../../components/ui/Busqueda";
 
 const LayoutPrincipal = (props) => {
 
-  const { hanbleBuscar, handleChange, busqueda, nombre, cargando, btnIr } = props;
+  const { hanbleBuscar, handleChange, busqueda, nombre, cargando, titulo, btnIr } = props;
   // const cargando = false;
   // const hanbleBuscar=(e)=> {
   //     e.preventDefault();
@@ -25,7 +25,7 @@ const LayoutPrincipal = (props) => {
     <Layout title="Clientes">
       {cargando && (<div className="spinner"><Spinner/></div>)}
 
-      <Navegacion titulo={"Lista de Clientes"}>
+      <Navegacion titulo={titulo}>
         <div className="row justify-content-center">
           <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 mt-2 p-0">
             <Busqueda hanbleBuscar={hanbleBuscar} handleChange={handleChange} busqueda={busqueda}/>
