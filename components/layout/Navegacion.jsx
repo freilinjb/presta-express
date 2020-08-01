@@ -28,7 +28,7 @@ const Navegacion = (props) => {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav flex-column">
                 <li className="nav-divider">Menu</li>
-                <Link href="/">
+                {/* <Link href="/">
                   <li className="nav-item ">
                     <a
                       className={`nav-link ${
@@ -133,7 +133,7 @@ const Navegacion = (props) => {
                       </li>
                     </ul>
                   </div>
-                </li>
+                </li> */}
 
                 <li className="nav-divider">Features</li>
                 <li className="nav-item">
