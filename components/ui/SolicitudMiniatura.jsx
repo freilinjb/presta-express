@@ -9,7 +9,7 @@ import Spinner from "./Spinner";
 import useMensajesAlertas from "../../hooks/useMensajesAlertas";
 import useCalculadora from "../../hooks/useCalculadora";
 
-const SolicitudMiniatura = ({ solicitud, index }) => {
+const SolicitudMiniatura = ({ setSolicitudDetalles,solicitud, index }) => {
   const { Toast } = useMensajesAlertas();
   const { setMoneda } = useCalculadora();
   const { firebase, usuario } = useContext(FirebaseContext);
@@ -84,6 +84,14 @@ const SolicitudMiniatura = ({ solicitud, index }) => {
       firebase.cargando = false;
     }
   };
+
+  const handlClick=()=> {
+    setSolicitudDetalles(solicitud);
+
+
+    console.log('click', solicitud);
+  };
+
   return (
     <>
       {cargando && (
@@ -121,8 +129,9 @@ const SolicitudMiniatura = ({ solicitud, index }) => {
         <td>
           <div className="btn-group ml-auto">
             <a
-              className="btn btn-sm btn-outline-light"
-              // href="/cliente/CS0nmfGKG5p0s1yA6sVr"
+              className="btn btn-sm btn-outline-light" data-toggle="modal" data-toast-posy="top" data-target="#solicitudPrestamoModal"
+            // href="/cliente/CS0nmfGKG5p0s1yA6sVr
+              onClick={handlClick}
             >
               Visualizar
             </a>

@@ -5,7 +5,11 @@ import ButtonFloat from "../components/ui/ButtonFloat";
 import LayoutPrincipal from "../components/layout/LayoutPrincipal";
 import useSolicitud from "../hooks/useSolicitud";
 
+//Modal
+import SolicitudPrestamoModal from "../components/modal/SolicitudPrestamoModal";
+
 const Solicitudes = () => {
+  const [solicitudDetalles, setSolicitudDetalles] = useState({});
   //hook cliente
   const {
     solicitudes,
@@ -43,44 +47,47 @@ const Solicitudes = () => {
   const Componente = cargando ? (
     <Spinner />
   ) : (
-    <div className="row justify-content-center">
-      <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <div className="card">
-          <h5 className="card-header">Solicitudes</h5>
-          <div className="card-body p-0">
-            <div className="table-responsive">
-              <table className="table">
-                <thead className="bg-light">
-                  <tr className="border-0">
-                    <th className="border-0">#</th>
-                    <th className="border-0">Cliente</th>
-                    <th className="border-0">Tipo de Prestamo</th>
-                    <th className="border-0">Interes</th>
-                    <th className="border-0">Cuotas</th>
-                    <th className="border-0">Fecha de entrega</th>
-                    <th className="border-0">Tipo de Tasa</th>
-                    <th className="border-0">Periodo</th>
-                    <th className="border-0">Tasa</th>
-                    <th className="border-0">Estado</th>
-                    <th className="border-0">Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {solicitudes.map((solicitud, index) => (
-                    <SolicitudMiniatura
-                      key={solicitud.id}
-                      solicitud={solicitud}
-                      index={index}
-                    />
-                  ))}
-                </tbody>
-              </table>
+      <>
+        <div className="row justify-content-center">
+          <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div className="card">
+              <h5 className="card-header">Solicitudes</h5>
+              <div className="card-body p-0">
+                <div className="table-responsive">
+                  <table className="table">
+                    <thead className="bg-light">
+                      <tr className="border-0">
+                        <th className="border-0">#</th>
+                        <th className="border-0">Cliente</th>
+                        <th className="border-0">Tipo de Prestamo</th>
+                        <th className="border-0">Interes</th>
+                        <th className="border-0">Cuotas</th>
+                        <th className="border-0">Fecha de entrega</th>
+                        <th className="border-0">Tipo de Tasa</th>
+                        <th className="border-0">Periodo</th>
+                        <th className="border-0">Tasa</th>
+                        <th className="border-0">Estado</th>
+                        <th className="border-0">Acción</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {solicitudes.map((solicitud, index) => (
+                        <SolicitudMiniatura
+                          key={solicitud.id}
+                          solicitud={solicitud}
+                          setSolicitudDetalles={setSolicitudDetalles}
+                          index={index}
+                        />
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
+      </>
+    );
   return (
     <>
       <LayoutPrincipal
@@ -92,6 +99,10 @@ const Solicitudes = () => {
         btnIr="/add/Solicitud"
       >
         <ButtonFloat modal={false} ir="/add/Solicitud" />
+        <SolicitudPrestamoModal 
+          solicitudDetalles={solicitudDetalles}
+        />
+
         {Componente}
       </LayoutPrincipal>
     </>
