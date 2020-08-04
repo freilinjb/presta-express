@@ -39,9 +39,13 @@ const SolicitudPrestamoModal = ({ solicitudDetalles }) => {
                         <fieldset>
                           <div className="row">
                             <div className="col-lg-4 col-sm-4">
-                              <div class="user-avatar text-center d-block">
+                              <div className="user-avatar text-center d-block">
                                 <img
-                                  src={solicitudDetalles.cliente.urlFoto}
+                                  src={` ${
+                                    solicitudDetalles.cliente.urlFoto
+                                      ? solicitudDetalles.cliente.urlFoto
+                                      : "static/assets/images/product-pic.jpg"
+                                  } `}
                                   alt={solicitudDetalles.cliente.nombre}
                                   alt="User Avatar"
                                   className="rounded-circle user-avatar-xxl"
@@ -85,7 +89,7 @@ const SolicitudPrestamoModal = ({ solicitudDetalles }) => {
                             <div className="col-md-6 mb-3">
                               <div className="form-group">
                                 <label htmlFor="periodoPagos">
-                                Fecha de Entrega
+                                  Fecha de Entrega
                                 </label>
                                 <input
                                   type="text"
@@ -98,7 +102,7 @@ const SolicitudPrestamoModal = ({ solicitudDetalles }) => {
                             <div className="col-md-6 mb-3">
                               <div className="form-group">
                                 <label htmlFor="periodoPagos">
-                                Cantidad de Cuotas
+                                  Cantidad de Cuotas
                                 </label>
                                 <input
                                   type="text"
@@ -111,7 +115,7 @@ const SolicitudPrestamoModal = ({ solicitudDetalles }) => {
                             <div className="col-md-6 mb-3">
                               <div className="form-group">
                                 <label htmlFor="periodoPagos">
-                                Tipo de Tasa
+                                  Tipo de Tasa
                                 </label>
                                 <input
                                   type="text"
@@ -124,7 +128,7 @@ const SolicitudPrestamoModal = ({ solicitudDetalles }) => {
                             <div className="col-md-6 mb-3">
                               <div className="form-group">
                                 <label htmlFor="periodoPagos">
-                                Tasa de Interes
+                                  Tasa de Interes
                                 </label>
                                 <input
                                   type="text"
@@ -137,7 +141,7 @@ const SolicitudPrestamoModal = ({ solicitudDetalles }) => {
                             <div className="col-md-6 mb-3">
                               <div className="form-group">
                                 <label htmlFor="periodoPagos">
-                                Periodo de Pagos
+                                  Periodo de Pagos
                                 </label>
                                 <input
                                   type="text"
@@ -160,6 +164,47 @@ const SolicitudPrestamoModal = ({ solicitudDetalles }) => {
                             </div>
                           </div>
                         </fieldset>
+                        <div className="w-100 border-top"></div>
+                        <fieldset>
+                          <legend>Informacion gerencial</legend>
+                          <div className="col-md-12 mb-3">
+                            <textarea
+                              className="form-control"
+                              value={solicitudDetalles.observacion}
+                              autoComplete="off"
+                              rows="2"
+                            ></textarea>
+                          </div>
+                        </fieldset>
+                        <div className="custom-control custom-radio custom-control-inline">
+                          <input
+                            type="radio"
+                            id="rechazarSolicitud"
+                            name="estadoSolicitud"
+                            className="custom-control-input"
+                            checked
+                          />
+                          <label
+                            className="custom-control-label"
+                            for="rechazarSolicitud"
+                          >
+                            Rechazar Solicitud
+                          </label>
+                        </div>
+                        <div className="custom-control custom-radio custom-control-inline">
+                          <input
+                            type="radio"
+                            id="aceptarSolicitud"
+                            name="estadoSolicitud"
+                            className="custom-control-input"
+                          />
+                          <label
+                            className="custom-control-label"
+                            for="aceptarSolicitud"
+                          >
+                            Aceptar solicitud
+                          </label>
+                        </div>
                       </form>
                     </div>
                   </div>
@@ -170,10 +215,10 @@ const SolicitudPrestamoModal = ({ solicitudDetalles }) => {
                     className="btn btn-secondary"
                     data-dismiss="modal"
                   >
-                    Close
+                    Cerrar
                   </button>
                   <button type="button" className="btn btn-primary">
-                    Save changes
+                    Guardar
                   </button>
                 </div>
               </div>
