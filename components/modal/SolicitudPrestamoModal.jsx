@@ -1,7 +1,58 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+import {useAlert} from 'react-alert';
+
+import { useRouter } from "next/router";
+
+import { FirebaseContext } from "../../firebase";
 
 const SolicitudPrestamoModal = ({ solicitudDetalles }) => {
+  const { usuario, firebase } = useContext(FirebaseContext);
+  const alert = useAlert();
+
+  const [estadoSolicitud, setEstadoSolicitud] = useState('');
+  const [observacion, setObservacion] = useState('');
+  
   console.log("Detalle Solicitud", "=>", solicitudDetalles);
+
+  //Context con las operaciones crud de firebase
+  //   console.log(usuario);
+  const router = useRouter();
+
+  function validarCrear() {
+    let error;
+
+    let errores = "";
+  }
+
+  useEffect(() => {
+    console.log('cambio',estadoSolicitud);
+  },[estadoSolicitud]);
+
+  async function procesarSolicitud() {
+    if (!usuario) {
+      firebase.cargando = false;
+      return router.push("/SignIn");
+    }
+
+    try {
+      //Insertar en la BD
+      firebase.cargando = true;
+      firebase.db.collection("Solicitud").doc(solicitudDetalles.id).update({
+        estado: estadoSolicitud,
+        observacionGerancial: observacion,
+      });
+      alert.success("Se ha guardo correctamente");
+
+    } catch (error) {
+      console.log(error);
+      alert.error("Ha ocurrido un error");
+    } finally {
+      firebase.cargando = false;
+      // router.push("/Solicitd");
+      document.getElementById("btnSolicitudCerrar").click();
+      console.log('se ha guardado correctamente');
+    }
+  }
 
   return (
     <>
@@ -35,7 +86,10 @@ const SolicitudPrestamoModal = ({ solicitudDetalles }) => {
                 <div className="modal-body">
                   <div className="card">
                     <div className="card-body">
-                      <form className="needs-validation" noValidate>
+                      <form
+                        className="needs-validation"
+                        noValidate
+                      >
                         <fieldset>
                           <div className="row">
                             <div className="col-lg-4 col-sm-4">
@@ -156,7 +210,8 @@ const SolicitudPrestamoModal = ({ solicitudDetalles }) => {
                               <textarea
                                 className="form-control"
                                 placeholder="Observaciones a tomar en cuanta"
-                                value={solicitudDetalles.observacion}
+                                value={observacion}
+                                onChange={e=>setObservacion(e.target.value)}
                                 disabled
                                 autoComplete="off"
                                 rows="2"
@@ -177,16 +232,18 @@ const SolicitudPrestamoModal = ({ solicitudDetalles }) => {
                           </div>
                         </fieldset>
                         <div className="custom-control custom-radio custom-control-inline">
-                          <input
+                        <input
                             type="radio"
                             id="rechazarSolicitud"
                             name="estadoSolicitud"
+                            value={estadoSolicitud}
+                            checked={estadoSolicitud ===  'Rechazada'}
                             className="custom-control-input"
-                            checked
+                            onClick={() => setEstadoSolicitud('Rechazada')}
                           />
                           <label
                             className="custom-control-label"
-                            for="rechazarSolicitud"
+                            htmlFor="rechazarSolicitud"
                           >
                             Rechazar Solicitud
                           </label>
@@ -196,30 +253,38 @@ const SolicitudPrestamoModal = ({ solicitudDetalles }) => {
                             type="radio"
                             id="aceptarSolicitud"
                             name="estadoSolicitud"
+                            value={estadoSolicitud}
+                            checked={estadoSolicitud ===  'Autorizado'}
                             className="custom-control-input"
+                            onClick={() => setEstadoSolicitud('Autorizado')}
                           />
                           <label
                             className="custom-control-label"
-                            for="aceptarSolicitud"
+                            htmlFor="aceptarSolicitud"
                           >
                             Aceptar solicitud
                           </label>
                         </div>
+                        <div className="modal-footer">
+                          <button
+                            type="button"
+                            className="btn btn-secondary"
+                            data-dismiss="modal"
+                            id="btnSolicitudCerrar"
+                          >
+                            Cerrar
+                          </button>
+                          <button 
+                            type="button" 
+                            className="btn btn-primary"
+                            onClick={() => procesarSolicitud()}
+                            >
+                            Guardar
+                          </button>
+                        </div>
                       </form>
                     </div>
                   </div>
-                </div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-dismiss="modal"
-                  >
-                    Cerrar
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Guardar
-                  </button>
                 </div>
               </div>
             </div>
