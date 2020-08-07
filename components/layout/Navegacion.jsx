@@ -265,9 +265,17 @@ const Navegacion = (props) => {
                         </a>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="data-tables.html">
-                          Pagos de cuotas
-                        </a>
+                      <Link href="/pagos">
+                          <a
+                            className={`nav-link ${
+                              router.pathname == "/pagos" ? "active" : ""
+                            }`}
+                          >
+                            {" "}
+                            <i className="far fa-money-bill-alt"></i>
+                            Pagos de cuotas{" "}
+                          </a>
+                        </Link>
                       </li>
                       <li className="nav-item">
                         <a className="nav-link" href="data-tables.html">
@@ -321,6 +329,11 @@ const Navegacion = (props) => {
                           Controles generales
                         </a>
                       </li>
+                      <li className="nav-item">
+                        <a className="nav-link" href="data-tables.html">
+                        Parámetros de préstamos generales
+                        </a>
+                      </li>
                     </ul>
                   </div>
                 </li>
@@ -364,6 +377,21 @@ const Navegacion = (props) => {
                       <li className="nav-item">
                         <a className="nav-link" href="icon-flag.html">
                           Bienes
+                        </a>
+                      </li>
+                      <li className="nav-item">
+                        <a className="nav-link" href="icon-flag.html">
+                        Transacciones 
+                        </a>
+                      </li>
+                      <li className="nav-item">
+                        <a className="nav-link" href="icon-flag.html">
+                         Préstamos
+                        </a>
+                      </li>
+                      <li className="nav-item">
+                        <a className="nav-link" href="icon-flag.html">
+                         Operaciones de usuarios
                         </a>
                       </li>
                     </ul>
