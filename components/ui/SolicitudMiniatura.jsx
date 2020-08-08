@@ -9,7 +9,7 @@ import Spinner from "./Spinner";
 import useMensajesAlertas from "../../hooks/useMensajesAlertas";
 import useCalculadora from "../../hooks/useCalculadora";
 
-const SolicitudMiniatura = ({ setSolicitudDetalles,solicitud, index }) => {
+const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index }) => {
   const { Toast } = useMensajesAlertas();
   const { setMoneda } = useCalculadora();
   const { firebase, usuario } = useContext(FirebaseContext);
@@ -85,12 +85,35 @@ const SolicitudMiniatura = ({ setSolicitudDetalles,solicitud, index }) => {
     }
   };
 
-  const handlClick=()=> {
+  const handlClick = () => {
     setSolicitudDetalles(solicitud);
 
-
-    console.log('click', solicitud);
+    console.log("click", solicitud);
   };
+
+  function estadoAlerta(estado) {
+    let mensaje = "";
+
+    switch (estado) {
+      case "Autorizado":
+        mensaje = "success";
+        break;
+
+      case "En revisión":
+        mensaje = "brand";
+        break;
+
+      case "Rechazada":
+        mensaje = "danger";
+        break;
+
+      default:
+        mensaje = "brand";
+        break;
+    }
+
+    return mensaje;
+  }
 
   return (
     <>
@@ -123,14 +146,17 @@ const SolicitudMiniatura = ({ setSolicitudDetalles,solicitud, index }) => {
         <td>{solicitud.tipoTasa}</td>
         <td>{solicitud.tasaInteres}%</td>
         <td>
-          <span className="badge-dot badge-brand mr-1"></span>
+          <span className={`badge-dot badge-${estadoAlerta(solicitud.estado)} mr-1`}></span>
           {solicitud.estado}{" "}
         </td>
         <td>
           <div className="btn-group ml-auto">
             <a
-              className="btn btn-sm btn-outline-light" data-toggle="modal" data-toast-posy="top" data-target="#solicitudPrestamoModal"
-            // href="/cliente/CS0nmfGKG5p0s1yA6sVr
+              className="btn btn-sm btn-outline-light"
+              data-toggle="modal"
+              data-toast-posy="top"
+              data-target="#solicitudPrestamoModal"
+              // href="/cliente/CS0nmfGKG5p0s1yA6sVr
               onClick={handlClick}
             >
               Visualizar
