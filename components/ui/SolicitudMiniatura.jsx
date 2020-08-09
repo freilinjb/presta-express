@@ -4,12 +4,18 @@ import { FirebaseContext } from "../../firebase";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { es } from "date-fns/locale";
 
+
+//Alert
+import Swal from "sweetalert2";
+
 import Spinner from "./Spinner";
 
 import useMensajesAlertas from "../../hooks/useMensajesAlertas";
 import useCalculadora from "../../hooks/useCalculadora";
+import swal from "sweetalert";
 
 const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index }) => {
+  
   const { Toast } = useMensajesAlertas();
   const { setMoneda } = useCalculadora();
   const { firebase, usuario } = useContext(FirebaseContext);
@@ -28,6 +34,28 @@ const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index }) => {
     creador,
   } = solicitud;
 
+  const confirmarEliminacion = async ()=> {
+      Swal.fire({
+      title: "Eliminar",
+      text: "Esta seguro que desea eliminar esta Solicitud!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.value) {
+        eliminarSolicitud();
+
+      } else {
+
+        Swal.fire("Deleted!", "Preciono cancelar.", "success");
+      }
+    });
+
+  }
+
   const eliminarSolicitud = async () => {
     if (!usuario) {
       return router.push("/login");
@@ -38,6 +66,7 @@ const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index }) => {
     }
 
     try {
+
       setCargando(true);
       let existe = false;
       firebase.cargando = true;
@@ -161,7 +190,9 @@ const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index }) => {
             >
               Visualizar
             </a>
-            <button className="jsx-1189774325 btn btn-sm btn-outline-light">
+            <button className="jsx-1189774325 btn btn-sm btn-outline-light"
+              onClick={e=>confirmarEliminacion()}
+            >
               <i className="jsx-1189774325 far fa-trash-alt"></i>
             </button>
           </div>
