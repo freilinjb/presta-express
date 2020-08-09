@@ -278,9 +278,17 @@ const Navegacion = (props) => {
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="data-tables.html">
-                          Procesamiento de solicitud
-                        </a>
+                      <Link href="/ProcesamientoSolicitud">
+                          <a
+                            className={`nav-link ${
+                              router.pathname == "/ProcesamientoSolicitud" ? "active" : ""
+                            }`}
+                          >
+                            {" "}
+                            <i className="far fa-money-bill-alt"></i>
+                            ProcesamientoSolicitud{" "}
+                          </a>
+                        </Link>
                       </li>
                       <li className="nav-item">
                         <a className="nav-link" href="data-tables.html">
