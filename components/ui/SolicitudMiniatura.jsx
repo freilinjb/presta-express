@@ -12,15 +12,26 @@ import Spinner from "./Spinner";
 
 import useMensajesAlertas from "../../hooks/useMensajesAlertas";
 import useCalculadora from "../../hooks/useCalculadora";
-import swal from "sweetalert";
 
 const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index }) => {
   
-  const { Toast } = useMensajesAlertas();
   const { setMoneda } = useCalculadora();
   const { firebase, usuario } = useContext(FirebaseContext);
 
   const [cargando, setCargando] = useState(false);
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+  
 
   const {
     id,
@@ -37,7 +48,7 @@ const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index }) => {
   const confirmarEliminacion = async ()=> {
       Swal.fire({
       title: "Eliminar",
-      text: "Esta seguro que desea eliminar esta Solicitud!",
+      text: "¿Esta seguro que desea eliminar esta Solicitud?",
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -48,10 +59,12 @@ const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index }) => {
       if (result.value) {
         eliminarSolicitud();
 
-      } else {
-
-        Swal.fire("Deleted!", "Preciono cancelar.", "success");
       }
+      //Si no se cumple
+      //  else {
+
+      //   // Swal.fire("Deleted!", "Preciono cancelar.", "success");
+      // }
     });
 
   }
@@ -87,11 +100,13 @@ const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index }) => {
             }
           });
           if (existe) {
-            Toast.fire({
-              icon: "warning",
-              title:
-                "El usuario tiene prestamos activo.\nNo puede ser eliminado hasta cultimar los prestamos activos!!",
-            });
+
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'El usuario tiene prestamos activo.\nNo puede ser eliminado hasta cultimar los prestamos activos!!',
+              footer: '<a href=#>Contactar con el administrador?</a>'
+            })
           }
         })
         .catch(function (error) {
@@ -101,10 +116,16 @@ const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index }) => {
       //Elimina el usuario si no contiene prestamos activos
       if (!existe) {
         await firebase.db.collection("Solicitud").doc(id).delete();
+        Swal.fire({
+          icon: 'success',
+          title: 'Oops...',
+          text: 'El usuario tiene prestamos activo.\nNo puede ser eliminado hasta cultimar los prestamos activos!!',
+          footer: '<a href=#>Contactar con el administrador?</a>'
+        })
         Toast.fire({
-          icon: "success",
-          title: "Se ha eliminado correctamente!!",
-        });
+          icon: 'success',
+          title: 'Se ha eliminado correctamente!'
+        })
       }
     } catch (error) {
       console.log(error);

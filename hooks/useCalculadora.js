@@ -1,74 +1,71 @@
-  const useCalculadora =() => {
-    let detalleCuotas = {
-      monto: 0,
-      cuotaFija: "",
-      cuotas: [],
-      msg: ""
-      // listo: false
-    };
+const useCalculadora = () => {
+  let detalleCuotas = {
+    monto: 0,
+    cuotaFija: "",
+    cuotas: [],
+    msg: "",
+    // listo: false
+  };
 
-  
   let fechaInicial;
-  function formatearFecha(fecha = new Date(), formato = 'dmy') {
-     //Formatear la fecha
-     let dd = fecha.getDate();
+  function formatearFecha(fecha = new Date(), formato = "dmy") {
+    //Formatear la fecha
+    let dd = fecha.getDate();
 
-     let mm = fecha.getMonth()+1; 
-     const yyyy = fecha.getFullYear();
-     if(dd<10) 
-     {
-         dd=`0${dd}`;
-     } 
- 
-     if(mm<10) 
-     {
-         mm=`0${mm}`;
-     } 
-     if(formato === 'dmy') {
-       fecha = `${dd}-${mm}-${yyyy}`;
-     } else if (formato === 'ymd'){
-       fecha = `${yyyy}-${mm}-${dd}`;
-     } else if(formato === 'mdy') {
-       fecha = `${mm}-${dd}-${yyyy}`;
-     }
-     // fecha = `${mm}-${dd}-${yyyy}`;
-     // console.log(fecha);
-     // fecha = `${mm}/${dd}/${yyyy}`;
-     // console.log(fecha);
+    let mm = fecha.getMonth() + 1;
+    const yyyy = fecha.getFullYear();
+    if (dd < 10) {
+      dd = `0${dd}`;
+    }
+
+    if (mm < 10) {
+      mm = `0${mm}`;
+    }
+    if (formato === "dmy") {
+      fecha = `${dd}-${mm}-${yyyy}`;
+    } else if (formato === "ymd") {
+      fecha = `${yyyy}-${mm}-${dd}`;
+    } else if (formato === "mdy") {
+      fecha = `${mm}-${dd}-${yyyy}`;
+    }
+    // fecha = `${mm}-${dd}-${yyyy}`;
+    // console.log(fecha);
+    // fecha = `${mm}/${dd}/${yyyy}`;
+    // console.log(fecha);
     //  fecha = `${dd}-${mm}-${yyyy}`;
- 
-     return fecha;
+
+    return fecha;
   }
 
   function addDay(date, days) {
     const copy = new Date(Number(date));
-    copy.setDate(date.getDate()+ days);
+    copy.setDate(date.getDate() + days);
 
     return;
   }
 
   function setFecha(dia, periodo) {
     let fecha = new Date(fechaInicial);
-    
+
     // console.log('dia=>',dia,'periodo=>',periodo);
-    
+
     switch (periodo) {
       case "diario":
-        fecha.setDate((fecha.getDate() + dia+2));
+        fecha.setDate(fecha.getDate() + dia + 2);
         break;
 
       case "semanal":
-        fecha.setDate(fecha.getDate() + (dia * 7));
+        fecha.setDate(fecha.getDate() + dia * 7);
         break;
 
       case "quincenal":
-        fecha.setDate(fecha.getDate() + (15 * dia));
+        fecha.setDate(fecha.getDate() + 15 * dia);
         break;
       case "mensual":
         fecha.setDate(fecha.getMonth() + dia);
         break;
       case "bimestral":
-        fecha.setDate(fecha.getMonth() + (dia * 2));
+        fecha.setDate(fecha.getMonth() + dia * 2);
         break;
 
       case "trimestral":
@@ -92,7 +89,7 @@
     // }
 
     //Formatear la fecha
-    fecha = formatearFecha(fecha,'dmy');
+    fecha = formatearFecha(fecha, "dmy");
 
     return fecha;
   }
@@ -149,7 +146,9 @@
     let valor;
 
     tasa = getTasa(tasa, tasa_tipo, periodo);
-    valor = monto * ((tasa * Math.pow(1 + tasa, cuotas)) / (Math.pow(1 + tasa, cuotas) - 1));
+    valor =
+      monto *
+      ((tasa * Math.pow(1 + tasa, cuotas)) / (Math.pow(1 + tasa, cuotas) - 1));
     return valor.toFixed(2);
   }
 
@@ -177,8 +176,6 @@
       abono_al_capital = abono_al_capital.toFixed(2);
       saldo_al_capital = saldo_al_capital.toFixed(2);
 
-
-
       var item = [
         numero,
         interes,
@@ -187,7 +184,15 @@
         saldo_al_capital,
         setFecha(i, periodo),
       ];
-      detalleCuotas.cuotas.push({cuota: numero, interes: interes, abonoCapital: abono_al_capital,valorCuota:  valor_de_cuota,saldoCapital: saldo_al_capital, fecha: setFecha(i, periodo),estado:'pendiente'});
+      detalleCuotas.cuotas.push({
+        cuota: numero,
+        interes: interes,
+        abonoCapital: abono_al_capital,
+        valorCuota: valor_de_cuota,
+        saldoCapital: saldo_al_capital,
+        fecha: setFecha(i, periodo),
+        estado: "pendiente",
+      });
 
       items.push(item);
     }
@@ -216,7 +221,13 @@
   function calcular(monto, cuotas, tasa, periodo, tasa_tipo, fechaI) {
     fechaInicial = fechaI;
 
-    const cuotafija = getValorDeCuotaFija(monto, tasa, cuotas, periodo, tasa_tipo);
+    const cuotafija = getValorDeCuotaFija(
+      monto,
+      tasa,
+      cuotas,
+      periodo,
+      tasa_tipo
+    );
     if (!monto) {
       alert("Indique el monto");
       return;
@@ -253,7 +264,6 @@
           value = value;
         }
       }
-
     }
 
     let valor = setMoneda(items[0][3]);
@@ -340,13 +350,12 @@
   // calcular(3000, 10, 6, "diario", "mensual");
   // console.log(detalleCuotas.cuotas);
 
-  return{
+  return {
     calcular,
     detalleCuotas,
     setMoneda,
-    formatearFecha
-  }
-
+    formatearFecha,
+  };
 };
 
 export default useCalculadora;
