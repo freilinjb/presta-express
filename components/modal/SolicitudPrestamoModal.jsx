@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
-import {useAlert} from 'react-alert';
+import useMensajesAlertas from "../../hooks/useMensajesAlertas";
+
+// import {useAlert} from 'react-alert';
 
 import { useRouter } from "next/router";
 
@@ -7,7 +9,9 @@ import { FirebaseContext } from "../../firebase";
 
 const SolicitudPrestamoModal = ({ solicitudDetalles }) => {
   const { usuario, firebase } = useContext(FirebaseContext);
-  const alert = useAlert();
+  // const alert = useAlert();
+  const { Toast } = useMensajesAlertas();
+
 
   const [estadoSolicitud, setEstadoSolicitud] = useState('');
   const [observacion, setObservacion] = useState('');
@@ -41,11 +45,19 @@ const SolicitudPrestamoModal = ({ solicitudDetalles }) => {
         estado: estadoSolicitud,
         observacionGerancial: observacion,
       });
-      alert.success("Se ha guardo correctamente");
+      // alert.success("Se ha guardo correctamente");
+      Toast.fire({
+        icon: "success",
+        title: "Se ha guardado correctamente!!",
+      });
 
     } catch (error) {
       console.log(error);
-      alert.error("Ha ocurrido un error");
+      // alert.error("Ha ocurrido un error");
+      Toast.fire({
+        icon: "error",
+        title: "Ha ocurrido un error!!",
+      });
     } finally {
       firebase.cargando = false;
       // router.push("/Solicitd");
