@@ -8,20 +8,24 @@ import { useRouter } from "next/router";
 
 import { FirebaseContext } from "../../firebase";
 
-const SolicitudEditarModal = ({ solicitudDetalles, actualiza, setActualiza }) => {
+const SolicitudEditarModal = ({
+  solicitudDetalles,
+  actualiza,
+  setActualiza,
+}) => {
   const { usuario, firebase } = useContext(FirebaseContext);
   const [datosSolicitud, setDatosSolicitud] = useState({
     monto: solicitudDetalles.monto,
   });
 
-  const onChangeSolicitud =e=> {
+  const onChangeSolicitud = (e) => {
     setDatosSolicitud({
       ...datosSolicitud,
-      [e.target.name] : e.target.value
+      [e.target.name]: e.target.value,
     });
-  }
+  };
 
-  useEffect(()=> {
+  useEffect(() => {
     setDatosSolicitud({
       ...datosSolicitud,
       entrega: solicitudDetalles.entrega,
@@ -35,33 +39,20 @@ const SolicitudEditarModal = ({ solicitudDetalles, actualiza, setActualiza }) =>
     });
 
     setActualiza(false);
-  },[actualiza]);
+  }, [actualiza]);
 
   const { Toast } = useMensajesAlertas();
 
   const router = useRouter();
-  
-  const STATE_INICIAL = {
-  };
+
+  const STATE_INICIAL = {};
 
   console.log(solicitudDetalles);
-  const {
-    valores,
-    errores,
-    handleSubmit,
-    handleChange,
-  } = useValidacion(STATE_INICIAL, validarSolicitudPrestamo, editarSolicitud);
-
-  const {
-    entrega,
-    monto,
-    cuotas,
-    tipoTasa,
-    tasaInteres,
-    periodoPagos,
-    cargosPorMora,
-    observacion,
-  } = valores;
+  const { valores, errores, handleSubmit, handleChange } = useValidacion(
+    STATE_INICIAL,
+    validarSolicitudPrestamo,
+    editarSolicitud
+  );
 
   async function editarSolicitud() {
     if (!usuario) {
@@ -73,7 +64,15 @@ const SolicitudEditarModal = ({ solicitudDetalles, actualiza, setActualiza }) =>
       //Insertar en la BD
       firebase.cargando = true;
       firebase.db.collection("Solicitud").doc(solicitudDetalles.id).update({
-        monto,
+        entrega: datosSolicitud.entrega,
+        monto: datosSolicitud.monto,
+        cuotas: datosSolicitud.cuotas,
+        tipoTasa: datosSolicitud.tipoTasa,
+        tasaInteres: datosSolicitud.tasaInteres,
+        periodoPagos: datosSolicitud.periodoPagos,
+        cargosPorMora: datosSolicitud.cargosPorMora,
+        observacion: datosSolicitud.observacion,
+        estado:"En revisión"
       });
       // alert.success("Se ha guardo correctamente");
       Toast.fire({
@@ -127,7 +126,11 @@ const SolicitudEditarModal = ({ solicitudDetalles, actualiza, setActualiza }) =>
                 <div className="modal-body">
                   <div className="card">
                     <div className="card-body">
-                      <form className="needs-validation" noValidate onSubmit={handleSubmit}>
+                      <form
+                        className="needs-validation"
+                        noValidate
+                        onSubmit={handleSubmit}
+                      >
                         <fieldset>
                           <div className="row">
                             <div className="col-lg-4 col-sm-4">
@@ -185,12 +188,12 @@ const SolicitudEditarModal = ({ solicitudDetalles, actualiza, setActualiza }) =>
                                   Fecha de Entrega
                                 </label>
                                 <input
-                                  type="number"
+                                  type="date"
                                   className="form-control"
                                   id="entrega"
                                   name="entrega"
                                   value={datosSolicitud.entrega}
-                                  onChange={handleChange}
+                                  onChange={onChangeSolicitud}
                                   autoComplete="off"
                                   required
                                 />
@@ -207,7 +210,7 @@ const SolicitudEditarModal = ({ solicitudDetalles, actualiza, setActualiza }) =>
                                   id="cuotas"
                                   name="cuotas"
                                   value={datosSolicitud.cuotas}
-                                  onChange={handleChange}
+                                  onChange={onChangeSolicitud}
                                   autoComplete="off"
                                   required
                                 />
@@ -215,24 +218,26 @@ const SolicitudEditarModal = ({ solicitudDetalles, actualiza, setActualiza }) =>
                             </div>
                             <div className="col-md-6 mb-3">
                               <div className="form-group">
-                                <label htmlFor="periodoPagos">
-                                  Tipo de Tasa
-                                </label>
-                                <input
-                                  type="text"
+                                <label htmlFor="tipoTasa">Tipo de Tasa</label>
+                                <select
                                   className="form-control"
-                                  id="tipoTasa"
                                   name="tipoTasa"
+                                  id="tipoTasa"
                                   value={datosSolicitud.tipoTasa}
-                                  onChange={handleChange}
-                                  autoComplete="off"
+                                  onChange={onChangeSolicitud}
                                   required
-                                />
+                                >
+                                  <option selected value="">
+                                    --Seleccione--
+                                  </option>
+                                  <option value="mensual">Mensual</option>
+                                  <option value="anual">Anual</option>
+                                </select>
                               </div>
                             </div>
                             <div className="col-md-6 mb-3">
                               <div className="form-group">
-                                <label htmlFor="periodoPagos">
+                                <label htmlFor="tasaInteres">
                                   Tasa de Interes
                                 </label>
                                 <input
@@ -241,7 +246,7 @@ const SolicitudEditarModal = ({ solicitudDetalles, actualiza, setActualiza }) =>
                                   id="tasaInteres"
                                   name="tasaInteres"
                                   value={datosSolicitud.tasaInteres}
-                                  onChange={handleChange}
+                                  onChange={onChangeSolicitud}
                                   autoComplete="off"
                                   required
                                 />
@@ -249,19 +254,30 @@ const SolicitudEditarModal = ({ solicitudDetalles, actualiza, setActualiza }) =>
                             </div>
                             <div className="col-md-6 mb-3">
                               <div className="form-group">
-                                <label htmlFor="periodoPagos">
+                              <label htmlFor="periodoPagos">
                                   Periodo de Pagos
                                 </label>
-                                <input
-                                  type="text"
+                                <select
                                   className="form-control"
-                                  id="periodoPagos"
                                   name="periodoPagos"
+                                  id="periodoPagos"
                                   value={datosSolicitud.periodoPagos}
-                                  onChange={handleChange}
-                                  autoComplete="off"
+                                  onChange={onChangeSolicitud}
                                   required
-                                />
+                                >
+                                  <option value="">--Seleccione--</option>
+                                  <option value="diario">Diario</option>
+                                  <option value="semanal">Semanal</option>
+                                  <option value="quincenal">Quincenal</option>
+                                  <option value="mensual">Mensual</option>
+                                  <option value="bimestral">Bimestral</option>
+                                  <option value="trimestral">Trimestral</option>
+                                  <option value="cuatrimestral">
+                                    Cuatrimestral
+                                  </option>
+                                  <option value="semestral">Semestral</option>
+                                  <option value="anual">Anual</option>
+                                </select>
                               </div>
                             </div>
 
@@ -272,7 +288,7 @@ const SolicitudEditarModal = ({ solicitudDetalles, actualiza, setActualiza }) =>
                                 id="observacion"
                                 name="observacion"
                                 value={datosSolicitud.observacion}
-                                onChange={handleChange}
+                                onChange={onChangeSolicitud}
                                 autoComplete="off"
                                 required
                                 autoComplete="off"
@@ -282,6 +298,7 @@ const SolicitudEditarModal = ({ solicitudDetalles, actualiza, setActualiza }) =>
                           </div>
                         </fieldset>
                         <div className="modal-footer">
+                         
                           <button
                             type="button"
                             className="btn btn-secondary"
@@ -290,7 +307,11 @@ const SolicitudEditarModal = ({ solicitudDetalles, actualiza, setActualiza }) =>
                           >
                             Cerrar
                           </button>
-                          <button type="submit" className="btn btn-primary">
+                          <button
+                            type="submit"
+                            className="btn btn-primary"
+                            onClick={editarSolicitud}
+                          >
                             Guardar
                           </button>
                         </div>

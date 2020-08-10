@@ -28,13 +28,13 @@ const ProcesamientoSolicitud = () => {
 
   // setSolicitudes(solicitudes.filter(x=>x.estado === "Autorizado"));
   //TODO Filtra las solicitudes por su estado
-  useEffect(()=> {
-    // solicitudTemp = solicitudes.filter(solicitud => solicitud.estado === "Autorizado");
-    // setSolicitudAutorizada(solicitudTemp);
+  // useEffect(()=> {
+  //   // solicitudTemp = solicitudes.filter(solicitud => solicitud.estado === "Autorizado");
+  //   // setSolicitudAutorizada(solicitudTemp);
 
-    setSolicitudes(solicitudes.filter(x=>x.estado === "Autorizado"));
+  //   setSolicitudes(solicitudes.filter(x=>x.estado === "Autorizado"));
 
-  }, []);
+  // }, []);
 
   const hanbleBuscar = (e) => {
     e.preventDefault();
@@ -85,7 +85,7 @@ const ProcesamientoSolicitud = () => {
                   <tbody>
                     {solicitudes.map((solicitud, index) => (
                       <>
-                        {solicitud.estado === "Autorizado" && (
+                        {solicitud && (
                           <SolicitudProcesarMiniatura
                             key={solicitud.id}
                             solicitud={solicitud}
@@ -93,7 +93,6 @@ const ProcesamientoSolicitud = () => {
                             index={index}
                           />
                         )}
-                        :
                         {solicitudes.length === 0 && (
                           <div className="page-wrap d-flex flex-row align-items-center">
                             <div className="container">

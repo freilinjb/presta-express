@@ -202,18 +202,21 @@ const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index, setActuali
         </td>
         <td>
           <div className="btn-group ml-auto">
-            <a
+            <button
               className="btn btn-sm btn-outline-light"
               data-toggle="modal"
               data-toast-posy="top"
               data-target="#solicitudPrestamoModal"
               // href="/cliente/CS0nmfGKG5p0s1yA6sVr
               onClick={handlClick}
+              disabled={solicitud.estado !== "En revisión"}
             >
               Editar
-            </a>
+            </button>
             <button className="btn btn-sm btn-outline-light"
               onClick={e=>confirmarEliminacion()}
+              disabled={solicitud.estado !== "En revisión"}
+
             >
               <i className="far fa-trash-alt"></i>
             </button>
