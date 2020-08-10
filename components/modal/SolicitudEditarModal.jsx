@@ -8,22 +8,40 @@ import { useRouter } from "next/router";
 
 import { FirebaseContext } from "../../firebase";
 
-const SolicitudEditarModal = ({ solicitudDetalles }) => {
+const SolicitudEditarModal = ({ solicitudDetalles, actualiza, setActualiza }) => {
   const { usuario, firebase } = useContext(FirebaseContext);
+  const [datosSolicitud, setDatosSolicitud] = useState({
+    monto: solicitudDetalles.monto,
+  });
+
+  const onChangeSolicitud =e=> {
+    setDatosSolicitud({
+      ...datosSolicitud,
+      [e.target.name] : e.target.value
+    });
+  }
+
+  useEffect(()=> {
+    setDatosSolicitud({
+      ...datosSolicitud,
+      entrega: solicitudDetalles.entrega,
+      monto: solicitudDetalles.monto,
+      cuotas: solicitudDetalles.cuotas,
+      tipoTasa: solicitudDetalles.tipoTasa,
+      tasaInteres: solicitudDetalles.tasaInteres,
+      periodoPagos: solicitudDetalles.periodoPagos,
+      cargosPorMora: solicitudDetalles.cargosPorMora,
+      observacion: solicitudDetalles.observacion,
+    });
+
+    setActualiza(false);
+  },[actualiza]);
 
   const { Toast } = useMensajesAlertas();
 
   const router = useRouter();
-
+  
   const STATE_INICIAL = {
-    entrega: solicitudDetalles.entrega,
-    monto: solicitudDetalles.monto,
-    cuotas: solicitudDetalles.cuotas,
-    tipoTasa: solicitudDetalles.tipoTasa,
-    tasaInteres: solicitudDetalles.tasaInteres,
-    periodoPagos: solicitudDetalles.periodoPagos,
-    cargosPorMora: solicitudDetalles.cargosPorMora,
-    observacion: solicitudDetalles.observacion,
   };
 
   console.log(solicitudDetalles);
@@ -32,7 +50,6 @@ const SolicitudEditarModal = ({ solicitudDetalles }) => {
     errores,
     handleSubmit,
     handleChange,
-    handleBlur,
   } = useValidacion(STATE_INICIAL, validarSolicitudPrestamo, editarSolicitud);
 
   const {
@@ -110,7 +127,7 @@ const SolicitudEditarModal = ({ solicitudDetalles }) => {
                 <div className="modal-body">
                   <div className="card">
                     <div className="card-body">
-                      <form className="needs-validation" noValidate>
+                      <form className="needs-validation" noValidate onSubmit={handleSubmit}>
                         <fieldset>
                           <div className="row">
                             <div className="col-lg-4 col-sm-4">
@@ -155,8 +172,8 @@ const SolicitudEditarModal = ({ solicitudDetalles }) => {
                                   className="form-control"
                                   id="monto"
                                   name="monto"
-                                  value={solicitudDetalles.monto}
-                                  onChange={handleChange}
+                                  value={datosSolicitud.monto}
+                                  onChange={onChangeSolicitud}
                                   autoComplete="off"
                                   required
                                 />
@@ -168,11 +185,11 @@ const SolicitudEditarModal = ({ solicitudDetalles }) => {
                                   Fecha de Entrega
                                 </label>
                                 <input
-                                  type="text"
+                                  type="number"
                                   className="form-control"
                                   id="entrega"
                                   name="entrega"
-                                  value={solicitudDetalles.entrega}
+                                  value={datosSolicitud.entrega}
                                   onChange={handleChange}
                                   autoComplete="off"
                                   required
@@ -185,11 +202,11 @@ const SolicitudEditarModal = ({ solicitudDetalles }) => {
                                   Cantidad de Cuotas
                                 </label>
                                 <input
-                                  type="text"
+                                  type="number"
                                   className="form-control"
                                   id="cuotas"
                                   name="cuotas"
-                                  value={solicitudDetalles.cuotas}
+                                  value={datosSolicitud.cuotas}
                                   onChange={handleChange}
                                   autoComplete="off"
                                   required
@@ -206,7 +223,7 @@ const SolicitudEditarModal = ({ solicitudDetalles }) => {
                                   className="form-control"
                                   id="tipoTasa"
                                   name="tipoTasa"
-                                  value={solicitudDetalles.tipoTasa}
+                                  value={datosSolicitud.tipoTasa}
                                   onChange={handleChange}
                                   autoComplete="off"
                                   required
@@ -219,11 +236,11 @@ const SolicitudEditarModal = ({ solicitudDetalles }) => {
                                   Tasa de Interes
                                 </label>
                                 <input
-                                  type="text"
+                                  type="number"
                                   className="form-control"
                                   id="tasaInteres"
                                   name="tasaInteres"
-                                  value={solicitudDetalles.tasaInteres}
+                                  value={datosSolicitud.tasaInteres}
                                   onChange={handleChange}
                                   autoComplete="off"
                                   required
@@ -240,7 +257,7 @@ const SolicitudEditarModal = ({ solicitudDetalles }) => {
                                   className="form-control"
                                   id="periodoPagos"
                                   name="periodoPagos"
-                                  value={solicitudDetalles.periodoPagos}
+                                  value={datosSolicitud.periodoPagos}
                                   onChange={handleChange}
                                   autoComplete="off"
                                   required
@@ -254,7 +271,7 @@ const SolicitudEditarModal = ({ solicitudDetalles }) => {
                                 placeholder="Observaciones a tomar en cuanta"
                                 id="observacion"
                                 name="observacion"
-                                value={solicitudDetalles.observacion}
+                                value={datosSolicitud.observacion}
                                 onChange={handleChange}
                                 autoComplete="off"
                                 required
@@ -273,7 +290,7 @@ const SolicitudEditarModal = ({ solicitudDetalles }) => {
                           >
                             Cerrar
                           </button>
-                          <button type="button" className="btn btn-primary">
+                          <button type="submit" className="btn btn-primary">
                             Guardar
                           </button>
                         </div>

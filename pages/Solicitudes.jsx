@@ -10,6 +10,7 @@ import SolicitudEditarModal from "../components/modal/SolicitudEditarModal";
 
 const Solicitudes = () => {
   const [solicitudDetalles, setSolicitudDetalles] = useState({});
+  const [actualiza, setActualiza] = useState(false);
   //hook cliente
   const {
     solicitudes,
@@ -75,6 +76,7 @@ const Solicitudes = () => {
                         <SolicitudMiniatura
                           key={solicitud.id}
                           solicitud={solicitud}
+                          setActualiza={setActualiza}
                           setSolicitudDetalles={setSolicitudDetalles}
                           index={index}
                         />
@@ -101,6 +103,8 @@ const Solicitudes = () => {
         <ButtonFloat modal={false} ir="/add/Solicitud" />
         <SolicitudEditarModal 
           solicitudDetalles={solicitudDetalles}
+          actualiza={actualiza}
+          setActualiza={setActualiza}
         />
 
         {Componente}

@@ -13,7 +13,7 @@ import Spinner from "./Spinner";
 import useMensajesAlertas from "../../hooks/useMensajesAlertas";
 import useCalculadora from "../../hooks/useCalculadora";
 
-const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index }) => {
+const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index, setActualiza }) => {
   
   const { setMoneda } = useCalculadora();
   const { firebase, usuario } = useContext(FirebaseContext);
@@ -137,8 +137,9 @@ const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index }) => {
 
   const handlClick = () => {
     setSolicitudDetalles(solicitud);
-
+    setActualiza(true);
     console.log("click", solicitud);
+    
   };
 
   function estadoAlerta(estado) {
