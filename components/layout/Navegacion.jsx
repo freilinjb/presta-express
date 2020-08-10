@@ -286,14 +286,22 @@ const Navegacion = (props) => {
                           >
                             {" "}
                             <i className="far fa-money-bill-alt"></i>
-                            ProcesamientoSolicitud{" "}
+                            Procesamiento de Solicitud{" "}
                           </a>
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="data-tables.html">
-                          Desembolso de prestamos
-                        </a>
+                      <Link href="/DesembolsoPrestamo">
+                          <a
+                            className={`nav-link ${
+                              router.pathname == "/DesembolsoPrestamo" ? "active" : ""
+                            }`}
+                          >
+                            {" "}
+                            <i className="far fa-money-bill-alt"></i>
+                            Desembolso de prestamos{" "}
+                          </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>

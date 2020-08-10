@@ -8,7 +8,7 @@ import useSolicitud from "../hooks/useSolicitud";
 //Modal
 import SolicitudPrestamoModal from "../components/modal/SolicitudPrestamoModal";
 
-const ProcesamientoSolicitud = () => {
+const DesembolsoPrestamo = () => {
   const [solicitudDetalles, setSolicitudDetalles] = useState({});
   const [solicitudAutorizada, setSolicitudAutorizada] = useState([]);
   //hook cliente
@@ -28,13 +28,13 @@ const ProcesamientoSolicitud = () => {
 
   // setSolicitudes(solicitudes.filter(x=>x.estado === "Autorizado"));
   //TODO Filtra las solicitudes por su estado
-  // useEffect(()=> {
-  //   // solicitudTemp = solicitudes.filter(solicitud => solicitud.estado === "Autorizado");
-  //   // setSolicitudAutorizada(solicitudTemp);
+  useEffect(()=> {
+    // solicitudTemp = solicitudes.filter(solicitud => solicitud.estado === "Autorizado");
+    // setSolicitudAutorizada(solicitudTemp);
 
-  //   setSolicitudes(solicitudes.filter(x=>x.estado === "Autorizado"));
+    setSolicitudes(solicitudes.filter(x=>x.estado === "Autorizado"));
 
-  // }, []);
+  }, []);
 
   const hanbleBuscar = (e) => {
     e.preventDefault();
@@ -69,7 +69,7 @@ const ProcesamientoSolicitud = () => {
                 <table className="table">
                   <thead className="bg-light">
                     <tr className="border-0">
-                      <th className="border-0">#</th>
+                    <th className="border-0">#</th>
                       <th className="border-0">Foto</th>
                       <th className="border-0">Nombre</th>
                       <th className="border-0">Periodo</th>
@@ -85,7 +85,7 @@ const ProcesamientoSolicitud = () => {
                   <tbody>
                     {solicitudes.map((solicitud, index) => (
                       <>
-                        {solicitud && (
+                        {solicitud.estado === "Autorizado" && (
                           <SolicitudProcesarMiniatura
                             key={solicitud.id}
                             solicitud={solicitud}
@@ -130,7 +130,7 @@ const ProcesamientoSolicitud = () => {
         cargando={false}
         handleChange={handleChange}
         hanbleBuscar={hanbleBuscar}
-        titulo="Pendientes sin procesar"
+        titulo="Desembolso de Prestamos"
         busqueda={busqueda}
         btnIr="/add/Solicitud"
       >
@@ -143,4 +143,4 @@ const ProcesamientoSolicitud = () => {
   );
 };
 
-export default ProcesamientoSolicitud;
+export default DesembolsoPrestamo;
