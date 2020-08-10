@@ -13,7 +13,7 @@ import Spinner from "./Spinner";
 import useMensajesAlertas from "../../hooks/useMensajesAlertas";
 import useCalculadora from "../../hooks/useCalculadora";
 
-const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index }) => {
+const SolicitudProcesarMiniatura = ({ setSolicitudDetalles, solicitud, index }) => {
   
   const { setMoneda } = useCalculadora();
   const { firebase, usuario } = useContext(FirebaseContext);
@@ -209,12 +209,12 @@ const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index }) => {
               // href="/cliente/CS0nmfGKG5p0s1yA6sVr
               onClick={handlClick}
             >
-              Editar
+              Visualizar
             </a>
             <button className="btn btn-sm btn-outline-light"
               onClick={e=>confirmarEliminacion()}
             >
-              <i className="far fa-trash-alt"></i>
+              <i className="jsx-1189774325 far fa-trash-alt"></i>
             </button>
           </div>
         </td>
@@ -223,4 +223,4 @@ const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index }) => {
   );
 };
 
-export default SolicitudMiniatura;
+export default SolicitudProcesarMiniatura;

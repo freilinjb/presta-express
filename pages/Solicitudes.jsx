@@ -6,7 +6,7 @@ import LayoutPrincipal from "../components/layout/LayoutPrincipal";
 import useSolicitud from "../hooks/useSolicitud";
 
 //Modal
-import SolicitudPrestamoModal from "../components/modal/SolicitudPrestamoModal";
+import SolicitudEditarModal from "../components/modal/SolicitudEditarModal";
 
 const Solicitudes = () => {
   const [solicitudDetalles, setSolicitudDetalles] = useState({});
@@ -99,7 +99,7 @@ const Solicitudes = () => {
         btnIr="/add/Solicitud"
       >
         <ButtonFloat modal={false} ir="/add/Solicitud" />
-        <SolicitudPrestamoModal 
+        <SolicitudEditarModal 
           solicitudDetalles={solicitudDetalles}
         />
 

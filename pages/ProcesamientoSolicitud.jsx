@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import SolicitudMiniatura from "../components/ui/SolicitudMiniatura";
+import SolicitudProcesarMiniatura from "../components/ui/SolicitudProcesarMiniatura";
 import Spinner from "../components/ui/Spinner";
 import ButtonFloat from "../components/ui/ButtonFloat";
 import LayoutPrincipal from "../components/layout/LayoutPrincipal";
@@ -86,7 +86,7 @@ const ProcesamientoSolicitud = () => {
                     {solicitudes.map((solicitud, index) => (
                       <>
                         {solicitud.estado === "Autorizado" && (
-                          <SolicitudMiniatura
+                          <SolicitudProcesarMiniatura
                             key={solicitud.id}
                             solicitud={solicitud}
                             setSolicitudDetalles={setSolicitudDetalles}
@@ -131,7 +131,7 @@ const ProcesamientoSolicitud = () => {
         cargando={false}
         handleChange={handleChange}
         hanbleBuscar={hanbleBuscar}
-        titulo="Listas de Solicitudes"
+        titulo="Pendientes sin procesar"
         busqueda={busqueda}
         btnIr="/add/Solicitud"
       >
