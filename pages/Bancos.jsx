@@ -5,7 +5,7 @@ import ButtonFloat from "../components/ui/ButtonFloat";
 import LayoutPrincipal from "../components/layout/LayoutPrincipal";
 import useCliente from '../hooks/useCliente';
 
-const Clientes = () => {
+const Bancos = () => {
   //hook cliente
   const {clientes, setClientes, cargando, busqueda, setBusqueda} =  useCliente("desc");
 
@@ -68,15 +68,15 @@ const Clientes = () => {
         cargando={false}
         handleChange={handleChange}
         hanbleBuscar={hanbleBuscar}
-        titulo="Listas de clientes"
+        titulo="Listas de cuentas bancarias"
         busqueda={busqueda}
-        btnIr="/add/Cliente"
+        btnIr="/add/Banco"
       >
-          <ButtonFloat modal={false} ir="/add/Cliente"/>
+          <ButtonFloat modal={false} ir="/add/Banco"/>
         {Componente}
       </LayoutPrincipal>
     </>
   );
 };
 
-export default Clientes;
+export default Bancos;

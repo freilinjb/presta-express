@@ -219,9 +219,17 @@ const Navegacion = (props) => {
                         </a>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="icon-flag.html">
-                          Carteras de clientes
-                        </a>
+                      <Link href="/Bancos">
+                          <a
+                            className={`nav-link ${
+                              router.pathname == "/Bancos" ? "active" : ""
+                            }`}
+                          >
+                            {" "}
+                            <i className="fas fa-map"></i>
+                            Bancos{" "}
+                          </a>
+                        </Link>
                       </li>
 
                       <li className="nav-item">

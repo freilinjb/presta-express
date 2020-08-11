@@ -134,7 +134,7 @@ const DesembolsoPrestamo = () => {
         busqueda={busqueda}
         btnIr="/add/Solicitud"
       >
-        <ButtonFloat modal={false} ir="/add/Solicitud" />
+        {/* <ButtonFloat modal={false} ir="/add/Solicitud" /> */}
         <SolicitudPrestamoModal solicitudDetalles={solicitudDetalles} />
 
         {Componente}
