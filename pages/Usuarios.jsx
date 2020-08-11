@@ -94,11 +94,11 @@ const Solicitudes = () => {
         cargando={false}
         handleChange={handleChange}
         hanbleBuscar={hanbleBuscar}
-        titulo="Listas de Solicitudes"
+        titulo="Listas de Usuarios"
         busqueda={busqueda}
         btnIr="/add/Solicitud"
       >
-        <ButtonFloat modal={false} ir="/add/Solicitud" />
+        <ButtonFloat modal={false} ir="/add/Usuario" />
         <SolicitudPrestamoModal 
           solicitudDetalles={solicitudDetalles}
         />

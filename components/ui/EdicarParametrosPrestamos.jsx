@@ -189,32 +189,15 @@ const EditarConfiguracionPrestamos = ({ parametrosNegocios }) => {
               <fieldset>
                 <legend>Datos del Configuración</legend>
                 <div className="form-row">
-                  <div className="col-lg-6 col-md-8 col-sm-12 mb-3">
-                    <label htmlFor="nombreEmpresa">Operaciones de Negocio</label>
+                <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
+                    <label htmlFor="eslogan">Dias del mes</label>
                     <input
-                      type="text"
+                      type="number"
                       className="form-control"
-                      id="nombreEmpresa"
-                      name="nombreEmpresa"
-                      value={nombreEmpresa}
-                      placeholder="Ingrese el nombre"
-                      onChange={handleChange}
-                      autoComplete="off"
-                    />
-                    {errores.nombreEmpresa && (
-                      <p className="alert alert-danger">
-                        {errores.nombreEmpresa}
-                      </p>
-                    )}
-                  </div>
-                  <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                    <label htmlFor="eslogan">eslogan</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="eslogan"
+                      id="diasMes"
                       name="eslogan"
-                      placeholder="Ingrese el eslogan del negocio"
+                      min="28"
+                      max="31"
                       value={eslogan}
                       onChange={handleChange}
                       autoComplete="off"
@@ -226,161 +209,133 @@ const EditarConfiguracionPrestamos = ({ parametrosNegocios }) => {
                   </div>
 
                   <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                    <label htmlFor="eslogan">Nombre</label>
+                    <label htmlFor="eslogan">Dias por quincena</label>
                     <input
-                      type="text"
+                      type="number"
                       className="form-control"
-                      id="nombre"
-                      name="nombre"
-                      placeholder="Ingrese el eslogan del negocio"
-                      value={nombre}
+                      id="diasQuincena"
+                      name="eslogan"
+                      min="7"
+                      max="15"
+                      value={eslogan}
                       onChange={handleChange}
                       autoComplete="off"
-                      disabled
                     />
                     <div className="valid-feedback">Looks good!</div>
-                    {errores.nombre && (
-                      <p className="alert alert-danger">{errores.nombre}</p>
+                    {errores.eslogan && (
+                      <p className="alert alert-danger">{errores.eslogan}</p>
                     )}
                   </div>
 
                   <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
-                    <label htmlFor="logo">Logo</label>
-
-                    <div className="input-group">
-                      <div className="custom-file">
-                        <FileUploader
-                          className="custom-file-input"
-                          accept="image/*"
-                          name="logo"
-                          id="logo"
-                          randomizeFilename
-                          storageRef={firebase.storage.ref("Configuracion")}
-                          onUploadStart={handleUploadStart}
-                          onUploadError={handleUploadError}
-                          onUploadSuccess={handleUploadSuccess}
-                          onProgress={handleProgress}
-                        />
-                        <label className="custom-file-label" htmlFor="logo">
-                          Elegir archivo
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <legend>Contactos</legend>
-                <div className="form-row">
-                  <div className="col-md-6 col-sm-12 mb-3">
-                    <label htmlFor="telefono1">Telefono 1</label>
+                    <label htmlFor="eslogan">Interes por Default</label>
                     <input
-                      type="text"
+                      type="number"
                       className="form-control"
-                      id="telefono1"
-                      placeholder="Ingrese el numero telefonico"
-                      name="telefono1"
-                      value={telefono1}
+                      id="interesDefault"
+                      name="eslogan"
+                      min="7"
+                      max="15"
+                      value={eslogan}
                       onChange={handleChange}
                       autoComplete="off"
-                    />
-                  </div>
-
-                  <div className="col-md-6 col-sm-12 mb-3">
-                    <label htmlFor="telefono1">Telefono 2</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="telefono2"
-                      placeholder="Ingrese el numero telefonico"
-                      name="telefono2"
-                      value={telefono2}
-                      onChange={handleChange}
-                      autoComplete="off"
-                    />
-                  </div>
-
-                  <div className="col-md-6 col-sm-12 mb-3">
-                    <label htmlFor="celular">celular</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="celular"
-                      placeholder="Ingrese el numero de celular"
-                      name="celular"
-                      value={celular}
-                      onChange={handleChange}
-                      autoComplete="off"
-                    />
-                  </div>
-                  <div className="col-md-6 col-sm-12 mb-3">
-                    <label htmlFor="correo">Correo</label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      id="correo"
-                      placeholder="Ingrese el correo electronico"
-                      name="correo"
-                      value={correo}
-                      onChange={handleChange}
-                      autoComplete="off"
-                    />
-                    {/* {errores.correo && (
-                    <p className="alert alert-danger">{errores.correo}</p>
-                  )} */}
-                  </div>
-
-                  <legend>Ubicación</legend>
-                  <div className="w-100"></div>
-                  <div className="col-md-6 col-sm-12 mb-3">
-                    <label htmlFor="sector">Sector</label>
-                    <select
-                      className="form-control"
-                      name="sector"
-                      id="sector"
-                      value={sector}
-                      onChange={handleChange}
-                    >
-                      <option value="" selected>
-                        --Seleccione--
-                      </option>
-                      {sectores.map((str) => (
-                        <option value={str.id} key={str.id}>
-                          {str.nombre}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="col-md-6 col-sm-12 mb-3">
-                    <label htmlFor="ciudad">ciudad</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="ciudad"
-                      placeholder="Ejemplo (809-888-9999)"
-                      name="ciudad"
-                      value={ciudad}
-                      onChange={handleChange}
-                      autoComplete="off"
-                    />
-                  </div>
-
-                  <div className="col-12 mb-3">
-                    <label htmlFor="direccion">Direccion</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="direccion"
-                      name="direccion"
-                      value={direccion}
-                      onChange={handleChange}
-                      placeholder="Identificacion"
                     />
                     <div className="valid-feedback">Looks good!</div>
+                    {errores.eslogan && (
+                      <p className="alert alert-danger">{errores.eslogan}</p>
+                    )}
+                  </div>
+                  
+                  <div className="col-lg-6 col-md-8 col-sm-12 mb-3">
+                    
+                    <label class="custom-control custom-checkbox custom-control-inline">
+                      <input type="checkbox" class="custom-control-input" />
+                      <span class="custom-control-label">Fijar cobro</span>
+                    </label>
+                    <label class="custom-control custom-checkbox custom-control-inline">
+                      <input type="checkbox" class="custom-control-input" />
+                      <span class="custom-control-label">Ignorar Dias Feriados</span>
+                    </label>
+                  </div>
+
+                  <div className="col-lg-6 col-md-8 col-sm-12 mb-3">
+                    <label class="custom-control custom-checkbox custom-control-inline">
+                      <input
+                        type="checkbox"
+                        class="custom-control-input"
+                      />
+                      <span class="custom-control-label">Redondeo</span>
+                    </label>
+                    <label class="custom-control custom-checkbox custom-control-inline">
+                      <input type="checkbox" class="custom-control-input" />
+                      <span class="custom-control-label">Permitir Cambiar Interes</span>
+                    </label>
                   </div>
                 </div>
-                {/* dfs65df4a6sd54f6asd54f6asdf */}
 
+                <legend>Dias de Cobros Habiles</legend>
+                <div className="form-row">
+                  <div className="col-md-6 col-sm-12 mb-3">
+                    <label htmlFor="telefono1">Semanal</label>
+                    <input
+                      type="number"
+                      min="1"
+                      max="7"
+                      className="form-control"
+                      id="telefono1"
+                      placeholder="Espesifique dia de cobro"
+                      name="telefono1"
+                      // value={telefono1}
+                      onChange={handleChange}
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  <div className="col-md-6 col-sm-12 mb-3">
+                    <label htmlFor="telefono1">Quincenal</label>
+                    <input
+                      type="number"
+                      min="1"
+                      max="15"
+                      className="form-control"
+                      id="telefono2"
+                      placeholder="Espesifique dia de cobro"
+                      name="telefono2"
+                      // value={telefono2}
+                      onChange={handleChange}
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  <div className="col-md-6 col-sm-12 mb-3">
+                    <label htmlFor="celular">Mensual</label>
+                    <input
+                      type="number"
+                      min="1"
+                      max="30"
+                      className="form-control"
+                      id="diaMensual"
+                      placeholder="Espesifique dia de cobro"
+                      name="celular"
+                      // value={celular}
+                      onChange={handleChange}
+                      autoComplete="off"
+                    />
+                  </div>
+                  <div className="col-lg-6 col-md-12 col-sm-12 mb-3">
+                        <label htmlFor="sexo">Amortifacion por Default</label>
+                        <select
+                          className="form-control"
+                          id="amortizacionDefault"
+                          onChange={handleChange}
+                        >
+                          <option selected value="Hombre">
+                            Insoluto
+                          </option>
+                          <option value="mujer">Absoluto</option>
+                        </select>
+                      </div>
+                </div>
                 <div className="row">
                   <div className="col-sm-6">
                     <button
