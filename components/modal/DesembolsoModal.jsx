@@ -83,7 +83,7 @@ const DesembolsoModal = ({ solicitudDetalles }) => {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title">
-                    Solicitud de Prestamo{" "}
+                    Desembolso de Prestamo{" "}
                     <span className="fas fa-clipboard"></span>
                   </h5>
                   <button

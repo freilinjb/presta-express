@@ -329,21 +329,6 @@ const Navegacion = (props) => {
                   <div id="submenu-6" className="collapse submenu">
                     <ul className="nav flex-column">
                       <li className="nav-item">
-                        <a className="nav-link" href="general-table.html">
-                          Intereses
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a className="nav-link" href="data-tables.html">
-                          Fechas de cobro
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a className="nav-link" href="data-tables.html">
-                          Dias Ignorados
-                        </a>
-                      </li>
-                      <li className="nav-item">
                         <a className="nav-link" href="data-tables.html">
                           Controles de usuarios
                         </a>

@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
-import SolicitudProcesarMiniatura from "../components/ui/SolicitudProcesarMiniatura";
+import SolicitudDesembolsoMiniatura from "../components/ui/SolicitudDesembolsoMiniatura";
 import Spinner from "../components/ui/Spinner";
 import ButtonFloat from "../components/ui/ButtonFloat";
 import LayoutPrincipal from "../components/layout/LayoutPrincipal";
 import useSolicitud from "../hooks/useSolicitud";
 
 //Modal
-import SolicitudPrestamoModal from "../components/modal/SolicitudPrestamoModal";
+import DesembolsoModal from "../components/modal/DesembolsoModal";
 
 const DesembolsoPrestamo = () => {
   const [solicitudDetalles, setSolicitudDetalles] = useState({});
@@ -86,7 +86,7 @@ const DesembolsoPrestamo = () => {
                     {solicitudes.map((solicitud, index) => (
                       <>
                         {solicitud.estado === "Autorizado" && (
-                          <SolicitudProcesarMiniatura
+                          <SolicitudDesembolsoMiniatura
                             key={solicitud.id}
                             solicitud={solicitud}
                             setSolicitudDetalles={setSolicitudDetalles}
@@ -135,7 +135,7 @@ const DesembolsoPrestamo = () => {
         btnIr="/add/Solicitud"
       >
         {/* <ButtonFloat modal={false} ir="/add/Solicitud" /> */}
-        <SolicitudPrestamoModal solicitudDetalles={solicitudDetalles} />
+        <DesembolsoModal solicitudDetalles={solicitudDetalles} />
 
         {Componente}
       </LayoutPrincipal>
