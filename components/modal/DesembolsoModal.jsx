@@ -231,10 +231,22 @@ const DesembolsoModal = ({ solicitudDetalles }) => {
                             </div>
                           </div>
                         </fieldset>
-                        <div className="w-100 border-top"></div>
                         <fieldset>
-                          <legend>Informacion gerencial</legend>
+                          <legend>Forma de desembolso</legend>
+                          <div className="col-12 mb-3">
+                        <label htmlFor="formaDesembolso">Desembolso</label>
+                        <select
+                          className="form-control"
+                          name="formaDesembolso"
+                          id="formaDesembolso"
+                        >
+                          <option selected value="efectivo">Efectivo</option>
+                          <option value="transferencia">Transferencia</option>
+                        </select>
+                      </div>
+                      <div className="w-100 border-top"></div>
                           <div className="col-md-12 mb-3">
+                        <label htmlFor="formaDesembolso">Observación</label>
                             <textarea
                               className="form-control"
                               value={solicitudDetalles.observacion}
@@ -243,40 +255,6 @@ const DesembolsoModal = ({ solicitudDetalles }) => {
                             ></textarea>
                           </div>
                         </fieldset>
-                        <div className="custom-control custom-radio custom-control-inline">
-                        <input
-                            type="radio"
-                            id="rechazarSolicitud"
-                            name="estadoSolicitud"
-                            value={estadoSolicitud}
-                            checked={estadoSolicitud ===  'Rechazada'}
-                            className="custom-control-input"
-                            onClick={() => setEstadoSolicitud('Rechazada')}
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="rechazarSolicitud"
-                          >
-                            Rechazar Solicitud
-                          </label>
-                        </div>
-                        <div className="custom-control custom-radio custom-control-inline">
-                          <input
-                            type="radio"
-                            id="aceptarSolicitud"
-                            name="estadoSolicitud"
-                            value={estadoSolicitud}
-                            checked={estadoSolicitud ===  'Autorizado'}
-                            className="custom-control-input"
-                            onClick={() => setEstadoSolicitud('Autorizado')}
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="aceptarSolicitud"
-                          >
-                            Aceptar solicitud
-                          </label>
-                        </div>
                         <div className="modal-footer">
                           <button
                             type="button"
