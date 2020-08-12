@@ -329,9 +329,18 @@ const Navegacion = (props) => {
                   <div id="submenu-6" className="collapse submenu">
                     <ul className="nav flex-column">
                       <li className="nav-item">
-                        <a className="nav-link" href="data-tables.html">
-                          Controles de usuarios
-                        </a>
+                        <Link href="/controles/Usuarios">
+                          <a
+                            className={`nav-link ${
+                              router.pathname == "/controles/Usuarios" ? "active" : ""
+                            }`}
+                          >
+                            {" "}
+                            <i className="far fa-money-bill-alt"></i>
+                            Controles de usuarios{" "}
+                          </a>
+                        </Link>
+
                       </li>
                       <li className="nav-item">
                         <a className="nav-link" href="data-tables.html">

@@ -172,7 +172,7 @@ const Usuario = () => {
           <div className="col-xl-8 col-lg-10 col-md-12 col-sm-12">
             <div className="card">
               <h5 className="card-header">
-                Registro de Cliente <span className="fas fa-user-plus"></span>
+                Registro de Usuario <span className="fas fa-user-plus"></span>
               </h5>
               <div className="card-body">
                 <form
@@ -363,86 +363,6 @@ const Usuario = () => {
                     </div>
 
 
-                    {/* LEYENDA */}
-                    <legend className="border-top mt-2"><strong>Datos Laborales</strong></legend>
-                    <div className="form-row">
-                      <div className="col-md-6 col-sm-12 mb-3">
-                        <label htmlFor="empresa">Empresa</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="empresa"
-                          placeholder="Ingrese el nombre de la Empresa"
-                          name="empresa"
-                          value={empresa}
-                          onChange={handleChange}
-                          autoComplete="off"
-                          required
-                        />
-                      </div>
-                      <div className="col-md-6 col-sm-12 mb-3">
-                        <label htmlFor="fechaIngrerso">Fecha de Ingreso</label>
-                        <input
-                          type="date"
-                          className="form-control"
-                          id="fechaIngrerso"
-                          name="fechaIngrerso"
-                          value={fechaIngrerso}
-                          onChange={handleChange}
-                          selected={fechaIngrerso}
-                          autoComplete="off"
-                          required
-                        />
-                        {errores.correo && (
-                          <p className="alert alert-danger">{errores.correo}</p>
-                        )}
-                      </div>
-
-                      <div className="w-100"></div>
-                      <div className="col-md-6 col-sm-12 mb-3">
-                      <label htmlFor="telefonoTrabajo">Telefono</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="telefonoTrabajo"
-                          placeholder="Ejemplo (809-888-9999)"
-                          name="telefonoTrabajo"
-                          value={telefonoTrabajo}
-                          onChange={handleChange}
-                          autoComplete="off"
-                          required
-                        />
-                      </div>
-                      <div className="col-md-6 col-sm-12 mb-3">
-                        <label htmlFor="sueldo">Sueldo$</label>
-                        <input
-                          type="number"
-                          className="form-control"
-                          id="sueldo"
-                          name="sueldo"
-                          value={sueldo}
-                          onChange={handleChange}
-                          placeholder="Sueldo"
-                        />
-                        <div className="valid-feedback">Looks good!</div>
-                      </div>
-
-                      <div className="col-12">
-                        <div className="form-group">
-                          <label htmlFor="direccionLaboral">Direccion Laboral</label>
-                          <textarea
-                            className="form-control"
-                            name="direccionLaboral"
-                            id="direccionLaboral"
-                            value={direccionLaboral}
-                            onChange={handleChange}
-                            placeholder="Direccion del lugar de trabajo"
-                            autoComplete="off"
-                            rows="2"
-                          ></textarea>
-                        </div>
-                      </div>
-                    </div>
 
                     {/* LEYANDA */}
 
