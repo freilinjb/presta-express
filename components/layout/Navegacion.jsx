@@ -370,9 +370,17 @@ const Navegacion = (props) => {
                   <div id="submenu-10" className="collapse submenu">
                     <ul className="nav flex-column">
                       <li className="nav-item">
-                        <a className="nav-link" href="icon-fontawesome.html">
-                          Clientes
-                        </a>
+                      <Link href="/reportes/Clientes">
+                          <a
+                            className={`nav-link ${
+                              router.pathname == "/reportes/Clientes" ? "active" : ""
+                            }`}
+                          >
+                            {" "}
+                            <i className="far fa-money-bill-alt"></i>
+                            Clientes{" "}
+                          </a>
+                        </Link>
                       </li>
                       <li className="nav-item">
                         <a className="nav-link" href="icon-material.html">
@@ -403,9 +411,17 @@ const Navegacion = (props) => {
                         </a>
                       </li>
                       <li className="nav-item">
-                        <a className="nav-link" href="icon-flag.html">
-                         Préstamos
-                        </a>
+                      <Link href="/reportes/Prestamos">
+                          <a
+                            className={`nav-link ${
+                              router.pathname == "/reportes/Prestamos" ? "active" : ""
+                            }`}
+                          >
+                            {" "}
+                            <i className="far fa-money-bill-alt"></i>
+                            Prestamos{" "}
+                          </a>
+                        </Link>
                       </li>
                       <li className="nav-item">
                         <a className="nav-link" href="icon-flag.html">
