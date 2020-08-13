@@ -137,7 +137,7 @@ const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index, setActuali
 
   const handlClick = () => {
     setSolicitudDetalles(solicitud);
-    setActualiza(true);
+    // setActualiza(true);
     console.log("click", solicitud);
     
   };

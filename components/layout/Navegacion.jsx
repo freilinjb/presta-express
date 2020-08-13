@@ -28,114 +28,7 @@ const Navegacion = (props) => {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav flex-column">
                 <li className="nav-divider">Menu</li>
-                {/* <Link href="/">
-                  <li className="nav-item ">
-                    <a
-                      className={`nav-link ${
-                        router.pathname == "/" ? "active" : ""
-                      }`}
-                    >
-                      <i className="fa fa-fw fa-user-circle"></i>
-                      Dashboard
-                    </a>
-                  </li>
-                </Link>
-                <Link href="/Clientes">
-                  <li className="nav-item">
-                    <div
-                      className={`nav-link ${
-                        router.pathname == "/Clientes" ? "active" : ""
-                      }`}
-                    >
-                      <i className="fas fa-user"></i>
-                      Clientes
-                    </div>
-                  </li>
-                </Link>
 
-                <Link href="/Solicitudes">
-                  <li className="nav-item">
-                    <div
-                      className={`nav-link ${
-                        router.pathname == "/Solicitudes" ? "active" : ""
-                      }`}
-                    >
-                      <i className="far fa-money-bill-alt"></i>
-                      Solicitudes
-                    </div>
-                  </li>
-                </Link>
-
-                <Link href="/Prestamos">
-                  <li className="nav-item">
-                    <div
-                      className={`nav-link ${
-                        router.pathname == "/Prestamos" ? "active" : ""
-                      }`}
-                    >
-                      <i className="far fa-money-bill-alt"></i>
-                      Prestamos
-                    </div>
-                  </li>
-                </Link>
-                <Link href="/Pagos">
-                  <li className="nav-item">
-                    <div
-                      className={`nav-link ${
-                        router.pathname == "/Pagos" ? "active" : ""
-                      }`}
-                    >
-                      <i className="fas fa-hand-holding-usd"></i>
-                      Cuotas por cobrar
-                    </div>
-                  </li>
-                </Link>
-                <Link href="/Sectores">
-                  <li className="nav-item">
-                    <div
-                      className={`nav-link ${
-                        router.pathname == "/Sectores" ? "active" : ""
-                      }`}
-                    >
-                      <i className="fas fa-map"></i>
-                      Sectores
-                    </div>
-                  </li>
-                </Link>
-
-                <li className="nav-item ">
-                  <a
-                    className="nav-link"
-                    href="#!"
-                    data-toggle="collapse"
-                    aria-expanded="false"
-                    data-target="#submenu-4"
-                    aria-controls="submenu-4"
-                  >
-                    <i className="fab fa-fw fa-wpforms"></i>Garantias
-                  </a>
-                  <div id="submenu-4" className="collapse submenu">
-                    <ul className="nav flex-column">
-                      <li className="nav-item">
-                        <a className="nav-link" href="form-elements.html">
-                          Solidarias
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a className="nav-link" href="form-validation.html">
-                          Vehiculos
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a className="nav-link" href="multiselect.html">
-                          Hipotecarios
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </li> */}
-
-                <li className="nav-divider">Features</li>
                 <li className="nav-item">
                   <a
                     className="nav-link"
@@ -268,9 +161,17 @@ const Navegacion = (props) => {
                   <div id="submenu-5" className="collapse submenu">
                     <ul className="nav flex-column">
                       <li className="nav-item">
-                        <a className="nav-link" href="data-tables.html">
-                          Adjudicacion de bienes
-                        </a>
+                      <Link href="/AdjudicacionBienes">
+                          <a
+                            className={`nav-link ${
+                              router.pathname == "/AdjudicacionBienes" ? "active" : ""
+                            }`}
+                          >
+                            {" "}
+                            <i className="far fa-money-bill-alt"></i>
+                            Adjudicacion de bienes{" "}
+                          </a>
+                        </Link>
                       </li>
                       <li className="nav-item">
                       <Link href="/pagos">
