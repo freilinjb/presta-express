@@ -86,7 +86,7 @@ const Solicitud = () => {
       tasaInteres,
       periodoPagos,
       cargosPorMora,
-      // detallesCuotas: tablaAmortizada.cuotas,
+      detallesCuotas: tablaAmortizada.cuotas,
       observacion,
       estado: "En revisión",
       garantias: garantiasTemporales,

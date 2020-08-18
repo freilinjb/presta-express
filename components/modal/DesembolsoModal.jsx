@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import useMensajesAlertas from "../../hooks/useMensajesAlertas";
+import useCalculadora from "../../hooks/useCalculadora";
 
 // import {useAlert} from 'react-alert';
 
@@ -10,12 +11,14 @@ import { FirebaseContext } from "../../firebase";
 const DesembolsoModal = ({ solicitudDetalles }) => {
   const { usuario, firebase } = useContext(FirebaseContext);
   // const alert = useAlert();
+  const { calcular, formatearFecha } = useCalculadora();
+
   const { Toast } = useMensajesAlertas();
 
+  const [estadoSolicitud, setEstadoSolicitud] = useState("");
+  const [observacion, setObservacion] = useState("");
+  const [tablaAmortizada, setTablaAmortizada] = useState([]);
 
-  const [estadoSolicitud, setEstadoSolicitud] = useState('');
-  const [observacion, setObservacion] = useState('');
-  
   console.log("Detalle Solicitud", "=>", solicitudDetalles);
 
   //Context con las operaciones crud de firebase
@@ -29,8 +32,9 @@ const DesembolsoModal = ({ solicitudDetalles }) => {
   }
 
   useEffect(() => {
-    console.log('cambio',estadoSolicitud);
-  },[estadoSolicitud]);
+    console.log("cambio", estadoSolicitud);
+
+  }, [estadoSolicitud]);
 
   async function procesarSolicitud() {
     if (!usuario) {
@@ -42,17 +46,69 @@ const DesembolsoModal = ({ solicitudDetalles }) => {
       //Insertar en la BD
       firebase.cargando = true;
       firebase.db.collection("Solicitud").doc(solicitudDetalles.id).update({
-        estado: 'Desembolsado',
+        estado: "Desembolsado",
         observacionGerancial: observacion,
       });
-      // alert.success("Se ha guardo correctamente");
 
       
+  // setTablaAmortizada(
+  //   calcular(
+  //     solicitudDetalles.monto,
+  //     solicitudDetalles.cuotas,
+  //     solicitudDetalles.tasaInteres,
+  //     solicitudDetalles.periodoPagos,
+  //     solicitudDetalles.tipoTasa,
+  //     solicitudDetalles.entrega
+  //   )
+  // );
+
+
+  //     console.log( calcular(
+  //       solicitudDetalles.monto,
+  //       solicitudDetalles.cuotas,
+  //       solicitudDetalles.tasaInteres,
+  //       solicitudDetalles.periodoPagos,
+  //       solicitudDetalles.tipoTasa,
+  //       solicitudDetalles.entrega
+  //     ));
+
+      console.log('monto: ',solicitudDetalles.monto);
+      console.log('cuotas: ',solicitudDetalles.cuotas);
+      console.log('tasaInteres: ',solicitudDetalles.tasaInteres);
+      console.log('periodoPagos: ',solicitudDetalles.periodoPagos);
+      console.log('tipoTasa: ',solicitudDetalles.tipoTasa);
+      console.log('entrega: ',solicitudDetalles.entrega);
+
+      const prestamo = {
+        entrega: solicitudDetalles.entrega,
+        monto: solicitudDetalles.monto,
+        cuotas: tablaAmortizada,
+        tipoTasa: solicitudDetalles.tipoTasa,
+        tasaInteres: solicitudDetalles.tasaInteres,
+        periodoPagos: solicitudDetalles.periodoPagos,
+        cargosPorMora: solicitudDetalles.cargosPorMora,
+        detallesCuotas: solicitudDetalles.detallesCuotas,
+        observacion: solicitudDetalles.observacion,
+        estado: "activo",
+        creado: Date.now(),
+        cliente: {
+          id: solicitudDetalles.cliente.id,
+          nombre: solicitudDetalles.cliente.nombre,
+          apellido: solicitudDetalles.cliente.apellido,
+        },
+        creador: {
+          id: usuario.uid,
+          nombre: usuario.displayName,
+        },
+      };
+
+      await firebase.db.collection("Prestamos").add(prestamo);
+      // alert.success("Se ha guardo correctamente");
+
       Toast.fire({
         icon: "success",
         title: "Se ha guardado correctamente!!",
       });
-
     } catch (error) {
       console.log(error);
       // alert.error("Ha ocurrido un error");
@@ -64,7 +120,7 @@ const DesembolsoModal = ({ solicitudDetalles }) => {
       firebase.cargando = false;
       // router.push("/Solicitd");
       document.getElementById("btnSolicitudCerrar").click();
-      console.log('se ha guardado correctamente');
+      console.log("se ha guardado correctamente");
     }
   }
 
@@ -100,10 +156,7 @@ const DesembolsoModal = ({ solicitudDetalles }) => {
                 <div className="modal-body">
                   <div className="card">
                     <div className="card-body">
-                      <form
-                        className="needs-validation"
-                        noValidate
-                      >
+                      <form className="needs-validation" noValidate>
                         <fieldset>
                           <div className="row">
                             <div className="col-lg-4 col-sm-4">
@@ -225,7 +278,7 @@ const DesembolsoModal = ({ solicitudDetalles }) => {
                                 className="form-control"
                                 placeholder="Observaciones a tomar en cuanta"
                                 value={observacion}
-                                onChange={e=>setObservacion(e.target.value)}
+                                onChange={(e) => setObservacion(e.target.value)}
                                 disabled
                                 autoComplete="off"
                                 rows="2"
@@ -236,19 +289,23 @@ const DesembolsoModal = ({ solicitudDetalles }) => {
                         <fieldset>
                           <legend>Forma de desembolso</legend>
                           <div className="col-12 mb-3">
-                        <label htmlFor="formaDesembolso">Desembolso</label>
-                        <select
-                          className="form-control"
-                          name="formaDesembolso"
-                          id="formaDesembolso"
-                        >
-                          <option selected value="efectivo">Efectivo</option>
-                          <option value="transferencia">Transferencia</option>
-                        </select>
-                      </div>
-                      <div className="w-100 border-top"></div>
+                            <label htmlFor="formaDesembolso">Desembolso</label>
+                            <select
+                              className="form-control"
+                              name="formaDesembolso"
+                              id="formaDesembolso"
+                            >
+                              <option selected value="efectivo">
+                                Efectivo
+                              </option>
+                              <option value="transferencia">
+                                Transferencia
+                              </option>
+                            </select>
+                          </div>
+                          <div className="w-100 border-top"></div>
                           <div className="col-md-12 mb-3">
-                        <label htmlFor="formaDesembolso">Observación</label>
+                            <label htmlFor="formaDesembolso">Observación</label>
                             <textarea
                               className="form-control"
                               value={solicitudDetalles.observacion}
@@ -266,11 +323,11 @@ const DesembolsoModal = ({ solicitudDetalles }) => {
                           >
                             Cerrar
                           </button>
-                          <button 
-                            type="button" 
+                          <button
+                            type="button"
                             className="btn btn-primary"
                             onClick={() => procesarSolicitud()}
-                            >
+                          >
                             Guardar
                           </button>
                         </div>

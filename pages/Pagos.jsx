@@ -1,16 +1,22 @@
 //FRONTAL DE CLIENTE
 import React, { useState, useContext, useEffect } from "react";
 import Link from "next/link";
+import {useReactToPrint} from 'react-to-print';
+
 import Layout from "../components/layout/Layout";
 import { FirebaseContext } from "../firebase";
 import Navegacion from "../components/layout/Navegacion";
 import Spinner from "../components/ui/Spinner";
 import ModalCobroParcial from "../components/ui/ModalCobroParcial";
 
+import Cuotas from "../components/Print/Cuotas";
+
+
 import useCuotas from "../hooks/useCuotas";
 import ResumenPrestamos from "../components/ui/witget/ResumenPrestamos";
 import useCalculadora from "../hooks/useCalculadora";
 import usePagoParcial from "../hooks/usePagoParcial";
+import ReactToPrint from "react-to-print";
 const Pagos = () => {
   const {
     cuotasPendientes,
@@ -50,6 +56,12 @@ const Pagos = () => {
     console.log(cuota);
     console.log(filtrar);
   };
+
+
+  const BolantePago = ()=> {
+    <Cuotas/>
+  }
+
 
   const Componente = cargando ? (
     <Spinner />

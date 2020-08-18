@@ -24,6 +24,7 @@
     "react-confirm-alert": "^2.6.1",
     "react-dom": "16.13.1",
     "react-firebase-file-uploader": "^2.4.3",
+    "react-to-print": "^2.9.0",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^9.10.13",
     "uuid": "^8.2.0"

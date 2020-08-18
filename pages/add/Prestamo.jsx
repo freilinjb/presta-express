@@ -87,17 +87,17 @@ const Prestamo = () => {
               });
             // alert.success('Se ha guardo correctamente');
             
-            tablaAmortizada.prestamo = {
-                id: p.id
-            }
-            tablaAmortizada.cliente = {
-                id: idcliente,
-                nombre:(clientes.filter(doc => doc.id === idcliente))[0].nombre,
-                apellido: (clientes.filter(doc => doc.id === idcliente))[0].apellido
-            }
-            console.log('tabla amortizada','=>',tablaAmortizada);
-            tablaAmortizada.estado = 'activo';
-            await firebase.db.collection("Cuotas").add(tablaAmortizada);
+            // tablaAmortizada.prestamo = {
+            //     id: p.id
+            // }
+            // tablaAmortizada.cliente = {
+            //     id: idcliente,
+            //     nombre:(clientes.filter(doc => doc.id === idcliente))[0].nombre,
+            //     apellido: (clientes.filter(doc => doc.id === idcliente))[0].apellido
+            // }
+            // console.log('tabla amortizada','=>',tablaAmortizada);
+            // tablaAmortizada.estado = 'activo';
+            // await firebase.db.collection("Cuotas").add(tablaAmortizada);
             setCargando(false);
             
             //Inicio
