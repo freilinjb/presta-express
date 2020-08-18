@@ -42,10 +42,12 @@ const DesembolsoModal = ({ solicitudDetalles }) => {
       //Insertar en la BD
       firebase.cargando = true;
       firebase.db.collection("Solicitud").doc(solicitudDetalles.id).update({
-        estado: estadoSolicitud,
+        estado: 'Desembolsado',
         observacionGerancial: observacion,
       });
       // alert.success("Se ha guardo correctamente");
+
+      
       Toast.fire({
         icon: "success",
         title: "Se ha guardado correctamente!!",

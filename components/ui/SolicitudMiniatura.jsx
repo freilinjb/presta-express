@@ -158,6 +158,10 @@ const SolicitudMiniatura = ({ setSolicitudDetalles, solicitud, index, setActuali
         mensaje = "danger";
         break;
 
+      case "Desembolsado":
+        mensaje = "primary";
+        break;
+
       default:
         mensaje = "brand";
         break;

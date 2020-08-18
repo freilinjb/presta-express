@@ -321,7 +321,7 @@ const Solicitud = () => {
 
                             <legend className="pl-3  border-top mt-3">Datos y valores de la Solicitud</legend>
                             
-                            <div className="col-md-6 mb-3">
+                            <div className="col-md-6 mt-3">
                               <div className="form-group">
                                 <label htmlFor="idcliente">Cliente</label>
                                 <select
